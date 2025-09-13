@@ -1,0 +1,11 @@
+=== uv sync start Sat Sep 13 07:09:32 AM UTC 2025 ===
+=== uv install end Sat Sep 13 07:10:37 AM UTC 2025 ===
+=== [PHASE 1/2] Smoke test start Sat Sep 13 07:10:37 AM UTC 2025 ===
+
+==== EXPERIMENT 1 – SOIC Leakage-Stress Test ====
+[ERROR] Experiment 'soic_leakage' terminated: Failed to download hyperion-data/PII-Bench-v1/: 401 Client Error. (Request ID: Root=1-68c518ff-7d63f5b34f398bc80ee62c55;fe2bb60d-20df-46d4-88ba-839624f63006)
+
+Repository Not Found for url: https://huggingface.co/api/models/hyperion-data/PII-Bench-v1/revision/main.
+Please make sure you specified the correct `repo_id` and `repo_type`.
+If you are trying to access a private or gated repo, make sure you are authenticated. For more details, see https://huggingface.co/docs/huggingface_hub/authentication
+Invalid username or password.
