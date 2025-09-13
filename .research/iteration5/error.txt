@@ -1,0 +1,25 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/src/main.py", line 56, in <module>
+    main()
+  File "/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/src/main.py", line 52, in main
+    run_config(full_cfg)
+  File "/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/src/main.py", line 29, in run_config
+    trainer = SimpleTrainer(exp_name, exp_cfg)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/src/train.py", line 143, in __init__
+    self.dl_train = build_dataloader(cfg["dataset"], split="train")
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/src/preprocess.py", line 205, in build_dataloader
+    ds = SmokeAudio(subset="training" if split == "train" else "testing")
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/src/preprocess.py", line 131, in __init__
+    self.ds = aud_datasets.SPEECHCOMMANDS(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/.venv/lib/python3.11/site-packages/torchaudio/datasets/speechcommands.py", line 109, in __init__
+    download_url_to_file(url, archive, hash_prefix=checksum)
+  File "/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/.venv/lib/python3.11/site-packages/torch/hub.py", line 638, in download_url_to_file
+    f = open(tmp_dst, 'w+b')
+        ^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'data/speech_cmd/speech_commands_v0.02.tar.gz.9e5acf5482f34fa8945f20db03b23e5a.partial'

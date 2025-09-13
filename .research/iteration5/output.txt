@@ -1,0 +1,111 @@
+=== [PHASE 2/2] Full experiment start Sat Sep 13 04:41:27 AM UTC 2025 ===
+
+=== Running SMOKE TEST ===
+
+============================================
+Launching experiment: smoke_img
+============================================
+
+Files already downloaded and verified
+[exp:smoke_img] step 0000 loss=5.1876
+[exp:smoke_img] step 0010 loss=4.0914
+[exp:smoke_img] step 0020 loss=4.3751
+[exp:smoke_img] step 0030 loss=4.9375
+[exp:smoke_img] step 0040 loss=5.1250
+
+=== Numerical Results ===
+{
+  "experiment": "smoke_img",
+  "final_train_loss": 2.875,
+  "mean_train_loss": 4.421551833152771,
+  "steps": 50,
+  "figure": "iteration5/images/smoke_img_training_loss.pdf"
+}
+
+Figure saved → iteration5/images/smoke_img_training_loss.pdf
+
+============================================
+Launching experiment: smoke_txt
+============================================
+
+[exp:smoke_txt] step 0000 loss=1.5385
+[exp:smoke_txt] step 0010 loss=1.7021
+[exp:smoke_txt] step 0020 loss=1.4982
+
+=== Numerical Results ===
+{
+  "experiment": "smoke_txt",
+  "final_train_loss": 1.3830703496932983,
+  "mean_train_loss": 1.5809666514396667,
+  "steps": 30,
+  "figure": "iteration5/images/smoke_txt_training_loss.pdf"
+}
+
+Figure saved → iteration5/images/smoke_txt_training_loss.pdf
+
+=== Running FULL EXPERIMENT ===
+
+============================================
+Launching experiment: exp1_oracle_img
+============================================
+
+Files already downloaded and verified
+[exp:exp1_oracle_img] step 0000 loss=4.0938
+[exp:exp1_oracle_img] step 0010 loss=5.3125
+[exp:exp1_oracle_img] step 0020 loss=5.1094
+[exp:exp1_oracle_img] step 0030 loss=4.4844
+[exp:exp1_oracle_img] step 0040 loss=4.1406
+[exp:exp1_oracle_img] step 0050 loss=4.1562
+[exp:exp1_oracle_img] step 0060 loss=4.4219
+[exp:exp1_oracle_img] step 0070 loss=5.3125
+[exp:exp1_oracle_img] step 0080 loss=4.8438
+[exp:exp1_oracle_img] step 0090 loss=3.6406
+[exp:exp1_oracle_img] step 0100 loss=4.3438
+[exp:exp1_oracle_img] step 0110 loss=4.1094
+[exp:exp1_oracle_img] step 0120 loss=4.8594
+[exp:exp1_oracle_img] step 0130 loss=4.6406
+[exp:exp1_oracle_img] step 0140 loss=4.5469
+[exp:exp1_oracle_img] step 0150 loss=5.0312
+[exp:exp1_oracle_img] step 0160 loss=4.3594
+[exp:exp1_oracle_img] step 0170 loss=4.8438
+[exp:exp1_oracle_img] step 0180 loss=4.4219
+[exp:exp1_oracle_img] step 0190 loss=4.7031
+
+=== Numerical Results ===
+{
+  "experiment": "exp1_oracle_img",
+  "final_train_loss": 3.90625,
+  "mean_train_loss": 4.508000214099884,
+  "steps": 200,
+  "figure": "iteration5/images/exp1_oracle_img_training_loss.pdf"
+}
+
+Figure saved → iteration5/images/exp1_oracle_img_training_loss.pdf
+
+============================================
+Launching experiment: exp1_oracle_txt
+============================================
+
+[exp:exp1_oracle_txt] step 0000 loss=1.5938
+[exp:exp1_oracle_txt] step 0010 loss=1.9375
+[exp:exp1_oracle_txt] step 0020 loss=1.6562
+[exp:exp1_oracle_txt] step 0030 loss=1.5000
+[exp:exp1_oracle_txt] step 0040 loss=1.7812
+[exp:exp1_oracle_txt] step 0050 loss=1.9062
+[exp:exp1_oracle_txt] step 0060 loss=2.0938
+
+=== Numerical Results ===
+{
+  "experiment": "exp1_oracle_txt",
+  "final_train_loss": 2.0625,
+  "mean_train_loss": 1.7310021377745128,
+  "steps": 63,
+  "figure": "iteration5/images/exp1_oracle_txt_training_loss.pdf"
+}
+
+Figure saved → iteration5/images/exp1_oracle_txt_training_loss.pdf
+
+============================================
+Launching experiment: exp1_oracle_aud
+============================================
+

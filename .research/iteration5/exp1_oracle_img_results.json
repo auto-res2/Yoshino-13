@@ -1,0 +1,7 @@
+{
+  "experiment": "exp1_oracle_img",
+  "final_train_loss": 3.90625,
+  "mean_train_loss": 4.508000214099884,
+  "steps": 200,
+  "figure": "iteration5/images/exp1_oracle_img_training_loss.pdf"
+}
