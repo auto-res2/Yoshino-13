@@ -6,5 +6,157 @@
     "compositional attack generation",
     "diverse red-teaming systems",
     "LLM-based red teaming"
+  ],
+  "research_study_list": [
+    {
+      "title": "Uncovering Safety Risks of Large Language Models through Concept Activation Vector"
+    },
+    {
+      "title": "COLD-Attack: Jailbreaking LLMs with Stealthiness and Controllability"
+    },
+    {
+      "title": "Tree of Attacks: Jailbreaking Black-Box LLMs Automatically"
+    },
+    {
+      "title": "Rainbow Teaming: Open-Ended Generation of Diverse Adversarial Prompts"
+    },
+    {
+      "title": "Catastrophic Jailbreak of Open-source LLMs via Exploiting Generation"
+    },
+    {
+      "title": "Watch Out for Your Agents! Investigating Backdoor Threats to LLM-Based Agents"
+    },
+    {
+      "title": "AutoDAN: Generating Stealthy Jailbreak Prompts on Aligned Large Language Models"
+    },
+    {
+      "title": "Are aligned neural networks adversarially aligned?"
+    },
+    {
+      "title": "HarmBench: A Standardized Evaluation Framework for Automated Red Teaming and Robust Refusal"
+    },
+    {
+      "title": "TrojLLM: A Black-box Trojan Prompt Attack on Large Language Models"
+    },
+    {
+      "title": "Attack of the Tails: Yes, You Really Can Backdoor Federated Learning"
+    },
+    {
+      "title": "Adversarial training for high-stakes reliability"
+    },
+    {
+      "title": "SafeBench: A Benchmarking Platform for Safety Evaluation of Autonomous Vehicles"
+    },
+    {
+      "title": "Increasing Confidence in Adversarial Robustness Evaluations"
+    },
+    {
+      "title": "Testing DNN-based Autonomous Driving Systems under Critical Environmental Conditions"
+    },
+    {
+      "title": "Curiosity-driven Red-teaming for Large Language Models"
+    },
+    {
+      "title": "Discovering Failure Modes of Text-guided Diffusion Models via Adversarial Search"
+    },
+    {
+      "title": "On the Adversarial Robustness of Benjamini Hochberg"
+    },
+    {
+      "title": "Are aligned neural networks adversarially aligned?"
+    },
+    {
+      "title": "Adversarial Robustness with Non-uniform Perturbations"
+    },
+    {
+      "title": "Towards Compositional Adversarial Robustness: Generalizing Adversarial Training to Composite Semantic Perturbations"
+    },
+    {
+      "title": "GAMA: Generative Adversarial Multi-Object Scene Attacks"
+    },
+    {
+      "title": "Semantic-Aware Multi-Label Adversarial Attacks"
+    },
+    {
+      "title": "Automated Discovery of Adaptive Attacks on Adversarial Defenses"
+    },
+    {
+      "title": "Position: Compositional Generative Modeling: A Single Model is Not All You Need"
+    },
+    {
+      "title": "COLD-Attack: Jailbreaking LLMs with Stealthiness and Controllability"
+    },
+    {
+      "title": "Compositional Visual Generation with Energy Based Models"
+    },
+    {
+      "title": "Dynamic Generative Targeted Attacks With Pattern Injection"
+    },
+    {
+      "title": "Compositional Explanations of Neurons"
+    },
+    {
+      "title": "Compositional Explanations of Neurons"
+    },
+    {
+      "title": "Curiosity-driven Red-teaming for Large Language Models"
+    },
+    {
+      "title": "HarmBench: A Standardized Evaluation Framework for Automated Red Teaming and Robust Refusal"
+    },
+    {
+      "title": "Rainbow Teaming: Open-Ended Generation of Diverse Adversarial Prompts"
+    },
+    {
+      "title": "Adversarial Diversity in Hanabi"
+    },
+    {
+      "title": "Adversarial Diversity in Hanabi"
+    },
+    {
+      "title": "RedCode: Risky Code Execution and Generation Benchmark for Code Agents"
+    },
+    {
+      "title": "Revisiting Injective Attacks on Recommender Systems"
+    },
+    {
+      "title": "Protecting DNNs from Theft using an Ensemble of Diverse Models"
+    },
+    {
+      "title": "Modelling Behavioural Diversity for Learning in Open-Ended Games"
+    },
+    {
+      "title": "Modelling Behavioural Diversity for Learning in Open-Ended Games"
+    },
+    {
+      "title": "HarmBench: A Standardized Evaluation Framework for Automated Red Teaming and Robust Refusal"
+    },
+    {
+      "title": "Curiosity-driven Red-teaming for Large Language Models"
+    },
+    {
+      "title": "Rainbow Teaming: Open-Ended Generation of Diverse Adversarial Prompts"
+    },
+    {
+      "title": "NYU CTF Bench: A Scalable Open-Source Benchmark Dataset for Evaluating LLMs in Offensive Security"
+    },
+    {
+      "title": "AgentPoison: Red-teaming LLM Agents via Poisoning Memory or Knowledge Bases"
+    },
+    {
+      "title": "Tree of Attacks: Jailbreaking Black-Box LLMs Automatically"
+    },
+    {
+      "title": "COLD-Attack: Jailbreaking LLMs with Stealthiness and Controllability"
+    },
+    {
+      "title": "Watch Out for Your Agents! Investigating Backdoor Threats to LLM-Based Agents"
+    },
+    {
+      "title": "Fine-tuning Aligned Language Models Compromises Safety, Even When Users Do Not Intend To!"
+    },
+    {
+      "title": "Fine-tuning Aligned Language Models Compromises Safety, Even When Users Do Not Intend To!"
+    }
   ]
 }
