@@ -1,0 +1,2 @@
+=== [PHASE 2/2] Full experiment start Sat Sep 13 08:53:24 AM UTC 2025 ===
+[ERROR] --full-experiment specified but no HuggingFace token was provided. Set it via the --hf-token CLI argument or HF_TOKEN environment variable.
