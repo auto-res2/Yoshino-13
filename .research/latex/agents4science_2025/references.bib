@@ -5,3 +5,1328 @@
   publisher = {GitHub},
   url       = {https://github.com/airas-org/airas}
 }
+
+% ===========================================
+% REQUIRED CITATIONS
+% These papers must be cited in the manuscript
+% ===========================================
+
+@article{alayrac-2020-self,
+ abstract = {Videos are a rich source of multi-modal supervision. In this work, we learn
+representations using self-supervision by leveraging three modalities naturally
+present in videos: visual, audio and language streams. To this end, we
+introduce the notion of a multimodal versatile network -- a network that can
+ingest multiple modalities and whose representations enable downstream tasks in
+multiple modalities. In particular, we explore how best to combine the
+modalities, such that fine-grained representations of the visual and audio
+modalities can be maintained, whilst also integrating text into a common
+embedding. Driven by versatility, we also introduce a novel process of
+deflation, so that the networks can be effortlessly applied to the visual data
+in the form of video or a static image. We demonstrate how such networks
+trained on large collections of unlabelled video data can be applied on video,
+video-text, image and audio tasks. Equipped with these representations, we
+obtain state-of-the-art performance on multiple challenging benchmarks
+including UCF101, HMDB51, Kinetics600, AudioSet and ESC-50 when compared to
+previous self-supervised work. Our models are publicly available.},
+ arxiv_url = {https://arxiv.org/pdf/2006.16228v2.pdf},
+ author = {Jean-Baptiste Alayrac and Adrià Recasens and Rosalia Schneider and Relja Arandjelović and Jason Ramapuram and Jeffrey De Fauw and Lucas Smaira and Sander Dieleman and Andrew Zisserman},
+ title = {Self-Supervised MultiModal Versatile Networks},
+ year = {2020}
+}
+
+@article{arditi-2024-refusal,
+ abstract = {Conversational large language models are fine-tuned for both
+instruction-following and safety, resulting in models that obey benign requests
+but refuse harmful ones. While this refusal behavior is widespread across chat
+models, its underlying mechanisms remain poorly understood. In this work, we
+show that refusal is mediated by a one-dimensional subspace, across 13 popular
+open-source chat models up to 72B parameters in size. Specifically, for each
+model, we find a single direction such that erasing this direction from the
+model's residual stream activations prevents it from refusing harmful
+instructions, while adding this direction elicits refusal on even harmless
+instructions. Leveraging this insight, we propose a novel white-box jailbreak
+method that surgically disables refusal with minimal effect on other
+capabilities. Finally, we mechanistically analyze how adversarial suffixes
+suppress propagation of the refusal-mediating direction. Our findings
+underscore the brittleness of current safety fine-tuning methods. More broadly,
+our work showcases how an understanding of model internals can be leveraged to
+develop practical methods for controlling model behavior.},
+ arxiv_url = {https://arxiv.org/pdf/2406.11717v3.pdf},
+ author = {Andy Arditi and Oscar Obeso and Aaquib Syed and Daniel Paleka and Nina Panickssery and Wes Gurnee and Neel Nanda},
+ github_url = {https://github.com/andyrdt/refusal_direction},
+ title = {Refusal in Language Models Is Mediated by a Single Direction},
+ year = {2024}
+}
+
+@article{author-year-many,
+ title = {Many-shot Jailbreaking}
+}
+
+@article{author-year-novel,
+ title = {OmniVec2 - A Novel Transformer based Network for Large Scale Multimodal and Multitask Learning}
+}
+
+@article{author-year-robustness,
+ title = {Robustness in Multimodal Learning under Train-Test Modality Mismatch}
+}
+
+@article{author-year-towards,
+ title = {Towards Safe Concept Transfer of Multi-Modal Diffusion via Causal Representation Editing}
+}
+
+@article{cai-2022-badprompt,
+ abstract = {The prompt-based learning paradigm has gained much research attention
+recently. It has achieved state-of-the-art performance on several NLP tasks,
+especially in the few-shot scenarios. While steering the downstream tasks, few
+works have been reported to investigate the security problems of the
+prompt-based models. In this paper, we conduct the first study on the
+vulnerability of the continuous prompt learning algorithm to backdoor attacks.
+We observe that the few-shot scenarios have posed a great challenge to backdoor
+attacks on the prompt-based models, limiting the usability of existing NLP
+backdoor methods. To address this challenge, we propose BadPrompt, a
+lightweight and task-adaptive algorithm, to backdoor attack continuous prompts.
+Specially, BadPrompt first generates candidate triggers which are indicative
+for predicting the targeted label and dissimilar to the samples of the
+non-targeted labels. Then, it automatically selects the most effective and
+invisible trigger for each sample with an adaptive trigger optimization
+algorithm. We evaluate the performance of BadPrompt on five datasets and two
+continuous prompt models. The results exhibit the abilities of BadPrompt to
+effectively attack continuous prompts while maintaining high performance on the
+clean test sets, outperforming the baseline models by a large margin. The
+source code of BadPrompt is publicly available at
+https://github.com/papersPapers/BadPrompt.},
+ arxiv_url = {https://arxiv.org/pdf/2211.14719v1.pdf},
+ author = {Xiangrui Cai and Haidong Xu and Sihan Xu and Ying Zhang and Xiaojie Yuan},
+ github_url = {https://github.com/papersPapers/BadPrompt},
+ title = {BadPrompt: Backdoor Attacks on Continuous Prompts},
+ year = {2022}
+}
+
+@article{cao-2024-predictive,
+ abstract = {Multimodal fusion is crucial in joint decision-making systems for rendering
+holistic judgments. Since multimodal data changes in open environments, dynamic
+fusion has emerged and achieved remarkable progress in numerous applications.
+However, most existing dynamic multimodal fusion methods lack theoretical
+guarantees and easily fall into suboptimal problems, yielding unreliability and
+instability. To address this issue, we propose a Predictive Dynamic Fusion
+(PDF) framework for multimodal learning. We proceed to reveal the multimodal
+fusion from a generalization perspective and theoretically derive the
+predictable Collaborative Belief (Co-Belief) with Mono- and Holo-Confidence,
+which provably reduces the upper bound of generalization error. Accordingly, we
+further propose a relative calibration strategy to calibrate the predicted
+Co-Belief for potential uncertainty. Extensive experiments on multiple
+benchmarks confirm our superiority. Our code is available at
+https://github.com/Yinan-Xia/PDF.},
+ arxiv_url = {https://arxiv.org/pdf/2406.04802v3.pdf},
+ author = {Bing Cao and Yinan Xia and Yi Ding and Changqing Zhang and Qinghua Hu},
+ title = {Predictive Dynamic Fusion},
+ year = {2024}
+}
+
+@article{gong-2024-cross,
+ abstract = {In recent years, there has been significant research focusing on addressing
+security concerns in single-modal person re-identification (ReID) systems that
+are based on RGB images. However, the safety of cross-modality scenarios, which
+are more commonly encountered in practical applications involving images
+captured by infrared cameras, has not received adequate attention. The main
+challenge in cross-modality ReID lies in effectively dealing with visual
+differences between different modalities. For instance, infrared images are
+typically grayscale, unlike visible images that contain color information.
+Existing attack methods have primarily focused on the characteristics of the
+visible image modality, overlooking the features of other modalities and the
+variations in data distribution among different modalities. This oversight can
+potentially undermine the effectiveness of these methods in image retrieval
+across diverse modalities. This study represents the first exploration into the
+security of cross-modality ReID models and proposes a universal perturbation
+attack specifically designed for cross-modality ReID. This attack optimizes
+perturbations by leveraging gradients from diverse modality data, thereby
+disrupting the discriminator and reinforcing the differences between
+modalities. We conducted experiments on three widely used cross-modality
+datasets, namely RegDB, SYSU, and LLCM. The results not only demonstrate the
+effectiveness of our method but also provide insights for future improvements
+in the robustness of cross-modality ReID systems. The code will be available at
+https://github.com/finger-monkey/cmps__attack.},
+ arxiv_url = {https://arxiv.org/pdf/2401.10090v6.pdf},
+ author = {Yunpeng Gong and Zhun Zhong and Yansong Qu and Zhiming Luo and Rongrong Ji and Min Jiang},
+ title = {Cross-Modality Perturbation Synergy Attack for Person Re-identification},
+ year = {2024}
+}
+
+@article{hu-2022-unified,
+ abstract = {The recently developed discrete diffusion models perform extraordinarily well
+in the text-to-image task, showing significant promise for handling the
+multi-modality signals. In this work, we harness these traits and present a
+unified multimodal generation model that can conduct both the "modality
+translation" and "multi-modality generation" tasks using a single model,
+performing text-based, image-based, and even vision-language simultaneous
+generation. Specifically, we unify the discrete diffusion process for
+multimodal signals by proposing a unified transition matrix. Moreover, we
+design a mutual attention module with fused embedding layer and a unified
+objective function to emphasise the inter-modal linkages, which are vital for
+multi-modality generation. Extensive experiments indicate that our proposed
+method can perform comparably to the state-of-the-art solutions in various
+generation tasks.},
+ arxiv_url = {https://arxiv.org/pdf/2211.14842v1.pdf},
+ author = {Minghui Hu and Chuanxia Zheng and Heliang Zheng and Tat-Jen Cham and Chaoyue Wang and Zuopeng Yang and Dacheng Tao and Ponnuthurai N. Suganthan},
+ github_url = {https://github.com/mhh0318/UniD3},
+ title = {Unified Discrete Diffusion for Simultaneous Vision-Language Generation},
+ year = {2022}
+}
+
+@article{hu-2024-deep,
+ abstract = {Large-scale multimodal models have shown excellent performance over a series
+of tasks powered by the large corpus of paired multimodal training data.
+Generally, they are always assumed to receive modality-complete inputs.
+However, this simple assumption may not always hold in the real world due to
+privacy constraints or collection difficulty, where models pretrained on
+modality-complete data easily demonstrate degraded performance on
+missing-modality cases. To handle this issue, we refer to prompt learning to
+adapt large pretrained multimodal models to handle missing-modality scenarios
+by regarding different missing cases as different types of input. Instead of
+only prepending independent prompts to the intermediate layers, we present to
+leverage the correlations between prompts and input features and excavate the
+relationships between different layers of prompts to carefully design the
+instructions. We also incorporate the complementary semantics of different
+modalities to guide the prompting design for each modality. Extensive
+experiments on three commonly-used datasets consistently demonstrate the
+superiority of our method compared to the previous approaches upon different
+missing scenarios. Plentiful ablations are further given to show the
+generalizability and reliability of our method upon different modality-missing
+ratios and types.},
+ arxiv_url = {https://arxiv.org/pdf/2410.06558v4.pdf},
+ author = {Lianyu Hu and Tongkai Shi and Wei Feng and Fanhua Shang and Liang Wan},
+ github_url = {https://github.com/hulianyuyy/Deep_Correlated_Prompting},
+ title = {Deep Correlated Prompting for Visual Recognition with Missing Modalities},
+ year = {2024}
+}
+
+@article{lee-2023-multimodal,
+ abstract = {In this paper, we tackle two challenges in multimodal learning for visual
+recognition: 1) when missing-modality occurs either during training or testing
+in real-world situations; and 2) when the computation resources are not
+available to finetune on heavy transformer models. To this end, we propose to
+utilize prompt learning and mitigate the above two challenges together.
+Specifically, our modality-missing-aware prompts can be plugged into multimodal
+transformers to handle general missing-modality cases, while only requiring
+less than 1% learnable parameters compared to training the entire model. We
+further explore the effect of different prompt configurations and analyze the
+robustness to missing modality. Extensive experiments are conducted to show the
+effectiveness of our prompt learning framework that improves the performance
+under various missing-modality cases, while alleviating the requirement of
+heavy model re-training. Code is available.},
+ arxiv_url = {https://arxiv.org/pdf/2303.03369v2.pdf},
+ author = {Yi-Lun Lee and Yi-Hsuan Tsai and Wei-Chen Chiu and Chen-Yu Lee},
+ title = {Multimodal Prompting With Missing Modalities for Visual Recognition},
+ year = {2023}
+}
+
+@article{lee-2024-vhelm,
+ abstract = {Current benchmarks for assessing vision-language models (VLMs) often focus on
+their perception or problem-solving capabilities and neglect other critical
+aspects such as fairness, multilinguality, or toxicity. Furthermore, they
+differ in their evaluation procedures and the scope of the evaluation, making
+it difficult to compare models. To address these issues, we extend the HELM
+framework to VLMs to present the Holistic Evaluation of Vision Language Models
+(VHELM). VHELM aggregates various datasets to cover one or more of the 9
+aspects: visual perception, knowledge, reasoning, bias, fairness,
+multilinguality, robustness, toxicity, and safety. In doing so, we produce a
+comprehensive, multi-dimensional view of the capabilities of the VLMs across
+these important factors. In addition, we standardize the standard inference
+parameters, methods of prompting, and evaluation metrics to enable fair
+comparisons across models. Our framework is designed to be lightweight and
+automatic so that evaluation runs are cheap and fast. Our initial run evaluates
+22 VLMs on 21 existing datasets to provide a holistic snapshot of the models.
+We uncover new key findings, such as the fact that efficiency-focused models
+(e.g., Claude 3 Haiku or Gemini 1.5 Flash) perform significantly worse than
+their full models (e.g., Claude 3 Opus or Gemini 1.5 Pro) on the bias benchmark
+but not when evaluated on the other aspects. For transparency, we release the
+raw model generations and complete results on our website
+(https://crfm.stanford.edu/helm/vhelm/v2.0.1). VHELM is intended to be a living
+benchmark, and we hope to continue adding new datasets and models over time.},
+ arxiv_url = {https://arxiv.org/pdf/2410.07112v2.pdf},
+ author = {Tony Lee and Haoqin Tu and Chi Heem Wong and Wenhao Zheng and Yiyang Zhou and Yifan Mai and Josselin Somerville Roberts and Michihiro Yasunaga and Huaxiu Yao and Cihang Xie and Percy Liang},
+ github_url = {https://github.com/stanford-crfm/helm},
+ title = {VHELM: A Holistic Evaluation of Vision Language Models},
+ year = {2024}
+}
+
+@article{li-2024-art,
+ abstract = {Large-scale pre-trained generative models are taking the world by storm, due
+to their abilities in generating creative content. Meanwhile, safeguards for
+these generative models are developed, to protect users' rights and safety,
+most of which are designed for large language models. Existing methods
+primarily focus on jailbreak and adversarial attacks, which mainly evaluate the
+model's safety under malicious prompts. Recent work found that manually crafted
+safe prompts can unintentionally trigger unsafe generations. To further
+systematically evaluate the safety risks of text-to-image models, we propose a
+novel Automatic Red-Teaming framework, ART. Our method leverages both vision
+language model and large language model to establish a connection between
+unsafe generations and their prompts, thereby more efficiently identifying the
+model's vulnerabilities. With our comprehensive experiments, we reveal the
+toxicity of the popular open-source text-to-image models. The experiments also
+validate the effectiveness, adaptability, and great diversity of ART.
+Additionally, we introduce three large-scale red-teaming datasets for studying
+the safety risks associated with text-to-image models. Datasets and models can
+be found in https://github.com/GuanlinLee/ART.},
+ arxiv_url = {https://arxiv.org/pdf/2405.19360v3.pdf},
+ author = {Guanlin Li and Kangjie Chen and Shudong Zhang and Jie Zhang and Tianwei Zhang},
+ github_url = {https://github.com/GuanlinLee/ART},
+ title = {ART: Automatic Red-teaming for Text-to-Image Models to Protect Benign Users},
+ year = {2024}
+}
+
+@article{li-2024-improved,
+ abstract = {Adversarial prompts generated using gradient-based methods exhibit
+outstanding performance in performing automatic jailbreak attacks against
+safety-aligned LLMs. Nevertheless, due to the discrete nature of texts, the
+input gradient of LLMs struggles to precisely reflect the magnitude of loss
+change that results from token replacements in the prompt, leading to limited
+attack success rates against safety-aligned LLMs, even in the white-box
+setting. In this paper, we explore a new perspective on this problem,
+suggesting that it can be alleviated by leveraging innovations inspired in
+transfer-based attacks that were originally proposed for attacking black-box
+image classification models. For the first time, we appropriate the ideologies
+of effective methods among these transfer-based attacks, i.e., Skip Gradient
+Method and Intermediate Level Attack, into gradient-based adversarial prompt
+generation and achieve significant performance gains without introducing
+obvious computational cost. Meanwhile, by discussing mechanisms behind the
+gains, new insights are drawn, and proper combinations of these methods are
+also developed. Our empirical results show that 87% of the query-specific
+adversarial suffixes generated by the developed combination can induce
+Llama-2-7B-Chat to produce the output that exactly matches the target string on
+AdvBench. This match rate is 33% higher than that of a very strong baseline
+known as GCG, demonstrating advanced discrete optimization for adversarial
+prompt generation against LLMs. In addition, without introducing obvious cost,
+the combination achieves >30% absolute increase in attack success rates
+compared with GCG when generating both query-specific (38% -> 68%) and
+universal adversarial prompts (26.68% -> 60.32%) for attacking the
+Llama-2-7B-Chat model on AdvBench. Code at:
+https://github.com/qizhangli/Gradient-based-Jailbreak-Attacks.},
+ arxiv_url = {https://arxiv.org/pdf/2405.20778v2.pdf},
+ author = {Qizhang Li and Yiwen Guo and Wangmeng Zuo and Hao Chen},
+ title = {Improved Generation of Adversarial Examples Against Safety-aligned LLMs},
+ year = {2024}
+}
+
+@article{li-2024-naturalbench,
+ abstract = {Vision-language models (VLMs) have made significant progress in recent
+visual-question-answering (VQA) benchmarks that evaluate complex
+visio-linguistic reasoning. However, are these models truly effective? In this
+work, we show that VLMs still struggle with natural images and questions that
+humans can easily answer, which we term natural adversarial samples. We also
+find it surprisingly easy to generate these VQA samples from natural image-text
+corpora using off-the-shelf models like CLIP and ChatGPT. We propose a
+semi-automated approach to collect a new benchmark, NaturalBench, for reliably
+evaluating VLMs with 10,000 human-verified VQA samples. Crucially, we adopt a
+$\textbf{vision-centric}$ design by pairing each question with two images that
+yield different answers, preventing blind solutions from answering without
+using the images. This makes NaturalBench more challenging than previous
+benchmarks that can be solved with commonsense priors. We evaluate 53
+state-of-the-art VLMs on NaturalBench, showing that models like
+LLaVA-OneVision, Cambrian-1, Llama3.2-Vision, Molmo, Qwen2-VL, and even GPT-4o
+lag 50%-70% behind human performance (over 90%). We analyze why NaturalBench is
+hard from two angles: (1) Compositionality: Solving NaturalBench requires
+diverse visio-linguistic skills, including understanding attribute bindings,
+object relationships, and advanced reasoning like logic and counting. To this
+end, unlike prior work that uses a single tag per sample, we tag each
+NaturalBench sample with 1 to 8 skill tags for fine-grained evaluation. (2)
+Biases: NaturalBench exposes severe biases in VLMs, as models often choose the
+same answer regardless of the image. Lastly, we apply our benchmark curation
+method to diverse data sources, including long captions (over 100 words) and
+non-English languages like Chinese and Hindi, highlighting its potential for
+dynamic evaluations of VLMs.},
+ arxiv_url = {https://arxiv.org/pdf/2410.14669v4.pdf},
+ author = {Baiqi Li and Zhiqiu Lin and Wenxuan Peng and Jean de Dieu Nyandwi and Daniel Jiang and Zixian Ma and Simran Khanuja and Ranjay Krishna and Graham Neubig and Deva Ramanan},
+ title = {NaturalBench: Evaluating Vision-Language Models on Natural Adversarial Samples},
+ year = {2024}
+}
+
+@article{li-2024-one,
+ abstract = {Large pre-trained Vision-Language Models (VLMs) like CLIP, despite having
+remarkable generalization ability, are highly vulnerable to adversarial
+examples. This work studies the adversarial robustness of VLMs from the novel
+perspective of the text prompt instead of the extensively studied model weights
+(frozen in this work). We first show that the effectiveness of both adversarial
+attack and defense are sensitive to the used text prompt. Inspired by this, we
+propose a method to improve resilience to adversarial attacks by learning a
+robust text prompt for VLMs. The proposed method, named Adversarial Prompt
+Tuning (APT), is effective while being both computationally and data efficient.
+Extensive experiments are conducted across 15 datasets and 4 data sparsity
+schemes (from 1-shot to full training data settings) to show APT's superiority
+over hand-engineered prompts and other state-of-the-art adaption methods. APT
+demonstrated excellent abilities in terms of the in-distribution performance
+and the generalization under input distribution shift and across datasets.
+Surprisingly, by simply adding one learned word to the prompts, APT can
+significantly boost the accuracy and robustness (epsilon=4/255) over the
+hand-engineered prompts by +13% and +8.5% on average respectively. The
+improvement further increases, in our most effective setting, to +26.4% for
+accuracy and +16.7% for robustness. Code is available at
+https://github.com/TreeLLi/APT.},
+ arxiv_url = {https://arxiv.org/pdf/2403.01849v1.pdf},
+ author = {Lin Li and Haoyan Guan and Jianing Qiu and Michael Spratling},
+ github_url = {https://github.com/TreeLLi/APT},
+ title = {One Prompt Word is Enough to Boost Adversarial Robustness for Pre-trained Vision-Language Models},
+ year = {2024}
+}
+
+@article{liu-2023-autodan,
+ abstract = {The aligned Large Language Models (LLMs) are powerful language understanding
+and decision-making tools that are created through extensive alignment with
+human feedback. However, these large models remain susceptible to jailbreak
+attacks, where adversaries manipulate prompts to elicit malicious outputs that
+should not be given by aligned LLMs. Investigating jailbreak prompts can lead
+us to delve into the limitations of LLMs and further guide us to secure them.
+Unfortunately, existing jailbreak techniques suffer from either (1) scalability
+issues, where attacks heavily rely on manual crafting of prompts, or (2)
+stealthiness problems, as attacks depend on token-based algorithms to generate
+prompts that are often semantically meaningless, making them susceptible to
+detection through basic perplexity testing. In light of these challenges, we
+intend to answer this question: Can we develop an approach that can
+automatically generate stealthy jailbreak prompts? In this paper, we introduce
+AutoDAN, a novel jailbreak attack against aligned LLMs. AutoDAN can
+automatically generate stealthy jailbreak prompts by the carefully designed
+hierarchical genetic algorithm. Extensive evaluations demonstrate that AutoDAN
+not only automates the process while preserving semantic meaningfulness, but
+also demonstrates superior attack strength in cross-model transferability, and
+cross-sample universality compared with the baseline. Moreover, we also compare
+AutoDAN with perplexity-based defense methods and show that AutoDAN can bypass
+them effectively.},
+ arxiv_url = {https://arxiv.org/pdf/2310.04451v2.pdf},
+ author = {Xiaogeng Liu and Nan Xu and Muhao Chen and Chaowei Xiao},
+ github_url = {https://github.com/SheltonLiu-N/AutoDAN},
+ title = {AutoDAN: Generating Stealthy Jailbreak Prompts on Aligned Large Language Models},
+ year = {2023}
+}
+
+@article{lu-2023-theory,
+ abstract = {Human perception of the empirical world involves recognizing the diverse
+appearances, or 'modalities', of underlying objects. Despite the longstanding
+consideration of this perspective in philosophy and cognitive science, the
+study of multimodality remains relatively under-explored within the field of
+machine learning. Nevertheless, current studies of multimodal machine learning
+are limited to empirical practices, lacking theoretical foundations beyond
+heuristic arguments. An intriguing finding from the practice of multimodal
+learning is that a model trained on multiple modalities can outperform a
+finely-tuned unimodal model, even on unimodal tasks. This paper provides a
+theoretical framework that explains this phenomenon, by studying generalization
+properties of multimodal learning algorithms. We demonstrate that multimodal
+learning allows for a superior generalization bound compared to unimodal
+learning, up to a factor of $O(\sqrt{n})$, where $n$ represents the sample
+size. Such advantage occurs when both connection and heterogeneity exist
+between the modalities.},
+ arxiv_url = {https://arxiv.org/pdf/2309.12458v2.pdf},
+ author = {Zhou Lu},
+ title = {A Theory of Multimodal Learning},
+ year = {2023}
+}
+
+@article{luo-2024-image,
+ abstract = {Different from traditional task-specific vision models, recent large VLMs can
+readily adapt to different vision tasks by simply using different textual
+instructions, i.e., prompts. However, a well-known concern about traditional
+task-specific vision models is that they can be misled by imperceptible
+adversarial perturbations. Furthermore, the concern is exacerbated by the
+phenomenon that the same adversarial perturbations can fool different
+task-specific models. Given that VLMs rely on prompts to adapt to different
+tasks, an intriguing question emerges: Can a single adversarial image mislead
+all predictions of VLMs when a thousand different prompts are given? This
+question essentially introduces a novel perspective on adversarial
+transferability: cross-prompt adversarial transferability. In this work, we
+propose the Cross-Prompt Attack (CroPA). This proposed method updates the
+visual adversarial perturbation with learnable prompts, which are designed to
+counteract the misleading effects of the adversarial image. By doing this,
+CroPA significantly improves the transferability of adversarial examples across
+prompts. Extensive experiments are conducted to verify the strong cross-prompt
+adversarial transferability of CroPA with prevalent VLMs including Flamingo,
+BLIP-2, and InstructBLIP in various different tasks. Our source code is
+available at \url{https://github.com/Haochen-Luo/CroPA}.},
+ arxiv_url = {https://arxiv.org/pdf/2403.09766v1.pdf},
+ author = {Haochen Luo and Jindong Gu and Fengyuan Liu and Philip Torr},
+ github_url = {https://github.com/Haochen-Luo/CroPA},
+ title = {An Image Is Worth 1000 Lies: Transferability of Adversarial Images across Prompts on Vision-Language Models},
+ year = {2024}
+}
+
+@article{miao-2024-evaluating,
+ abstract = {The recent development of Sora leads to a new era in text-to-video (T2V)
+generation. Along with this comes the rising concern about its security risks.
+The generated videos may contain illegal or unethical content, and there is a
+lack of comprehensive quantitative understanding of their safety, posing a
+challenge to their reliability and practical deployment. Previous evaluations
+primarily focus on the quality of video generation. While some evaluations of
+text-to-image models have considered safety, they cover fewer aspects and do
+not address the unique temporal risk inherent in video generation. To bridge
+this research gap, we introduce T2VSafetyBench, a new benchmark designed for
+conducting safety-critical assessments of text-to-video models. We define 12
+critical aspects of video generation safety and construct a malicious prompt
+dataset including real-world prompts, LLM-generated prompts and jailbreak
+attack-based prompts. Based on our evaluation results, we draw several
+important findings, including: 1) no single model excels in all aspects, with
+different models showing various strengths; 2) the correlation between GPT-4
+assessments and manual reviews is generally high; 3) there is a trade-off
+between the usability and safety of text-to-video generative models. This
+indicates that as the field of video generation rapidly advances, safety risks
+are set to surge, highlighting the urgency of prioritizing video safety. We
+hope that T2VSafetyBench can provide insights for better understanding the
+safety of video generation in the era of generative AI.},
+ arxiv_url = {https://arxiv.org/pdf/2407.05965v3.pdf},
+ author = {Yibo Miao and Yifan Zhu and Yinpeng Dong and Lijia Yu and Jun Zhu and Xiao-Shan Gao},
+ github_url = {https://github.com/unitaryai/detoxify},
+ title = {T2VSafetyBench: Evaluating the Safety of Text-to-Video Generative Models},
+ year = {2024}
+}
+
+@article{morris-2023-language,
+ abstract = {Language models produce a distribution over the next token; can we use this
+information to recover the prompt tokens? We consider the problem of language
+model inversion and show that next-token probabilities contain a surprising
+amount of information about the preceding text. Often we can recover the text
+in cases where it is hidden from the user, motivating a method for recovering
+unknown prompts given only the model's current distribution output. We consider
+a variety of model access scenarios, and show how even without predictions for
+every token in the vocabulary we can recover the probability vector through
+search. On Llama-2 7b, our inversion method reconstructs prompts with a BLEU of
+$59$ and token-level F1 of $78$ and recovers $27\%$ of prompts exactly. Code
+for reproducing all experiments is available at
+http://github.com/jxmorris12/vec2text.},
+ arxiv_url = {https://arxiv.org/pdf/2311.13647v1.pdf},
+ author = {John X. Morris and Wenting Zhao and Justin T. Chiu and Vitaly Shmatikov and Alexander M. Rush},
+ github_url = {https://github.com/tatsu-lab/stanford_alpaca},
+ title = {Language Model Inversion},
+ year = {2023}
+}
+
+@article{naseer-2023-boosting,
+ abstract = {The transferability of adversarial perturbations between image models has
+been extensively studied. In this case, an attack is generated from a known
+surrogate \eg, the ImageNet trained model, and transferred to change the
+decision of an unknown (black-box) model trained on an image dataset. However,
+attacks generated from image models do not capture the dynamic nature of a
+moving object or a changing scene due to a lack of temporal cues within image
+models. This leads to reduced transferability of adversarial attacks from
+representation-enriched \emph{image} models such as Supervised Vision
+Transformers (ViTs), Self-supervised ViTs (\eg, DINO), and Vision-language
+models (\eg, CLIP) to black-box \emph{video} models. In this work, we induce
+dynamic cues within the image models without sacrificing their original
+performance on images. To this end, we optimize \emph{temporal prompts} through
+frozen image models to capture motion dynamics. Our temporal prompts are the
+result of a learnable transformation that allows optimizing for temporal
+gradients during an adversarial attack to fool the motion dynamics.
+Specifically, we introduce spatial (image) and temporal (video) cues within the
+same source model through task-specific prompts. Attacking such prompts
+maximizes the adversarial transferability from image-to-video and
+image-to-image models using the attacks designed for image models. Our attack
+results indicate that the attacker does not need specialized architectures,
+\eg, divided space-time attention, 3D convolutions, or multi-view convolution
+networks for different data modalities. Image models are effective surrogates
+to optimize an adversarial attack to fool black-box models in a changing
+environment over time. Code is available at https://bit.ly/3Xd9gRQ},
+ arxiv_url = {https://arxiv.org/pdf/2302.12252v2.pdf},
+ author = {Muzammal Naseer and Ahmad Mahmood and Salman Khan and Fahad Khan},
+ title = {Boosting Adversarial Transferability using Dynamic Cues},
+ year = {2023}
+}
+
+@article{rakotonirina-2023-can,
+ abstract = {We study whether automatically-induced prompts that effectively extract
+information from a language model can also be used, out-of-the-box, to probe
+other language models for the same information. After confirming that discrete
+prompts induced with the AutoPrompt algorithm outperform manual and semi-manual
+prompts on the slot-filling task, we demonstrate a drop in performance for
+AutoPrompt prompts learned on a model and tested on another. We introduce a way
+to induce prompts by mixing language models at training time that results in
+prompts that generalize well across models. We conduct an extensive analysis of
+the induced prompts, finding that the more general prompts include a larger
+proportion of existing English words and have a less order-dependent and more
+uniform distribution of information across their component tokens. Our work
+provides preliminary evidence that it's possible to generate discrete prompts
+that can be induced once and used with a number of different models, and gives
+insights on the properties characterizing such prompts.},
+ arxiv_url = {https://arxiv.org/pdf/2302.09865v2.pdf},
+ author = {Nathanaël Carraz Rakotonirina and Roberto Dessì and Fabio Petroni and Sebastian Riedel and Marco Baroni},
+ title = {Can discrete information extraction prompts generalize across language models?},
+ year = {2023}
+}
+
+@article{shayegani-2023-jailbreak,
+ abstract = {We introduce new jailbreak attacks on vision language models (VLMs), which
+use aligned LLMs and are resilient to text-only jailbreak attacks.
+Specifically, we develop cross-modality attacks on alignment where we pair
+adversarial images going through the vision encoder with textual prompts to
+break the alignment of the language model. Our attacks employ a novel
+compositional strategy that combines an image, adversarially targeted towards
+toxic embeddings, with generic prompts to accomplish the jailbreak. Thus, the
+LLM draws the context to answer the generic prompt from the adversarial image.
+The generation of benign-appearing adversarial images leverages a novel
+embedding-space-based methodology, operating with no access to the LLM model.
+Instead, the attacks require access only to the vision encoder and utilize one
+of our four embedding space targeting strategies. By not requiring access to
+the LLM, the attacks lower the entry barrier for attackers, particularly when
+vision encoders such as CLIP are embedded in closed-source LLMs. The attacks
+achieve a high success rate across different VLMs, highlighting the risk of
+cross-modality alignment vulnerabilities, and the need for new alignment
+approaches for multi-modal models.},
+ arxiv_url = {https://arxiv.org/pdf/2307.14539v2.pdf},
+ author = {Erfan Shayegani and Yue Dong and Nael Abu-Ghazaleh},
+ title = {Jailbreak in pieces: Compositional Adversarial Attacks on Multi-Modal Language Models},
+ year = {2023}
+}
+
+@article{souly-2024-strongreject,
+ abstract = {Most jailbreak papers claim the jailbreaks they propose are highly effective,
+often boasting near-100% attack success rates. However, it is perhaps more
+common than not for jailbreak developers to substantially exaggerate the
+effectiveness of their jailbreaks. We suggest this problem arises because
+jailbreak researchers lack a standard, high-quality benchmark for evaluating
+jailbreak performance, leaving researchers to create their own. To create a
+benchmark, researchers must choose a dataset of forbidden prompts to which a
+victim model will respond, along with an evaluation method that scores the
+harmfulness of the victim model's responses. We show that existing benchmarks
+suffer from significant shortcomings and introduce the StrongREJECT benchmark
+to address these issues. StrongREJECT's dataset contains prompts that victim
+models must answer with specific, harmful information, while its automated
+evaluator measures the extent to which a response gives useful information to
+forbidden prompts. In doing so, the StrongREJECT evaluator achieves
+state-of-the-art agreement with human judgments of jailbreak effectiveness.
+Notably, we find that existing evaluation methods significantly overstate
+jailbreak effectiveness compared to human judgments and the StrongREJECT
+evaluator. We describe a surprising and novel phenomenon that explains this
+discrepancy: jailbreaks bypassing a victim model's safety fine-tuning tend to
+reduce its capabilities. Together, our findings underscore the need for
+researchers to use a high-quality benchmark, such as StrongREJECT, when
+developing new jailbreak attacks. We release the StrongREJECT code and data at
+https://strong-reject.readthedocs.io/en/latest/.},
+ arxiv_url = {https://arxiv.org/pdf/2402.10260v2.pdf},
+ author = {Alexandra Souly and Qingyuan Lu and Dillon Bowen and Tu Trinh and Elvis Hsieh and Sana Pandey and Pieter Abbeel and Justin Svegliato and Scott Emmons and Olivia Watkins and Sam Toyer},
+ title = {A StrongREJECT for Empty Jailbreaks},
+ year = {2024}
+}
+
+@article{toyer-2023-tensor,
+ abstract = {While Large Language Models (LLMs) are increasingly being used in real-world
+applications, they remain vulnerable to prompt injection attacks: malicious
+third party prompts that subvert the intent of the system designer. To help
+researchers study this problem, we present a dataset of over 126,000 prompt
+injection attacks and 46,000 prompt-based "defenses" against prompt injection,
+all created by players of an online game called Tensor Trust. To the best of
+our knowledge, this is currently the largest dataset of human-generated
+adversarial examples for instruction-following LLMs. The attacks in our dataset
+have a lot of easily interpretable stucture, and shed light on the weaknesses
+of LLMs. We also use the dataset to create a benchmark for resistance to two
+types of prompt injection, which we refer to as prompt extraction and prompt
+hijacking. Our benchmark results show that many models are vulnerable to the
+attack strategies in the Tensor Trust dataset. Furthermore, we show that some
+attack strategies from the dataset generalize to deployed LLM-based
+applications, even though they have a very different set of constraints to the
+game. We release all data and source code at https://tensortrust.ai/paper},
+ arxiv_url = {https://arxiv.org/pdf/2311.01011v1.pdf},
+ author = {Sam Toyer and Olivia Watkins and Ethan Adrian Mendes and Justin Svegliato and Luke Bailey and Tiffany Wang and Isaac Ong and Karim Elmaaroufi and Pieter Abbeel and Trevor Darrell and Alan Ritter and Stuart Russell},
+ title = {Tensor Trust: Interpretable Prompt Injection Attacks from an Online Game},
+ year = {2023}
+}
+
+@article{wang-2024-diagnosing,
+ abstract = {Compositional reasoning capabilities are usually considered as fundamental
+skills to characterize human perception. Recent studies show that current
+Vision Language Models (VLMs) surprisingly lack sufficient knowledge with
+respect to such capabilities. To this end, we propose to thoroughly diagnose
+the composition representations encoded by VLMs, systematically revealing the
+potential cause for this weakness. Specifically, we propose evaluation methods
+from a novel game-theoretic view to assess the vulnerability of VLMs on
+different aspects of compositional understanding, e.g., relations and
+attributes. Extensive experimental results demonstrate and validate several
+insights to understand the incapabilities of VLMs on compositional reasoning,
+which provide useful and reliable guidance for future studies. The deliverables
+will be updated at https://vlms-compositionality-gametheory.github.io/.},
+ arxiv_url = {https://arxiv.org/pdf/2405.17201v1.pdf},
+ author = {Jin Wang and Shichao Dong and Yapeng Zhu and Kelu Yao and Weidong Zhao and Chao Li and Ping Luo},
+ github_url = {https://github.com/mertyg/vision-language-models-are-bows},
+ title = {Diagnosing the Compositional Knowledge of Vision Language Models from a Game-Theoretic View},
+ year = {2024}
+}
+
+@article{wang-2024-mmcert,
+ abstract = {Different from a unimodal model whose input is from a single modality, the
+input (called multi-modal input) of a multi-modal model is from multiple
+modalities such as image, 3D points, audio, text, etc. Similar to unimodal
+models, many existing studies show that a multi-modal model is also vulnerable
+to adversarial perturbation, where an attacker could add small perturbation to
+all modalities of a multi-modal input such that the multi-modal model makes
+incorrect predictions for it. Existing certified defenses are mostly designed
+for unimodal models, which achieve sub-optimal certified robustness guarantees
+when extended to multi-modal models as shown in our experimental results. In
+our work, we propose MMCert, the first certified defense against adversarial
+attacks to a multi-modal model. We derive a lower bound on the performance of
+our MMCert under arbitrary adversarial attacks with bounded perturbations to
+both modalities (e.g., in the context of auto-driving, we bound the number of
+changed pixels in both RGB image and depth image). We evaluate our MMCert using
+two benchmark datasets: one for the multi-modal road segmentation task and the
+other for the multi-modal emotion recognition task. Moreover, we compare our
+MMCert with a state-of-the-art certified defense extended from unimodal models.
+Our experimental results show that our MMCert outperforms the baseline.},
+ arxiv_url = {https://arxiv.org/pdf/2403.19080v3.pdf},
+ author = {Yanting Wang and Hongye Fu and Wei Zou and Jinyuan Jia},
+ title = {MMCert: Provable Defense against Adversarial Attacks to Multi-modal Models},
+ year = {2024}
+}
+
+@article{wen-2023-hard,
+ abstract = {The strength of modern generative models lies in their ability to be
+controlled through text-based prompts. Typical "hard" prompts are made from
+interpretable words and tokens, and must be hand-crafted by humans. There are
+also "soft" prompts, which consist of continuous feature vectors. These can be
+discovered using powerful optimization methods, but they cannot be easily
+interpreted, re-used across models, or plugged into a text-based interface.
+  We describe an approach to robustly optimize hard text prompts through
+efficient gradient-based optimization. Our approach automatically generates
+hard text-based prompts for both text-to-image and text-to-text applications.
+In the text-to-image setting, the method creates hard prompts for diffusion
+models, allowing API users to easily generate, discover, and mix and match
+image concepts without prior knowledge on how to prompt the model. In the
+text-to-text setting, we show that hard prompts can be automatically discovered
+that are effective in tuning LMs for classification.},
+ arxiv_url = {https://arxiv.org/pdf/2302.03668v2.pdf},
+ author = {Yuxin Wen and Neel Jain and John Kirchenbauer and Micah Goldblum and Jonas Geiping and Tom Goldstein},
+ title = {Hard Prompts Made Easy: Gradient-Based Discrete Optimization for Prompt Tuning and Discovery},
+ year = {2023}
+}
+
+@article{xiang-2024-badchain,
+ abstract = {Large language models (LLMs) are shown to benefit from chain-of-thought (COT)
+prompting, particularly when tackling tasks that require systematic reasoning
+processes. On the other hand, COT prompting also poses new vulnerabilities in
+the form of backdoor attacks, wherein the model will output unintended
+malicious content under specific backdoor-triggered conditions during
+inference. Traditional methods for launching backdoor attacks involve either
+contaminating the training dataset with backdoored instances or directly
+manipulating the model parameters during deployment. However, these approaches
+are not practical for commercial LLMs that typically operate via API access. In
+this paper, we propose BadChain, the first backdoor attack against LLMs
+employing COT prompting, which does not require access to the training dataset
+or model parameters and imposes low computational overhead. BadChain leverages
+the inherent reasoning capabilities of LLMs by inserting a backdoor reasoning
+step into the sequence of reasoning steps of the model output, thereby altering
+the final response when a backdoor trigger exists in the query prompt.
+Empirically, we show the effectiveness of BadChain for two COT strategies
+across four LLMs (Llama2, GPT-3.5, PaLM2, and GPT-4) and six complex benchmark
+tasks encompassing arithmetic, commonsense, and symbolic reasoning. Moreover,
+we show that LLMs endowed with stronger reasoning capabilities exhibit higher
+susceptibility to BadChain, exemplified by a high average attack success rate
+of 97.0% across the six benchmark tasks on GPT-4. Finally, we propose two
+defenses based on shuffling and demonstrate their overall ineffectiveness
+against BadChain. Therefore, BadChain remains a severe threat to LLMs,
+underscoring the urgency for the development of robust and effective future
+defenses.},
+ arxiv_url = {https://arxiv.org/pdf/2401.12242v1.pdf},
+ author = {Zhen Xiang and Fengqing Jiang and Zidi Xiong and Bhaskar Ramasubramanian and Radha Poovendran and Bo Li},
+ github_url = {https://github.com/Django-Jiang/BadChain},
+ title = {BadChain: Backdoor Chain-of-Thought Prompting for Large Language Models},
+ year = {2024}
+}
+
+@article{xu-2024-shadowcast,
+ abstract = {Vision-Language Models (VLMs) excel in generating textual responses from
+visual inputs, but their versatility raises security concerns. This study takes
+the first step in exposing VLMs' susceptibility to data poisoning attacks that
+can manipulate responses to innocuous, everyday prompts. We introduce
+Shadowcast, a stealthy data poisoning attack where poison samples are visually
+indistinguishable from benign images with matching texts. Shadowcast
+demonstrates effectiveness in two attack types. The first is a traditional
+Label Attack, tricking VLMs into misidentifying class labels, such as confusing
+Donald Trump for Joe Biden. The second is a novel Persuasion Attack, leveraging
+VLMs' text generation capabilities to craft persuasive and seemingly rational
+narratives for misinformation, such as portraying junk food as healthy. We show
+that Shadowcast effectively achieves the attacker's intentions using as few as
+50 poison samples. Crucially, the poisoned samples demonstrate transferability
+across different VLM architectures, posing a significant concern in black-box
+settings. Moreover, Shadowcast remains potent under realistic conditions
+involving various text prompts, training data augmentation, and image
+compression techniques. This work reveals how poisoned VLMs can disseminate
+convincing yet deceptive misinformation to everyday, benign users, emphasizing
+the importance of data integrity for responsible VLM deployments. Our code is
+available at: https://github.com/umd-huang-lab/VLM-Poisoning.},
+ arxiv_url = {https://arxiv.org/pdf/2402.06659v2.pdf},
+ author = {Yuancheng Xu and Jiarui Yao and Manli Shu and Yanchao Sun and Zichu Wu and Ning Yu and Tom Goldstein and Furong Huang},
+ github_url = {https://github.com/umd-huang-lab/VLM-Poisoning},
+ title = {Shadowcast: Stealthy Data Poisoning Attacks Against Vision-Language Models},
+ year = {2024}
+}
+
+@article{xue-2023-trojllm,
+ abstract = {Large Language Models (LLMs) are progressively being utilized as machine
+learning services and interface tools for various applications. However, the
+security implications of LLMs, particularly in relation to adversarial and
+Trojan attacks, remain insufficiently examined. In this paper, we propose
+TrojLLM, an automatic and black-box framework to effectively generate universal
+and stealthy triggers. When these triggers are incorporated into the input
+data, the LLMs' outputs can be maliciously manipulated. Moreover, the framework
+also supports embedding Trojans within discrete prompts, enhancing the overall
+effectiveness and precision of the triggers' attacks. Specifically, we propose
+a trigger discovery algorithm for generating universal triggers for various
+inputs by querying victim LLM-based APIs using few-shot data samples.
+Furthermore, we introduce a novel progressive Trojan poisoning algorithm
+designed to generate poisoned prompts that retain efficacy and transferability
+across a diverse range of models. Our experiments and results demonstrate
+TrojLLM's capacity to effectively insert Trojans into text prompts in
+real-world black-box LLM APIs including GPT-3.5 and GPT-4, while maintaining
+exceptional performance on clean test sets. Our work sheds light on the
+potential security risks in current models and offers a potential defensive
+approach. The source code of TrojLLM is available at
+https://github.com/UCF-ML-Research/TrojLLM.},
+ arxiv_url = {https://arxiv.org/pdf/2306.06815v3.pdf},
+ author = {Jiaqi Xue and Mengxin Zheng and Ting Hua and Yilin Shen and Yepeng Liu and Ladislau Boloni and Qian Lou},
+ github_url = {https://github.com/UCF-ML-Research/TrojLLM},
+ title = {TrojLLM: A Black-box Trojan Prompt Attack on Large Language Models},
+ year = {2023}
+}
+
+@article{yang-2022-data,
+ abstract = {Recently, the newly emerged multimodal models, which leverage both visual and
+linguistic modalities to train powerful encoders, have gained increasing
+attention. However, learning from a large-scale unlabeled dataset also exposes
+the model to the risk of potential poisoning attacks, whereby the adversary
+aims to perturb the model's training data to trigger malicious behaviors in it.
+In contrast to previous work, only poisoning visual modality, in this work, we
+take the first step to studying poisoning attacks against multimodal models in
+both visual and linguistic modalities. Specially, we focus on answering two
+questions: (1) Is the linguistic modality also vulnerable to poisoning attacks?
+and (2) Which modality is most vulnerable? To answer the two questions, we
+propose three types of poisoning attacks against multimodal models. Extensive
+evaluations on different datasets and model architectures show that all three
+attacks can achieve significant attack performance while maintaining model
+utility in both visual and linguistic modalities. Furthermore, we observe that
+the poisoning effect differs between different modalities. To mitigate the
+attacks, we propose both pre-training and post-training defenses. We
+empirically show that both defenses can significantly reduce the attack
+performance while preserving the model's utility.},
+ arxiv_url = {https://arxiv.org/pdf/2209.15266v2.pdf},
+ author = {Ziqing Yang and Xinlei He and Zheng Li and Michael Backes and Mathias Humbert and Pascal Berrang and Yang Zhang},
+ github_url = {https://github.com/zqypku/mm_poison},
+ title = {Data Poisoning Attacks Against Multimodal Encoders},
+ year = {2022}
+}
+
+@article{yang-2024-not,
+ abstract = {Given the power of vision transformers, a new learning paradigm, pre-training
+and then prompting, makes it more efficient and effective to address downstream
+visual recognition tasks. In this paper, we identify a novel security threat
+towards such a paradigm from the perspective of backdoor attacks. Specifically,
+an extra prompt token, called the switch token in this work, can turn the
+backdoor mode on, i.e., converting a benign model into a backdoored one. Once
+under the backdoor mode, a specific trigger can force the model to predict a
+target class. It poses a severe risk to the users of cloud API, since the
+malicious behavior can not be activated and detected under the benign mode,
+thus making the attack very stealthy. To attack a pre-trained model, our
+proposed attack, named SWARM, learns a trigger and prompt tokens including a
+switch token. They are optimized with the clean loss which encourages the model
+always behaves normally even the trigger presents, and the backdoor loss that
+ensures the backdoor can be activated by the trigger when the switch is on.
+Besides, we utilize the cross-mode feature distillation to reduce the effect of
+the switch token on clean samples. The experiments on diverse visual
+recognition tasks confirm the success of our switchable backdoor attack, i.e.,
+achieving 95%+ attack success rate, and also being hard to be detected and
+removed. Our code is available at https://github.com/20000yshust/SWARM.},
+ arxiv_url = {https://arxiv.org/pdf/2405.10612v1.pdf},
+ author = {Sheng Yang and Jiawang Bai and Kuofeng Gao and Yong Yang and Yiming Li and Shu-tao Xia},
+ github_url = {https://github.com/20000yshust/SWARM},
+ title = {Not All Prompts Are Secure: A Switchable Backdoor Attack Against Pre-trained Vision Transfomers},
+ year = {2024}
+}
+
+@article{yang-2024-quantifying,
+ abstract = {Multi-modal models have shown a promising capability to effectively integrate
+information from various sources, yet meanwhile, they are found vulnerable to
+pervasive perturbations, such as uni-modal attacks and missing conditions. To
+counter these perturbations, robust multi-modal representations are highly
+expected, which are positioned well away from the discriminative multi-modal
+decision boundary. In this paper, different from conventional empirical
+studies, we focus on a commonly used joint multi-modal framework and
+theoretically discover that larger uni-modal representation margins and more
+reliable integration for modalities are essential components for achieving
+higher robustness. This discovery can further explain the limitation of
+multi-modal robustness and the phenomenon that multi-modal models are often
+vulnerable to attacks on the specific modality. Moreover, our analysis reveals
+how the widespread issue, that the model has different preferences for
+modalities, limits the multi-modal robustness by influencing the essential
+components and could lead to attacks on the specific modality highly effective.
+Inspired by our theoretical finding, we introduce a training procedure called
+Certifiable Robust Multi-modal Training (CRMT), which can alleviate this
+influence from modality preference and explicitly regulate essential components
+to significantly improve robustness in a certifiable manner. Our method
+demonstrates substantial improvements in performance and robustness compared
+with existing methods. Furthermore, our training procedure can be easily
+extended to enhance other robust training strategies, highlighting its
+credibility and flexibility.},
+ arxiv_url = {https://arxiv.org/pdf/2402.06244v2.pdf},
+ author = {Zequn Yang and Yake Wei and Ce Liang and Di Hu},
+ github_url = {https://github.com/GeWu-Lab/Certifiable-Robust-Multi-modal-Training},
+ title = {Quantifying and Enhancing Multi-modal Robustness with Modality Preference},
+ year = {2024}
+}
+
+@article{yin-2023-vlattack,
+ abstract = {Vision-Language (VL) pre-trained models have shown their superiority on many
+multimodal tasks. However, the adversarial robustness of such models has not
+been fully explored. Existing approaches mainly focus on exploring the
+adversarial robustness under the white-box setting, which is unrealistic. In
+this paper, we aim to investigate a new yet practical task to craft image and
+text perturbations using pre-trained VL models to attack black-box fine-tuned
+models on different downstream tasks. Towards this end, we propose VLATTACK to
+generate adversarial samples by fusing perturbations of images and texts from
+both single-modal and multimodal levels. At the single-modal level, we propose
+a new block-wise similarity attack (BSA) strategy to learn image perturbations
+for disrupting universal representations. Besides, we adopt an existing text
+attack strategy to generate text perturbations independent of the image-modal
+attack. At the multimodal level, we design a novel iterative cross-search
+attack (ICSA) method to update adversarial image-text pairs periodically,
+starting with the outputs from the single-modal level. We conduct extensive
+experiments to attack five widely-used VL pre-trained models for six tasks.
+Experimental results show that VLATTACK achieves the highest attack success
+rates on all tasks compared with state-of-the-art baselines, which reveals a
+blind spot in the deployment of pre-trained VL models. Source codes can be
+found at https://github.com/ericyinyzy/VLAttack.},
+ arxiv_url = {https://arxiv.org/pdf/2310.04655v3.pdf},
+ author = {Ziyi Yin and Muchao Ye and Tianrong Zhang and Tianyu Du and Jinguo Zhu and Han Liu and Jinghui Chen and Ting Wang and Fenglong Ma},
+ github_url = {https://github.com/ericyinyzy/VLAttack},
+ title = {VLATTACK: Multimodal Adversarial Attacks on Vision-Language Tasks via Pre-trained Models},
+ year = {2023}
+}
+
+@article{zhang-2023-calibrating,
+ abstract = {Multimodal machine learning has achieved remarkable progress in a wide range
+of scenarios. However, the reliability of multimodal learning remains largely
+unexplored. In this paper, through extensive empirical studies, we identify
+current multimodal classification methods suffer from unreliable predictive
+confidence that tend to rely on partial modalities when estimating confidence.
+Specifically, we find that the confidence estimated by current models could
+even increase when some modalities are corrupted. To address the issue, we
+introduce an intuitive principle for multimodal learning, i.e., the confidence
+should not increase when one modality is removed. Accordingly, we propose a
+novel regularization technique, i.e., Calibrating Multimodal Learning (CML)
+regularization, to calibrate the predictive confidence of previous methods.
+This technique could be flexibly equipped by existing models and improve the
+performance in terms of confidence calibration, classification accuracy, and
+model robustness.},
+ arxiv_url = {https://arxiv.org/pdf/2306.01265v1.pdf},
+ author = {Huan Ma. Qingyang Zhang and Changqing Zhang and Bingzhe Wu and Huazhu Fu and Joey Tianyi Zhou and Qinghua Hu},
+ title = {Calibrating Multimodal Learning},
+ year = {2023}
+}
+
+@article{zhang-2023-provable,
+ abstract = {The inherent challenge of multimodal fusion is to precisely capture the
+cross-modal correlation and flexibly conduct cross-modal interaction. To fully
+release the value of each modality and mitigate the influence of low-quality
+multimodal data, dynamic multimodal fusion emerges as a promising learning
+paradigm. Despite its widespread use, theoretical justifications in this field
+are still notably lacking. Can we design a provably robust multimodal fusion
+method? This paper provides theoretical understandings to answer this question
+under a most popular multimodal fusion framework from the generalization
+perspective. We proceed to reveal that several uncertainty estimation solutions
+are naturally available to achieve robust multimodal fusion. Then a novel
+multimodal fusion framework termed Quality-aware Multimodal Fusion (QMF) is
+proposed, which can improve the performance in terms of classification accuracy
+and model robustness. Extensive experimental results on multiple benchmarks can
+support our findings.},
+ arxiv_url = {https://arxiv.org/pdf/2306.02050v2.pdf},
+ author = {Qingyang Zhang and Haitao Wu and Changqing Zhang and Qinghua Hu and Huazhu Fu and Joey Tianyi Zhou and Xi Peng},
+ github_url = {https://github.com/QingyangZhang/QMF},
+ title = {Provable Dynamic Fusion for Low-Quality Multimodal Data},
+ year = {2023}
+}
+
+@article{zhang-2024-multitrust,
+ abstract = {Despite the superior capabilities of Multimodal Large Language Models (MLLMs)
+across diverse tasks, they still face significant trustworthiness challenges.
+Yet, current literature on the assessment of trustworthy MLLMs remains limited,
+lacking a holistic evaluation to offer thorough insights into future
+improvements. In this work, we establish MultiTrust, the first comprehensive
+and unified benchmark on the trustworthiness of MLLMs across five primary
+aspects: truthfulness, safety, robustness, fairness, and privacy. Our benchmark
+employs a rigorous evaluation strategy that addresses both multimodal risks and
+cross-modal impacts, encompassing 32 diverse tasks with self-curated datasets.
+Extensive experiments with 21 modern MLLMs reveal some previously unexplored
+trustworthiness issues and risks, highlighting the complexities introduced by
+the multimodality and underscoring the necessity for advanced methodologies to
+enhance their reliability. For instance, typical proprietary models still
+struggle with the perception of visually confusing images and are vulnerable to
+multimodal jailbreaking and adversarial attacks; MLLMs are more inclined to
+disclose privacy in text and reveal ideological and cultural biases even when
+paired with irrelevant images in inference, indicating that the multimodality
+amplifies the internal risks from base LLMs. Additionally, we release a
+scalable toolbox for standardized trustworthiness research, aiming to
+facilitate future advancements in this important field. Code and resources are
+publicly available at: https://multi-trust.github.io/.},
+ arxiv_url = {https://arxiv.org/pdf/2406.07057v2.pdf},
+ author = {Yichi Zhang and Yao Huang and Yitong Sun and Chang Liu and Zhe Zhao and Zhengwei Fang and Yifan Wang and Huanran Chen and Xiao Yang and Xingxing Wei and Hang Su and Yinpeng Dong and Jun Zhu},
+ github_url = {https://github.com/isXinLiu/MM-SafetyBench},
+ title = {MultiTrust: A Comprehensive Benchmark Towards Trustworthy Multimodal Large Language Models},
+ year = {2024}
+}
+
+@article{zhao-2023-evaluating,
+ abstract = {Large vision-language models (VLMs) such as GPT-4 have achieved unprecedented
+performance in response generation, especially with visual inputs, enabling
+more creative and adaptable interaction than large language models such as
+ChatGPT. Nonetheless, multimodal generation exacerbates safety concerns, since
+adversaries may successfully evade the entire system by subtly manipulating the
+most vulnerable modality (e.g., vision). To this end, we propose evaluating the
+robustness of open-source large VLMs in the most realistic and high-risk
+setting, where adversaries have only black-box system access and seek to
+deceive the model into returning the targeted responses. In particular, we
+first craft targeted adversarial examples against pretrained models such as
+CLIP and BLIP, and then transfer these adversarial examples to other VLMs such
+as MiniGPT-4, LLaVA, UniDiffuser, BLIP-2, and Img2Prompt. In addition, we
+observe that black-box queries on these VLMs can further improve the
+effectiveness of targeted evasion, resulting in a surprisingly high success
+rate for generating targeted responses. Our findings provide a quantitative
+understanding regarding the adversarial vulnerability of large VLMs and call
+for a more thorough examination of their potential security flaws before
+deployment in practice. Code is at https://github.com/yunqing-me/AttackVLM.},
+ arxiv_url = {https://arxiv.org/pdf/2305.16934v2.pdf},
+ author = {Yunqing Zhao and Tianyu Pang and Chao Du and Xiao Yang and Chongxuan Li and Ngai-Man Cheung and Min Lin},
+ title = {On Evaluating Adversarial Robustness of Large Vision-Language Models},
+ year = {2023}
+}
+
+@article{zhou-2024-few,
+ abstract = {The vulnerability of deep neural networks to imperceptible adversarial
+perturbations has attracted widespread attention. Inspired by the success of
+vision-language foundation models, previous efforts achieved zero-shot
+adversarial robustness by aligning adversarial visual features with text
+supervision. However, in practice, they are still unsatisfactory due to several
+issues, including heavy adaptation cost, suboptimal text supervision, and
+uncontrolled natural generalization capacity. In this paper, to address these
+issues, we propose a few-shot adversarial prompt framework where adapting input
+sequences with limited data makes significant adversarial robustness
+improvement. Specifically, we achieve this by providing adversarially
+correlated text supervision that is end-to-end learned from adversarial
+examples. We also propose a novel training objective that enhances the
+consistency of multi-modal features while encourages differentiated uni-modal
+features between natural and adversarial examples. The proposed framework gives
+access to learn adversarial text supervision, which provides superior
+cross-modal adversarial alignment and matches state-of-the-art zero-shot
+adversarial robustness with only 1% training data. Code is available at:
+https://github.com/lionel-w2/FAP.},
+ arxiv_url = {https://arxiv.org/pdf/2403.14774v2.pdf},
+ author = {Yiwei Zhou and Xiaobo Xia and Zhiwei Lin and Bo Han and Tongliang Liu},
+ github_url = {https://github.com/lionel-w2/FAP},
+ title = {Few-Shot Adversarial Prompt Learning on Vision-Language Models},
+ year = {2024}
+}
+
+@article{zong-2024-safety,
+ abstract = {Current vision large language models (VLLMs) exhibit remarkable capabilities
+yet are prone to generate harmful content and are vulnerable to even the
+simplest jailbreaking attacks. Our initial analysis finds that this is due to
+the presence of harmful data during vision-language instruction fine-tuning,
+and that VLLM fine-tuning can cause forgetting of safety alignment previously
+learned by the underpinning LLM. To address this issue, we first curate a
+vision-language safe instruction-following dataset VLGuard covering various
+harmful categories. Our experiments demonstrate that integrating this dataset
+into standard vision-language fine-tuning or utilizing it for post-hoc
+fine-tuning effectively safety aligns VLLMs. This alignment is achieved with
+minimal impact on, or even enhancement of, the models' helpfulness. The
+versatility of our safety fine-tuning dataset makes it a valuable resource for
+safety-testing existing VLLMs, training new models or safeguarding pre-trained
+VLLMs. Empirical results demonstrate that fine-tuned VLLMs effectively reject
+unsafe instructions and substantially reduce the success rates of several
+black-box adversarial attacks, which approach zero in many cases. The code and
+dataset are available at https://github.com/ys-zong/VLGuard.},
+ arxiv_url = {https://arxiv.org/pdf/2402.02207v2.pdf},
+ author = {Yongshuo Zong and Ondrej Bohdal and Tingyang Yu and Yongxin Yang and Timothy Hospedales},
+ github_url = {https://github.com/Vision-CAIR/MiniGPT-4},
+ title = {Safety Fine-Tuning at (Almost) No Cost: A Baseline for Vision Large Language Models},
+ year = {2024}
+}
+
+@article{zou-2024-improving,
+ abstract = {AI systems can take harmful actions and are highly vulnerable to adversarial
+attacks. We present an approach, inspired by recent advances in representation
+engineering, that interrupts the models as they respond with harmful outputs
+with "circuit breakers." Existing techniques aimed at improving alignment, such
+as refusal training, are often bypassed. Techniques such as adversarial
+training try to plug these holes by countering specific attacks. As an
+alternative to refusal training and adversarial training, circuit-breaking
+directly controls the representations that are responsible for harmful outputs
+in the first place. Our technique can be applied to both text-only and
+multimodal language models to prevent the generation of harmful outputs without
+sacrificing utility -- even in the presence of powerful unseen attacks.
+Notably, while adversarial robustness in standalone image recognition remains
+an open challenge, circuit breakers allow the larger multimodal system to
+reliably withstand image "hijacks" that aim to produce harmful content.
+Finally, we extend our approach to AI agents, demonstrating considerable
+reductions in the rate of harmful actions when they are under attack. Our
+approach represents a significant step forward in the development of reliable
+safeguards to harmful behavior and adversarial attacks.},
+ arxiv_url = {https://arxiv.org/pdf/2406.04313v4.pdf},
+ author = {Andy Zou and Long Phan and Justin Wang and Derek Duenas and Maxwell Lin and Maksym Andriushchenko and Rowan Wang and Zico Kolter and Matt Fredrikson and Dan Hendrycks},
+ title = {Improving Alignment and Robustness with Circuit Breakers},
+ year = {2024}
+}
+
+% ===========================================
+% REFERENCE CANDIDATES
+% Additional reference papers for context
+% ===========================================
+
+@article{alon-2023-detecting,
+ abstract = {A novel hack involving Large Language Models (LLMs) has emerged, exploiting
+adversarial suffixes to deceive models into generating perilous responses. Such
+jailbreaks can trick LLMs into providing intricate instructions to a malicious
+user for creating explosives, orchestrating a bank heist, or facilitating the
+creation of offensive content. By evaluating the perplexity of queries with
+adversarial suffixes using an open-source LLM (GPT-2), we found that they have
+exceedingly high perplexity values. As we explored a broad range of regular
+(non-adversarial) prompt varieties, we concluded that false positives are a
+significant challenge for plain perplexity filtering. A Light-GBM trained on
+perplexity and token length resolved the false positives and correctly detected
+most adversarial attacks in the test set.},
+ arxiv_url = {https://arxiv.org/pdf/2308.14132v3.pdf},
+ author = {Gabriel Alon and Michael Kamfonas},
+ title = {Detecting language model attacks with perplexity},
+ year = {2023}
+}
+
+@article{andriushchenko-2024-jailbreaking,
+ abstract = {We show that even the most recent safety-aligned LLMs are not robust to
+simple adaptive jailbreaking attacks. First, we demonstrate how to successfully
+leverage access to logprobs for jailbreaking: we initially design an
+adversarial prompt template (sometimes adapted to the target LLM), and then we
+apply random search on a suffix to maximize a target logprob (e.g., of the
+token "Sure"), potentially with multiple restarts. In this way, we achieve 100%
+attack success rate -- according to GPT-4 as a judge -- on Vicuna-13B,
+Mistral-7B, Phi-3-Mini, Nemotron-4-340B, Llama-2-Chat-7B/13B/70B,
+Llama-3-Instruct-8B, Gemma-7B, GPT-3.5, GPT-4o, and R2D2 from HarmBench that
+was adversarially trained against the GCG attack. We also show how to jailbreak
+all Claude models -- that do not expose logprobs -- via either a transfer or
+prefilling attack with a 100% success rate. In addition, we show how to use
+random search on a restricted set of tokens for finding trojan strings in
+poisoned models -- a task that shares many similarities with jailbreaking --
+which is the algorithm that brought us the first place in the SaTML'24 Trojan
+Detection Competition. The common theme behind these attacks is that adaptivity
+is crucial: different models are vulnerable to different prompting templates
+(e.g., R2D2 is very sensitive to in-context learning prompts), some models have
+unique vulnerabilities based on their APIs (e.g., prefilling for Claude), and
+in some settings, it is crucial to restrict the token search space based on
+prior knowledge (e.g., for trojan detection). For reproducibility purposes, we
+provide the code, logs, and jailbreak artifacts in the JailbreakBench format at
+https://github.com/tml-epfl/llm-adaptive-attacks.},
+ arxiv_url = {https://arxiv.org/pdf/2404.02151v4.pdf},
+ author = {Maksym Andriushchenko and Francesco Croce and Nicolas Flammarion},
+ title = {Jailbreaking leading safety-aligned LLMs with simple adaptive attacks},
+ year = {2024}
+}
+
+@article{author-year-prefill,
+ title = {Prefill claude’s response}
+}
+
+@article{author-year-tool,
+ title = {Tool use (function calling)}
+}
+
+@article{bau-2020-semantic,
+ abstract = {Despite the recent success of GANs in synthesizing images conditioned on
+inputs such as a user sketch, text, or semantic labels, manipulating the
+high-level attributes of an existing natural photograph with GANs is
+challenging for two reasons. First, it is hard for GANs to precisely reproduce
+an input image. Second, after manipulation, the newly synthesized pixels often
+do not fit the original image. In this paper, we address these issues by
+adapting the image prior learned by GANs to image statistics of an individual
+image. Our method can accurately reconstruct the input image and synthesize new
+content, consistent with the appearance of the input image. We demonstrate our
+interactive system on several semantic image editing tasks, including
+synthesizing new objects consistent with background, removing unwanted objects,
+and changing the appearance of an object. Quantitative and qualitative
+comparisons against several existing methods demonstrate the effectiveness of
+our method.},
+ arxiv_url = {https://arxiv.org/pdf/2005.07727v2.pdf},
+ author = {David Bau and Hendrik Strobelt and William Peebles and Jonas Wulff and Bolei Zhou and Jun-Yan Zhu and Antonio Torralba},
+ doi = {10.1145/3306346.3323023},
+ journal = {ACM Transactions on Graphics (TOG) 38.4 (2019)},
+ title = {Semantic photo manipulation with a generative image prior},
+ year = {2020}
+}
+
+@article{carlini-2023-are,
+ abstract = {Large language models are now tuned to align with the goals of their
+creators, namely to be "helpful and harmless." These models should respond
+helpfully to user questions, but refuse to answer requests that could cause
+harm. However, adversarial users can construct inputs which circumvent attempts
+at alignment. In this work, we study adversarial alignment, and ask to what
+extent these models remain aligned when interacting with an adversarial user
+who constructs worst-case inputs (adversarial examples). These inputs are
+designed to cause the model to emit harmful content that would otherwise be
+prohibited. We show that existing NLP-based optimization attacks are
+insufficiently powerful to reliably attack aligned text models: even when
+current NLP-based attacks fail, we can find adversarial inputs with brute
+force. As a result, the failure of current attacks should not be seen as proof
+that aligned text models remain aligned under adversarial inputs.
+  However the recent trend in large-scale ML models is multimodal models that
+allow users to provide images that influence the text that is generated. We
+show these models can be easily attacked, i.e., induced to perform arbitrary
+un-aligned behavior through adversarial perturbation of the input image. We
+conjecture that improved NLP attacks may demonstrate this same level of
+adversarial control over text-only models.},
+ arxiv_url = {https://arxiv.org/pdf/2306.15447v2.pdf},
+ author = {Nicholas Carlini and Milad Nasr and Christopher A. Choquette-Choo and Matthew Jagielski and Irena Gao and Anas Awadalla and Pang Wei Koh and Daphne Ippolito and Katherine Lee and Florian Tramer and Ludwig Schmidt},
+ title = {Are aligned neural networks adversarially aligned?},
+ year = {2023}
+}
+
+@article{caron-2021-emerging,
+ abstract = {In this paper, we question if self-supervised learning provides new
+properties to Vision Transformer (ViT) that stand out compared to convolutional
+networks (convnets). Beyond the fact that adapting self-supervised methods to
+this architecture works particularly well, we make the following observations:
+first, self-supervised ViT features contain explicit information about the
+semantic segmentation of an image, which does not emerge as clearly with
+supervised ViTs, nor with convnets. Second, these features are also excellent
+k-NN classifiers, reaching 78.3% top-1 on ImageNet with a small ViT. Our study
+also underlines the importance of momentum encoder, multi-crop training, and
+the use of small patches with ViTs. We implement our findings into a simple
+self-supervised method, called DINO, which we interpret as a form of
+self-distillation with no labels. We show the synergy between DINO and ViTs by
+achieving 80.1% top-1 on ImageNet in linear evaluation with ViT-Base.},
+ arxiv_url = {https://arxiv.org/pdf/2104.14294v2.pdf},
+ author = {Mathilde Caron and Hugo Touvron and Ishan Misra and Hervé Jégou and Julien Mairal and Piotr Bojanowski and Armand Joulin},
+ title = {Emerging properties in self-supervised vision transformers},
+ year = {2021}
+}
+
+@article{chao-2023-jailbreaking,
+ abstract = {There is growing interest in ensuring that large language models (LLMs) align
+with human values. However, the alignment of such models is vulnerable to
+adversarial jailbreaks, which coax LLMs into overriding their safety
+guardrails. The identification of these vulnerabilities is therefore
+instrumental in understanding inherent weaknesses and preventing future misuse.
+To this end, we propose Prompt Automatic Iterative Refinement (PAIR), an
+algorithm that generates semantic jailbreaks with only black-box access to an
+LLM. PAIR -- which is inspired by social engineering attacks -- uses an
+attacker LLM to automatically generate jailbreaks for a separate targeted LLM
+without human intervention. In this way, the attacker LLM iteratively queries
+the target LLM to update and refine a candidate jailbreak. Empirically, PAIR
+often requires fewer than twenty queries to produce a jailbreak, which is
+orders of magnitude more efficient than existing algorithms. PAIR also achieves
+competitive jailbreaking success rates and transferability on open and
+closed-source LLMs, including GPT-3.5/4, Vicuna, and Gemini.},
+ arxiv_url = {https://arxiv.org/pdf/2310.08419v4.pdf},
+ author = {Patrick Chao and Alexander Robey and Edgar Dobriban and Hamed Hassani and George J. Pappas and Eric Wong},
+ title = {Jailbreaking black box large language models in twenty queries},
+ year = {2023}
+}
+
+@article{christiano-2017-deep,
+ abstract = {For sophisticated reinforcement learning (RL) systems to interact usefully
+with real-world environments, we need to communicate complex goals to these
+systems. In this work, we explore goals defined in terms of (non-expert) human
+preferences between pairs of trajectory segments. We show that this approach
+can effectively solve complex RL tasks without access to the reward function,
+including Atari games and simulated robot locomotion, while providing feedback
+on less than one percent of our agent's interactions with the environment. This
+reduces the cost of human oversight far enough that it can be practically
+applied to state-of-the-art RL systems. To demonstrate the flexibility of our
+approach, we show that we can successfully train complex novel behaviors with
+about an hour of human time. These behaviors and environments are considerably
+more complex than any that have been previously learned from human feedback.},
+ arxiv_url = {https://arxiv.org/pdf/1706.03741v4.pdf},
+ author = {Paul Christiano and Jan Leike and Tom B. Brown and Miljan Martic and Shane Legg and Dario Amodei},
+ title = {Deep reinforcement learning from human preferences},
+ year = {2017}
+}
+
+@article{clark-2018-think,
+ abstract = {We present a new question set, text corpus, and baselines assembled to
+encourage AI research in advanced question answering. Together, these
+constitute the AI2 Reasoning Challenge (ARC), which requires far more powerful
+knowledge and reasoning than previous challenges such as SQuAD or SNLI. The ARC
+question set is partitioned into a Challenge Set and an Easy Set, where the
+Challenge Set contains only questions answered incorrectly by both a
+retrieval-based algorithm and a word co-occurence algorithm. The dataset
+contains only natural, grade-school science questions (authored for human
+tests), and is the largest public-domain set of this kind (7,787 questions). We
+test several baselines on the Challenge Set, including leading neural models
+from the SQuAD and SNLI tasks, and find that none are able to significantly
+outperform a random baseline, reflecting the difficult nature of this task. We
+are also releasing the ARC Corpus, a corpus of 14M science sentences relevant
+to the task, and implementations of the three neural baseline models tested.
+Can your model perform better? We pose ARC as a challenge to the community.},
+ arxiv_url = {https://arxiv.org/pdf/1803.05457v1.pdf},
+ author = {Peter Clark and Isaac Cowhey and Oren Etzioni and Tushar Khot and Ashish Sabharwal and Carissa Schoenick and Oyvind Tafjord},
+ title = {Think you have solved question answering? try arc, the ai2 reasoning challenge},
+ year = {2018}
+}
+
+@article{cobbe-2021-training,
+ abstract = {State-of-the-art language models can match human performance on many tasks,
+but they still struggle to robustly perform multi-step mathematical reasoning.
+To diagnose the failures of current models and support research, we introduce
+GSM8K, a dataset of 8.5K high quality linguistically diverse grade school math
+word problems. We find that even the largest transformer models fail to achieve
+high test performance, despite the conceptual simplicity of this problem
+distribution. To increase performance, we propose training verifiers to judge
+the correctness of model completions. At test time, we generate many candidate
+solutions and select the one ranked highest by the verifier. We demonstrate
+that verification significantly improves performance on GSM8K, and we provide
+strong empirical evidence that verification scales more effectively with
+increased data than a finetuning baseline.},
+ arxiv_url = {https://arxiv.org/pdf/2110.14168v2.pdf},
+ author = {Karl Cobbe and Vineet Kosaraju and Mohammad Bavarian and Mark Chen and Heewoo Jun and Lukasz Kaiser and Matthias Plappert and Jerry Tworek and Jacob Hilton and Reiichiro Nakano and Christopher Hesse and John Schulman},
+ title = {Training verifiers to solve math word problems},
+ year = {2021}
+}
+
+@article{ding-2023-enhancing,
+ abstract = {Fine-tuning on instruction data has been widely validated as an effective
+practice for implementing chat language models like ChatGPT. Scaling the
+diversity and quality of such data, although straightforward, stands a great
+chance of leading to improved performance. This paper aims to improve the upper
+bound of open-source models further. We first provide a systematically
+designed, diverse, informative, large-scale dataset of instructional
+conversations, UltraChat, which does not involve human queries. Our objective
+is to capture the breadth of interactions that a human might have with an AI
+assistant and employs a comprehensive framework to generate multi-turn
+conversation iteratively. UltraChat contains 1.5 million high-quality
+multi-turn dialogues and covers a wide range of topics and instructions. Our
+statistical analysis of UltraChat reveals its superiority in various key
+metrics, including scale, average length, diversity, coherence, etc.,
+solidifying its position as a leading open-source dataset. Building upon
+UltraChat, we fine-tune a LLaMA model to create a powerful conversational
+model, UltraLLaMA. Our evaluations indicate that UltraLLaMA consistently
+outperforms other open-source models, including Vicuna, the previously
+recognized state-of-the-art open-source model. The dataset and the model will
+be publicly released\footnote{\url{https://github.com/thunlp/UltraChat}}.},
+ arxiv_url = {https://arxiv.org/pdf/2305.14233v1.pdf},
+ author = {Ning Ding and Yulin Chen and Bokai Xu and Yujia Qin and Zhi Zheng and Shengding Hu and Zhiyuan Liu and Maosong Sun and Bowen Zhou},
+ title = {Enhancing chat language models by scaling high-quality instructional conversations},
+ year = {2023}
+}
+
+@article{myrzakhan-2024-open,
+ abstract = {Multiple-choice questions (MCQ) are frequently used to assess large language
+models (LLMs). Typically, an LLM is given a question and selects the answer
+deemed most probable after adjustments for factors like length. Unfortunately,
+LLMs may inherently favor certain answer choice IDs, such as A/B/C/D, due to
+inherent biases of priori unbalanced probabilities, influencing the prediction
+of answers based on these IDs. Previous research has introduced methods to
+reduce this ''selection bias'' by simply permutating options on a few test
+samples and applying to new ones. Another problem of MCQ is the lottery ticket
+choice by ''random guessing''. The LLM does not learn particular knowledge, but
+the option is guessed correctly. This situation is especially serious for those
+small-scale LLMs. To address them, a more thorough approach involves shifting
+from MCQ to open-style questions, which can fundamentally eliminate selection
+bias and random guessing issues. However, transitioning causes its own set of
+challenges in (1) identifying suitable open-style questions and (2) validating
+the correctness of LLM open-style responses against human-annotated
+ground-truths. This work aims to tackle these significant difficulties, and
+establish a new LLM evaluation benchmark through entirely open-style questions.
+Consequently, we introduce the Open-LLM-Leaderboard to track various LLMs'
+performance and reflect true capability of them, such as GPT-4o/4/3.5, Claude
+3, Gemini, etc. Our code and dataset are available at
+https://github.com/VILA-Lab/Open-LLM-Leaderboard.},
+ arxiv_url = {https://arxiv.org/pdf/2406.07545v1.pdf},
+ author = {Aidar Myrzakhan and Sondos Mahmoud Bsharat and Zhiqiang Shen},
+ title = {Open llm leaderboard},
+ year = {2024}
+}
