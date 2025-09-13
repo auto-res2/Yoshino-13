@@ -1,0 +1,26 @@
+experiment_name: smoke
+experiments:
+  - soic_leakage
+
+hf_token_env: HF_TOKEN
+num_seeds: 1
+seed_list: [11]
+
+resources:
+  batch_size: 2
+  max_prompts: 5
+  attacker_epochs: 1
+
+datasets:
+  secret_prompts:
+    repo: hyperion-data/PII-Bench-v1
+    subset: pii_bench
+  benign_prompts:
+    repo: hyperion-data/MT-Bench-neutral
+    subset: mt_bench_neutral
+
+models:
+  base:
+    repo: meta-llama/Llama-2-7b-hf
+  hyperion:
+    repo: hyperion-lab/llama-2-7b-hyperion-shield-snapshot

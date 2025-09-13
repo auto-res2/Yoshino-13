@@ -1,0 +1,46 @@
+experiment_name: full
+experiments:
+  - soic_leakage
+  - care_bench
+  - gmsm_side_channel
+
+hf_token_env: HF_TOKEN
+num_seeds: 5
+seed_list: [11, 23, 29, 47, 83]
+
+resources:
+  batch_size: 8
+  max_prompts: 5000
+  attacker_epochs: 10
+
+datasets:
+  secret_prompts:
+    repo: hyperion-data/PII-Bench-v1
+    subset: pii_bench_full
+  benign_prompts:
+    repo: hyperion-data/MT-Bench-neutral
+    subset: mt_bench_neutral_full
+  lora_updates:
+    repo: hyperion-data/FedLoRA-1B
+    subset: default
+  care_bench:
+    repo: hyperion-data/CARE-Bench-v1
+    subset: default
+  gaze_capture:
+    repo: hyperion-data/GazeCapture-IMU
+    subset: default
+  ar_latency:
+    repo: hyperion-data/AR-Latency-2023
+    subset: default
+
+models:
+  base:
+    repo: meta-llama/Llama-2-70b-chat-hf
+  oracle_guard:
+    repo: oracle-guard/llama-2-70b-oracle-guard
+  hyperion:
+    repo: hyperion-lab/llama-2-70b-hyperion-shield
+  hyperion_no_hessian:
+    repo: hyperion-lab/llama-2-70b-hyperion-no-hessian
+  hyperion_no_dither:
+    repo: hyperion-lab/llama-2-70b-hyperion-no-dither
