@@ -1,0 +1,209 @@
+=== [PHASE 2/2] Full experiment start Sat Sep 13 05:29:45 AM UTC 2025 ===
+
+=== Running SMOKE TEST ===
+
+============================================
+Launching experiment: smoke_img
+============================================
+
+Files already downloaded and verified
+[exp:smoke_img] step 0000 loss=5.0007
+[exp:smoke_img] step 0010 loss=4.1875
+[exp:smoke_img] step 0020 loss=5.1927
+[exp:smoke_img] step 0030 loss=4.6875
+[exp:smoke_img] step 0040 loss=4.3750
+
+=== Numerical Results ===
+{
+  "experiment": "smoke_img",
+  "final_train_loss": 6.0,
+  "mean_train_loss": 4.528982510566712,
+  "steps": 50,
+  "figure": "iteration9/images/smoke_img_training_loss.pdf"
+}
+
+Figure saved → iteration9/images/smoke_img_training_loss.pdf
+
+============================================
+Launching experiment: smoke_txt
+============================================
+
+[exp:smoke_txt] step 0000 loss=2.3826
+[exp:smoke_txt] step 0010 loss=2.1607
+[exp:smoke_txt] step 0020 loss=1.5014
+
+=== Numerical Results ===
+{
+  "experiment": "smoke_txt",
+  "final_train_loss": 1.7545135021209717,
+  "mean_train_loss": 1.7082385460535685,
+  "steps": 30,
+  "figure": "iteration9/images/smoke_txt_training_loss.pdf"
+}
+
+Figure saved → iteration9/images/smoke_txt_training_loss.pdf
+
+=== Running FULL EXPERIMENT ===
+
+============================================
+Launching experiment: exp1_oracle_img
+============================================
+
+Files already downloaded and verified
+[exp:exp1_oracle_img] step 0000 loss=4.7344
+[exp:exp1_oracle_img] step 0010 loss=4.6562
+[exp:exp1_oracle_img] step 0020 loss=4.5938
+[exp:exp1_oracle_img] step 0030 loss=4.5000
+[exp:exp1_oracle_img] step 0040 loss=4.5469
+[exp:exp1_oracle_img] step 0050 loss=4.7344
+[exp:exp1_oracle_img] step 0060 loss=4.4531
+[exp:exp1_oracle_img] step 0070 loss=4.4688
+[exp:exp1_oracle_img] step 0080 loss=4.9375
+[exp:exp1_oracle_img] step 0090 loss=4.8906
+[exp:exp1_oracle_img] step 0100 loss=4.4844
+[exp:exp1_oracle_img] step 0110 loss=4.9219
+[exp:exp1_oracle_img] step 0120 loss=4.7344
+[exp:exp1_oracle_img] step 0130 loss=4.8594
+[exp:exp1_oracle_img] step 0140 loss=4.6562
+[exp:exp1_oracle_img] step 0150 loss=4.6094
+[exp:exp1_oracle_img] step 0160 loss=4.5000
+[exp:exp1_oracle_img] step 0170 loss=4.1562
+[exp:exp1_oracle_img] step 0180 loss=4.1719
+[exp:exp1_oracle_img] step 0190 loss=4.5469
+
+=== Numerical Results ===
+{
+  "experiment": "exp1_oracle_img",
+  "final_train_loss": 4.4375,
+  "mean_train_loss": 4.50985148191452,
+  "steps": 200,
+  "figure": "iteration9/images/exp1_oracle_img_training_loss.pdf"
+}
+
+Figure saved → iteration9/images/exp1_oracle_img_training_loss.pdf
+
+============================================
+Launching experiment: exp1_oracle_txt
+============================================
+
+[exp:exp1_oracle_txt] step 0000 loss=1.5938
+[exp:exp1_oracle_txt] step 0010 loss=1.5312
+[exp:exp1_oracle_txt] step 0020 loss=1.8125
+[exp:exp1_oracle_txt] step 0030 loss=1.7188
+[exp:exp1_oracle_txt] step 0040 loss=1.7812
+[exp:exp1_oracle_txt] step 0050 loss=1.6250
+[exp:exp1_oracle_txt] step 0060 loss=1.6250
+
+=== Numerical Results ===
+{
+  "experiment": "exp1_oracle_txt",
+  "final_train_loss": 1.5,
+  "mean_train_loss": 1.721620625919766,
+  "steps": 63,
+  "figure": "iteration9/images/exp1_oracle_txt_training_loss.pdf"
+}
+
+Figure saved → iteration9/images/exp1_oracle_txt_training_loss.pdf
+
+============================================
+Launching experiment: exp1_oracle_aud
+============================================
+
+[exp:exp1_oracle_aud] step 0000 loss=4.8750
+[exp:exp1_oracle_aud] step 0010 loss=5.1250
+
+=== Numerical Results ===
+{
+  "experiment": "exp1_oracle_aud",
+  "final_train_loss": 3.625,
+  "mean_train_loss": 4.179688394069672,
+  "steps": 16,
+  "figure": "iteration9/images/exp1_oracle_aud_training_loss.pdf"
+}
+
+Figure saved → iteration9/images/exp1_oracle_aud_training_loss.pdf
+
+============================================
+Launching experiment: exp2_causal_leak
+============================================
+
+Files already downloaded and verified
+[exp:exp2_causal_leak] step 0000 loss=5.1875
+[exp:exp2_causal_leak] step 0010 loss=4.3438
+[exp:exp2_causal_leak] step 0020 loss=5.0313
+[exp:exp2_causal_leak] step 0030 loss=4.2500
+[exp:exp2_causal_leak] step 0040 loss=3.8125
+[exp:exp2_causal_leak] step 0050 loss=3.7009
+[exp:exp2_causal_leak] step 0060 loss=5.0938
+[exp:exp2_causal_leak] step 0070 loss=4.6562
+[exp:exp2_causal_leak] step 0080 loss=3.7500
+[exp:exp2_causal_leak] step 0090 loss=5.4062
+[exp:exp2_causal_leak] step 0100 loss=4.5625
+[exp:exp2_causal_leak] step 0110 loss=4.4375
+[exp:exp2_causal_leak] step 0120 loss=3.7500
+[exp:exp2_causal_leak] step 0130 loss=3.4688
+[exp:exp2_causal_leak] step 0140 loss=4.9375
+[exp:exp2_causal_leak] step 0150 loss=5.0001
+[exp:exp2_causal_leak] step 0160 loss=4.8438
+[exp:exp2_causal_leak] step 0170 loss=4.9688
+[exp:exp2_causal_leak] step 0180 loss=4.5000
+[exp:exp2_causal_leak] step 0190 loss=3.3438
+[exp:exp2_causal_leak] step 0200 loss=4.3438
+[exp:exp2_causal_leak] step 0210 loss=3.8438
+[exp:exp2_causal_leak] step 0220 loss=4.4062
+[exp:exp2_causal_leak] step 0230 loss=4.2812
+[exp:exp2_causal_leak] step 0240 loss=4.5000
+[exp:exp2_causal_leak] step 0250 loss=4.7188
+[exp:exp2_causal_leak] step 0260 loss=4.0312
+[exp:exp2_causal_leak] step 0270 loss=4.5625
+[exp:exp2_causal_leak] step 0280 loss=3.8438
+[exp:exp2_causal_leak] step 0290 loss=5.0625
+[exp:exp2_causal_leak] step 0300 loss=5.0312
+[exp:exp2_causal_leak] step 0310 loss=5.1562
+[exp:exp2_causal_leak] step 0320 loss=5.0938
+[exp:exp2_causal_leak] step 0330 loss=4.7812
+[exp:exp2_causal_leak] step 0340 loss=4.7188
+[exp:exp2_causal_leak] step 0350 loss=3.4062
+[exp:exp2_causal_leak] step 0360 loss=4.5625
+[exp:exp2_causal_leak] step 0370 loss=4.3438
+[exp:exp2_causal_leak] step 0380 loss=4.4688
+[exp:exp2_causal_leak] step 0390 loss=3.9062
+[exp:exp2_causal_leak] step 0400 loss=3.4688
+[exp:exp2_causal_leak] step 0410 loss=4.7500
+[exp:exp2_causal_leak] step 0420 loss=5.0938
+[exp:exp2_causal_leak] step 0430 loss=4.7188
+[exp:exp2_causal_leak] step 0440 loss=3.0625
+[exp:exp2_causal_leak] step 0450 loss=4.7812
+[exp:exp2_causal_leak] step 0460 loss=4.7500
+[exp:exp2_causal_leak] step 0470 loss=3.3125
+[exp:exp2_causal_leak] step 0480 loss=4.9062
+[exp:exp2_causal_leak] step 0490 loss=5.0000
+
+=== Numerical Results ===
+{
+  "experiment": "exp2_causal_leak",
+  "final_train_loss": 4.5625,
+  "mean_train_loss": 4.4913251805305485,
+  "steps": 500,
+  "figure": "iteration9/images/exp2_causal_leak_training_loss.pdf"
+}
+
+Figure saved → iteration9/images/exp2_causal_leak_training_loss.pdf
+
+============================================
+Launching experiment: exp3_ledger_sim
+============================================
+
+[exp:exp3_ledger_sim] step 0000 loss=2.0000
+
+=== Numerical Results ===
+{
+  "experiment": "exp3_ledger_sim",
+  "final_train_loss": 2.0,
+  "mean_train_loss": 2.0,
+  "steps": 1,
+  "figure": "iteration9/images/exp3_ledger_sim_training_loss.pdf"
+}
+
+Figure saved → iteration9/images/exp3_ledger_sim_training_loss.pdf
+=== [PHASE 2/2] Full experiment end Sat Sep 13 05:34:45 AM UTC 2025 ===

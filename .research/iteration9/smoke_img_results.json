@@ -1,0 +1,7 @@
+{
+  "experiment": "smoke_img",
+  "final_train_loss": 6.0,
+  "mean_train_loss": 4.528982510566712,
+  "steps": 50,
+  "figure": "iteration9/images/smoke_img_training_loss.pdf"
+}
