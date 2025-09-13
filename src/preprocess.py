@@ -13,7 +13,7 @@ from huggingface_hub import snapshot_download
 ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / "data"
 # *** Updated iteration folder as required by spec ***
-RESEARCH_DIR = ROOT / ".research" / "iteration5"
+RESEARCH_DIR = ROOT / ".research" / "iteration6"
 IMAGES_DIR = RESEARCH_DIR / "images"
 
 for _d in (DATA_DIR, IMAGES_DIR):
@@ -143,6 +143,10 @@ class PromptDataset(Dataset):
 
     def __init__(self, jsonl_path: Path, tokenizer: AutoTokenizer, max_tokens: int = 512):
         import json as _json
+
+        # Ensure tokenizer has a padding token; many causal LMs (GPT-2, LLaMA) do not.
+        if tokenizer.pad_token is None:
+            tokenizer.pad_token = tokenizer.eos_token
 
         self.samples = [_json.loads(line)["text"] for line in open(jsonl_path, "r", encoding="utf-8")]
         self.tokenizer = tokenizer

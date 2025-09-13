@@ -58,7 +58,16 @@ def run_soic_leakage(cfg: Dict, smoke: bool):
     secret_file = next(secret_dir.glob("**/data.jsonl"))
     benign_file = next(benign_dir.glob("**/data.jsonl"))
 
-    tokenizer = AutoTokenizer.from_pretrained(cfg["models"]["base"]["repo"], token=cfg.get("_hf_token"))
+    tokenizer = AutoTokenizer.from_pretrained(
+        cfg["models"]["base"]["repo"], token=cfg.get("_hf_token")
+    )
+
+    # ---------------------------------------------------------------------------
+    # Ensure padding token is available (many GPT-family tokenizers lack one)
+    # ---------------------------------------------------------------------------
+    if tokenizer.pad_token is None:
+        # Use EOS as PAD to avoid size mismatch when calling with padding="max_length"
+        tokenizer.pad_token = tokenizer.eos_token
 
     secret_ds = PromptDataset(secret_file, tokenizer)
     benign_ds = PromptDataset(benign_file, tokenizer)
