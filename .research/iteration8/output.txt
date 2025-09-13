@@ -1,0 +1,9 @@
+=== [PHASE 2/2] Full experiment start Sat Sep 13 07:42:00 AM UTC 2025 ===
+
+==== EXPERIMENT 1 – SOIC Leakage-Stress Test ====
+[ERROR] Experiment 'soic_leakage' terminated: Failed to download dataset 'hyperion-data/PII-Bench-v1': 401 Client Error. (Request ID: Root=1-68c5204e-1bc9944c4af6701e56f5937c;207f6737-566d-4efe-b9cb-8152e1fdeeb1)
+
+Repository Not Found for url: https://huggingface.co/api/datasets/hyperion-data/PII-Bench-v1/revision/main.
+Please make sure you specified the correct `repo_id` and `repo_type`.
+If you are trying to access a private or gated repo, make sure you are authenticated. For more details, see https://huggingface.co/docs/huggingface_hub/authentication
+Invalid username or password. – did you set the HF_TOKEN environment variable?
