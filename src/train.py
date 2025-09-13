@@ -144,10 +144,10 @@ class SimpleTrainer:
 
         # bookkeeping & output paths -----------------------------------
         root = Path(__file__).resolve().parent.parent
-        # mandatory iteration3 paths (spec requirement)
-        self.img_dir = root / ".research" / "iteration3" / "images"
+        # Updated to mandatory iteration4 paths (spec requirement)
+        self.img_dir = root / ".research" / "iteration4" / "images"
         self.img_dir.mkdir(parents=True, exist_ok=True)
-        self.res_dir = root / ".research" / "iteration3"
+        self.res_dir = root / ".research" / "iteration4"
         self.res_dir.mkdir(parents=True, exist_ok=True)
         self.loss_history: List[float] = []
 

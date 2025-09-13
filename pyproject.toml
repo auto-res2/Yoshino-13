@@ -16,4 +16,6 @@ dependencies = [
     "matplotlib>=3.4.0",
     "requests>=2.0.0",
     "pyyaml>=6.0",
+    # Explicit NumPy pin – PyTorch/torchvision wheels compiled against NumPy <2.0.
+    "numpy>=1.22.3,<2.0",
 ]
