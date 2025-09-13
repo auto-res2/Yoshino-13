@@ -1,0 +1,86 @@
+2025-09-13 02:05:26,394 | INFO | Running Experiment 1 – Full Experiment 1 – Resistance to Long-Range Jailbreaks.
+2025-09-13 02:05:26,394 | INFO | Using cached dataset 'longfuse'
+Generating train split: 0 examples [00:00, ? examples/s]Generating train split: 2 examples [00:00, 202.40 examples/s]
+Traceback (most recent call last):
+  File "/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/.venv/lib/python3.11/site-packages/huggingface_hub/utils/_http.py", line 409, in hf_raise_for_status
+    response.raise_for_status()
+  File "/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/.venv/lib/python3.11/site-packages/requests/models.py", line 1026, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 401 Client Error: Unauthorized for url: https://huggingface.co/mistralai/Mixtral-8x7B-Instruct-v0.1/resolve/main/config.json
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/.venv/lib/python3.11/site-packages/transformers/utils/hub.py", line 478, in cached_files
+    hf_hub_download(
+  File "/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/.venv/lib/python3.11/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/.venv/lib/python3.11/site-packages/huggingface_hub/file_download.py", line 1010, in hf_hub_download
+    return _hf_hub_download_to_cache_dir(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/.venv/lib/python3.11/site-packages/huggingface_hub/file_download.py", line 1117, in _hf_hub_download_to_cache_dir
+    _raise_on_head_call_error(head_call_error, force_download, local_files_only)
+  File "/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/.venv/lib/python3.11/site-packages/huggingface_hub/file_download.py", line 1658, in _raise_on_head_call_error
+    raise head_call_error
+  File "/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/.venv/lib/python3.11/site-packages/huggingface_hub/file_download.py", line 1546, in _get_metadata_or_catch_error
+    metadata = get_hf_file_metadata(
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/.venv/lib/python3.11/site-packages/huggingface_hub/utils/_validators.py", line 114, in _inner_fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/.venv/lib/python3.11/site-packages/huggingface_hub/file_download.py", line 1463, in get_hf_file_metadata
+    r = _request_wrapper(
+        ^^^^^^^^^^^^^^^^^
+  File "/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/.venv/lib/python3.11/site-packages/huggingface_hub/file_download.py", line 286, in _request_wrapper
+    response = _request_wrapper(
+               ^^^^^^^^^^^^^^^^^
+  File "/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/.venv/lib/python3.11/site-packages/huggingface_hub/file_download.py", line 310, in _request_wrapper
+    hf_raise_for_status(response)
+  File "/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/.venv/lib/python3.11/site-packages/huggingface_hub/utils/_http.py", line 426, in hf_raise_for_status
+    raise _format(GatedRepoError, message, response) from e
+huggingface_hub.errors.GatedRepoError: 401 Client Error. (Request ID: Root=1-68c4d169-439e80777580938e6406a4dd;93c5960e-16ab-4740-8d8e-f61e1c9c6c4d)
+
+Cannot access gated repo for url https://huggingface.co/mistralai/Mixtral-8x7B-Instruct-v0.1/resolve/main/config.json.
+Access to model mistralai/Mixtral-8x7B-Instruct-v0.1 is restricted. You must have access to it and be authenticated to access it. Please log in.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/src/main.py", line 107, in <module>
+    main()
+  File "/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/src/main.py", line 97, in main
+    _run_cfg(_FULL_CFG)
+  File "/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/src/main.py", line 83, in _run_cfg
+    run_experiment_1(cfg)
+  File "/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/src/evaluate.py", line 88, in run_experiment_1
+    tokenizer, model = load_model(model_id)
+                       ^^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/src/train.py", line 38, in load_model
+    tokenizer = AutoTokenizer.from_pretrained(model_id)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/.venv/lib/python3.11/site-packages/transformers/models/auto/tokenization_auto.py", line 1078, in from_pretrained
+    config = AutoConfig.from_pretrained(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/.venv/lib/python3.11/site-packages/transformers/models/auto/configuration_auto.py", line 1288, in from_pretrained
+    config_dict, unused_kwargs = PretrainedConfig.get_config_dict(pretrained_model_name_or_path, **kwargs)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/.venv/lib/python3.11/site-packages/transformers/configuration_utils.py", line 662, in get_config_dict
+    config_dict, kwargs = cls._get_config_dict(pretrained_model_name_or_path, **kwargs)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/.venv/lib/python3.11/site-packages/transformers/configuration_utils.py", line 721, in _get_config_dict
+    resolved_config_file = cached_file(
+                           ^^^^^^^^^^^^
+  File "/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/.venv/lib/python3.11/site-packages/transformers/utils/hub.py", line 321, in cached_file
+    file = cached_files(path_or_repo_id=path_or_repo_id, filenames=[filename], **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/.venv/lib/python3.11/site-packages/transformers/utils/hub.py", line 542, in cached_files
+    raise OSError(
+OSError: You are trying to access a gated repo.
+Make sure to have access to it at https://huggingface.co/mistralai/Mixtral-8x7B-Instruct-v0.1.
+401 Client Error. (Request ID: Root=1-68c4d169-439e80777580938e6406a4dd;93c5960e-16ab-4740-8d8e-f61e1c9c6c4d)
+
+Cannot access gated repo for url https://huggingface.co/mistralai/Mixtral-8x7B-Instruct-v0.1/resolve/main/config.json.
+Access to model mistralai/Mixtral-8x7B-Instruct-v0.1 is restricted. You must have access to it and be authenticated to access it. Please log in.
