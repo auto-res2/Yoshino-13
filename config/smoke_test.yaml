@@ -1,0 +1,28 @@
+# config/smoke_test.yaml – lightweight configuration for CI / sanity checks
+experiments:
+  smoke_img:
+    description: |
+      Smoke-test Vision – CIFAR-10 with ViT-B/16 backbone + ORACLE differentiable top-k head.
+    model: oracle_vision
+    backbone: vit_base_patch16_224
+    k: 3
+    tau: 0.5
+    lr: 5e-4
+    max_steps: 50
+    dataset:
+      name: cifar10
+      batch_size: 16
+      has_val: false
+
+  smoke_txt:
+    description: |
+      Smoke-test Text – AG-News with T5-base encoder + ORACLE head.
+    model: oracle_text
+    k: 3
+    tau: 0.5
+    lr: 3e-4
+    max_steps: 30
+    dataset:
+      name: ag_news
+      batch_size: 8
+      has_val: false
