@@ -21,7 +21,13 @@ import torch
 from sklearn.metrics import mutual_info_score
 from transformers import AutoTokenizer
 
-from .preprocess import IMAGES_DIR, RESEARCH_DIR, PromptDataset, prepare_dataset
+from .preprocess import (
+    IMAGES_DIR,
+    RESEARCH_DIR,
+    PromptDataset,
+    prepare_dataset,
+    ensure_pad_token,
+)
 from .train import load_model
 
 # ---------------------------------------------------------------
@@ -62,16 +68,8 @@ def run_soic_leakage(cfg: Dict, smoke: bool):
     tokenizer = AutoTokenizer.from_pretrained(
         cfg["models"]["base"]["repo"], token=cfg.get("_hf_token")
     )
-
-    # Ensure padding token exists – many GPT family tokenizers lack one
-    if tokenizer.pad_token is None:
-        if tokenizer.eos_token is not None:
-            tokenizer.pad_token = tokenizer.eos_token
-            tokenizer.pad_token_id = tokenizer.eos_token_id
-        else:
-            tokenizer.add_special_tokens({"pad_token": "<|pad|>"})
-            if tokenizer.pad_token_id is None:
-                tokenizer.pad_token_id = tokenizer.convert_tokens_to_ids(tokenizer.pad_token)
+    # ensure PAD token exists (in-place)
+    ensure_pad_token(tokenizer)
 
     secret_ds = PromptDataset(secret_file, tokenizer)
     benign_ds = PromptDataset(benign_file, tokenizer)

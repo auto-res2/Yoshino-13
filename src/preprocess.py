@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / "data"
 
 #  Updated iteration folder as required by spec ----------------------
-RESEARCH_DIR = ROOT / ".research" / "iteration17"  # <-- updated from iteration16 to iteration17
+RESEARCH_DIR = ROOT / ".research" / "iteration18"  # upgraded from iteration17 → iteration18
 IMAGES_DIR = RESEARCH_DIR / "images"
 
 # Ensure that all required directories exist -------------------------
@@ -23,11 +23,43 @@ __all__ = [
     "PromptDataset",
     "RESEARCH_DIR",
     "IMAGES_DIR",
+    "ensure_pad_token",
 ]
+
+# -------------------------------------------------------------------
+#  PAD-token helper – centralised to avoid duplicates
+# -------------------------------------------------------------------
+
+def ensure_pad_token(tokenizer):
+    """Ensure that *tokenizer* has a valid PAD token & id.
+
+    This is a hard requirement for our batched `padding="max_length"`
+    calls.  The function is *idempotent* – calling it multiple times is
+    safe and has no side-effects once a PAD token exists.
+    """
+
+    if tokenizer.pad_token is not None and tokenizer.pad_token_id is not None:
+        return tokenizer  # nothing to do
+
+    # Prefer mapping PAD → EOS if an EOS token exists (no vocab growth).
+    if tokenizer.eos_token is not None and tokenizer.eos_token_id is not None:
+        tokenizer.pad_token = tokenizer.eos_token
+        tokenizer.pad_token_id = tokenizer.eos_token_id
+        return tokenizer
+
+    # Otherwise we have to *add* a new special token to the vocabulary.
+    new_pad_token = "<|pad|>"
+    if new_pad_token not in tokenizer.get_vocab():
+        tokenizer.add_special_tokens({"pad_token": new_pad_token})
+    tokenizer.pad_token = new_pad_token
+    if tokenizer.pad_token_id is None:
+        tokenizer.pad_token_id = tokenizer.convert_tokens_to_ids(new_pad_token)
+    return tokenizer
 
 # -------------------------------------------------------------------
 #  download helpers & synthetic dataset generation
 # -------------------------------------------------------------------
+
 
 def _create_synthetic_dataset(name: str) -> Path:
     """Create a **tiny** JSONL dataset on-the-fly so that smoke tests can
@@ -142,18 +174,8 @@ class PromptDataset(Dataset):
     """A minimal JSONL prompt dataset with a `text` field."""
 
     def __init__(self, jsonl_path: Path, tokenizer: AutoTokenizer, max_tokens: int = 512):
-        # ------------------------------------------------------------------
-        # Ensure the tokenizer has a valid PAD token.  Some causal LMs (GPT-2,
-        # LLaMA) are trained without one which breaks `padding=...` in the
-        # encoding call unless we fix it here.
-        # ------------------------------------------------------------------
-        if tokenizer.pad_token_id is None:
-            if tokenizer.eos_token is not None:
-                tokenizer.pad_token = tokenizer.eos_token
-            else:
-                tokenizer.add_special_tokens({"pad_token": "<|pad|>"})
-                if tokenizer.pad_token_id is None:
-                    tokenizer.pad_token_id = tokenizer.convert_tokens_to_ids(tokenizer.pad_token)
+        # ensure pad token exists on the *shared* tokenizer instance
+        ensure_pad_token(tokenizer)
 
         self.samples = [json.loads(line)["text"] for line in open(jsonl_path, "r", encoding="utf-8")]
         self.tokenizer = tokenizer
