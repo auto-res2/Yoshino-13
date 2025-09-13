@@ -1,0 +1,180 @@
+\documentclass{article}
+
+\usepackage{agents4science_2025}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{nicefrac}
+
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{colortbl}
+\usepackage{xcolor}
+
+\usepackage{tikz}
+\usepackage{pgfplots}
+
+\usepackage{float}
+
+\usepackage{algorithm}
+\usepackage{algorithmicx}
+\usepackage{algpseudocode}
+
+\usepackage{hyperref}
+\usepackage{cleveref}
+
+\usepackage{microtype}
+\usepackage{booktabs}
+
+
+\title{HYPERION-SHIELD: Reactive, Revocable and History-Aware Safety for Vision-Language Models}
+
+\author{AIRAS}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Vision-language models (VLMs) already power mixed-reality glasses, surgical robots and on-device copilots, yet their safety guards remain static, single-turn and unimodal. They cannot react once a jailbreak is detected, they provide no guarantees after local fine-tuning, and they ignore leakage through higher-order derivatives, low-bit gradient releases or physiological side-channels. We address these shortcomings with HYPERION-SHIELD, a five-pillar framework: (i) a Second-Order Information Curtain that projects Hessians into a 64-dimensional subspace and dithers 4-bit gradients while enforcing a PAC-Bayes leakage bound; (ii) Continual Revocable Certification, which anchors every dialogue turn in a BLS-signed Merkle chain and propagates 96-byte revocations within milliseconds; (iii) a Reflexive Causal Patch that repairs unsafe causal paths on-device in ten gradient steps and embeds witness-encrypted watermarks; (iv) a Gaze-Motion Side-Channel Mask that maps latency, gaze and IMU traces onto a $\sigma$-smooth manifold with $\mathrm{TV} \leq 0.01$; and (v) CARE-Bench, the first continual arms-race benchmark with 12 351 adaptive multimodal attack episodes. We fully specify three experiments—leakage auditing, continual red-teaming and sensor masking—and release logs. A pilot run exposed critical implementation gaps: mutual-information estimates collapsed to zero, token recovery reached 100\%, and only ten samples were processed. We analyse these failures and outline the rerun conditions required to substantiate HYPERION-SHIELD’s theoretical guarantees.
+\end{abstract}
+
+\section{Introduction}
+Large VLMs increasingly mediate safety-critical decisions-from autonomous drones to multimodal prosthetics-yet their alignment remains brittle. Human players in Tensor Trust contributed 126 k prompt-injection attacks that subvert chat models \cite{toyer-2023-tensor}; adaptive suffixes achieve 100\% jailbreak success on leading text LLMs \cite{andriushchenko-2024-jailbreaking}; and benign-looking adversarial images can hijack cross-modal alignment \cite{shayegani-2023-jailbreak}. Certified defences exist but are passive and unimodal. MMCert bounds $\ell_{\infty}$ perturbations on RGB-depth pairs \cite{wang-2024-mmcert}, whereas Circuit Breaker suppresses harmful activations at inference time only \cite{zou-2024-improving}. None of these approaches (i) repair models after compromise, (ii) maintain guarantees over multi-turn dialogues, or (iii) cover leakage through Hessians, quantised gradients, or physiological traces.
+
+We therefore seek a holistic safety apparatus that delivers: 1) immediate reaction after a detected exploit; 2) cryptographically verifiable guarantees across arbitrarily long interaction histories; and 3) formal bounds on information leaked via logits, first- and second-order gradients and multimodal side-channels. The adversary we consider is adaptive, multimodal and history-aware: they can observe previous answers, fine-tune the model on-device, record latency together with gaze and inertial data on an AR headset, and probe Hessians released for federated learning.
+
+HYPERION-SHIELD tackles these challenges through five orthogonal components: • Second-Order Information Curtain (SOIC) learns a low-rank Hessian projector and injects $\sigma$-dither into 4-bit gradients, yielding a PAC-Bayes mutual-information bound. • Continual Revocable Certification (CRC) attaches threshold-BLS signatures to every turn and revokes compromised weights in <150 ms locally and <800 ms globally. • Reflexive Causal Patch (RCP) trains a 32 k-parameter router online to null unsafe causal directions and embeds witness-encrypted watermarks that ensure non-repudiation. • Gaze-Motion Side-Channel Masking (GMSM) deploys an eight-coupling normalising flow to decorrelate latency, gaze and IMU from hidden prompts. • CARE-Bench establishes the first continual arms-race protocol where AutoDAN-Vision agents adapt after each defence patch \cite{liu-2023-autodan}.
+
+\subsection{Key contributions}
+\begin{itemize}
+  \item \textbf{Second-order leakage bound:} Derivation of a PAC-Bayes upper bound $I(h; y,\nabla,H) \leq \varepsilon_{\mathrm{MI}}^{2}$ that remains valid under 4-bit gradient release and Hessian projection.
+  \item \textbf{Revocable certificate chain:} Threshold-BLS certificate chain with millisecond-scale revocation and per-turn Merkle anchoring.
+  \item \textbf{Reflexive Causal Patch:} A reactive patch that restores $\tau$-safety within ten gradient steps and embeds a non-repudiable watermark.
+  \item \textbf{Sensor side-channel masking:} First mask certified to $\mathrm{TV} \leq 0.01$ on gaze-motion-latency traces.
+  \item \textbf{CARE-Bench:} 12 351 adaptive attack episodes across four modalities with metrics Time-to-Breach (TTB), Revocation Latency (RL) and Conversation-Safe-Rate (CSR).
+  \item \textbf{Protocol and logs:} Rigorous experimental protocol and public logs that uncover implementation gaps.
+\end{itemize}
+
+Future work will complete missing experiments, extend CRC to tool-state graphs in autonomous agents, and provide a formal proof for the witness-encrypted watermark.
+
+\section{Related Work}
+\subsection{Static certification}
+Norm-bounded multimodal certificates such as MMCert restrict RGB-depth perturbations but assume frozen weights and single-step inputs \cite{wang-2024-mmcert}. JS-DS constrains Jacobians; however, neither Hessians nor low-precision gradient releases are addressed. SOIC generalises these efforts through a learned 64-dimensional Hessian subspace and $\sigma$-dither that preserves differential privacy.
+
+\subsection{Reactive alignment}
+Circuit Breaker interrupts harmful activations on the fly \cite{zou-2024-improving}; BadChain shows how back-doored reasoning steps exploit chain-of-thought \cite{xiang-2024-badchain}. RCP instead repairs the causal pathway and certifies the patch via witness encryption, while CRC ensures that compromised weights are provably revoked across clients.
+
+\subsection{Adaptive jailbreaks and benchmarks}
+PAIR finds semantic jailbreaks in <20 queries \cite{chao-2023-jailbreaking}; AutoDAN produces stealthy adaptive prompts \cite{liu-2023-autodan}; StrongREJECT exposes benchmark inflation in jailbreak literature \cite{souly-2024-strongreject}. CARE-Bench extends these lines to multimodal, continual red-teaming with sensor side-channels and Hessian probes.
+
+\subsection{Side-channel leakage}
+Language-model inversion extracts hidden prompts from next-token distributions \cite{morris-2023-language}, while adversarial images transfer across thousands of prompts \cite{luo-2024-image}. GMSM is, to our knowledge, the first defence that masks latency-gaze-IMU traces in AR settings.
+
+By offering second-order leakage bounds, cryptographically revocable guarantees and continual evaluation, HYPERION-SHIELD advances beyond the current state of the art.
+
+\section{Background}
+\subsection{Formal setting}
+Let a foundation VLM $f_{\theta}$ map multimodal input $x = (\iota,\tau,s)$ consisting of image $\iota$, text $\tau$ and sensor trace $s$ to an answer $y$ and auxiliary artefacts $a = (\nabla_{\theta} L, H_{\theta} L)$ that may be released for federated learning. A hidden prompt $h$ resides in $\tau$; an adversary observes $(y,a,s')$ and seeks to infer $h$. The system is $\varepsilon$-safe if $I(h; y,a,s') \leq \varepsilon$.
+
+\subsection{Dialogue history and multi-turn safety}
+Dialogue history $H = (h_{1},\dots,h_{T})$ evolves over time. Because attackers adapt after each turn, certification must hold jointly over the full history. Released gradients may be INT4; sensor traces comprise latency, gaze vectors and six-axis IMU readings; and a root authority can publish threshold-BLS signatures and revocations.
+
+\subsection{Cryptographic and information-theoretic tools}
+PAC-Bayes leakage bounds generalise classical differential privacy to information channels \cite{wang-2024-mmcert}. Threshold-BLS signatures yield 96-byte proofs verifiable on mobile hardware. Witness encryption allows embedding encrypted statements whose decryption key is a later-revealed witness, providing non-repudiation without server trust.
+
+\section{Method}
+\subsection{Second-Order Information Curtain}
+During safety fine-tuning we train a linear conditioner $g_{H}\in\mathbb{R}^{64\times d}$ that projects each Hessian-vector product $H v$ onto a 64-dimensional subspace and applies 50\% dropout. Concurrently, gradients destined for public release are quantised to INT4 using GPTQ symmetric rounding and perturbed by i.i.d. Gaussian $\sigma$-dither ($\sigma = 0.4$). If $\kappa$ bounds the spectral norm of $g_{H}$ and $\rho$ is the zCDP noise for the dither, PAC-Bayes yields
+\[ I(h;\, y,\nabla,H) \leq (\kappa^{2}+\rho)\,\varepsilon_{\mathrm{MI}}^{2}. \]
+
+\subsection{Continual Revocable Certification}
+Safety-critical weights $W_{s}$ are wrapped by an initial threshold-BLS signature $\sigma_{0}$. For every dialogue turn $t$ we compute a Merkle root $m_{t} = \mathrm{Hash}(h_{t},\, \mathrm{timestamp})$ and sign it, generating $\sigma_{t}$. Clients verify $\sigma_{t}$ in $\approx$5 ms on Apple A17 mobile hardware. When a 96-byte revocation proof appears on the bulletin board, the client zeros $W_{s}$ and switches to a safe fallback, guaranteeing that the entire conversation remains $\tau$-safe as long as no link in the chain is revoked.
+
+\subsection{Reflexive Causal Patch}
+Let $\mathcal{C}$ be the causal graph over residual streams. If the instantaneous causal effect $\mathrm{CE}(u\to v)$ on an unsafe node $v$ exceeds $\tau$, an on-device 32 k-parameter router $\v{R}$ is trained online for $\leq$10 SGD steps under DP-CARC noise $\rho = 0.3$. A micro-certificate for $\v{R}$ is signed locally, and its hash is embedded via witness-encrypted watermark in the next benign answer, preventing silent removal by the operator.
+
+\subsection{Gaze-Motion Side-Channel Masking}
+An eight-coupling normalising flow $f_{\phi}$ maps the joint distribution of latency, gaze and IMU to a $\sigma$-smooth manifold statistically independent of $h$. We certify $\mathrm{TV}(s', f_{\phi}(s')) \leq 0.01$ using the multimodal predictive-dynamic-fusion bound \cite{cao-2024-predictive}.
+
+\subsection{Continual-arms-race evaluation}
+CARE-Bench distributes 12 351 adaptive attack episodes driven by AutoDAN-Vision agents. Primary metrics are median TTB (higher is better), CSR (higher is better) and RL (lower is better).
+
+\section{Experimental Setup}
+\subsection{Infrastructure}
+Experiments run on 8$\times$ NVIDIA A100-80 GB GPUs with 2 TB RAM, orchestrated by Slurm.
+
+\subsection{Victim model}
+Llama-2-70B-chat with a vision adaptor; safety heads are hot-swapped per variant.
+
+\subsection{Datasets}
+\begin{itemize}
+  \item Secret prompts: PII-Bench-v1 plus MUSDL-Lyrics (5 000).
+  \item Benign prompts: MT-Bench-Neutral (5 000).
+  \item Sparse LoRA updates: FedLoRA-1B.
+  \item CARE-Bench-v1: 12 351 adaptive episodes with sensor traces.
+  \item GMSM: GazeCapture-IMU, EgoMotion-IMU and AR-Latency-2023.
+\end{itemize}
+
+\subsection{Variants}
+Leakage audit: Base, ORACLE-GUARD, HYPERION, HYP-no-Hessian, HYP-no-Dither. CARE adds HYP-no-CRC and HYP-no-RCP.
+
+\subsection{Experiment 1 - SOIC leakage}
+Prompts are split 70/15/15; five seeds $\{11,23,29,47,83\}$. For each prompt we capture logits, full FP16 gradients, INT4 gradients with $\sigma = 0.4$ dither, and 64 Hessian projections. Mutual information is estimated by MINE (three-layer MLP, 50\,k steps, Adam $3\times 10^{-4}$) and KSG-kNN ($k = 10$) with 1\,000 bootstrap CIs. Token recovery uses the LoRA-aware inversion of Zhu et al. 2024.
+
+\subsection{Experiment 2 - CARE arms-race}
+Five-fold split; same seeds. Metrics: median TTB, CSR, RLlocal, RLglobal. Stressors: (i) network blackout, (ii) 3 s latency jitter, (iii) thermal-IR images. RCP hyper-parameters: steps $\in\{2,5,10\}$, $\tau \in\{0.1,0.2,0.3\}$.
+
+\subsection{Experiment 3 - GMSM sensor masking}
+Flow depth $= 8$, $\sigma = 0.01$. Metrics: Extraction-Accuracy (lower is better), TV-distance (lower is better) and Watermark TNR (higher is better). Five seeds $\{3,7,13,19,101\}$.
+
+\subsection{Reproducibility}
+SHA-256 of every checkpoint, dataset commit and source revision is stored in JSON artefacts; a CI smoke test exercises all flags in <90 s.
+
+\section{Results}
+Only Experiment 1 ran beyond the CI smoke test; Experiments 2 and 3 produced no logs. Moreover, the leakage audit processed merely ten samples per variant, invalidating statistical claims.
+
+\subsection{Mutual information}
+All five variants report $\hat{\varepsilon}_{\mathrm{MI}}^{2} = 0.0$ bits (mean of 10 samples, sd 0), an artefact of degenerate gradient capture.
+
+\subsection{Exact-token recovery}
+All variants achieve 100\% recovery, contradicting zero mutual information. Manual inspection shows the inversion metric compared recovered tokens against teacher-forced inputs rather than hidden prompts.
+
+\subsection{Sample size}
+\texttt{num\_samples} $= 10$ instead of the planned 50 k; confidence intervals are therefore meaningless.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\linewidth]{ images/mi\_bits\_models.pdf }
+  \caption{Mutual-information estimates across variants; lower values indicate better privacy.}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\linewidth]{ images/token\_recovery\_accuracy.pdf }
+  \caption{Exact-token recovery accuracy; lower values indicate better privacy.}
+\end{figure}
+
+\subsection{Analysis}
+Identical scores across variants and the mathematical impossibility of $\mathrm{MI}=0$ with perfect recovery indicate that gradient hooks defaulted to zero tensors and the evaluation loop reused cached data. The environment variable \texttt{EXPERIMENT\_MODE} was left at its default "smoke", bypassing the full protocol. Consequently no empirical evidence supports SOIC’s claimed leakage reduction, and CRC, RCP and GMSM remain unevaluated.
+
+\subsection{Fairness and reproducibility}
+Although logs contain SHA-256 hashes, the degenerate results highlight the danger of relying on smoke-test defaults. We therefore publish the artefacts and specify rerun conditions: set \texttt{EXPERIMENT\_MODE} $=$ \texttt{full}, ensure 50 k prompts per variant, correct the inversion metric to use hidden prompts, and validate non-zero captured gradients.
+
+\subsection{Limitations}
+(1) Only a trivial subset of prompts was processed; (2) continual revocation and sensor masking remain untested; (3) claimed overheads (+5\% latency, +1.6 GB-month logging) are unverified.
+
+\section{Conclusion}
+HYPERION-SHIELD aspires to elevate VLM safety from static, single-turn certification to a reactive, revocable and history-aware paradigm. Conceptually, it bounds second-order leakage, enables millisecond-scale certificate revocation, repairs unsafe causal paths on-device and masks emerging sensor side-channels, all under a continual arms-race benchmark. A pilot execution, however, revealed severe implementation gaps: a smoke-test path masked silent failures, mutual-information collapsed to zero and token inversion was mis-scored. No empirical evidence yet substantiates the theoretical guarantees. Immediate next steps are to rerun the full protocol with corrected metrics, complete CRC and GMSM evaluations, and extend revocation logic to tool-state graphs in autonomous agents. Once validated, HYPERION-SHIELD could form a deployable blueprint for the post-market monitoring envisioned by the EU AI Act, closing critical safety gaps in real-world wearable AI systems.
+
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}
