@@ -1,9 +1,5 @@
 """src/main.py
-Entry-point with CLI flags.
-
-Update (iteration-7)
---------------------
-1. Config paths now point to *iteration7* directories.
+Entry-point with CLI flags for running the TRACS experiments (iteration-8).
 """
 from __future__ import annotations
 
@@ -21,16 +17,15 @@ logger = logging.getLogger("tracs_runner.main")
 logging.basicConfig(level=logging.INFO, format="%(asctime)s | %(levelname)s | %(message)s")
 
 ###############################################################################
-#   Config helpers                                                            #
+#   Config helpers                                                             #
 ###############################################################################
+
 _CONFIG_DIR = Path(__file__).resolve().parent.parent / "config"
 _SMOKE_CFG = _CONFIG_DIR / "smoke_test.yaml"
 _FULL_CFG = _CONFIG_DIR / "full_experiment.yaml"
 
 
 class ExperimentConfig:  # pylint: disable=too-few-public-methods
-    """Lightweight immutable wrapper around the YAML config dict."""
-
     __slots__ = (
         "name",
         "description",
@@ -53,7 +48,7 @@ class ExperimentConfig:  # pylint: disable=too-few-public-methods
         return ExperimentConfig(raw)
 
 ###############################################################################
-#   CLI parsing                                                               #
+#   CLI parsing                                                                #
 ###############################################################################
 
 def _parse_args():
@@ -64,7 +59,7 @@ def _parse_args():
     return p.parse_args()
 
 ###############################################################################
-#   Main orchestration                                                        #
+#   Main orchestration                                                         #
 ###############################################################################
 
 def _run_cfg(cfg_path: Path):

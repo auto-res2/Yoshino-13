@@ -1,6 +1,6 @@
 """src/preprocess.py
-Dataset acquisition & caching utilities.  Downloads are stored under ./data
-and re-used on subsequent runs.
+Dataset acquisition & caching utilities.  Downloads are stored under ./data and
+re-used on subsequent runs.
 """
 from __future__ import annotations
 
@@ -19,11 +19,10 @@ DATA_DIR = Path("data")
 DATA_DIR.mkdir(parents=True, exist_ok=True)
 
 ###############################################################################
-# Internal helpers
+# Internal helpers                                                             #
 ###############################################################################
 
 def _load_local_jsonl(path: Path) -> DatasetDict:
-    """Helper – load a local JSONL file via 🤗 *datasets*."""
     if not path.exists():
         logger.error("Local dataset %s not found", path)
         sys.exit(1)
@@ -31,47 +30,31 @@ def _load_local_jsonl(path: Path) -> DatasetDict:
 
 
 def _write_jsonl(file_path: Path, rows: List[Dict[str, Any]]):
-    """Persist *rows* (list of dicts) as newline-delimited JSON."""
     with open(file_path, "w", encoding="utf-8") as fp:
         for r in rows:
             fp.write(json.dumps(r, ensure_ascii=False) + "\n")
 
 ###############################################################################
-# Public API – ensure_dataset
+# Public API                                                                   #
 ###############################################################################
 
 def ensure_dataset(name: str, spec: Dict[str, Any]) -> DatasetDict:
-    """Download (if required) and return a 🤗 *DatasetDict* for *name*.
-
-    Aborts the run with exit-code 1 on any irrecoverable error – signalling CI
-    failure so that problems surface immediately.
-    """
+    """Download (if required) and return a 🤗 *DatasetDict* for *name*."""
 
     ds_path = DATA_DIR / name
-
-    # ------------------------------------------------------------------
-    # Fast path – cached copy already on disk *and* contains the data file.
-    # ------------------------------------------------------------------
     cached_file = ds_path / "data.jsonl"
     if cached_file.exists():
         logger.info("Using cached dataset '%s'", name)
         return _load_local_jsonl(cached_file)
 
-    # Ensure the directory exists for any upcoming writes
     ds_path.mkdir(parents=True, exist_ok=True)
 
     try:
-        # ------------------------------------------------------------------
-        # 1) HuggingFace Hub repository
-        # ------------------------------------------------------------------
         if spec.get("type") == "hf":
             repo_id = spec["repo"]
             token = os.getenv("HF_TOKEN")
             return load_dataset(repo_id, token=token)
 
-        # ------------------------------------------------------------------
-        # 2) Remote JSONL file (HTTP/HTTPS)
-        # ------------------------------------------------------------------
         if spec.get("type") == "jsonl":
             url = spec["url"]
             import requests
@@ -84,26 +67,20 @@ def ensure_dataset(name: str, spec: Dict[str, Any]) -> DatasetDict:
             cached_file.write_bytes(resp.content)
             return _load_local_jsonl(cached_file)
 
-        # ------------------------------------------------------------------
-        # 3) Local path provided in the spec
-        # ------------------------------------------------------------------
         if spec.get("type") == "local":
             local_file = Path(spec["path"])
             return _load_local_jsonl(local_file)
 
-        # ------------------------------------------------------------------
-        # 4) Inline data (used by the smoke-test to avoid network I/O)
-        # ------------------------------------------------------------------
         if spec.get("type") == "inline":
             rows: List[Dict[str, Any]] = spec.get("data", [])
             if not rows:
                 logger.error("Inline dataset for '%s' is empty", name)
                 sys.exit(1)
-            _write_jsonl(cached_file, rows)  # also cache for future runs
+            _write_jsonl(cached_file, rows)
             ds = Dataset.from_list(rows)
             return DatasetDict({"train": ds})
 
-    except Exception as e:  # noqa: BLE001 – we want to catch *anything* and abort
+    except Exception as e:  # noqa: BLE001 – catch *anything* and abort
         logger.error("Dataset acquisition failed for %s: %s", name, e)
         sys.exit(1)
 

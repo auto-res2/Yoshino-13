@@ -1,14 +1,11 @@
 """src/evaluate.py
-Evaluation utilities – Experiment-1 (iteration-7).
+Evaluation utilities – Experiment-1 (iteration-8).
 
-Key updates
------------
-1. Path compliance – All images are now stored under `.research/iteration7/images`.
-2. Skipping gated models – If `train.load_model` raises *GatedRepoAccessError*
-   we skip that model *without* aborting the full run.  A clear warning is
-   logged so users know additional credentials would unlock more results.
-3. Results JSON – Saved under `.research/iteration7/experiment_1_results.json`
-   per mandatory policy and echoed to *stdout* for CI verification.
+Updates versus iteration-7
+-------------------------
+1. Paths now point to `.research/iteration8/**` in compliance with the latest
+   storage policy.
+2. All other logic remains identical apart from minor housekeeping tweaks.
 """
 from __future__ import annotations
 
@@ -24,7 +21,7 @@ import seaborn as sns
 import torch
 
 from .preprocess import ensure_dataset
-from .train import GatedRepoAccessError, load_guard, load_model, GenerationConfig
+from .train import GatedRepoAccessError, GenerationConfig, load_guard, load_model
 
 # Use a head-less backend **before** importing pyplot
 matplotlib.use("Agg")
@@ -32,7 +29,7 @@ matplotlib.use("Agg")
 logger = logging.getLogger("tracs_runner.evaluate")
 
 ###############################################################################
-#   Metric helpers                                                           #
+#   Metric helpers                                                            #
 ###############################################################################
 
 def compute_asr(outputs):
@@ -50,13 +47,13 @@ def median(values):
     return values[mid] if n % 2 else (values[mid - 1] + values[mid]) / 2.0
 
 ###############################################################################
-#   Plot helpers – images must reside in .research/iteration7/images          #
+#   Plot helpers – images must reside in .research/iteration8/images           #
 ###############################################################################
 
 def _save_bar(fig_name: str, labels: List[str], numbers: List[float], ylabel: str) -> str:
     """Save bar-plot under the mandated research directory and return its path."""
 
-    images_dir = Path(".research/iteration7/images")
+    images_dir = Path(".research/iteration8/images")
     images_dir.mkdir(parents=True, exist_ok=True)
     pdf_path = images_dir / f"{fig_name}.pdf"
 
@@ -74,7 +71,7 @@ def _save_bar(fig_name: str, labels: List[str], numbers: List[float], ylabel: st
     return str(pdf_path)
 
 ###############################################################################
-#   Core experimental routine                                                #
+#   Core experimental routine                                                 #
 ###############################################################################
 
 def run_experiment_1(cfg):
@@ -94,9 +91,9 @@ def run_experiment_1(cfg):
     for model_key, model_id in cfg.models.items():
         try:
             tokenizer, model = load_model(model_id)
-        except GatedRepoAccessError as e:
+        except GatedRepoAccessError:
             logger.warning("Skipping %s (gated repo, no HF_TOKEN).", model_id)
-            continue  # move on to the next model
+            continue
         except Exception as e:  # Any other issue → fail-fast
             logger.error("Unhandled error while loading %s: %s", model_id, e)
             raise
@@ -170,8 +167,8 @@ def run_experiment_1(cfg):
     print(json.dumps(results_all, indent=2))
 
     print("\nFigures generated:")
-    for f in fig_files:
-        print(" –", f)
+    for fig in fig_files:
+        print(" –", fig)
 
     print("\nFull JSON saved to:", out_path)
     with open(out_path, "r", encoding="utf-8") as fp:

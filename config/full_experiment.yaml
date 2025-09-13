@@ -2,7 +2,7 @@
 name: experiment_1
 description: |
   Full Experiment-1 – Resistance to Long-Range Jailbreaks.
-output_dir: .research/iteration7
+output_dir: .research/iteration8
 models:
   mixtral: mistralai/Mixtral-8x7B-Instruct-v0.1   # will be skipped if HF_TOKEN absent
   gptj: EleutherAI/gpt-j-6B

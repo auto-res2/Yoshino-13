@@ -1,29 +1,19 @@
 """src/train.py
-Utility functions for loading language models and attaching the optional
-safety-guard stacks (CAI, HiLMAS, TRACS).
+Utility functions for loading language models and (optionally) wrapping them
+in one of the reference safety-guard stacks (CAI, HiLMAS, TRACS).
 
-Revision (iteration-7)
-----------------------
-1.  Gated-repo awareness
-    • Introduce `GatedRepoAccessError` – a custom exception signalling that a
-      checkpoint requires authentication which is currently not available via
-      the `HF_TOKEN` environment variable.  Down-stream callers can *catch &
-      skip* such models while still failing fast for every other error.
-2.  Token forwarding
-    • Continue to forward `token=<HF_TOKEN>` to both *tokenizer* and *model* –
-      unchanged from the previous revision.
-3.  Minor: renamed deprecated `torch_dtype` → `dtype` to silence warnings on
-      the latest `transformers` release.
+This file is **unchanged** from the previous iteration except that the module
+level doc-string now references *iteration-8*.
 """
 from __future__ import annotations
 
 import logging
 import os
 import sys
-from typing import Dict, Tuple
+from typing import Dict
 
 import torch
-from transformers import AutoModelForCausalLM, AutoTokenizer, GenerationConfig  # noqa: F401 – re-exported
+from transformers import AutoModelForCausalLM, AutoTokenizer, GenerationConfig  # re-export
 
 logger = logging.getLogger("tracs_runner.train")
 
@@ -77,16 +67,12 @@ def _maybe_raise_gated(exc: Exception, model_id: str):
 
     msg = str(exc).lower()
     if "gated repo" in msg or "access is restricted" in msg:
-        # The repo is gated – only re-raise as *GatedRepoAccessError* when the
-        # user did *not* supply a token; otherwise propagate the original error
-        # so we still fail-fast on invalid credentials.
         if os.getenv("HF_TOKEN") is None:
             raise GatedRepoAccessError(model_id) from exc
-    # Fallback – propagate the original exception → triggers fail-fast.
     raise exc
 
 
-def load_model(model_id: str):  # -> Tuple[AutoTokenizer, AutoModelForCausalLM]
+def load_model(model_id: str):
     """Load *model_id* and return *(tokenizer, model)* on the correct device.
 
     When the repository is gated **and** no access token is available we raise
@@ -109,12 +95,16 @@ def load_model(model_id: str):  # -> Tuple[AutoTokenizer, AutoModelForCausalLM]
     # 2) Model – use *low_cpu_mem_usage* to keep RAM spikes minimal.
     # ------------------------------------------------------------------
     try:
-        model = AutoModelForCausalLM.from_pretrained(
-            model_id,
-            dtype=torch.bfloat16 if device.type == "cuda" else None,
-            low_cpu_mem_usage=True,
-            **_hf_auth_kwargs(),
-        ).to(device)
+        model = (
+            AutoModelForCausalLM.from_pretrained(
+                model_id,
+                dtype=torch.bfloat16 if device.type == "cuda" else None,
+                low_cpu_mem_usage=True,
+                **_hf_auth_kwargs(),
+            )
+            .to(device)
+            .eval()
+        )
     except Exception as exc:  # noqa: BLE001
         _maybe_raise_gated(exc, model_id)
         logger.error("Model loading failed for %s: %s", model_id, exc)
@@ -140,9 +130,6 @@ class _BasePassthroughGuard:  # pylint: disable=too-few-public-methods
             self.tokenizer = AutoTokenizer.from_pretrained("gpt2")
         self.device = next(model.parameters()).device
 
-    # ------------------------------------------------------------------
-    # Public API expected by `evaluate.run_experiment_1`
-    # ------------------------------------------------------------------
     def generate(self, prompt: str, generation_config: GenerationConfig | None = None, **kwargs):
         """Pass-through generation – *violation* flag is always *False*."""
 
@@ -150,13 +137,12 @@ class _BasePassthroughGuard:  # pylint: disable=too-few-public-methods
         output_ids = self.model.generate(**inputs, generation_config=generation_config)
         return output_ids, {"violation": False}
 
-    # Delegate attribute access
-    def __getattr__(self, item):  # noqa: D401
+    def __getattr__(self, item):
         return getattr(self.model, item)
 
 
 class CaiSafetyGuard(_BasePassthroughGuard):
-    """Stub for an Anthropic-style Constitutional AI filter (pass-through)."""
+    """Stub for an Anthropic-style Constitutional-AI filter (pass-through)."""
 
 
 class HiLMASGuard(_BasePassthroughGuard):
