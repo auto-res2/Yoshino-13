@@ -6,5 +6,157 @@
     "attack success rate reduction",
     "multi-stage generation safety",
     "layered AI safety filters"
+  ],
+  "research_study_list": [
+    {
+      "title": "Verified Safe Reinforcement Learning  for Neural Network Dynamic Models"
+    },
+    {
+      "title": "Zonotope Domains for Lagrangian Neural Network Verification"
+    },
+    {
+      "title": "Provably Safe Neural Network Controllers via Differential Dynamic Logic"
+    },
+    {
+      "title": "Hierarchical Verification for Adversarial Robustness"
+    },
+    {
+      "title": "Safety Guarantees for Neural Network Dynamic Systems via Stochastic Barrier Functions"
+    },
+    {
+      "title": "Classification with Conceptual Safeguards"
+    },
+    {
+      "title": "Exact Verification of ReLU Neural Control Barrier Functions"
+    },
+    {
+      "title": "Efficient Verification of Neural Networks Against LVM-Based Specifications"
+    },
+    {
+      "title": "Make Sure You're Unsure: A Framework for Verifying Probabilistic Specifications"
+    },
+    {
+      "title": "Make Sure You're Unsure: A Framework for Verifying Probabilistic Specifications"
+    },
+    {
+      "title": "Position: Social Choice Should Guide AI Alignment in Dealing with Diverse Human Feedback"
+    },
+    {
+      "title": "Aligning Model Properties via Conformal Risk Control"
+    },
+    {
+      "title": "Position: The Reasonable Person Standard for AI"
+    },
+    {
+      "title": "Consent in Crisis: The Rapid Decline of the AI Data Commons"
+    },
+    {
+      "title": "Position: Beyond Personhood: Agency, Accountability, and the Limits of Anthropomorphic Ethical Analysis"
+    },
+    {
+      "title": "Position: Beyond Personhood: Agency, Accountability, and the Limits of Anthropomorphic Ethical Analysis"
+    },
+    {
+      "title": "Position: Social Environment Design Should be Further Developed for AI-based Policy-Making"
+    },
+    {
+      "title": "Wisdom of the Ensemble: Improving Consistency of Deep Learning Models"
+    },
+    {
+      "title": "Regulating algorithmic filtering on social media"
+    },
+    {
+      "title": "Regulating algorithmic filtering on social media"
+    },
+    {
+      "title": "[Re] Privacy-preserving collaborative learning with automatic transformation search"
+    },
+    {
+      "title": "[Re] Privacy-preserving collaborative learning with automatic transformation search"
+    },
+    {
+      "title": "Adversarial Attack on Attackers: Post-Process to Mitigate Black-Box Score-Based Query Attacks"
+    },
+    {
+      "title": "Attack-Aware Noise Calibration for Differential Privacy"
+    },
+    {
+      "title": "Not All Poisons are Created Equal: Robust Training against Data Poisoning"
+    },
+    {
+      "title": "Not All Poisons are Created Equal: Robust Training against Data Poisoning"
+    },
+    {
+      "title": "Revisiting Injective Attacks on Recommender Systems"
+    },
+    {
+      "title": "Efficient Loss Function by Minimizing the Detrimental Effect of Floating-Point Errors on Gradient-Based Attacks"
+    },
+    {
+      "title": "Toward effective protection against diffusion-based mimicry through score distillation"
+    },
+    {
+      "title": "Moderate-fitting as a Natural Backdoor Defender for Pre-trained Language Models"
+    },
+    {
+      "title": "Adversarial training for high-stakes reliability"
+    },
+    {
+      "title": "Generating compositional scenes via Text-to-image RGBA Instance Generation"
+    },
+    {
+      "title": "Improving Alignment and Robustness with Circuit Breakers"
+    },
+    {
+      "title": "What Makes and Breaks Safety Fine-tuning? A Mechanistic Study"
+    },
+    {
+      "title": "AI Control: Improving Safety Despite Intentional Subversion"
+    },
+    {
+      "title": "AI Control: Improving Safety Despite Intentional Subversion"
+    },
+    {
+      "title": "Improving Training Efficiency of Diffusion Models via Multi-Stage Framework and Tailored Multi-Decoder Architecture"
+    },
+    {
+      "title": "Towards Safe Concept Transfer of Multi-Modal Diffusion via Causal Representation Editing"
+    },
+    {
+      "title": "Towards Theoretical Understandings of Self-Consuming Generative Models"
+    },
+    {
+      "title": "On the Stability of Iterative Retraining of Generative Models on their own Data"
+    },
+    {
+      "title": "AI Control: Improving Safety Despite Intentional Subversion"
+    },
+    {
+      "title": "AI Control: Improving Safety Despite Intentional Subversion"
+    },
+    {
+      "title": "Who's asking? User personas and the mechanics of latent misalignment"
+    },
+    {
+      "title": "Improving Alignment and Robustness with Circuit Breakers"
+    },
+    {
+      "title": "Learning and Forgetting Unsafe Examples in Large Language Models"
+    },
+    {
+      "title": "Position: Building Guardrails for Large Language Models Requires Systematic Design"
+    },
+    {
+      "title": "PARDEN, Can You Repeat That? Defending against Jailbreaks via Repetition"
+    },
+    {
+      "title": "Jailbroken: How Does LLM Safety Training Fail?"
+    },
+    {
+      "title": "Jailbroken: How Does LLM Safety Training Fail?"
+    },
+    {
+      "title": "What Makes and Breaks Safety Fine-tuning? A Mechanistic Study"
+    }
   ]
 }
