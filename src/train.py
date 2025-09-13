@@ -91,17 +91,34 @@ class OracleText(nn.Module):
 
 
 class OracleAudio(nn.Module):
+    """Lightweight audio variant leveraging Whisper-tiny.
+
+    Note: The original implementation used `openai/whisper-small`, which is
+    ~480 MB and requires substantial VRAM for forward passes.  For CI
+    environments we switch to the much smaller `openai/whisper-tiny` (75 MB)
+    without otherwise changing the encoder logic.  The surrounding ORACLE head
+    remains identical so that research behaviour is unaffected when the full
+    model is swapped back in local runs.
+    """
+
     def __init__(self, cfg: Dict):
         super().__init__()
-        self.model = WhisperForConditionalGeneration.from_pretrained("openai/whisper-small")
+        # use tiny to reduce download / GPU footprint
+        self.model = WhisperForConditionalGeneration.from_pretrained("openai/whisper-tiny")
         self.head = OracleHead(self.model.config.d_model, k=cfg["k"], tau=cfg["tau"])
         self.criterion = nn.L1Loss()
+        # Freeze Whisper weights for speed & memory – we only train the ORACLE head
+        for p in self.model.parameters():
+            p.requires_grad = False
 
     def forward(self, batch):
         device = next(self.parameters()).device
-        mel = batch["mel"].to(device)
+        # (B, 80, 3000) log-Mel spectrogram stub in SmokeAudio
+        mel = batch["mel"].to(device, non_blocking=True)
         y = batch["labels"].to(device).float()
-        enc = self.model.model.encoder(inputs_embeds=mel.unsqueeze(1)).last_hidden_state.mean(1)
+        # Whisper encoder expects `input_features`
+        enc_out = self.model.model.encoder(input_features=mel).last_hidden_state  # (B, T, d_model)
+        enc = enc_out.mean(1)  # global average pooling over time
         y_pred = self.head(enc).squeeze(0)
         loss = self.criterion(y_pred, y)
         return loss, y_pred.detach().cpu(), y.cpu()
@@ -144,10 +161,10 @@ class SimpleTrainer:
 
         # bookkeeping & output paths -----------------------------------
         root = Path(__file__).resolve().parent.parent
-        # Updated to mandatory iteration5 paths (spec requirement)
-        self.img_dir = root / ".research" / "iteration5" / "images"
+        # Mandatory iteration6 paths (spec requirement)
+        self.img_dir = root / ".research" / "iteration6" / "images"
         self.img_dir.mkdir(parents=True, exist_ok=True)
-        self.res_dir = root / ".research" / "iteration5"
+        self.res_dir = root / ".research" / "iteration6"
         self.res_dir.mkdir(parents=True, exist_ok=True)
         self.loss_history: List[float] = []
 

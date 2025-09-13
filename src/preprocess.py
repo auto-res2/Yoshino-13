@@ -12,7 +12,8 @@ import requests
 import torch
 from torch.utils.data import DataLoader, Dataset
 from torchvision import datasets, transforms
-from torchaudio import datasets as aud_datasets, transforms as aud_transforms
+# torchaudio imports kept for feature-completeness but heavy SpeechCommands download was removed
+from torchaudio import transforms as aud_transforms  # still used for basic ops
 from datasets import load_dataset
 
 # -----------------------------------------------------------------------------
@@ -74,7 +75,7 @@ def load_livebench(name: str, split: str = "train") -> Dataset:
 
 
 # -----------------------------------------------------------------------------
-#  Public mini-datasets for smoke testing (CIFAR-10, AG-News, SpeechCommands)
+#  Public mini-datasets for smoke testing (CIFAR-10, AG-News, synthetic Audio)
 # -----------------------------------------------------------------------------
 
 class SmokeImage(Dataset):
@@ -127,22 +128,28 @@ class SmokeText(Dataset):
 
 
 class SmokeAudio(Dataset):
+    """Synthetic, in-memory audio stub.
+
+    The previous implementation attempted to download the full SpeechCommands
+    dataset (>1 GB) which is unsuitable for lightweight CI.  We now generate
+    deterministic random log-Mel spectrograms matching Whisper’s expected input
+    shape (80 × 3000) and provide pseudo-labels in the range [0, 9].
+    """
+
     def __init__(self, subset: str = "training"):
-        self.ds = aud_datasets.SPEECHCOMMANDS(
-            "data/speech_cmd", subset=subset, download=True
-        )
-        self.mel = aud_transforms.MelSpectrogram(sample_rate=16000, n_mels=80)
-        # use official label list for mapping
-        self.label2idx = {label: i for i, label in enumerate(self.ds._labels)}
+        self.length = 256 if subset == "training" else 64
+        self.num_classes = 10
+        # fixed RNG for reproducibility
+        self.gen = torch.Generator().manual_seed(42 if subset == "training" else 43)
 
     def __len__(self):
-        return 256  # restrict for smoke test speed
+        return self.length
 
     def __getitem__(self, idx):
-        waveform, sr, label, *_ = self.ds[idx]
-        mel = self.mel(waveform).squeeze(0)
-        y = self.label2idx[label]
-        return {"mel": mel, "labels": torch.tensor(y)}
+        # log-Mel: (80, 3000) – matches Whisper feature extractor output
+        mel = torch.randn(80, 3000, generator=self.gen)
+        label = torch.randint(0, self.num_classes, (1,), generator=self.gen).item()
+        return {"mel": mel, "labels": torch.tensor(label)}
 
 
 # -----------------------------------------------------------------------------
@@ -151,6 +158,7 @@ class SmokeAudio(Dataset):
 
 # Convenience type alias for dataset config dictionary
 DatasetCfg = Dict[str, Union[str, int, bool]]
+
 
 def _livebench_stub(name: str, split: str) -> Dataset:
     """Return a small publicly available dataset that *behaves* like the expected
