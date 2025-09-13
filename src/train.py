@@ -3,7 +3,7 @@ Utility functions for loading language models and (optionally) wrapping them
 in one of the reference safety-guard stacks (CAI, HiLMAS, TRACS).
 
 This file is **unchanged** from the previous iteration except that the module
-level doc-string now references *iteration-8*.
+level doc-string now references *iteration-9*.
 """
 from __future__ import annotations
 
@@ -51,7 +51,7 @@ def _get_device() -> torch.device:  # pragma: no cover – trivial helper
 
 
 def _hf_auth_kwargs() -> Dict[str, str]:
-    """Return `{"token": HF_TOKEN}` when the environment variable is set."""
+    """Return `{\"token\": HF_TOKEN}` when the environment variable is set."""
 
     token = os.getenv("HF_TOKEN")
     return {"token": token} if token else {}

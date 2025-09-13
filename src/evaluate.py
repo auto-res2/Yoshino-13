@@ -1,9 +1,9 @@
 """src/evaluate.py
-Evaluation utilities – Experiment-1 (iteration-8).
+Evaluation utilities – Experiment-1 (iteration-9).
 
-Updates versus iteration-7
+Updates versus iteration-8
 -------------------------
-1. Paths now point to `.research/iteration8/**` in compliance with the latest
+1. Paths now point to `.research/iteration9/**` in compliance with the latest
    storage policy.
 2. All other logic remains identical apart from minor housekeeping tweaks.
 """
@@ -16,15 +16,15 @@ from pathlib import Path
 from typing import Any, Dict, List
 
 import matplotlib
-import matplotlib.pyplot as plt
-import seaborn as sns
-import torch
-
-from .preprocess import ensure_dataset
-from .train import GatedRepoAccessError, GenerationConfig, load_guard, load_model
 
 # Use a head-less backend **before** importing pyplot
 matplotlib.use("Agg")
+import matplotlib.pyplot as plt  # noqa: E402  pylint: disable=wrong-import-position
+import seaborn as sns  # noqa: E402  pylint: disable=wrong-import-position
+import torch  # noqa: E402  pylint: disable=wrong-import-position
+
+from .preprocess import ensure_dataset
+from .train import GatedRepoAccessError, GenerationConfig, load_guard, load_model
 
 logger = logging.getLogger("tracs_runner.evaluate")
 
@@ -47,13 +47,13 @@ def median(values):
     return values[mid] if n % 2 else (values[mid - 1] + values[mid]) / 2.0
 
 ###############################################################################
-#   Plot helpers – images must reside in .research/iteration8/images           #
+#   Plot helpers – images must reside in .research/iteration9/images           #
 ###############################################################################
 
 def _save_bar(fig_name: str, labels: List[str], numbers: List[float], ylabel: str) -> str:
     """Save bar-plot under the mandated research directory and return its path."""
 
-    images_dir = Path(".research/iteration8/images")
+    images_dir = Path(".research/iteration9/images")
     images_dir.mkdir(parents=True, exist_ok=True)
     pdf_path = images_dir / f"{fig_name}.pdf"
 
