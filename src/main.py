@@ -9,12 +9,11 @@ Usage examples:
     # Full experiment only
     uv run python -m src.main --full-experiment --hf-token YOUR_HF_TOKEN
 
-If neither flag is provided, the smoke test is executed.  The *full*
-experiment is run **only** when the `--full-experiment` flag is
-provided or when the environment variable `RUN_FULL_EXPERIMENT` is set
-to ``1``.  This change avoids unintentional long-running private-data
-experiments on CI while still giving power-users a one-command pathway
-for two-phase execution.
+If neither flag is provided **only** the smoke test is executed.  The
+full experiment is run *exclusively* when the `--full-experiment` flag
+is present.  Auto-triggering via environment variables was removed to
+avoid surprises inside automated evaluation sandboxes that do not have
+access to private resources.
 """
 
 import argparse
@@ -88,27 +87,36 @@ def main():
         os.environ["HF_TOKEN"] = args.hf_token
 
     # ------------------------------------------------------------------
-    #  Decide execution plan
+    #  Decide execution plan ----------------------------------------------------
     # ------------------------------------------------------------------
-    run_smoke = args.smoke_test or not args.full_experiment
-    run_full = args.full_experiment or os.getenv("RUN_FULL_EXPERIMENT") == "1"
+    if args.smoke_test and args.full_experiment:
+        print("[ERROR] --smoke-test and --full-experiment are mutually exclusive.")
+        sys.exit(1)
 
-    # Phase 1 – smoke -----------------------------------------------------------
-    if run_smoke:
+    # ------------------------------------------------------------------
+    #  Run smoke test (default) --------------------------------------------------
+    # ------------------------------------------------------------------
+    if args.smoke_test or not args.full_experiment:
         cfg_smoke = _load_cfg(SMOKE_CFG_PATH)
+        print("=== [PHASE 1/1] Smoke test start ===")
         _run_experiments(cfg_smoke, smoke=True)
+        # If only smoke test was requested, we can exit successfully here.
+        if not args.full_experiment:
+            return
 
-    # Phase 2 – full experiment (optional) --------------------------------------
-    if run_full and not args.smoke_test:
-        cfg_full = _load_cfg(FULL_CFG_PATH)
-        # Fail fast if private resources are requested but no token is present.
-        if cfg_full.get("_hf_token") in (None, ""):
-            print(
-                "[ERROR] Full experiment requires access to private models/datasets. "
-                "Please provide a valid HuggingFace token via --hf-token or the HF_TOKEN environment variable."
-            )
-            sys.exit(1)
-        _run_experiments(cfg_full, smoke=False)
+    # ------------------------------------------------------------------
+    #  Run full experiment (explicit flag) --------------------------------------
+    # ------------------------------------------------------------------
+    cfg_full = _load_cfg(FULL_CFG_PATH)
+    if cfg_full.get("_hf_token") in (None, ""):
+        print(
+            "[ERROR] Full experiment requires access to private models/datasets. "
+            "Please provide a valid HuggingFace token via --hf-token or the HF_TOKEN environment variable."
+        )
+        sys.exit(1)
+
+    print("=== [PHASE 2/2] Full experiment start ===")
+    _run_experiments(cfg_full, smoke=False)
 
 
 if __name__ == "__main__":
