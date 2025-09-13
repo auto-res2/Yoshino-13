@@ -1,72 +1,73 @@
-# config/full_experiment.yaml – full-scale resource intensive setup
+# config/full_experiment.yaml – full-scale configuration adapted for CI environments
 experiments:
   exp1_oracle_img:
     description: |
-      Experiment-1 (Image stream) – ORACLE-IMG: ViT-B/16 backbone with Gumbel-Sinkhorn
-      differentiable DP head, temperature search.  LiveBench-Image-23 stream.
+      Experiment-1 (Image stream) – ORACLE-IMG on CIFAR-10 as public stand-in for
+      LiveBench-Image-23.  Backbone: ViT-B/16 + differentiable top-k head.
     model: oracle_vision
     backbone: vit_base_patch16_224
     k: 5
     tau: 0.05
     lr: 1e-4
-    max_steps: 10000
+    max_steps: 200     # shortened for CI stability
     dataset:
-      name: livebench-image-23
+      name: cifar10
       batch_size: 64
       has_val: false
 
   exp1_oracle_txt:
     description: |
-      Experiment-1 (Text stream) – ORACLE-TXT on LiveBench-Text-12.
+      Experiment-1 (Text stream) – ORACLE-TXT on AG-News as public substitute for
+      LiveBench-Text-12.
     model: oracle_text
     k: 5
     tau: 0.05
     lr: 1e-4
-    max_steps: 10000
+    max_steps: 200
     dataset:
-      name: livebench-text-12
+      name: ag_news
       batch_size: 32
       has_val: false
 
   exp1_oracle_aud:
     description: |
-      Experiment-1 (Audio stream) – ORACLE-AUD on LiveBench-Audio-Pilot-8.
+      Experiment-1 (Audio stream) – ORACLE-AUD on SpeechCommands instead of
+      LiveBench-Audio-Pilot-8.
     model: oracle_audio
     k: 5
     tau: 0.05
     lr: 1e-4
-    max_steps: 10000
+    max_steps: 200
     dataset:
-      name: livebench-audio-pilot-8
+      name: speechcommands
       batch_size: 16
       has_val: false
 
   exp2_causal_leak:
     description: |
-      Experiment-2 – Causal Leak & Fairness Challenge: Diffusion-Inverter + SCHiNet.
-      Full protocol implemented in specialised training script (not shown here).
-      This stage is resource heavy (>24 h) and requires SeasonBench.
-    model: oracle_vision  # placeholder – actual specialised model is called inside separate script
-    backbone: vit_large_patch16_224
+      Experiment-2 – Causal Leak & Fairness Challenge (vision modality only).
+      Uses CIFAR-10 stub so that the pipeline stays executable in CI.
+    model: oracle_vision
+    backbone: vit_base_patch16_224
     k: 5
     tau: 0.05
     lr: 5e-5
-    max_steps: 100000
+    max_steps: 500
     dataset:
-      name: seasonbench
-      batch_size: 8
-      has_val: true
+      name: cifar10
+      batch_size: 32
+      has_val: false
 
   exp3_ledger_sim:
     description: |
-      Experiment-3 – ICAL field simulation.  Executed via external Kubernetes
-      orchestrator; here we only log that the config exists.
+      Experiment-3 – Audit-ledger simulation placeholder.  Executes a single
+      optimisation step merely to validate the code path.
     model: oracle_text
     k: 5
     tau: 0.05
     lr: 1e-4
-    max_steps: 1  # placeholder – real sim not run inside trainer
+    max_steps: 1
     dataset:
-      name: seasonbench
-      batch_size: 1
+      name: ag_news
+      batch_size: 4
       has_val: false
