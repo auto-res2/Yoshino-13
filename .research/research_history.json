@@ -1263,6 +1263,53 @@
       }
     }
   ],
+  "reference_research_study_list": [
+    {
+      "title": "Detecting language model attacks with perplexity"
+    },
+    {
+      "title": "Jailbreaking leading safety-aligned LLMs with simple adaptive attacks"
+    },
+    {
+      "title": "Tool use (function calling)"
+    },
+    {
+      "title": "Prefill claude’s response"
+    },
+    {
+      "title": "The claude 3 model family: Opus, sonnet, haiku"
+    },
+    {
+      "title": "Image hijacks: Adversarial images can control generative models at runtime"
+    },
+    {
+      "title": "Semantic photo manipulation with a generative image prior"
+    },
+    {
+      "title": "Open llm leaderboard"
+    },
+    {
+      "title": "Are aligned neural networks adversarially aligned?"
+    },
+    {
+      "title": "Emerging properties in self-supervised vision transformers"
+    },
+    {
+      "title": "Jailbreaking black box large language models in twenty queries"
+    },
+    {
+      "title": "Deep reinforcement learning from human preferences"
+    },
+    {
+      "title": "Think you have solved question answering? try arc, the ai2 reasoning challenge"
+    },
+    {
+      "title": "Training verifiers to solve math word problems"
+    },
+    {
+      "title": "Enhancing chat language models by scaling high-quality instructional conversations"
+    }
+  ],
   "new_method": {
     "method": "Open Problems: 1. Existing VLM safety guarantees are purely *passive*: they certify that a fixed model will not leak or violate policy under a bounded perturbation, but give no mechanism to *actively react* after an attempted jailbreak or leakage event has been detected.  \n2. Certified defences treat each user query in isolation; they cannot prove that a model remains safe over *long interaction histories* where latent tool states or conversation memory may accumulate unsafe influence.  \n3. No current framework offers *adaptive* certificates that stay valid after on-device fine-tuning **and** can be *revoked or re-issued* if red-teamers discover new attack vectors.  \n4. Prompt-inversion attacks increasingly exploit *higher-order derivatives* (Hessian, second-order influence) and *low-bit quantised gradients* released by sparsely updated edge models; leakage bounds for these channels are missing.  \n5. Physiologically-based side channels – eye-gaze heat-maps in AR glasses, device motion sensors in wearables – can be correlated with VLM response latency to infer hidden prompts; no multimodal safety work even models these signals.  \n6. Watermarks and audit trails must satisfy *non-repudiation*: a deployer should not be able to delete evidence of a harmful reply after the fact. Current zk-SNARK logging still relies on the operator to publish proofs.  \n7. Benchmarks such as LeakBench, ChainTrust or MultiTrust do not capture *continual red-teaming*: the attacker can evolve after seeing partial defences; we lack an evaluation protocol that mimics this arms race.\nMethods: We propose HYPERION-SHIELD, a Reactive, Revocable and History-aware multimodal safety framework that extends ORACLE-GUARD with three orthogonal pillars.  \n\nA.  Second-Order Information Curtain (SOIC)\n   • Generalises JS-DS by injecting structured *Hessian dropout*: we learn a small conditioner g_H that projects per-token Hessians onto a 64-dim subspace with bounded mutual information.  We derive a PAC-Bayes upper bound I(prompt;{logits,∇,H})≤ε_MI^2.  \n   • Supports 4-bit quantised gradient releases via a dithering scheme that preserves DP-ρ,ε while keeping LoRA adaptivity.  \n\nB.  Continual Revocable Certification (CRC)\n   • Safety weights are wrapped in a threshold BLS signature.  When red-team evaluation detects a new exploit, the authority can *revoke* the certificate by publishing a 96-byte BLS revocation that any client can verify in 5 ms; the model then auto-degrades to a safe fallback.  \n   • Certificates are *versioned over dialogue history*: every turn appends a Merkle leaf of (hash(hidden_state),timestamp).  We prove that if all per-turn deltas satisfy SOIC bounds and the chain is unbroken, then the *entire conversation* is τ-safe.  \n\nC.  Reflexive Causal Patch (RCP)\n   • Extends C3 by adding an *active repair* step: when causal effect ≥τ on any unsafe node, an on-device lightweight re-router R̂ (32 K parameters) is trained online for ≤10 steps to null-space the unsafe direction.  A new micro-certificate for R̂ is issued locally with differential-privacy noise calibrated by CARC.  \n   • The update is logged through a non-repudiable \"witness encryption\" watermark: the model embeds a 256-bit witness into its *next* benign answer.  Anyone can later decrypt it only if they possess the revoked certificate hash, preventing silent removal.\n\nD.  Gaze-Motion Side-Channel Masking (GMSM)\n   • For AR / wearable clients we train a small normalising flow that maps the joint distribution of (latency, gaze vector, IMU) to a σ-smooth manifold independent of the hidden prompt.  We certify that total variation distance ≤0.01 after masking.\n\nE.  Continual-Arms-Race Evaluation (CARE)\n   • We release CARE-Bench: 12 k iterative attack episodes where AutoDAN-Vision agents adapt after each defence patch; includes sensor side-channels and Hessian probes.  \n   • Metrics: Time-to-Breach (TTB), Revocation-Latency (RL), and Conversation-Safe-Rate (CSR).\nExperimental Setup: Datasets / Benchmarks\n• CARE-Bench v1 (ours) with 12 k evolving attack chains across 4 modalities and sensor traces.  \n• LeakBench-V2, ChainTrust, FedEval (as in ORACLE-GUARD).  \n\nVictim / Client Models\n• Same four VLMs plus Vision-Apple-GPT and Meta-AR-Glass prototype (mobile A17).  \n\nMetrics\n1. SOIC-LeakCert-Acc (first- + second-order).  \n2. ε_MI^2 bound (target ≤0.02 bits).  \n3. CSR over 20-turn chats ≥98 %.  \n4. TTB under CARE ≥8 hours (↑6× over REGULUS).  \n5. RL (revocation propagation) ≤150 ms local, ≤800 ms global.  \n6. GMSM TV-dist ≤0.01.  \n7. Overhead: +5 % latency, +1.6 GB-month logging.  \n\nBaselines\nREGULUS, ORACLE-GUARD, SAFEGUARD-X, MMCert+PDF, Circuit-Breaker+PriLog, BadChain+CARC defence.\nExpected Result: • SOIC-LeakCert-Acc 78 % (+3 pp over ORACLE-GUARD).  \n• ε_MI^2 ≤0.018 bits vs 0.03 bits (ORACLE) and 0.22 bits (none).  \n• CARE Time-to-Breach median 9.1 h (baseline 1.5 h).  \n• Revocation-Latency 123 ms (mobile) / 487 ms (global).  \n• Conversation-Safe-Rate 98.7 % over 20-turn sessions vs 90 % (REGULUS).  \n• Gaze-Motion side-channel leakage <0.8 % extraction success (↓>95 %).  \n• Online RCP adds <4 ms per step and restores τ-safety in 96 % of detected violations.\nExpected Conclusion: HYPERION-SHIELD elevates multimodal safety from static, single-turn certification to a *reactive, revocable and history-aware* paradigm. It (1) bounds information leakage even through Hessian and quantised-gradient channels, (2) supports instant certificate revocation with BLS signatures, (3) actively repairs unsafe causal paths on-device, (4) masks emerging sensor side-channels in AR settings, and (5) sets the first continual arms-race benchmark for evolving jailbreaks. Together these advances provide a deployable blueprint for EU AI Act *post-market monitoring* and real-world wearable applications, closing critical gaps left by ORACLE-GUARD and prior work.",
     "experimental_design": {
