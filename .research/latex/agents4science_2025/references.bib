@@ -5,3 +5,901 @@
   publisher = {GitHub},
   url       = {https://github.com/airas-org/airas}
 }
+
+% ===========================================
+% REQUIRED CITATIONS
+% These papers must be cited in the manuscript
+% ===========================================
+
+@article{agarwal-2021-sensitivity,
+ abstract = {Meta-learning algorithms are widely used for few-shot learning. For example,
+image recognition systems that readily adapt to unseen classes after seeing
+only a few labeled examples. Despite their success, we show that modern
+meta-learning algorithms are extremely sensitive to the data used for
+adaptation, i.e. support data. In particular, we demonstrate the existence of
+(unaltered, in-distribution, natural) images that, when used for adaptation,
+yield accuracy as low as 4\% or as high as 95\% on standard few-shot image
+classification benchmarks. We explain our empirical findings in terms of class
+margins, which in turn suggests that robust and safe meta-learning requires
+larger margins than supervised learning.},
+ arxiv_url = {https://arxiv.org/pdf/2110.13953v1.pdf},
+ author = {Mayank Agarwal and Mikhail Yurochkin and Yuekai Sun},
+ title = {On sensitivity of meta-learning to support data},
+ year = {2021}
+}
+
+@article{alfarra-2023-evaluation,
+ abstract = {This paper proposes a novel online evaluation protocol for Test Time
+Adaptation (TTA) methods, which penalizes slower methods by providing them with
+fewer samples for adaptation. TTA methods leverage unlabeled data at test time
+to adapt to distribution shifts. Although many effective methods have been
+proposed, their impressive performance usually comes at the cost of
+significantly increased computation budgets. Current evaluation protocols
+overlook the effect of this extra computation cost, affecting their real-world
+applicability. To address this issue, we propose a more realistic evaluation
+protocol for TTA methods, where data is received in an online fashion from a
+constant-speed data stream, thereby accounting for the method's adaptation
+speed. We apply our proposed protocol to benchmark several TTA methods on
+multiple datasets and scenarios. Extensive experiments show that, when
+accounting for inference speed, simple and fast approaches can outperform more
+sophisticated but slower methods. For example, SHOT from 2020, outperforms the
+state-of-the-art method SAR from 2023 in this setting. Our results reveal the
+importance of developing practical TTA methods that are both accurate and
+efficient.},
+ arxiv_url = {https://arxiv.org/pdf/2304.04795v2.pdf},
+ author = {Motasem Alfarra and Hani Itani and Alejandro Pardo and Shyma Alhuwaider and Merey Ramazanova and Juan C. Pérez and Zhipeng Cai and Matthias Müller and Bernard Ghanem},
+ title = {Evaluation of Test-Time Adaptation Under Computational Time Constraints},
+ year = {2023}
+}
+
+@article{altahan-2024-unibench,
+ abstract = {Significant research efforts have been made to scale and improve
+vision-language model (VLM) training approaches. Yet, with an ever-growing
+number of benchmarks, researchers are tasked with the heavy burden of
+implementing each protocol, bearing a non-trivial computational cost, and
+making sense of how all these benchmarks translate into meaningful axes of
+progress. To facilitate a systematic evaluation of VLM progress, we introduce
+UniBench: a unified implementation of 50+ VLM benchmarks spanning a
+comprehensive range of carefully categorized capabilities from object
+recognition to spatial awareness, counting, and much more. We showcase the
+utility of UniBench for measuring progress by evaluating nearly 60 publicly
+available vision-language models, trained on scales of up to 12.8B samples. We
+find that while scaling training data or model size can boost many
+vision-language model capabilities, scaling offers little benefit for reasoning
+or relations. Surprisingly, we also discover today's best VLMs struggle on
+simple digit recognition and counting tasks, e.g. MNIST, which much simpler
+networks can solve. Where scale falls short, we find that more precise
+interventions, such as data quality or tailored-learning objectives offer more
+promise. For practitioners, we also offer guidance on selecting a suitable VLM
+for a given application. Finally, we release an easy-to-run UniBench code-base
+with the full set of 50+ benchmarks and comparisons across 59 models as well as
+a distilled, representative set of benchmarks that runs in 5 minutes on a
+single GPU.},
+ arxiv_url = {https://arxiv.org/pdf/2408.04810v1.pdf},
+ author = {Haider Al-Tahan and Quentin Garrido and Randall Balestriero and Diane Bouchacourt and Caner Hazirbas and Mark Ibrahim},
+ github_url = {https://github.com/facebookresearch/unibench},
+ title = {UniBench: Visual Reasoning Requires Rethinking Vision-Language Beyond Scaling},
+ year = {2024}
+}
+
+@article{author-year-defense,
+ title = {Defense against backdoor attacks via robust covariance estimation}
+}
+
+@article{author-year-hard,
+ title = {Hard-Meta-Dataset++: Towards Understanding Few-Shot Performance on Difficult Tasks}
+}
+
+@article{author-year-how,
+ title = {How Well Do Unsupervised Learning Algorithms Model Human Real-time and Life-long Learning?}
+}
+
+@article{author-year-large,
+ title = {A large-scale benchmark for few-shot program induction and synthesis}
+}
+
+@article{author-year-the,
+ title = {To the Cutoff... and Beyond? A Longitudinal Perspective on LLM Data Contamination}
+}
+
+@article{author-year-what,
+ title = {What Would Gauss Say About Representations? Probing Pretrained Image Models using Synthetic Gaussian Benchmarks}
+}
+
+@article{boudiaf-2023-open,
+ abstract = {We tackle the Few-Shot Open-Set Recognition (FSOSR) problem, i.e. classifying
+instances among a set of classes for which we only have a few labeled samples,
+while simultaneously detecting instances that do not belong to any known class.
+We explore the popular transductive setting, which leverages the unlabelled
+query instances at inference. Motivated by the observation that existing
+transductive methods perform poorly in open-set scenarios, we propose a
+generalization of the maximum likelihood principle, in which latent scores
+down-weighing the influence of potential outliers are introduced alongside the
+usual parametric model. Our formulation embeds supervision constraints from the
+support set and additional penalties discouraging overconfident predictions on
+the query set. We proceed with a block-coordinate descent, with the latent
+scores and parametric model co-optimized alternately, thereby benefiting from
+each other. We call our resulting formulation \textit{Open-Set Likelihood
+Optimization} (OSLO). OSLO is interpretable and fully modular; it can be
+applied on top of any pre-trained model seamlessly. Through extensive
+experiments, we show that our method surpasses existing inductive and
+transductive methods on both aspects of open-set recognition, namely inlier
+classification and outlier detection.},
+ arxiv_url = {https://arxiv.org/pdf/2301.08390v2.pdf},
+ author = {Malik Boudiaf and Etienne Bennequin and Myriam Tami and Antoine Toubhans and Pablo Piantanida and Céline Hudelot and Ismail Ben Ayed},
+ title = {Open-Set Likelihood Maximization for Few-Shot Learning},
+ year = {2023}
+}
+
+@article{bragg-2021-flex,
+ abstract = {Few-shot NLP research is highly active, yet conducted in disjoint research
+threads with evaluation suites that lack challenging-yet-realistic testing
+setups and fail to employ careful experimental design. Consequently, the
+community does not know which techniques perform best or even if they
+outperform simple baselines. In response, we formulate the FLEX Principles, a
+set of requirements and best practices for unified, rigorous, valid, and
+cost-sensitive few-shot NLP evaluation. These principles include Sample Size
+Design, a novel approach to benchmark design that optimizes statistical
+accuracy and precision while keeping evaluation costs manageable. Following the
+principles, we release the FLEX benchmark, which includes four few-shot
+transfer settings, zero-shot evaluation, and a public leaderboard that covers
+diverse NLP tasks. In addition, we present UniFew, a prompt-based model for
+few-shot learning that unifies pretraining and finetuning prompt formats,
+eschewing complex machinery of recent prompt-based approaches in adapting
+downstream task formats to language model pretraining objectives. We
+demonstrate that despite simplicity, UniFew achieves results competitive with
+both popular meta-learning and prompt-based approaches.},
+ arxiv_url = {https://arxiv.org/pdf/2107.07170v2.pdf},
+ author = {Jonathan Bragg and Arman Cohan and Kyle Lo and Iz Beltagy},
+ github_url = {https://github.com/allenai/unifew},
+ title = {FLEX: Unifying Evaluation for Few-Shot NLP},
+ year = {2021}
+}
+
+@article{cao-2019-theoretical,
+ abstract = {Few-shot classification is the task of predicting the category of an example
+from a set of few labeled examples. The number of labeled examples per category
+is called the number of shots (or shot number). Recent works tackle this task
+through meta-learning, where a meta-learner extracts information from observed
+tasks during meta-training to quickly adapt to new tasks during meta-testing.
+In this formulation, the number of shots exploited during meta-training has an
+impact on the recognition performance at meta-test time. Generally, the shot
+number used in meta-training should match the one used in meta-testing to
+obtain the best performance. We introduce a theoretical analysis of the impact
+of the shot number on Prototypical Networks, a state-of-the-art few-shot
+classification method. From our analysis, we propose a simple method that is
+robust to the choice of shot number used during meta-training, which is a
+crucial hyperparameter. The performance of our model trained for an arbitrary
+meta-training shot number shows great performance for different values of
+meta-testing shot numbers. We experimentally demonstrate our approach on
+different few-shot classification benchmarks.},
+ arxiv_url = {https://arxiv.org/pdf/1909.11722v2.pdf},
+ author = {Tianshi Cao and Marc Law and Sanja Fidler},
+ journal = {8th International Conference on Learning Representations 2020,
+  Addis Ababa, Ethiopia},
+ title = {A Theoretical Analysis of the Number of Shots in Few-Shot Learning},
+ year = {2019}
+}
+
+@article{cheng-2023-meta,
+ abstract = {The contrastive vision-language pre-training, known as CLIP, demonstrates
+remarkable potential in perceiving open-world visual concepts, enabling
+effective zero-shot image recognition. Nevertheless, few-shot learning methods
+based on CLIP typically require offline fine-tuning of the parameters on
+few-shot samples, resulting in longer inference time and the risk of
+over-fitting in certain domains. To tackle these challenges, we propose the
+Meta-Adapter, a lightweight residual-style adapter, to refine the CLIP features
+guided by the few-shot samples in an online manner. With a few training
+samples, our method can enable effective few-shot learning capabilities and
+generalize to unseen data or tasks without additional fine-tuning, achieving
+competitive performance and high efficiency. Without bells and whistles, our
+approach outperforms the state-of-the-art online few-shot learning method by an
+average of 3.6\% on eight image classification datasets with higher inference
+speed. Furthermore, our model is simple and flexible, serving as a
+plug-and-play module directly applicable to downstream tasks. Without further
+fine-tuning, Meta-Adapter obtains notable performance improvements in
+open-vocabulary object detection and segmentation tasks.},
+ arxiv_url = {https://arxiv.org/pdf/2311.03774v2.pdf},
+ author = {Cheng Cheng and Lin Song and Ruoyi Xue and Hang Wang and Hongbin Sun and Yixiao Ge and Ying Shan},
+ title = {Meta-Adapter: An Online Few-shot Learner for Vision-Language Model},
+ year = {2023}
+}
+
+@article{deng-2021-what,
+ abstract = {Understanding classifier decision under novel environments is central to the
+community, and a common practice is evaluating it on labeled test sets.
+However, in real-world testing, image annotations are difficult and expensive
+to obtain, especially when the test environment is changing. A natural question
+then arises: given a trained classifier, can we evaluate its accuracy on
+varying unlabeled test sets? In this work, we train semantic classification and
+rotation prediction in a multi-task way. On a series of datasets, we report an
+interesting finding, i.e., the semantic classification accuracy exhibits a
+strong linear relationship with the accuracy of the rotation prediction task
+(Pearson's Correlation r > 0.88). This finding allows us to utilize linear
+regression to estimate classifier performance from the accuracy of rotation
+prediction which can be obtained on the test set through the freely generated
+rotation labels.},
+ arxiv_url = {https://arxiv.org/pdf/2106.05961v1.pdf},
+ author = {Weijian Deng and Stephen Gould and Liang Zheng},
+ title = {What Does Rotation Prediction Tell Us about Classifier Accuracy under Varying Testing Environments?},
+ year = {2021}
+}
+
+@article{golchin-2023-time,
+ abstract = {Data contamination, i.e., the presence of test data from downstream tasks in
+the training data of large language models (LLMs), is a potential major issue
+in measuring LLMs' real effectiveness on other tasks. We propose a
+straightforward yet effective method for identifying data contamination within
+LLMs. At its core, our approach starts by identifying potential contamination
+at the instance level; using this information, our approach then assesses wider
+contamination at the partition level. To estimate contamination of individual
+instances, we employ "guided instruction:" a prompt consisting of the dataset
+name, partition type, and the random-length initial segment of a reference
+instance, asking the LLM to complete it. An instance is flagged as contaminated
+if the LLM's output either exactly or nearly matches the latter segment of the
+reference. To understand if an entire partition is contaminated, we propose two
+ideas. The first idea marks a dataset partition as contaminated if the average
+overlap score with the reference instances (as measured by ROUGE-L or BLEURT)
+is statistically significantly better with the completions from guided
+instruction compared to a "general instruction" that does not include the
+dataset and partition name. The second idea marks a dataset partition as
+contaminated if a classifier based on GPT-4 with few-shot in-context learning
+prompt marks multiple generated completions as exact/near-exact matches of the
+corresponding reference instances. Our best method achieves an accuracy between
+92% and 100% in detecting if an LLM is contaminated with seven datasets,
+containing train and test/validation partitions, when contrasted with manual
+evaluation by human experts. Further, our findings indicate that GPT-4 is
+contaminated with AG News, WNLI, and XSum datasets.},
+ arxiv_url = {https://arxiv.org/pdf/2308.08493v3.pdf},
+ author = {Shahriar Golchin and Mihai Surdeanu},
+ title = {Time Travel in LLMs: Tracing Data Contamination in Large Language Models},
+ year = {2023}
+}
+
+@article{gong-2023-sotta,
+ abstract = {Test-time adaptation (TTA) aims to address distributional shifts between
+training and testing data using only unlabeled test data streams for continual
+model adaptation. However, most TTA methods assume benign test streams, while
+test samples could be unexpectedly diverse in the wild. For instance, an unseen
+object or noise could appear in autonomous driving. This leads to a new threat
+to existing TTA algorithms; we found that prior TTA algorithms suffer from
+those noisy test samples as they blindly adapt to incoming samples. To address
+this problem, we present Screening-out Test-Time Adaptation (SoTTA), a novel
+TTA algorithm that is robust to noisy samples. The key enabler of SoTTA is
+two-fold: (i) input-wise robustness via high-confidence uniform-class sampling
+that effectively filters out the impact of noisy samples and (ii)
+parameter-wise robustness via entropy-sharpness minimization that improves the
+robustness of model parameters against large gradients from noisy samples. Our
+evaluation with standard TTA benchmarks with various noisy scenarios shows that
+our method outperforms state-of-the-art TTA methods under the presence of noisy
+samples and achieves comparable accuracy to those methods without noisy
+samples. The source code is available at https://github.com/taeckyung/SoTTA .},
+ arxiv_url = {https://arxiv.org/pdf/2310.10074v1.pdf},
+ author = {Taesik Gong and Yewon Kim and Taeckyung Lee and Sorn Chottananurak and Sung-Ju Lee},
+ github_url = {https://github.com/taeckyung/SoTTA},
+ title = {SoTTA: Robust Test-Time Adaptation on Noisy Data Streams},
+ year = {2023}
+}
+
+@article{guo-2022-adaptive,
+ abstract = {Few-shot classification aims to learn a classifier to recognize unseen
+classes during training, where the learned model can easily become over-fitted
+based on the biased distribution formed by only a few training examples. A
+recent solution to this problem is calibrating the distribution of these few
+sample classes by transferring statistics from the base classes with sufficient
+examples, where how to decide the transfer weights from base classes to novel
+classes is the key. However, principled approaches for learning the transfer
+weights have not been carefully studied. To this end, we propose a novel
+distribution calibration method by learning the adaptive weight matrix between
+novel samples and base classes, which is built upon a hierarchical Optimal
+Transport (H-OT) framework. By minimizing the high-level OT distance between
+novel samples and base classes, we can view the learned transport plan as the
+adaptive weight information for transferring the statistics of base classes.
+The learning of the cost function between a base class and novel class in the
+high-level OT leads to the introduction of the low-level OT, which considers
+the weights of all the data samples in the base class. Experimental results on
+standard benchmarks demonstrate that our proposed plug-and-play model
+outperforms competing approaches and owns desired cross-domain generalization
+ability, indicating the effectiveness of the learned adaptive weights.},
+ arxiv_url = {https://arxiv.org/pdf/2210.04144v1.pdf},
+ author = {Dandan Guo and Long Tian and He Zhao and Mingyuan Zhou and Hongyuan Zha},
+ title = {Adaptive Distribution Calibration for Few-Shot Learning with Hierarchical Optimal Transport},
+ year = {2022}
+}
+
+@article{huang-2024-surprisingly,
+ abstract = {In a recent, strongly emergent literature on few-shot CLIP adaptation, Linear
+Probe (LP) has been often reported as a weak baseline. This has motivated
+intensive research building convoluted prompt learning or feature adaptation
+strategies. In this work, we propose and examine from convex-optimization
+perspectives a generalization of the standard LP baseline, in which the linear
+classifier weights are learnable functions of the text embedding, with
+class-wise multipliers blending image and text knowledge. As our objective
+function depends on two types of variables, i.e., the class visual prototypes
+and the learnable blending parameters, we propose a computationally efficient
+block coordinate Majorize-Minimize (MM) descent algorithm. In our full-batch MM
+optimizer, which we coin LP++, step sizes are implicit, unlike standard
+gradient descent practices where learning rates are intensively searched over
+validation sets. By examining the mathematical properties of our loss (e.g.,
+Lipschitz gradient continuity), we build majorizing functions yielding
+data-driven learning rates and derive approximations of the loss's minima,
+which provide data-informed initialization of the variables. Our image-language
+objective function, along with these non-trivial optimization insights and
+ingredients, yields, surprisingly, highly competitive few-shot CLIP
+performances. Furthermore, LP++ operates in black-box, relaxes intensive
+validation searches for the optimization hyper-parameters, and runs
+orders-of-magnitudes faster than state-of-the-art few-shot CLIP adaptation
+methods. Our code is available at:
+\url{https://github.com/FereshteShakeri/FewShot-CLIP-Strong-Baseline.git}.},
+ arxiv_url = {https://arxiv.org/pdf/2404.02285v1.pdf},
+ author = {Yunshi Huang and Fereshteh Shakeri and Jose Dolz and Malik Boudiaf and Houda Bahig and Ismail Ben Ayed},
+ title = {LP++: A Surprisingly Strong Linear Probe for Few-Shot CLIP},
+ year = {2024}
+}
+
+@article{kim-2023-prometheus,
+ abstract = {Recently, using a powerful proprietary Large Language Model (LLM) (e.g.,
+GPT-4) as an evaluator for long-form responses has become the de facto
+standard. However, for practitioners with large-scale evaluation tasks and
+custom criteria in consideration (e.g., child-readability), using proprietary
+LLMs as an evaluator is unreliable due to the closed-source nature,
+uncontrolled versioning, and prohibitive costs. In this work, we propose
+Prometheus, a fully open-source LLM that is on par with GPT-4's evaluation
+capabilities when the appropriate reference materials (reference answer, score
+rubric) are accompanied. We first construct the Feedback Collection, a new
+dataset that consists of 1K fine-grained score rubrics, 20K instructions, and
+100K responses and language feedback generated by GPT-4. Using the Feedback
+Collection, we train Prometheus, a 13B evaluator LLM that can assess any given
+long-form text based on customized score rubric provided by the user.
+Experimental results show that Prometheus scores a Pearson correlation of 0.897
+with human evaluators when evaluating with 45 customized score rubrics, which
+is on par with GPT-4 (0.882), and greatly outperforms ChatGPT (0.392).
+Furthermore, measuring correlation with GPT-4 with 1222 customized score
+rubrics across four benchmarks (MT Bench, Vicuna Bench, Feedback Bench, Flask
+Eval) shows similar trends, bolstering Prometheus's capability as an evaluator
+LLM. Lastly, Prometheus achieves the highest accuracy on two human preference
+benchmarks (HHH Alignment & MT Bench Human Judgment) compared to open-sourced
+reward models explicitly trained on human preference datasets, highlighting its
+potential as an universal reward model. We open-source our code, dataset, and
+model at https://kaistai.github.io/prometheus/.},
+ arxiv_url = {https://arxiv.org/pdf/2310.08491v2.pdf},
+ author = {Seungone Kim and Jamin Shin and Yejin Cho and Joel Jang and Shayne Longpre and Hwaran Lee and Sangdoo Yun and Seongjin Shin and Sungdong Kim and James Thorne and Minjoon Seo},
+ github_url = {https://github.com/facebookresearch/llama-recipes},
+ title = {Prometheus: Inducing Fine-Grained Evaluation Capability in Language Models},
+ year = {2023}
+}
+
+@article{li-2024-pretrained,
+ abstract = {Zero-shot optimization involves optimizing a target task that was not seen
+during training, aiming to provide the optimal solution without or with minimal
+adjustments to the optimizer. It is crucial to ensure reliable and robust
+performance in various applications. Current optimizers often struggle with
+zero-shot optimization and require intricate hyperparameter tuning to adapt to
+new tasks. To address this, we propose a Pretrained Optimization Model (POM)
+that leverages knowledge gained from optimizing diverse tasks, offering
+efficient solutions to zero-shot optimization through direct application or
+fine-tuning with few-shot samples. Evaluation on the BBOB benchmark and two
+robot control tasks demonstrates that POM outperforms state-of-the-art
+black-box optimization methods, especially for high-dimensional tasks.
+Fine-tuning POM with a small number of samples and budget yields significant
+performance improvements. Moreover, POM demonstrates robust generalization
+across diverse task distributions, dimensions, population sizes, and
+optimization horizons. For code implementation, see
+https://github.com/ninja-wm/POM/.},
+ arxiv_url = {https://arxiv.org/pdf/2405.03728v2.pdf},
+ author = {Xiaobin Li and Kai Wu and Yujian Betterest Li and Xiaoyu Zhang and Handing Wang and Jing Liu},
+ github_url = {https://github.com/ninja-wm/POM},
+ title = {Pretrained Optimization Model for Zero-Shot Black Box Optimization},
+ year = {2024}
+}
+
+@article{luo-2023-closer,
+ abstract = {Few-shot classification consists of a training phase where a model is learned
+on a relatively large dataset and an adaptation phase where the learned model
+is adapted to previously-unseen tasks with limited labeled samples. In this
+paper, we empirically prove that the training algorithm and the adaptation
+algorithm can be completely disentangled, which allows algorithm analysis and
+design to be done individually for each phase. Our meta-analysis for each phase
+reveals several interesting insights that may help better understand key
+aspects of few-shot classification and connections with other fields such as
+visual representation learning and transfer learning. We hope the insights and
+research challenges revealed in this paper can inspire future work in related
+directions. Code and pre-trained models (in PyTorch) are available at
+https://github.com/Frankluox/CloserLookAgainFewShot.},
+ arxiv_url = {https://arxiv.org/pdf/2301.12246v4.pdf},
+ author = {Xu Luo and Hao Wu and Ji Zhang and Lianli Gao and Jing Xu and Jingkuan Song},
+ title = {A Closer Look at Few-shot Classification Again},
+ year = {2023}
+}
+
+@article{martin-2022-towards,
+ abstract = {Standard few-shot benchmarks are often built upon simplifying assumptions on
+the query sets, which may not always hold in practice. In particular, for each
+task at testing time, the classes effectively present in the unlabeled query
+set are known a priori, and correspond exactly to the set of classes
+represented in the labeled support set. We relax these assumptions and extend
+current benchmarks, so that the query-set classes of a given task are unknown,
+but just belong to a much larger set of possible classes. Our setting could be
+viewed as an instance of the challenging yet practical problem of extremely
+imbalanced K-way classification, K being much larger than the values typically
+used in standard benchmarks, and with potentially irrelevant supervision from
+the support set. Expectedly, our setting incurs drops in the performances of
+state-of-the-art methods. Motivated by these observations, we introduce a
+PrimAl Dual Minimum Description LEngth (PADDLE) formulation, which balances
+data-fitting accuracy and model complexity for a given few-shot task, under
+supervision constraints from the support set. Our constrained MDL-like
+objective promotes competition among a large set of possible classes,
+preserving only effective classes that befit better the data of a few-shot
+task. It is hyperparameter free, and could be applied on top of any base-class
+training. Furthermore, we derive a fast block coordinate descent algorithm for
+optimizing our objective, with convergence guarantee, and a linear
+computational complexity at each iteration. Comprehensive experiments over the
+standard few-shot datasets and the more realistic and challenging i-Nat dataset
+show highly competitive performances of our method, more so when the numbers of
+possible classes in the tasks increase. Our code is publicly available at
+https://github.com/SegoleneMartin/PADDLE.},
+ arxiv_url = {https://arxiv.org/pdf/2210.14545v1.pdf},
+ author = {Ségolène Martin and Malik Boudiaf and Emilie Chouzenoux and Jean-Christophe Pesquet and Ismail Ben Ayed},
+ github_url = {https://github.com/SegoleneMartin/PADDLE},
+ title = {Towards Practical Few-shot Query Sets: Transductive Minimum Description Length Inference},
+ year = {2022}
+}
+
+@article{nguyen-2023-expt,
+ abstract = {Experimental design is a fundamental problem in many science and engineering
+fields. In this problem, sample efficiency is crucial due to the time, money,
+and safety costs of real-world design evaluations. Existing approaches either
+rely on active data collection or access to large, labeled datasets of past
+experiments, making them impractical in many real-world scenarios. In this
+work, we address the more challenging yet realistic setting of few-shot
+experimental design, where only a few labeled data points of input designs and
+their corresponding values are available. We approach this problem as a
+conditional generation task, where a model conditions on a few labeled examples
+and the desired output to generate an optimal input design. To this end, we
+introduce Experiment Pretrained Transformers (ExPT), a foundation model for
+few-shot experimental design that employs a novel combination of synthetic
+pretraining with in-context learning. In ExPT, we only assume knowledge of a
+finite collection of unlabelled data points from the input domain and pretrain
+a transformer neural network to optimize diverse synthetic functions defined
+over this domain. Unsupervised pretraining allows ExPT to adapt to any design
+task at test time in an in-context fashion by conditioning on a few labeled
+data points from the target task and generating the candidate optima. We
+evaluate ExPT on few-shot experimental design in challenging domains and
+demonstrate its superior generality and performance compared to existing
+methods. The source code is available at https://github.com/tung-nd/ExPT.git.},
+ arxiv_url = {https://arxiv.org/pdf/2310.19961v1.pdf},
+ author = {Tung Nguyen and Sudhanshu Agrawal and Aditya Grover},
+ github_url = {https://github.com/tung-nd/ExPT},
+ title = {ExPT: Synthetic Pretraining for Few-Shot Experimental Design},
+ year = {2023}
+}
+
+@article{oren-2023-proving,
+ abstract = {Large language models are trained on vast amounts of internet data, prompting
+concerns and speculation that they have memorized public benchmarks. Going from
+speculation to proof of contamination is challenging, as the pretraining data
+used by proprietary models are often not publicly accessible. We show that it
+is possible to provide provable guarantees of test set contamination in
+language models without access to pretraining data or model weights. Our
+approach leverages the fact that when there is no data contamination, all
+orderings of an exchangeable benchmark should be equally likely. In contrast,
+the tendency for language models to memorize example order means that a
+contaminated language model will find certain canonical orderings to be much
+more likely than others. Our test flags potential contamination whenever the
+likelihood of a canonically ordered benchmark dataset is significantly higher
+than the likelihood after shuffling the examples. We demonstrate that our
+procedure is sensitive enough to reliably prove test set contamination in
+challenging situations, including models as small as 1.4 billion parameters, on
+small test sets of only 1000 examples, and datasets that appear only a few
+times in the pretraining corpus. Using our test, we audit five popular publicly
+accessible language models for test set contamination and find little evidence
+for pervasive contamination.},
+ arxiv_url = {https://arxiv.org/pdf/2310.17623v2.pdf},
+ author = {Yonatan Oren and Nicole Meister and Niladri Chatterji and Faisal Ladhak and Tatsunori B. Hashimoto},
+ github_url = {https://github.com/tatsu-lab/test_set_contamination},
+ title = {Proving Test Set Contamination in Black-Box Language Models},
+ year = {2023}
+}
+
+@article{prabhu-2024-efficient,
+ abstract = {Standardized benchmarks drive progress in machine learning. However, with
+repeated testing, the risk of overfitting grows as algorithms over-exploit
+benchmark idiosyncrasies. In our work, we seek to mitigate this challenge by
+compiling ever-expanding large-scale benchmarks called Lifelong Benchmarks.
+These benchmarks introduce a major challenge: the high cost of evaluating a
+growing number of models across very large sample sets. To address this
+challenge, we introduce an efficient framework for model evaluation, Sort &
+Search (S&S)}, which reuses previously evaluated models by leveraging dynamic
+programming algorithms to selectively rank and sub-select test samples. To test
+our approach at scale, we create Lifelong-CIFAR10 and Lifelong-ImageNet,
+containing 1.69M and 1.98M test samples for classification. Extensive empirical
+evaluations across over 31,000 models demonstrate that S&S achieves
+highly-efficient approximate accuracy measurement, reducing compute cost from
+180 GPU days to 5 GPU hours (about 1000x reduction) on a single A100 GPU, with
+low approximation error and memory cost of <100MB. Our work also highlights
+issues with current accuracy prediction metrics, suggesting a need to move
+towards sample-level evaluation metrics. We hope to guide future research by
+showing our method's bottleneck lies primarily in generalizing Sort beyond a
+single rank order and not in improving Search.},
+ arxiv_url = {https://arxiv.org/pdf/2402.19472v2.pdf},
+ author = {Ameya Prabhu and Vishaal Udandarao and Philip Torr and Matthias Bethge and Adel Bibi and Samuel Albanie},
+ github_url = {https://github.com/bethgelab/sort-and-search},
+ title = {Efficient Lifelong Model Evaluation in an Era of Rapid Progress},
+ year = {2024}
+}
+
+@article{ren-2020-wandering,
+ abstract = {We aim to bridge the gap between typical human and machine-learning
+environments by extending the standard framework of few-shot learning to an
+online, continual setting. In this setting, episodes do not have separate
+training and testing phases, and instead models are evaluated online while
+learning novel classes. As in the real world, where the presence of
+spatiotemporal context helps us retrieve learned skills in the past, our online
+few-shot learning setting also features an underlying context that changes
+throughout time. Object classes are correlated within a context and inferring
+the correct context can lead to better performance. Building upon this setting,
+we propose a new few-shot learning dataset based on large scale indoor imagery
+that mimics the visual experience of an agent wandering within a world.
+Furthermore, we convert popular few-shot learning approaches into online
+versions and we also propose a new contextual prototypical memory model that
+can make use of spatiotemporal contextual information from the recent past.},
+ arxiv_url = {https://arxiv.org/pdf/2007.04546v3.pdf},
+ author = {Mengye Ren and Michael L. Iuzzolino and Michael C. Mozer and Richard S. Zemel},
+ github_url = {https://github.com/renmengye/oc-fewshot-public},
+ title = {Wandering within a world: Online contextualized few-shot learning},
+ year = {2020}
+}
+
+@article{shirali-2022-theory,
+ abstract = {Dynamic benchmarks interweave model fitting and data collection in an attempt
+to mitigate the limitations of static benchmarks. In contrast to an extensive
+theoretical and empirical study of the static setting, the dynamic counterpart
+lags behind due to limited empirical studies and no apparent theoretical
+foundation to date. Responding to this deficit, we initiate a theoretical study
+of dynamic benchmarking. We examine two realizations, one capturing current
+practice and the other modeling more complex settings. In the first model,
+where data collection and model fitting alternate sequentially, we prove that
+model performance improves initially but can stall after only three rounds.
+Label noise arising from, for instance, annotator disagreement leads to even
+stronger negative results. Our second model generalizes the first to the case
+where data collection and model fitting have a hierarchical dependency
+structure. We show that this design guarantees strictly more progress than the
+first, albeit at a significant increase in complexity. We support our
+theoretical analysis by simulating dynamic benchmarks on two popular datasets.
+These results illuminate the benefits and practical limitations of dynamic
+benchmarking, providing both a theoretical foundation and a causal explanation
+for observed bottlenecks in empirical work.},
+ arxiv_url = {https://arxiv.org/pdf/2210.03165v3.pdf},
+ author = {Ali Shirali and Rediet Abebe and Moritz Hardt},
+ title = {A Theory of Dynamic Benchmarks},
+ year = {2022}
+}
+
+@article{silvarodrguez-2023-closer,
+ abstract = {Efficient transfer learning (ETL) is receiving increasing attention to adapt
+large pre-trained language-vision models on downstream tasks with a few labeled
+samples. While significant progress has been made, we reveal that
+state-of-the-art ETL approaches exhibit strong performance only in
+narrowly-defined experimental setups, and with a careful adjustment of
+hyperparameters based on a large corpus of labeled samples. In particular, we
+make two interesting, and surprising empirical observations. First, to
+outperform a simple Linear Probing baseline, these methods require to optimize
+their hyper-parameters on each target task. And second, they typically
+underperform -- sometimes dramatically -- standard zero-shot predictions in the
+presence of distributional drifts. Motivated by the unrealistic assumptions
+made in the existing literature, i.e., access to a large validation set and
+case-specific grid-search for optimal hyperparameters, we propose a novel
+approach that meets the requirements of real-world scenarios. More concretely,
+we introduce a CLass-Adaptive linear Probe (CLAP) objective, whose balancing
+term is optimized via an adaptation of the general Augmented Lagrangian method
+tailored to this context. We comprehensively evaluate CLAP on a broad span of
+datasets and scenarios, demonstrating that it consistently outperforms SoTA
+approaches, while yet being a much more efficient alternative.},
+ arxiv_url = {https://arxiv.org/pdf/2312.12730v2.pdf},
+ author = {Julio Silva-Rodríguez and Sina Hajimiri and Ismail Ben Ayed and Jose Dolz},
+ github_url = {https://github.com/jusiro/CLAP},
+ title = {A Closer Look at the Few-Shot Adaptation of Large Vision-Language Models},
+ year = {2023}
+}
+
+@article{snell-2020-bayesian,
+ abstract = {Few-shot classification (FSC), the task of adapting a classifier to unseen
+classes given a small labeled dataset, is an important step on the path toward
+human-like machine learning. Bayesian methods are well-suited to tackling the
+fundamental issue of overfitting in the few-shot scenario because they allow
+practitioners to specify prior beliefs and update those beliefs in light of
+observed data. Contemporary approaches to Bayesian few-shot classification
+maintain a posterior distribution over model parameters, which is slow and
+requires storage that scales with model size. Instead, we propose a Gaussian
+process classifier based on a novel combination of P\'olya-Gamma augmentation
+and the one-vs-each softmax approximation that allows us to efficiently
+marginalize over functions rather than model parameters. We demonstrate
+improved accuracy and uncertainty quantification on both standard few-shot
+classification benchmarks and few-shot domain transfer tasks.},
+ arxiv_url = {https://arxiv.org/pdf/2007.10417v2.pdf},
+ author = {Jake Snell and Richard Zemel},
+ github_url = {https://github.com/jakesnell/ove-polya-gamma-gp},
+ title = {Bayesian Few-Shot Classification with One-vs-Each Pólya-Gamma Augmented Gaussian Processes},
+ year = {2020}
+}
+
+@article{traub-2024-overcoming,
+ abstract = {Selective Classification, wherein models can reject low-confidence
+predictions, promises reliable translation of machine-learning based
+classification systems to real-world scenarios such as clinical diagnostics.
+While current evaluation of these systems typically assumes fixed working
+points based on pre-defined rejection thresholds, methodological progress
+requires benchmarking the general performance of systems akin to the
+$\mathrm{AUROC}$ in standard classification. In this work, we define 5
+requirements for multi-threshold metrics in selective classification regarding
+task alignment, interpretability, and flexibility, and show how current
+approaches fail to meet them. We propose the Area under the Generalized Risk
+Coverage curve ($\mathrm{AUGRC}$), which meets all requirements and can be
+directly interpreted as the average risk of undetected failures. We empirically
+demonstrate the relevance of $\mathrm{AUGRC}$ on a comprehensive benchmark
+spanning 6 data sets and 13 confidence scoring functions. We find that the
+proposed metric substantially changes metric rankings on 5 out of the 6 data
+sets.},
+ arxiv_url = {https://arxiv.org/pdf/2407.01032v2.pdf},
+ author = {Jeremias Traub and Till J. Bungert and Carsten T. Lüth and Michael Baumgartner and Klaus H. Maier-Hein and Lena Maier-Hein and Paul F Jaeger},
+ github_url = {https://github.com/IML-DKFZ/fd-shifts},
+ title = {Overcoming Common Flaws in the Evaluation of Selective Classification Systems},
+ year = {2024}
+}
+
+@article{triantafillou-2019-meta,
+ abstract = {Few-shot classification refers to learning a classifier for new classes given
+only a few examples. While a plethora of models have emerged to tackle it, we
+find the procedure and datasets that are used to assess their progress lacking.
+To address this limitation, we propose Meta-Dataset: a new benchmark for
+training and evaluating models that is large-scale, consists of diverse
+datasets, and presents more realistic tasks. We experiment with popular
+baselines and meta-learners on Meta-Dataset, along with a competitive method
+that we propose. We analyze performance as a function of various
+characteristics of test tasks and examine the models' ability to leverage
+diverse training sources for improving their generalization. We also propose a
+new set of baselines for quantifying the benefit of meta-learning in
+Meta-Dataset. Our extensive experimentation has uncovered important research
+challenges and we hope to inspire work in these directions.},
+ arxiv_url = {https://arxiv.org/pdf/1903.03096v4.pdf},
+ author = {Eleni Triantafillou and Tyler Zhu and Vincent Dumoulin and Pascal Lamblin and Utku Evci and Kelvin Xu and Ross Goroshin and Carles Gelada and Kevin Swersky and Pierre-Antoine Manzagol and Hugo Larochelle},
+ journal = {International Conference on Learning Representations (2020)},
+ title = {Meta-Dataset: A Dataset of Datasets for Learning to Learn from Few Examples},
+ year = {2019}
+}
+
+@article{veilleux-2022-realistic,
+ abstract = {Transductive inference is widely used in few-shot learning, as it leverages
+the statistics of the unlabeled query set of a few-shot task, typically
+yielding substantially better performances than its inductive counterpart. The
+current few-shot benchmarks use perfectly class-balanced tasks at inference. We
+argue that such an artificial regularity is unrealistic, as it assumes that the
+marginal label probability of the testing samples is known and fixed to the
+uniform distribution. In fact, in realistic scenarios, the unlabeled query sets
+come with arbitrary and unknown label marginals. We introduce and study the
+effect of arbitrary class distributions within the query sets of few-shot tasks
+at inference, removing the class-balance artefact. Specifically, we model the
+marginal probabilities of the classes as Dirichlet-distributed random
+variables, which yields a principled and realistic sampling within the simplex.
+This leverages the current few-shot benchmarks, building testing tasks with
+arbitrary class distributions. We evaluate experimentally state-of-the-art
+transductive methods over 3 widely used data sets, and observe, surprisingly,
+substantial performance drops, even below inductive methods in some cases.
+Furthermore, we propose a generalization of the mutual-information loss, based
+on $\alpha$-divergences, which can handle effectively class-distribution
+variations. Empirically, we show that our transductive $\alpha$-divergence
+optimization outperforms state-of-the-art methods across several data sets,
+models and few-shot settings. Our code is publicly available at
+https://github.com/oveilleux/Realistic_Transductive_Few_Shot.},
+ arxiv_url = {https://arxiv.org/pdf/2204.11181v1.pdf},
+ author = {Olivier Veilleux and Malik Boudiaf and Pablo Piantanida and Ismail Ben Ayed},
+ github_url = {https://github.com/oveilleux/Realistic_Transductive_Few_Shot},
+ title = {Realistic evaluation of transductive few-shot learning},
+ year = {2022}
+}
+
+@article{veniat-2020-efficient,
+ abstract = {Existing literature in Continual Learning (CL) has focused on overcoming
+catastrophic forgetting, the inability of the learner to recall how to perform
+tasks observed in the past. There are however other desirable properties of a
+CL system, such as the ability to transfer knowledge from previous tasks and to
+scale memory and compute sub-linearly with the number of tasks. Since most
+current benchmarks focus only on forgetting using short streams of tasks, we
+first propose a new suite of benchmarks to probe CL algorithms across these new
+axes. Finally, we introduce a new modular architecture, whose modules represent
+atomic skills that can be composed to perform a certain task. Learning a task
+reduces to figuring out which past modules to re-use, and which new modules to
+instantiate to solve the current task. Our learning algorithm leverages a
+task-driven prior over the exponential search space of all possible ways to
+combine modules, enabling efficient learning on long streams of tasks. Our
+experiments show that this modular architecture and learning algorithm perform
+competitively on widely used CL benchmarks while yielding superior performance
+on the more challenging benchmarks we introduce in this work.},
+ arxiv_url = {https://arxiv.org/pdf/2012.12631v2.pdf},
+ author = {Tom Veniat and Ludovic Denoyer and Marc'Aurelio Ranzato},
+ github_url = {https://github.com/TomVeniat/MNTDP},
+ title = {Efficient Continual Learning with Modular Networks and Task-Driven Priors},
+ year = {2020}
+}
+
+@article{wang-2024-dealing,
+ abstract = {Image generation has shown remarkable results in generating high-fidelity
+realistic images, in particular with the advancement of diffusion-based models.
+However, the prevalence of AI-generated images may have side effects for the
+machine learning community that are not clearly identified. Meanwhile, the
+success of deep learning in computer vision is driven by the massive dataset
+collected on the Internet. The extensive quantity of synthetic data being added
+to the Internet would become an obstacle for future researchers to collect
+"clean" datasets without AI-generated content. Prior research has shown that
+using datasets contaminated by synthetic images may result in performance
+degradation when used for training. In this paper, we investigate the potential
+impact of contaminated datasets on Online Continual Learning (CL) research. We
+experimentally show that contaminated datasets might hinder the training of
+existing online CL methods. Also, we propose Entropy Selection with
+Real-synthetic similarity Maximization (ESRM), a method to alleviate the
+performance deterioration caused by synthetic images when training online CL
+models. Experiments show that our method can significantly alleviate
+performance deterioration, especially when the contamination is severe. For
+reproducibility, the source code of our work is available at
+https://github.com/maorong-wang/ESRM.},
+ arxiv_url = {https://arxiv.org/pdf/2411.13852v1.pdf},
+ author = {Maorong Wang and Nicolas Michel and Jiafeng Mao and Toshihiko Yamasaki},
+ github_url = {https://github.com/maorong-wang/ESRM},
+ title = {Dealing with Synthetic Data Contamination in Online Continual Learning},
+ year = {2024}
+}
+
+@article{wu-2024-streambench,
+ abstract = {Recent works have shown that large language model (LLM) agents are able to
+improve themselves from experience, which is an important ability for
+continuous enhancement post-deployment. However, existing benchmarks primarily
+evaluate their innate capabilities and do not assess their ability to improve
+over time. To address this gap, we introduce StreamBench, a pioneering
+benchmark designed to evaluate the continuous improvement of LLM agents over an
+input-feedback sequence. StreamBench simulates an online learning environment
+where LLMs receive a continuous flow of feedback stream and iteratively enhance
+their performance. In addition, we propose several simple yet effective
+baselines for improving LLMs on StreamBench, and provide a comprehensive
+analysis to identify critical components that contribute to successful
+streaming strategies. Our work serves as a stepping stone towards developing
+effective online learning strategies for LLMs, paving the way for more adaptive
+AI systems in streaming scenarios. Source code:
+https://github.com/stream-bench/stream-bench. Benchmark website:
+https://stream-bench.github.io.},
+ arxiv_url = {https://arxiv.org/pdf/2406.08747v2.pdf},
+ author = {Cheng-Kuang Wu and Zhi Rui Tam and Chieh-Yen Lin and Yun-Nung Chen and Hung-yi Lee},
+ github_url = {https://github.com/stream-bench/stream-bench},
+ title = {StreamBench: Towards Benchmarking Continuous Improvement of Language Agents},
+ year = {2024}
+}
+
+@article{xue-2024-offline,
+ abstract = {Offline optimization aims to maximize a black-box objective function with a
+static dataset and has wide applications. In addition to the objective function
+being black-box and expensive to evaluate, numerous complex real-world problems
+entail optimizing multiple conflicting objectives, i.e., multi-objective
+optimization (MOO). Nevertheless, offline MOO has not progressed as much as
+offline single-objective optimization (SOO), mainly due to the lack of
+benchmarks like Design-Bench for SOO. To bridge this gap, we propose a first
+benchmark for offline MOO, covering a range of problems from synthetic to
+real-world tasks. This benchmark provides tasks, datasets, and open-source
+examples, which can serve as a foundation for method comparisons and
+advancements in offline MOO. Furthermore, we analyze how the current related
+methods can be adapted to offline MOO from four fundamental perspectives,
+including data, model architecture, learning algorithm, and search algorithm.
+Empirical results show improvements over the best value of the training set,
+demonstrating the effectiveness of offline MOO methods. As no particular method
+stands out significantly, there is still an open challenge in further enhancing
+the effectiveness of offline MOO. We finally discuss future challenges for
+offline MOO, with the hope of shedding some light on this emerging field. Our
+code is available at \url{https://github.com/lamda-bbo/offline-moo}.},
+ arxiv_url = {https://arxiv.org/pdf/2406.03722v1.pdf},
+ author = {Ke Xue and Rong-Xi Tan and Xiaobin Huang and Chao Qian},
+ title = {Offline Multi-Objective Optimization},
+ year = {2024}
+}
+
+@article{zela-2020-nas,
+ abstract = {One-shot neural architecture search (NAS) has played a crucial role in making
+NAS methods computationally feasible in practice. Nevertheless, there is still
+a lack of understanding on how these weight-sharing algorithms exactly work due
+to the many factors controlling the dynamics of the process. In order to allow
+a scientific study of these components, we introduce a general framework for
+one-shot NAS that can be instantiated to many recently-introduced variants and
+introduce a general benchmarking framework that draws on the recent large-scale
+tabular benchmark NAS-Bench-101 for cheap anytime evaluations of one-shot NAS
+methods. To showcase the framework, we compare several state-of-the-art
+one-shot NAS methods, examine how sensitive they are to their hyperparameters
+and how they can be improved by tuning their hyperparameters, and compare their
+performance to that of blackbox optimizers for NAS-Bench-101.},
+ arxiv_url = {https://arxiv.org/pdf/2001.10422v2.pdf},
+ author = {Arber Zela and Julien Siems and Frank Hutter},
+ github_url = {https://github.com/automl/nasbench-1shot1},
+ title = {NAS-Bench-1Shot1: Benchmarking and Dissecting One-shot Neural Architecture Search},
+ year = {2020}
+}
+
+@article{zhang-2023-seal,
+ abstract = {Real-world Super-Resolution (Real-SR) methods focus on dealing with diverse
+real-world images and have attracted increasing attention in recent years. The
+key idea is to use a complex and high-order degradation model to mimic
+real-world degradations. Although they have achieved impressive results in
+various scenarios, they are faced with the obstacle of evaluation. Currently,
+these methods are only assessed by their average performance on a small set of
+degradation cases randomly selected from a large space, which fails to provide
+a comprehensive understanding of their overall performance and often yields
+inconsistent and potentially misleading results. To overcome the limitation in
+evaluation, we propose SEAL, a framework for systematic evaluation of real-SR.
+In particular, we cluster the extensive degradation space to create a set of
+representative degradation cases, which serves as a comprehensive test set.
+Next, we propose a coarse-to-fine evaluation protocol to measure the
+distributed and relative performance of real-SR methods on the test set. The
+protocol incorporates two new metrics: acceptance rate (AR) and relative
+performance ratio (RPR), derived from acceptance and excellence lines. Under
+SEAL, we benchmark existing real-SR methods, obtain new observations and
+insights into their performance, and develop a new strong baseline. We consider
+SEAL as the first step towards creating a comprehensive real-SR evaluation
+platform, which can promote the development of real-SR. The source code is
+available at https://github.com/XPixelGroup/SEAL},
+ arxiv_url = {https://arxiv.org/pdf/2309.03020v2.pdf},
+ author = {Wenlong Zhang and Xiaohui Li and Xiangyu Chen and Yu Qiao and Xiao-Ming Wu and Chao Dong},
+ github_url = {https://github.com/XPixelGroup/SEAL},
+ title = {SEAL: A Framework for Systematic Evaluation of Real-World Super-Resolution},
+ year = {2023}
+}
+
+@article{zhang-2024-feature,
+ abstract = {Learning representations that generalize under distribution shifts is
+critical for building robust machine learning models. However, despite
+significant efforts in recent years, algorithmic advances in this direction
+have been limited. In this work, we seek to understand the fundamental
+difficulty of out-of-distribution generalization with deep neural networks. We
+first empirically show that perhaps surprisingly, even allowing a neural
+network to explicitly fit the representations obtained from a teacher network
+that can generalize out-of-distribution is insufficient for the generalization
+of the student network. Then, by a theoretical study of two-layer ReLU networks
+optimized by stochastic gradient descent (SGD) under a structured feature
+model, we identify a fundamental yet unexplored feature learning proclivity of
+neural networks, feature contamination: neural networks can learn uncorrelated
+features together with predictive features, resulting in generalization failure
+under distribution shifts. Notably, this mechanism essentially differs from the
+prevailing narrative in the literature that attributes the generalization
+failure to spurious correlations. Overall, our results offer new insights into
+the non-linear feature learning dynamics of neural networks and highlight the
+necessity of considering inductive biases in out-of-distribution
+generalization.},
+ arxiv_url = {https://arxiv.org/pdf/2406.03345v3.pdf},
+ author = {Tianren Zhang and Chujie Zhao and Guanyu Chen and Yizhou Jiang and Feng Chen},
+ title = {Feature Contamination: Neural Networks Learn Uncorrelated Features and Fail to Generalize},
+ year = {2024}
+}
+
+% ===========================================
+% REFERENCE CANDIDATES
+% Additional reference papers for context
+% ===========================================
+
+@article{author-year-combining,
+ title = {Combining the strengths of radiologists and ai for breast cancer screening: a retrospective analysis}
+}
+
+@article{author-year-enhancing,
+ title = {Enhancing the reliability and accuracy of ai-enabled diagnosis via complementarity-driven deferral to clinicians}
+}
+
+@article{geifman-2019-selectivenet,
+ abstract = {We consider the problem of selective prediction (also known as reject option)
+in deep neural networks, and introduce SelectiveNet, a deep neural architecture
+with an integrated reject option. Existing rejection mechanisms are based
+mostly on a threshold over the prediction confidence of a pre-trained network.
+In contrast, SelectiveNet is trained to optimize both classification (or
+regression) and rejection simultaneously, end-to-end. The result is a deep
+neural network that is optimized over the covered domain. In our experiments,
+we show a consistently improved risk-coverage trade-off over several well-known
+classification and regression datasets, thus reaching new state-of-the-art
+results for deep selective classification.},
+ arxiv_url = {https://arxiv.org/pdf/1901.09192v4.pdf},
+ author = {Yonatan Geifman and Ran El-Yaniv},
+ title = {Selectivenet: A deep neural network with an integrated reject option},
+ year = {2019}
+}
