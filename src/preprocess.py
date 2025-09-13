@@ -1,4 +1,3 @@
-# src/preprocess.py
 from pathlib import Path
 import json
 from typing import Dict, Optional
@@ -12,7 +11,7 @@ ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / "data"
 
 #  Updated iteration folder as required by spec ----------------------
-RESEARCH_DIR = ROOT / ".research" / "iteration16"  # <<<< updated to iteration16 >>>>
+RESEARCH_DIR = ROOT / ".research" / "iteration17"  # <-- updated from iteration16 to iteration17
 IMAGES_DIR = RESEARCH_DIR / "images"
 
 # Ensure that all required directories exist -------------------------
