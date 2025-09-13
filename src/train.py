@@ -42,7 +42,7 @@ def load_model(repo: str, hf_token: Union[str, None] = None, dtype: torch.dtype 
 
     # build kwargs for `from_pretrained` ---------------------------------------
     kwargs = {
-        "torch_dtype": dtype,
+        "dtype": dtype,  # use new keyword – torch_dtype is deprecated
         "token": hf_token,
     }
     if has_cuda:

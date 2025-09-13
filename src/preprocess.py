@@ -3,9 +3,9 @@
 import json
 import shutil
 from pathlib import Path
-from typing import Dict
+from typing import Dict, Optional
 
-from huggingface_hub import hf_hub_download, snapshot_download
+from huggingface_hub import snapshot_download
 
 # -------------------------------------------------------------------
 #  directory management
@@ -13,16 +13,22 @@ from huggingface_hub import hf_hub_download, snapshot_download
 ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / "data"
 # *** Updated iteration folder as required by spec ***
-RESEARCH_DIR = ROOT / ".research" / "iteration4"
+RESEARCH_DIR = ROOT / ".research" / "iteration5"
 IMAGES_DIR = RESEARCH_DIR / "images"
 
 for _d in (DATA_DIR, IMAGES_DIR):
     _d.mkdir(parents=True, exist_ok=True)
 
+__all__ = [
+    "prepare_dataset",
+    "PromptDataset",
+    "RESEARCH_DIR",
+    "IMAGES_DIR",
+]
+
 # -------------------------------------------------------------------
 #  download helpers & synthetic dataset generation
 # -------------------------------------------------------------------
-
 
 def _create_synthetic_dataset(name: str) -> Path:
     """Create a **tiny** JSONL dataset on-the-fly so that smoke tests can
@@ -62,7 +68,71 @@ def _create_synthetic_dataset(name: str) -> Path:
     return dst_dir
 
 
-# (rest of file unchanged)
+def prepare_dataset(cfg: Dict, key: str) -> Path:  # pylint: disable=too-many-branches
+    """Download (if necessary) a dataset described in the YAML configuration.
+
+    Parameters
+    ----------
+    cfg : Dict
+        Full experiment configuration dictionary.
+    key : str
+        Key under ``cfg["datasets"]`` which holds the dataset description.
+
+    Returns
+    -------
+    Path
+        Local directory that contains the dataset files (mirrors
+        *huggingface_hub* snapshot layout).
+    """
+    if "datasets" not in cfg or key not in cfg["datasets"]:
+        raise KeyError(f"Dataset entry '{key}' missing from configuration.")
+
+    ds_cfg: Dict = cfg["datasets"][key]
+    repo: str = ds_cfg["repo"]
+    subset: Optional[str] = ds_cfg.get("subset")
+    hf_token: Optional[str] = cfg.get("_hf_token")
+
+    # ------------------------------------------------------------------
+    # Synthetic / offline datasets -------------------------------------
+    # ------------------------------------------------------------------
+    if repo.startswith("synthetic://"):
+        synthetic_name = repo[len("synthetic://") :]
+        return _create_synthetic_dataset(synthetic_name)
+
+    # ------------------------------------------------------------------
+    # HuggingFace Hub datasets -----------------------------------------
+    # ------------------------------------------------------------------
+    # We always snapshot into DATA_DIR / <repo_id with slashes replaced>
+    local_dir = DATA_DIR / repo.replace("/", "__")
+
+    # If we already have the dataset locally, simply return the path.
+    if local_dir.exists():
+        return local_dir
+
+    # Otherwise download (requires network and/or cache).
+    download_kwargs = {
+        "repo_id": repo,
+        "repo_type": "dataset",
+        "token": hf_token,
+        "local_dir": str(local_dir),
+        "local_dir_use_symlinks": False,  # ensure CI artifact persists
+        # speed-up: only pull specific subset if given
+        "allow_patterns": None,
+    }
+    if subset is not None:
+        download_kwargs["allow_patterns"] = [f"{subset}/*", "*.jsonl", "*.json", "*.txt"]
+
+    try:
+        snapshot_download(**download_kwargs)
+    except Exception as e:  # pragma: no cover – propagate with context
+        raise RuntimeError(f"Failed to download dataset '{repo}': {e}") from e
+
+    return local_dir
+
+
+# -------------------------------------------------------------------
+#  Dataset wrapper
+# -------------------------------------------------------------------
 
 from torch.utils.data import Dataset  # pylint: disable=wrong-import-position
 from transformers import AutoTokenizer  # pylint: disable=wrong-import-position
