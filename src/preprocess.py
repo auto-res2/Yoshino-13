@@ -1,7 +1,6 @@
 # src/preprocess.py
 """Data loading, preprocessing and Hugging-Face Hub download helpers."""
 import json
-import shutil
 from pathlib import Path
 from typing import Dict, Optional
 
@@ -12,11 +11,12 @@ from huggingface_hub import snapshot_download
 # -------------------------------------------------------------------
 ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / "data"
+
 # *** Updated iteration folder as required by spec ***
-RESEARCH_DIR = ROOT / ".research" / "iteration10"
+RESEARCH_DIR = ROOT / ".research" / "iteration11"
 IMAGES_DIR = RESEARCH_DIR / "images"
 
-# Ensure that all required directories exist ---------------------------------
+# Ensure that all required directories exist -----------------------
 for _d in (DATA_DIR, RESEARCH_DIR, IMAGES_DIR):
     _d.mkdir(parents=True, exist_ok=True)
 
@@ -37,6 +37,7 @@ def _create_synthetic_dataset(name: str) -> Path:
     `snapshot_download` would produce so that caller code does not have
     to care about the provenance.
     """
+
     dst_dir = DATA_DIR / f"synthetic__{name}"
     if dst_dir.exists():
         return dst_dir
@@ -85,6 +86,7 @@ def prepare_dataset(cfg: Dict, key: str) -> Path:  # pylint: disable=too-many-br
         Local directory that contains the dataset files (mirrors
         *huggingface_hub* snapshot layout).
     """
+
     if "datasets" not in cfg or key not in cfg["datasets"]:
         raise KeyError(f"Dataset entry '{key}' missing from configuration.")
 
@@ -103,7 +105,6 @@ def prepare_dataset(cfg: Dict, key: str) -> Path:  # pylint: disable=too-many-br
     # ------------------------------------------------------------------
     # HuggingFace Hub datasets -----------------------------------------
     # ------------------------------------------------------------------
-    # We always snapshot into DATA_DIR / <repo_id with slashes replaced>
     local_dir = DATA_DIR / repo.replace("/", "__")
 
     # If we already have the dataset locally, simply return the path.
@@ -117,7 +118,6 @@ def prepare_dataset(cfg: Dict, key: str) -> Path:  # pylint: disable=too-many-br
         "token": hf_token,
         "local_dir": str(local_dir),
         "local_dir_use_symlinks": False,  # ensure CI artifact persists
-        # speed-up: only pull specific subset if given
         "allow_patterns": None,
     }
     if subset is not None:
@@ -126,7 +126,6 @@ def prepare_dataset(cfg: Dict, key: str) -> Path:  # pylint: disable=too-many-br
     try:
         snapshot_download(**download_kwargs)
     except Exception as e:  # pragma: no cover – propagate with context
-        # Provide a clearer error when authentication is required but missing.
         auth_hint = " – did you set the HF_TOKEN environment variable?" if hf_token is None else ""
         raise RuntimeError(f"Failed to download dataset '{repo}': {e}{auth_hint}") from e
 
@@ -145,13 +144,11 @@ class PromptDataset(Dataset):
     """A minimal JSONL prompt dataset with a `text` field."""
 
     def __init__(self, jsonl_path: Path, tokenizer: AutoTokenizer, max_tokens: int = 512):
-        import json as _json
-
         # Ensure tokenizer has a padding token; many causal LMs (GPT-2, LLaMA) do not.
         if tokenizer.pad_token is None:
             tokenizer.pad_token = tokenizer.eos_token
 
-        self.samples = [_json.loads(line)["text"] for line in open(jsonl_path, "r", encoding="utf-8")]
+        self.samples = [json.loads(line)["text"] for line in open(jsonl_path, "r", encoding="utf-8")]
         self.tokenizer = tokenizer
         self.max_tokens = max_tokens
 

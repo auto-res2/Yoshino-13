@@ -25,13 +25,18 @@ def load_model(repo: str, hf_token: Union[str, None] = None, dtype: torch.dtype 
     *   FP16 tensors are only supported on GPU.  When running on CPU we
         automatically promote the dtype to ``torch.float32``.
     """
+
     has_cuda = torch.cuda.is_available()
 
-    # ensure dtype is supported on the target device ---------------------------
+    # ---------------------------------------------------------------------
+    # ensure dtype is supported on the target device
+    # ---------------------------------------------------------------------
     if not has_cuda and dtype == torch.float16:
         dtype = torch.float32
 
-    # resolve synthetic:// URIs -------------------------------------------------
+    # ---------------------------------------------------------------------
+    # resolve synthetic:// URIs – used by smoke tests to load tiny local ckpts
+    # ---------------------------------------------------------------------
     if repo.startswith("synthetic://"):
         local_dir = Path("data") / repo[len("synthetic://") :].replace("/", "__")
         if not local_dir.exists():
@@ -40,9 +45,11 @@ def load_model(repo: str, hf_token: Union[str, None] = None, dtype: torch.dtype 
             )
         repo = str(local_dir)
 
-    # build kwargs for `from_pretrained` ---------------------------------------
+    # ---------------------------------------------------------------------
+    # build kwargs for `from_pretrained`
+    # ---------------------------------------------------------------------
     kwargs = {
-        "dtype": dtype,  # use new keyword – torch_dtype is deprecated
+        "torch_dtype": dtype,  # `torch_dtype` is still accepted by >=4.56
         "token": hf_token,
     }
     if has_cuda:
@@ -50,8 +57,8 @@ def load_model(repo: str, hf_token: Union[str, None] = None, dtype: torch.dtype 
 
     try:
         model = AutoModelForCausalLM.from_pretrained(repo, **kwargs)
-        # When running on CPU, make extra sure we land there even if the weight
-        # file is saved in FP16 (rare but possible for tiny test models).
+        # When running on CPU, explicitly move the model even if the checkpoint
+        # carries CUDA tensors (edge-case for tiny synthetic models saved on GPU)
         if not has_cuda:
             model.to(torch.device("cpu"))
         model.eval()

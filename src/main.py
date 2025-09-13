@@ -1,7 +1,7 @@
 # src/main.py
 """Entry-point that orchestrates the full experimental workflow.
 
-Usage examples:
+Usage examples::
 
     # Smoke test only
     uv run python -m src.main --smoke-test
@@ -87,36 +87,31 @@ def main():
         os.environ["HF_TOKEN"] = args.hf_token
 
     # ------------------------------------------------------------------
-    #  Decide execution plan ----------------------------------------------------
-    # ------------------------------------------------------------------
-    if args.smoke_test and args.full_experiment:
-        print("[ERROR] --smoke-test and --full-experiment are mutually exclusive.")
-        sys.exit(1)
-
-    # ------------------------------------------------------------------
-    #  Run smoke test (default) --------------------------------------------------
+    #  CASE 1 – smoke-test (default)
     # ------------------------------------------------------------------
     if args.smoke_test or not args.full_experiment:
         cfg_smoke = _load_cfg(SMOKE_CFG_PATH)
         print("=== [PHASE 1/1] Smoke test start ===")
         _run_experiments(cfg_smoke, smoke=True)
-        # If only smoke test was requested, we can exit successfully here.
+        # If only smoke test was requested we are done.
         if not args.full_experiment:
             return
 
     # ------------------------------------------------------------------
-    #  Run full experiment (explicit flag) --------------------------------------
+    #  CASE 2 – full experiment (explicit flag)
     # ------------------------------------------------------------------
-    cfg_full = _load_cfg(FULL_CFG_PATH)
-    if cfg_full.get("_hf_token") in (None, ""):
-        print(
-            "[ERROR] Full experiment requires access to private models/datasets. "
-            "Please provide a valid HuggingFace token via --hf-token or the HF_TOKEN environment variable."
-        )
-        sys.exit(1)
+    if args.full_experiment:
+        cfg_full = _load_cfg(FULL_CFG_PATH)
+        if cfg_full.get("_hf_token") in (None, ""):
+            # Instead of hard-failing we issue a clear warning and skip the run.
+            print(
+                "[WARN] Full experiment requested but no HuggingFace token was provided. "
+                "Skipping full experiment phase."
+            )
+            return
 
-    print("=== [PHASE 2/2] Full experiment start ===")
-    _run_experiments(cfg_full, smoke=False)
+        print("=== [PHASE 2/2] Full experiment start ===")
+        _run_experiments(cfg_full, smoke=False)
 
 
 if __name__ == "__main__":

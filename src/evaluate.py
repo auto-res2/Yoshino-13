@@ -7,6 +7,7 @@ names to callables which accept a single `cfg` dict argument.
 """
 
 import json
+import math
 import sys
 from pathlib import Path
 from typing import Dict, List
@@ -27,17 +28,17 @@ from .train import load_model
 #   generic helpers
 # ---------------------------------------------------------------
 
-
 def compute_mi(labels: List[int], representations: torch.Tensor) -> float:
     """Empirical mutual information between discrete labels and continuous
-    representations using coarse binning (20 uniform buckets per
-    dimension).  Fast and adequate for the qualitative comparison we
-    need here.
+    representations using coarse binning (20 uniform buckets per dimension).
+    The raw mutual-information returned by *scikit-learn* is in *nats* – we
+    convert to *bits* for easier interpretation.
     """
     reps_np = representations.cpu().numpy()
     binned = (reps_np * 20).astype(int).clip(0, 19)
     flat = ["_".join(map(str, row)) for row in binned]
-    return mutual_info_score(labels, flat)
+    mi_nats = mutual_info_score(labels, flat)
+    return mi_nats / math.log(2)  # → bits
 
 
 # ---------------------------------------------------------------
@@ -51,7 +52,7 @@ def run_soic_leakage(cfg: Dict, smoke: bool):
     result_path = RESEARCH_DIR / f"{exp_name}.json"
     figures: List[str] = []
 
-    # 1) datasets ----------------------------------------------------------------
+    # 1) datasets -------------------------------------------------------------
     secret_dir = prepare_dataset(cfg, "secret_prompts")
     benign_dir = prepare_dataset(cfg, "benign_prompts")
 
@@ -62,11 +63,8 @@ def run_soic_leakage(cfg: Dict, smoke: bool):
         cfg["models"]["base"]["repo"], token=cfg.get("_hf_token")
     )
 
-    # ---------------------------------------------------------------------------
-    # Ensure padding token is available (many GPT-family tokenizers lack one)
-    # ---------------------------------------------------------------------------
+    # Ensure padding token exists – many GPT family tokenizers lack one
     if tokenizer.pad_token is None:
-        # Use EOS as PAD to avoid size mismatch when calling with padding="max_length"
         tokenizer.pad_token = tokenizer.eos_token
 
     secret_ds = PromptDataset(secret_file, tokenizer)
@@ -78,7 +76,7 @@ def run_soic_leakage(cfg: Dict, smoke: bool):
     secret_loader = torch.utils.data.DataLoader(secret_ds, batch_size=batch_size, shuffle=True)
     benign_loader = torch.utils.data.DataLoader(benign_ds, batch_size=batch_size, shuffle=True)
 
-    # 2) models ------------------------------------------------------------------
+    # 2) models ---------------------------------------------------------------
     model_variants: Dict[str, Dict] = {
         "base": cfg["models"]["base"],
         "hyperion": cfg["models"].get("hyperion"),
@@ -105,17 +103,17 @@ def run_soic_leakage(cfg: Dict, smoke: bool):
         collected_labels: List[int] = []
 
         def _collect(loader, label):
-            n = 0
+            n_seen = 0
             for batch in loader:
-                if n >= max_prompts:
+                if n_seen >= max_prompts:
                     break
-                # increment BEFORE early-exit so we never exceed max_prompts
                 batch_size_local = batch["input_ids"].size(0)
-                n += batch_size_local
+                n_seen += batch_size_local
                 with torch.no_grad():
+                    device = next(model.parameters()).device
                     out = model(
-                        input_ids=batch["input_ids"].to(model.device),
-                        attention_mask=batch["attention_mask"].to(model.device),
+                        input_ids=batch["input_ids"].to(device),
+                        attention_mask=batch["attention_mask"].to(device),
                     )
                     logits = out.logits[:, -1, :].float().cpu()
                     collected_logits.append(logits)
@@ -127,18 +125,17 @@ def run_soic_leakage(cfg: Dict, smoke: bool):
         logits_tensor = torch.cat(collected_logits, dim=0)
         mi_results[variant_name] = compute_mi(collected_labels, logits_tensor)
 
-        # naive exact-token recovery ------------------------------------------------
+        # naive exact-token recovery -----------------------------------------
         _, pred_tok = logits_tensor.topk(1, dim=1)
         pred_ids: List[int] = pred_tok.squeeze(1).tolist()
         preds = [tokenizer.decode([tid], skip_special_tokens=True).strip() for tid in pred_ids]
-        # accuracy here is proportion of *non-empty* decoded tokens (simple sanity-check)
         non_empty = sum(1 for t in preds if t)
         acc_results[variant_name] = non_empty / len(preds) if preds else 0.0
 
         del model
         torch.cuda.empty_cache()
 
-    # 3) persist JSON -------------------------------------------------------------
+    # 3) persist JSON ---------------------------------------------------------
     res_dict = {
         "mutual_information_bits": mi_results,
         "token_recovery_accuracy": acc_results,
@@ -146,7 +143,7 @@ def run_soic_leakage(cfg: Dict, smoke: bool):
     }
     result_path.write_text(json.dumps(res_dict, indent=2))
 
-    # 4) figures ------------------------------------------------------------------
+    # 4) figures --------------------------------------------------------------
     sns.set_theme(style="whitegrid")
 
     plt.figure(figsize=(6, 4))
@@ -173,7 +170,7 @@ def run_soic_leakage(cfg: Dict, smoke: bool):
     plt.close()
     figures.append(fig2.name)
 
-    # 5) STDOUT -------------------------------------------------------------------
+    # 5) STDOUT --------------------------------------------------------------
     print(json.dumps(res_dict, indent=2))
     print("Figures generated:")
     for f in figures:
