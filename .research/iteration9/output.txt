@@ -1,0 +1,2 @@
+=== [PHASE 2/2] Full experiment start Sat Sep 13 07:47:51 AM UTC 2025 ===
+[ERROR] Full experiment requires access to private models/datasets. Please provide a valid HuggingFace token via --hf-token or the HF_TOKEN environment variable.
