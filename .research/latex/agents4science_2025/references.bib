@@ -5,3 +5,1228 @@
   publisher = {GitHub},
   url       = {https://github.com/airas-org/airas}
 }
+
+% ===========================================
+% REQUIRED CITATIONS
+% These papers must be cited in the manuscript
+% ===========================================
+
+@article{author-year-efficient,
+ title = {Efficient Verification of Neural Networks Against LVM-Based Specifications}
+}
+
+@article{author-year-moderate,
+ title = {Moderate-fitting as a Natural Backdoor Defender for Pre-trained Language Models}
+}
+
+@article{author-year-revisiting,
+ title = {Revisiting Injective Attacks on Recommender Systems}
+}
+
+@article{author-year-towards,
+ title = {Towards Safe Concept Transfer of Multi-Modal Diffusion via Causal Representation Editing}
+}
+
+@article{berrada-2021-make,
+ abstract = {Most real world applications require dealing with stochasticity like sensor
+noise or predictive uncertainty, where formal specifications of desired
+behavior are inherently probabilistic. Despite the promise of formal
+verification in ensuring the reliability of neural networks, progress in the
+direction of probabilistic specifications has been limited. In this direction,
+we first introduce a general formulation of probabilistic specifications for
+neural networks, which captures both probabilistic networks (e.g., Bayesian
+neural networks, MC-Dropout networks) and uncertain inputs (distributions over
+inputs arising from sensor noise or other perturbations). We then propose a
+general technique to verify such specifications by generalizing the notion of
+Lagrangian duality, replacing standard Lagrangian multipliers with "functional
+multipliers" that can be arbitrary functions of the activations at a given
+layer. We show that an optimal choice of functional multipliers leads to exact
+verification (i.e., sound and complete verification), and for specific forms of
+multipliers, we develop tractable practical verification algorithms.
+  We empirically validate our algorithms by applying them to Bayesian Neural
+Networks (BNNs) and MC Dropout Networks, and certifying properties such as
+adversarial robustness and robust detection of out-of-distribution (OOD) data.
+On these tasks we are able to provide significantly stronger guarantees when
+compared to prior work -- for instance, for a VGG-64 MC-Dropout CNN trained on
+CIFAR-10, we improve the certified AUC (a verified lower bound on the true AUC)
+for robust OOD detection (on CIFAR-100) from $0\% \rightarrow 29\%$. Similarly,
+for a BNN trained on MNIST, we improve on the robust accuracy from $60.2\%
+\rightarrow 74.6\%$. Further, on a novel specification -- distributionally
+robust OOD detection -- we improve the certified AUC from $5\% \rightarrow
+23\%$.},
+ arxiv_url = {https://arxiv.org/pdf/2102.09479v2.pdf},
+ author = {Leonard Berrada and Sumanth Dathathri and Krishnamurthy Dvijotham and Robert Stanforth and Rudy Bunel and Jonathan Uesato and Sven Gowal and M. Pawan Kumar},
+ title = {Make Sure You're Unsure: A Framework for Verifying Probabilistic Specifications},
+ year = {2021}
+}
+
+@article{bertrand-2023-the,
+ abstract = {Deep generative models have made tremendous progress in modeling complex
+data, often exhibiting generation quality that surpasses a typical human's
+ability to discern the authenticity of samples. Undeniably, a key driver of
+this success is enabled by the massive amounts of web-scale data consumed by
+these models. Due to these models' striking performance and ease of
+availability, the web will inevitably be increasingly populated with synthetic
+content. Such a fact directly implies that future iterations of generative
+models will be trained on both clean and artificially generated data from past
+models. In this paper, we develop a framework to rigorously study the impact of
+training generative models on mixed datasets -- from classical training on real
+data to self-consuming generative models trained on purely synthetic data. We
+first prove the stability of iterative training under the condition that the
+initial generative models approximate the data distribution well enough and the
+proportion of clean training data (w.r.t. synthetic data) is large enough. We
+empirically validate our theory on both synthetic and natural images by
+iteratively training normalizing flows and state-of-the-art diffusion models on
+CIFAR10 and FFHQ.},
+ arxiv_url = {https://arxiv.org/pdf/2310.00429v5.pdf},
+ author = {Quentin Bertrand and Avishek Joey Bose and Alexandre Duplessis and Marco Jiralerspong and Gauthier Gidel},
+ github_url = {https://github.com/NVlabs/edm},
+ title = {On the Stability of Iterative Retraining of Generative Models on their own Data},
+ year = {2023}
+}
+
+@article{cen-2020-regulating,
+ abstract = {By filtering the content that users see, social media platforms have the
+ability to influence users' perceptions and decisions, from their dining
+choices to their voting preferences. This influence has drawn scrutiny, with
+many calling for regulations on filtering algorithms, but designing and
+enforcing regulations remains challenging. In this work, we examine three
+questions. First, given a regulation, how would one design an audit to enforce
+it? Second, does the audit impose a performance cost on the platform? Third,
+how does the audit affect the content that the platform is incentivized to
+filter? In response, we propose a method such that, given a regulation, an
+auditor can test whether that regulation is met with only black-box access to
+the filtering algorithm. We then turn to the platform's perspective. The
+platform's goal is to maximize an objective function while meeting regulation.
+We find that there are conditions under which the regulation does not place a
+high performance cost on the platform and, notably, that content diversity can
+play a key role in aligning the interests of the platform and regulators.},
+ arxiv_url = {https://arxiv.org/pdf/2006.09647v4.pdf},
+ author = {Sarah H. Cen and Devavrat Shah},
+ title = {Regulating algorithmic filtering on social media},
+ year = {2020}
+}
+
+@article{chen-2022-adversarial,
+ abstract = {The score-based query attacks (SQAs) pose practical threats to deep neural
+networks by crafting adversarial perturbations within dozens of queries, only
+using the model's output scores. Nonetheless, we note that if the loss trend of
+the outputs is slightly perturbed, SQAs could be easily misled and thereby
+become much less effective. Following this idea, we propose a novel defense,
+namely Adversarial Attack on Attackers (AAA), to confound SQAs towards
+incorrect attack directions by slightly modifying the output logits. In this
+way, (1) SQAs are prevented regardless of the model's worst-case robustness;
+(2) the original model predictions are hardly changed, i.e., no degradation on
+clean accuracy; (3) the calibration of confidence scores can be improved
+simultaneously. Extensive experiments are provided to verify the above
+advantages. For example, by setting $\ell_\infty=8/255$ on CIFAR-10, our
+proposed AAA helps WideResNet-28 secure 80.59% accuracy under Square attack
+(2500 queries), while the best prior defense (i.e., adversarial training) only
+attains 67.44%. Since AAA attacks SQA's general greedy strategy, such
+advantages of AAA over 8 defenses can be consistently observed on 8
+CIFAR-10/ImageNet models under 6 SQAs, using different attack targets, bounds,
+norms, losses, and strategies. Moreover, AAA calibrates better without hurting
+the accuracy. Our code is available at https://github.com/Sizhe-Chen/AAA.},
+ arxiv_url = {https://arxiv.org/pdf/2205.12134v3.pdf},
+ author = {Sizhe Chen and Zhehao Huang and Qinghua Tao and Yingwen Wu and Cihang Xie and Xiaolin Huang},
+ title = {Adversarial Attack on Attackers: Post-Process to Mitigate Black-Box Score-Based Query Attacks},
+ year = {2022}
+}
+
+@article{conitzer-2024-position,
+ abstract = {Foundation models such as GPT-4 are fine-tuned to avoid unsafe or otherwise
+problematic behavior, such as helping to commit crimes or producing racist
+text. One approach to fine-tuning, called reinforcement learning from human
+feedback, learns from humans' expressed preferences over multiple outputs.
+Another approach is constitutional AI, in which the input from humans is a list
+of high-level principles. But how do we deal with potentially diverging input
+from humans? How can we aggregate the input into consistent data about
+"collective" preferences or otherwise use it to make collective choices about
+model behavior? In this paper, we argue that the field of social choice is well
+positioned to address these questions, and we discuss ways forward for this
+agenda, drawing on discussions in a recent workshop on Social Choice for AI
+Ethics and Safety held in Berkeley, CA, USA in December 2023.},
+ arxiv_url = {https://arxiv.org/pdf/2404.10271v2.pdf},
+ author = {Vincent Conitzer and Rachel Freedman and Jobst Heitzig and Wesley H. Holliday and Bob M. Jacobs and Nathan Lambert and Milan Mossé and Eric Pacuit and Stuart Russell and Hailey Schoelkopf and Emanuel Tewolde and William S. Zwicker},
+ title = {Position: Social Choice Should Guide AI Alignment in Dealing with Diverse Human Feedback},
+ year = {2024}
+}
+
+@article{dai-2024-position,
+ abstract = {What is agency, and why does it matter? In this work, we draw from the
+political science and philosophy literature and give two competing visions of
+what it means to be an (ethical) agent. The first view, which we term
+mechanistic, is commonly--and implicitly--assumed in AI research, yet it is a
+fundamentally limited means to understand the ethical characteristics of AI.
+Under the second view, which we term volitional, AI can no longer be considered
+an ethical agent. We discuss the implications of each of these views for two
+critical questions: first, what the ideal system ought to look like, and
+second, how accountability may be achieved. In light of this discussion, we
+ultimately argue that, in the context of ethically-significant behavior, AI
+should be viewed not as an agent but as the outcome of political processes.},
+ arxiv_url = {https://arxiv.org/pdf/2404.13861v1.pdf},
+ author = {Jessica Dai},
+ title = {Position: Beyond Personhood: Agency, Accountability, and the Limits of Anthropomorphic Ethical Analysis},
+ year = {2024}
+}
+
+@article{dong-2024-position,
+ abstract = {As Large Language Models (LLMs) become more integrated into our daily lives,
+it is crucial to identify and mitigate their risks, especially when the risks
+can have profound impacts on human users and societies. Guardrails, which
+filter the inputs or outputs of LLMs, have emerged as a core safeguarding
+technology. This position paper takes a deep look at current open-source
+solutions (Llama Guard, Nvidia NeMo, Guardrails AI), and discusses the
+challenges and the road towards building more complete solutions. Drawing on
+robust evidence from previous research, we advocate for a systematic approach
+to construct guardrails for LLMs, based on comprehensive consideration of
+diverse contexts across various LLMs applications. We propose employing
+socio-technical methods through collaboration with a multi-disciplinary team to
+pinpoint precise technical requirements, exploring advanced neural-symbolic
+implementations to embrace the complexity of the requirements, and developing
+verification and testing to ensure the utmost quality of the final product.},
+ arxiv_url = {https://arxiv.org/pdf/2402.01822v2.pdf},
+ author = {Yi Dong and Ronghui Mu and Gaojie Jin and Yi Qi and Jinwei Hu and Xingyu Zhao and Jie Meng and Wenjie Ruan and Xiaowei Huang},
+ title = {Position: Building Guardrails for Large Language Models Requires Systematic Design},
+ year = {2024}
+}
+
+@article{fontanella-2024-generating,
+ abstract = {Text-to-image diffusion generative models can generate high quality images at
+the cost of tedious prompt engineering. Controllability can be improved by
+introducing layout conditioning, however existing methods lack layout editing
+ability and fine-grained control over object attributes. The concept of
+multi-layer generation holds great potential to address these limitations,
+however generating image instances concurrently to scene composition limits
+control over fine-grained object attributes, relative positioning in 3D space
+and scene manipulation abilities. In this work, we propose a novel multi-stage
+generation paradigm that is designed for fine-grained control, flexibility and
+interactivity. To ensure control over instance attributes, we devise a novel
+training paradigm to adapt a diffusion model to generate isolated scene
+components as RGBA images with transparency information. To build complex
+images, we employ these pre-generated instances and introduce a multi-layer
+composite generation process that smoothly assembles components in realistic
+scenes. Our experiments show that our RGBA diffusion model is capable of
+generating diverse and high quality instances with precise control over object
+attributes. Through multi-layer composition, we demonstrate that our approach
+allows to build and manipulate images from highly complex prompts with
+fine-grained control over object appearance and location, granting a higher
+degree of control than competing methods.},
+ arxiv_url = {https://arxiv.org/pdf/2411.10913v1.pdf},
+ author = {Alessandro Fontanella and Petru-Daniel Tudosiu and Yongxin Yang and Shifeng Zhang and Sarah Parisot},
+ title = {Generating compositional scenes via Text-to-image RGBA Instance Generation},
+ year = {2024}
+}
+
+@article{fu-2024-towards,
+ abstract = {This paper tackles the emerging challenge of training generative models
+within a self-consuming loop, wherein successive generations of models are
+recursively trained on mixtures of real and synthetic data from previous
+generations. We construct a theoretical framework to rigorously evaluate how
+this training procedure impacts the data distributions learned by future
+models, including parametric and non-parametric models. Specifically, we derive
+bounds on the total variation (TV) distance between the synthetic data
+distributions produced by future models and the original real data distribution
+under various mixed training scenarios for diffusion models with a
+one-hidden-layer neural network score function. Our analysis demonstrates that
+this distance can be effectively controlled under the condition that mixed
+training dataset sizes or proportions of real data are large enough.
+Interestingly, we further unveil a phase transition induced by expanding
+synthetic data amounts, proving theoretically that while the TV distance
+exhibits an initial ascent, it declines beyond a threshold point. Finally, we
+present results for kernel density estimation, delivering nuanced insights such
+as the impact of mixed data training on error propagation.},
+ arxiv_url = {https://arxiv.org/pdf/2402.11778v2.pdf},
+ author = {Shi Fu and Sen Zhang and Yingjie Wang and Xinmei Tian and Dacheng Tao},
+ title = {Towards Theoretical Understandings of Self-Consuming Generative Models},
+ year = {2024}
+}
+
+@article{gao-2020-privacy,
+ abstract = {Collaborative learning has gained great popularity due to its benefit of data
+privacy protection: participants can jointly train a Deep Learning model
+without sharing their training sets. However, recent works discovered that an
+adversary can fully recover the sensitive training samples from the shared
+gradients. Such reconstruction attacks pose severe threats to collaborative
+learning. Hence, effective mitigation solutions are urgently desired.
+  In this paper, we propose to leverage data augmentation to defeat
+reconstruction attacks: by preprocessing sensitive images with
+carefully-selected transformation policies, it becomes infeasible for the
+adversary to extract any useful information from the corresponding gradients.
+We design a novel search method to automatically discover qualified policies.
+We adopt two new metrics to quantify the impacts of transformations on data
+privacy and model usability, which can significantly accelerate the search
+speed. Comprehensive evaluations demonstrate that the policies discovered by
+our method can defeat existing reconstruction attacks in collaborative
+learning, with high efficiency and negligible impact on the model performance.},
+ arxiv_url = {https://arxiv.org/pdf/2011.12505v2.pdf},
+ author = {Wei Gao and Shangwei Guo and Tianwei Zhang and Han Qiu and Yonggang Wen and Yang Liu},
+ title = {[Re] Privacy-preserving collaborative learning with automatic transformation search},
+ year = {2020}
+}
+
+@article{ghandeharioun-2024-who,
+ abstract = {Despite investments in improving model safety, studies show that misaligned
+capabilities remain latent in safety-tuned models. In this work, we shed light
+on the mechanics of this phenomenon. First, we show that even when model
+generations are safe, harmful content can persist in hidden representations and
+can be extracted by decoding from earlier layers. Then, we show that whether
+the model divulges such content depends significantly on its perception of who
+it is talking to, which we refer to as user persona. In fact, we find
+manipulating user persona to be even more effective for eliciting harmful
+content than direct attempts to control model refusal. We study both natural
+language prompting and activation steering as control methods and show that
+activation steering is significantly more effective at bypassing safety
+filters. We investigate why certain personas break model safeguards and find
+that they enable the model to form more charitable interpretations of otherwise
+dangerous queries. Finally, we show we can predict a persona's effect on
+refusal given only the geometry of its steering vector.},
+ arxiv_url = {https://arxiv.org/pdf/2406.12094v2.pdf},
+ author = {Asma Ghandeharioun and Ann Yuan and Marius Guerard and Emily Reif and Michael A. Lepori and Lucas Dixon},
+ title = {Who's asking? User personas and the mechanics of latent misalignment},
+ year = {2024}
+}
+
+@article{greenblatt-2023-control,
+ abstract = {As large language models (LLMs) become more powerful and are deployed more
+autonomously, it will be increasingly important to prevent them from causing
+harmful outcomes. Researchers have investigated a variety of safety techniques
+for this purpose, e.g. using models to review the outputs of other models, or
+red-teaming techniques to surface subtle failure modes. However, researchers
+have not evaluated whether such techniques still ensure safety if the model is
+itself intentionally trying to subvert them. In this paper, we develop and
+evaluate pipelines of safety techniques ("protocols") that are robust to
+intentional subversion.
+  We investigate a scenario in which we want to solve a sequence of programming
+problems, using access to a powerful but untrusted model (in our case, GPT-4),
+access to a less powerful trusted model (in our case, GPT-3.5), and limited
+access to high-quality trusted labor. We investigate protocols that aim to
+never submit solutions containing backdoors, which we operationalize here as
+logical errors that are not caught by test cases.
+  We investigate a range of protocols and test each against strategies that the
+untrusted model could use to subvert them. One protocol is what we call trusted
+editing. This protocol first asks GPT-4 to write code, and then asks GPT-3.5 to
+rate the suspiciousness of that code. If the code is below some suspiciousness
+threshold, it is submitted. Otherwise, GPT-3.5 edits the solution to remove
+parts that seem suspicious and then submits the edited code. Another protocol
+is untrusted monitoring. This protocol asks GPT-4 to write code, and then asks
+another instance of GPT-4 whether the code is backdoored, using various
+techniques to prevent the GPT-4 instances from colluding. These protocols
+improve substantially on simple baselines.},
+ arxiv_url = {https://arxiv.org/pdf/2312.06942v5.pdf},
+ author = {Ryan Greenblatt and Buck Shlegeris and Kshitij Sachan and Fabien Roger},
+ title = {AI Control: Improving Safety Despite Intentional Subversion},
+ year = {2023}
+}
+
+@article{jain-2024-what,
+ abstract = {Safety fine-tuning helps align Large Language Models (LLMs) with human
+preferences for their safe deployment. To better understand the underlying
+factors that make models safe via safety fine-tuning, we design a synthetic
+data generation framework that captures salient aspects of an unsafe input by
+modeling the interaction between the task the model is asked to perform (e.g.,
+"design") versus the specific concepts the task is asked to be performed upon
+(e.g., a "cycle" vs. a "bomb"). Using this, we investigate three well-known
+safety fine-tuning methods -- supervised safety fine-tuning, direct preference
+optimization, and unlearning -- and provide significant evidence demonstrating
+that these methods minimally transform MLP weights to specifically align unsafe
+inputs into its weights' null space. This yields a clustering of inputs based
+on whether the model deems them safe or not. Correspondingly, when an
+adversarial input (e.g., a jailbreak) is provided, its activations are closer
+to safer samples, leading to the model processing such an input as if it were
+safe. We validate our findings, wherever possible, on real-world models --
+specifically, Llama-2 7B and Llama-3 8B.},
+ arxiv_url = {https://arxiv.org/pdf/2407.10264v3.pdf},
+ author = {Samyak Jain and Ekdeep Singh Lubana and Kemal Oksuz and Tom Joy and Philip H. S. Torr and Amartya Sanyal and Puneet K. Dokania},
+ title = {What Makes and Breaks Safety Fine-tuning? A Mechanistic Study},
+ year = {2024}
+}
+
+@article{jordan-2022-zonotope,
+ abstract = {Neural network verification aims to provide provable bounds for the output of
+a neural network for a given input range. Notable prior works in this domain
+have either generated bounds using abstract domains, which preserve some
+dependency between intermediate neurons in the network; or framed verification
+as an optimization problem and solved a relaxation using Lagrangian methods. A
+key drawback of the latter technique is that each neuron is treated
+independently, thereby ignoring important neuron interactions. We provide an
+approach that merges these two threads and uses zonotopes within a Lagrangian
+decomposition. Crucially, we can decompose the problem of verifying a deep
+neural network into the verification of many 2-layer neural networks. While
+each of these problems is provably hard, we provide efficient relaxation
+methods that are amenable to efficient dual ascent procedures. Our technique
+yields bounds that improve upon both linear programming and Lagrangian-based
+verification techniques in both time and bound tightness.},
+ arxiv_url = {https://arxiv.org/pdf/2210.08069v1.pdf},
+ author = {Matt Jordan and Jonathan Hayase and Alexandros G. Dimakis and Sewoong Oh},
+ github_url = {https://github.com/revbucket/dual-verification},
+ title = {Zonotope Domains for Lagrangian Neural Network Verification},
+ year = {2022}
+}
+
+@article{joren-2024-classification,
+ abstract = {We propose a new approach to promote safety in classification tasks with
+established concepts. Our approach -- called a conceptual safeguard -- acts as
+a verification layer for models that predict a target outcome by first
+predicting the presence of intermediate concepts. Given this architecture, a
+safeguard ensures that a model meets a minimal level of accuracy by abstaining
+from uncertain predictions. In contrast to a standard selective classifier, a
+safeguard provides an avenue to improve coverage by allowing a human to confirm
+the presence of uncertain concepts on instances on which it abstains. We
+develop methods to build safeguards that maximize coverage without compromising
+safety, namely techniques to propagate the uncertainty in concept predictions
+and to flag salient concepts for human review. We benchmark our approach on a
+collection of real-world and synthetic datasets, showing that it can improve
+performance and coverage in deep learning tasks.},
+ arxiv_url = {https://arxiv.org/pdf/2411.04342v1.pdf},
+ author = {Hailey Joren and Charles Marx and Berk Ustun},
+ journal = {International Conference on Learning Representations (ICLR), 2024},
+ title = {Classification with Conceptual Safeguards},
+ year = {2024}
+}
+
+@article{kulynych-2024-attack,
+ abstract = {Differential privacy (DP) is a widely used approach for mitigating privacy
+risks when training machine learning models on sensitive data. DP mechanisms
+add noise during training to limit the risk of information leakage. The scale
+of the added noise is critical, as it determines the trade-off between privacy
+and utility. The standard practice is to select the noise scale to satisfy a
+given privacy budget $\varepsilon$. This privacy budget is in turn interpreted
+in terms of operational attack risks, such as accuracy, sensitivity, and
+specificity of inference attacks aimed to recover information about the
+training data records. We show that first calibrating the noise scale to a
+privacy budget $\varepsilon$, and then translating {\epsilon} to attack risk
+leads to overly conservative risk assessments and unnecessarily low utility.
+Instead, we propose methods to directly calibrate the noise scale to a desired
+attack risk level, bypassing the step of choosing $\varepsilon$. For a given
+notion of attack risk, our approach significantly decreases noise scale,
+leading to increased utility at the same level of privacy. We empirically
+demonstrate that calibrating noise to attack sensitivity/specificity, rather
+than $\varepsilon$, when training privacy-preserving ML models substantially
+improves model accuracy for the same risk level. Our work provides a principled
+and practical way to improve the utility of privacy-preserving ML without
+compromising on privacy. The code is available at
+https://github.com/Felipe-Gomez/riskcal},
+ arxiv_url = {https://arxiv.org/pdf/2407.02191v2.pdf},
+ author = {Bogdan Kulynych and Juan Felipe Gomez and Georgios Kaissis and Flavio du Pin Calmon and Carmela Troncoso},
+ title = {Attack-Aware Noise Calibration for Differential Privacy},
+ year = {2024}
+}
+
+@article{lim-2020-hierarchical,
+ abstract = {We introduce a new framework for the exact point-wise $\ell_p$ robustness
+verification problem that exploits the layer-wise geometric structure of deep
+feed-forward networks with rectified linear activations (ReLU networks). The
+activation regions of the network partition the input space, and one can verify
+the $\ell_p$ robustness around a point by checking all the activation regions
+within the desired radius. The GeoCert algorithm (Jordan et al., NeurIPS 2019)
+treats this partition as a generic polyhedral complex in order to detect which
+region to check next. In contrast, our LayerCert framework considers the
+\emph{nested hyperplane arrangement} structure induced by the layers of the
+ReLU network and explores regions in a hierarchical manner. We show that, under
+certain conditions on the algorithm parameters, LayerCert provably reduces the
+number and size of the convex programs that one needs to solve compared to
+GeoCert. Furthermore, our LayerCert framework allows the incorporation of lower
+bounding routines based on convex relaxations to further improve performance.
+Experimental results demonstrate that LayerCert can significantly reduce both
+the number of convex programs solved and the running time over the
+state-of-the-art.},
+ arxiv_url = {https://arxiv.org/pdf/2007.11826v1.pdf},
+ author = {Cong Han Lim and Raquel Urtasun and Ersin Yumer},
+ title = {Hierarchical Verification for Adversarial Robustness},
+ year = {2020}
+}
+
+@article{longpre-2024-consent,
+ abstract = {General-purpose artificial intelligence (AI) systems are built on massive
+swathes of public web data, assembled into corpora such as C4, RefinedWeb, and
+Dolma. To our knowledge, we conduct the first, large-scale, longitudinal audit
+of the consent protocols for the web domains underlying AI training corpora.
+Our audit of 14,000 web domains provides an expansive view of crawlable web
+data and how codified data use preferences are changing over time. We observe a
+proliferation of AI-specific clauses to limit use, acute differences in
+restrictions on AI developers, as well as general inconsistencies between
+websites' expressed intentions in their Terms of Service and their robots.txt.
+We diagnose these as symptoms of ineffective web protocols, not designed to
+cope with the widespread re-purposing of the internet for AI. Our longitudinal
+analyses show that in a single year (2023-2024) there has been a rapid
+crescendo of data restrictions from web sources, rendering ~5%+ of all tokens
+in C4, or 28%+ of the most actively maintained, critical sources in C4, fully
+restricted from use. For Terms of Service crawling restrictions, a full 45% of
+C4 is now restricted. If respected or enforced, these restrictions are rapidly
+biasing the diversity, freshness, and scaling laws for general-purpose AI
+systems. We hope to illustrate the emerging crises in data consent, for both
+developers and creators. The foreclosure of much of the open web will impact
+not only commercial AI, but also non-commercial AI and academic research.},
+ arxiv_url = {https://arxiv.org/pdf/2407.14933v2.pdf},
+ author = {Shayne Longpre and Robert Mahari and Ariel Lee and Campbell Lund and Hamidah Oderinwale and William Brannon and Nayan Saxena and Naana Obeng-Marnu and Tobin South and Cole Hunter and Kevin Klyman and Christopher Klamm and Hailey Schoelkopf and Nikhil Singh and Manuel Cherep and Ahmad Anis and An Dinh and Caroline Chitongo and Da Yin and Damien Sileo and Deividas Mataciunas and Diganta Misra and Emad Alghamdi and Enrico Shippole and Jianguo Zhang and Joanna Materzynska and Kun Qian and Kush Tiwary and Lester Miranda and Manan Dey and Minnie Liang and Mohammed Hamdy and Niklas Muennighoff and Seonghyeon Ye and Seungone Kim and Shrestha Mohanty and Vipul Gupta and Vivek Sharma and Vu Minh Chien and Xuhui Zhou and Yizhi Li and Caiming Xiong and Luis Villa and Stella Biderman and Hanlin Li and Daphne Ippolito and Sara Hooker and Jad Kabbara and Sandy Pentland},
+ title = {Consent in Crisis: The Rapid Decline of the AI Data Commons},
+ year = {2024}
+}
+
+@article{mazouz-2022-safety,
+ abstract = {Neural Networks (NNs) have been successfully employed to represent the state
+evolution of complex dynamical systems. Such models, referred to as NN dynamic
+models (NNDMs), use iterative noisy predictions of NN to estimate a
+distribution of system trajectories over time. Despite their accuracy, safety
+analysis of NNDMs is known to be a challenging problem and remains largely
+unexplored. To address this issue, in this paper, we introduce a method of
+providing safety guarantees for NNDMs. Our approach is based on stochastic
+barrier functions, whose relation with safety are analogous to that of Lyapunov
+functions with stability. We first show a method of synthesizing stochastic
+barrier functions for NNDMs via a convex optimization problem, which in turn
+provides a lower bound on the system's safety probability. A key step in our
+method is the employment of the recent convex approximation results for NNs to
+find piece-wise linear bounds, which allow the formulation of the barrier
+function synthesis problem as a sum-of-squares optimization program. If the
+obtained safety probability is above the desired threshold, the system is
+certified. Otherwise, we introduce a method of generating controls for the
+system that robustly maximizes the safety probability in a minimally-invasive
+manner. We exploit the convexity property of the barrier function to formulate
+the optimal control synthesis problem as a linear program. Experimental results
+illustrate the efficacy of the method. Namely, they show that the method can
+scale to multi-dimensional NNDMs with multiple layers and hundreds of neurons
+per layer, and that the controller can significantly improve the safety
+probability.},
+ arxiv_url = {https://arxiv.org/pdf/2206.07811v8.pdf},
+ author = {Rayan Mazouz and Karan Muvvala and Akash Ratheesh and Luca Laurenti and Morteza Lahijanian},
+ title = {Safety Guarantees for Neural Network Dynamic Systems via Stochastic Barrier Functions},
+ year = {2022}
+}
+
+@article{overman-2024-aligning,
+ abstract = {AI model alignment is crucial due to inadvertent biases in training data and
+the underspecified machine learning pipeline, where models with excellent test
+metrics may not meet end-user requirements. While post-training alignment via
+human feedback shows promise, these methods are often limited to generative AI
+settings where humans can interpret and provide feedback on model outputs. In
+traditional non-generative settings with numerical or categorical outputs,
+detecting misalignment through single-sample outputs remains challenging, and
+enforcing alignment during training requires repeating costly training
+processes. In this paper we consider an alternative strategy. We propose
+interpreting model alignment through property testing, defining an aligned
+model $f$ as one belonging to a subset $\mathcal{P}$ of functions that exhibit
+specific desired behaviors. We focus on post-processing a pre-trained model $f$
+to better align with $\mathcal{P}$ using conformal risk control. Specifically,
+we develop a general procedure for converting queries for testing a given
+property $\mathcal{P}$ to a collection of loss functions suitable for use in a
+conformal risk control algorithm. We prove a probabilistic guarantee that the
+resulting conformal interval around $f$ contains a function approximately
+satisfying $\mathcal{P}$. We exhibit applications of our methodology on a
+collection of supervised learning datasets for (shape-constrained) properties
+such as monotonicity and concavity. The general procedure is flexible and can
+be applied to a wide range of desired properties. Finally, we prove that
+pre-trained models will always require alignment techniques even as model sizes
+or training data increase, as long as the training data contains even small
+biases.},
+ arxiv_url = {https://arxiv.org/pdf/2406.18777v2.pdf},
+ author = {William Overman and Jacqueline Jil Vallon and Mohsen Bayati},
+ title = {Aligning Model Properties via Conformal Risk Control},
+ year = {2024}
+}
+
+@article{rane-2024-position,
+ abstract = {As AI systems are increasingly incorporated into domains where human behavior
+has set the norm, a challenge for AI governance and AI alignment research is to
+regulate their behavior in a way that is useful and constructive for society.
+One way to answer this question is to ask: how do we govern the human behavior
+that the models are emulating? To evaluate human behavior, the American legal
+system often uses the "Reasonable Person Standard." The idea of "reasonable"
+behavior comes up in nearly every area of law. The legal system often judges
+the actions of parties with respect to what a reasonable person would have done
+under similar circumstances. This paper argues that the reasonable person
+standard provides useful guidelines for the type of behavior we should develop,
+probe, and stress-test in models. It explains how reasonableness is defined and
+used in key areas of the law using illustrative cases, how the reasonable
+person standard could apply to AI behavior in each of these areas and contexts,
+and how our societal understanding of "reasonable" behavior provides useful
+technical goals for AI researchers.},
+ arxiv_url = {https://arxiv.org/pdf/2406.04671v1.pdf},
+ author = {Sunayana Rane},
+ title = {Position: The Reasonable Person Standard for AI},
+ year = {2024}
+}
+
+@article{teuber-2024-provably,
+ abstract = {While neural networks (NNs) have potential as autonomous controllers for
+Cyber-Physical Systems, verifying the safety of NN based control systems
+(NNCSs) poses significant challenges for the practical use of NNs, especially
+when safety is needed for unbounded time horizons. One reason is the
+intractability of analyzing NNs, ODEs and hybrid systems. To this end, we
+introduce VerSAILLE (Verifiably Safe AI via Logically Linked Envelopes): The
+first general approach that allows reusing control theory results for NNCS
+verification. By joining forces, we exploit the efficiency of NN verification
+tools while retaining the rigor of differential dynamic logic (dL). Based on
+provably safe control envelopes in dL, we derive specifications for the NN
+which is proven via NN verification. We show that a proof of the NN adhering to
+the specification is mirrored by a dL proof on the infinite-time safety of the
+NNCS.
+  The NN verification properties resulting from hybrid systems typically
+contain nonlinear arithmetic and arbitrary logical structures while efficient
+NN verification merely supports linear constraints. To overcome this divide, we
+present Mosaic: An efficient, sound and complete verification approach for
+polynomial real arithmetic properties on piece-wise linear NNs. Mosaic
+partitions complex verification queries into simple queries and lifts
+off-the-shelf linear constraint tools to the nonlinear setting in a
+completeness-preserving manner by combining approximation with exact reasoning
+for counterexample regions. Our evaluation demonstrates the versatility of
+VerSAILLE and Mosaic: We prove infinite-time safety on the classical Vertical
+Airborne Collision Avoidance NNCS verification benchmark for two scenarios
+while (exhaustively) enumerating counterexample regions in unsafe scenarios. We
+also show that our approach significantly outperforms State-of-the-Art tools in
+closed-loop NNV.},
+ arxiv_url = {https://arxiv.org/pdf/2402.10998v3.pdf},
+ author = {Samuel Teuber and Stefan Mitsch and André Platzer},
+ journal = {in Advances in Neural Information Processing Systems, 2024, pp.
+  1586-1624},
+ title = {Provably Safe Neural Network Controllers via Differential Dynamic Logic},
+ year = {2024}
+}
+
+@article{wang-2020-wisdom,
+ abstract = {Deep learning classifiers are assisting humans in making decisions and hence
+the user's trust in these models is of paramount importance. Trust is often a
+function of constant behavior. From an AI model perspective it means given the
+same input the user would expect the same output, especially for correct
+outputs, or in other words consistently correct outputs. This paper studies a
+model behavior in the context of periodic retraining of deployed models where
+the outputs from successive generations of the models might not agree on the
+correct labels assigned to the same input. We formally define consistency and
+correct-consistency of a learning model. We prove that consistency and
+correct-consistency of an ensemble learner is not less than the average
+consistency and correct-consistency of individual learners and
+correct-consistency can be improved with a probability by combining learners
+with accuracy not less than the average accuracy of ensemble component
+learners. To validate the theory using three datasets and two state-of-the-art
+deep learning classifiers we also propose an efficient dynamic snapshot
+ensemble method and demonstrate its value.},
+ arxiv_url = {https://arxiv.org/pdf/2011.06796v1.pdf},
+ author = {Lijing Wang and Dipanjan Ghosh and Maria Teresa Gonzalez Diaz and Ahmed Farahat and Mahbubul Alam and Chetan Gupta and Jiangzhuo Chen and Madhav Marathe},
+ title = {Wisdom of the Ensemble: Improving Consistency of Deep Learning Models},
+ year = {2020}
+}
+
+@article{wei-2023-jailbroken,
+ abstract = {Large language models trained for safety and harmlessness remain susceptible
+to adversarial misuse, as evidenced by the prevalence of "jailbreak" attacks on
+early releases of ChatGPT that elicit undesired behavior. Going beyond
+recognition of the issue, we investigate why such attacks succeed and how they
+can be created. We hypothesize two failure modes of safety training: competing
+objectives and mismatched generalization. Competing objectives arise when a
+model's capabilities and safety goals conflict, while mismatched generalization
+occurs when safety training fails to generalize to a domain for which
+capabilities exist. We use these failure modes to guide jailbreak design and
+then evaluate state-of-the-art models, including OpenAI's GPT-4 and Anthropic's
+Claude v1.3, against both existing and newly designed attacks. We find that
+vulnerabilities persist despite the extensive red-teaming and safety-training
+efforts behind these models. Notably, new attacks utilizing our failure modes
+succeed on every prompt in a collection of unsafe requests from the models'
+red-teaming evaluation sets and outperform existing ad hoc jailbreaks. Our
+analysis emphasizes the need for safety-capability parity -- that safety
+mechanisms should be as sophisticated as the underlying model -- and argues
+against the idea that scaling alone can resolve these safety failure modes.},
+ arxiv_url = {https://arxiv.org/pdf/2307.02483v1.pdf},
+ author = {Alexander Wei and Nika Haghtalab and Jacob Steinhardt},
+ title = {Jailbroken: How Does LLM Safety Training Fail?},
+ year = {2023}
+}
+
+@article{wu-2024-verified,
+ abstract = {Learning reliably safe autonomous control is one of the core problems in
+trustworthy autonomy. However, training a controller that can be formally
+verified to be safe remains a major challenge. We introduce a novel approach
+for learning verified safe control policies in nonlinear neural dynamical
+systems while maximizing overall performance. Our approach aims to achieve
+safety in the sense of finite-horizon reachability proofs, and is comprised of
+three key parts. The first is a novel curriculum learning scheme that
+iteratively increases the verified safe horizon. The second leverages the
+iterative nature of gradient-based learning to leverage incremental
+verification, reusing information from prior verification runs. Finally, we
+learn multiple verified initial-state-dependent controllers, an idea that is
+especially valuable for more complex domains where learning a single universal
+verified safe controller is extremely challenging. Our experiments on five safe
+control problems demonstrate that our trained controllers can achieve verified
+safety over horizons that are as much as an order of magnitude longer than
+state-of-the-art baselines, while maintaining high reward, as well as a perfect
+safety record over entire episodes. Our code is available at
+https://github.com/jlwu002/VSRL.},
+ arxiv_url = {https://arxiv.org/pdf/2405.15994v2.pdf},
+ author = {Junlin Wu and Huan Zhang and Yevgeniy Vorobeychik},
+ title = {Verified Safe Reinforcement Learning  for Neural Network Dynamic Models},
+ year = {2024}
+}
+
+@article{xue-2023-toward,
+ abstract = {While generative diffusion models excel in producing high-quality images,
+they can also be misused to mimic authorized images, posing a significant
+threat to AI systems. Efforts have been made to add calibrated perturbations to
+protect images from diffusion-based mimicry pipelines. However, most of the
+existing methods are too ineffective and even impractical to be used by
+individual users due to their high computation and memory requirements. In this
+work, we present novel findings on attacking latent diffusion models (LDM) and
+propose new plug-and-play strategies for more effective protection. In
+particular, we explore the bottleneck in attacking an LDM, discovering that the
+encoder module rather than the denoiser module is the vulnerable point. Based
+on this insight, we present our strategy using Score Distillation Sampling
+(SDS) to double the speed of protection and reduce memory occupation by half
+without compromising its strength. Additionally, we provide a robust protection
+strategy by counterintuitively minimizing the semantic loss, which can assist
+in generating more natural perturbations. Finally, we conduct extensive
+experiments to substantiate our findings and comprehensively evaluate our newly
+proposed strategies. We hope our insights and protective measures can
+contribute to better defense against malicious diffusion-based mimicry,
+advancing the development of secure AI systems. The code is available in
+https://github.com/xavihart/Diff-Protect},
+ arxiv_url = {https://arxiv.org/pdf/2311.12832v2.pdf},
+ author = {Haotian Xue and Chumeng Liang and Xiaoyu Wu and Yongxin Chen},
+ title = {Toward effective protection against diffusion-based mimicry through score distillation},
+ year = {2023}
+}
+
+@article{yang-2022-not,
+ abstract = {Data poisoning causes misclassification of test time target examples by
+injecting maliciously crafted samples in the training data. Existing defenses
+are often effective only against a specific type of targeted attack,
+significantly degrade the generalization performance, or are prohibitive for
+standard deep learning pipelines.
+  In this work, we propose an efficient defense mechanism that significantly
+reduces the success rate of various data poisoning attacks, and provides
+theoretical guarantees for the performance of the model. Targeted attacks work
+by adding bounded perturbations to a randomly selected subset of training data
+to match the targets' gradient or representation. We show that: (i) under
+bounded perturbations, only a number of poisons can be optimized to have a
+gradient that is close enough to that of the target and make the attack
+successful; (ii) such effective poisons move away from their original class and
+get isolated in the gradient space; (iii) dropping examples in low-density
+gradient regions during training can successfully eliminate the effective
+poisons, and guarantees similar training dynamics to that of training on full
+data. Our extensive experiments show that our method significantly decreases
+the success rate of state-of-the-art targeted attacks, including Gradient
+Matching and Bullseye Polytope, and easily scales to large datasets.},
+ arxiv_url = {https://arxiv.org/pdf/2210.09671v1.pdf},
+ author = {Yu Yang and Tian Yu Liu and Baharan Mirzasoleiman},
+ journal = {Proceedings of the 39th International Conference on Machine
+  Learning, PMLR 162:25154-25165, 2022},
+ title = {Not All Poisons are Created Equal: Robust Training against Data Poisoning},
+ year = {2022}
+}
+
+@article{zhang-2023-exact,
+ abstract = {Control Barrier Functions (CBFs) are a popular approach for safe control of
+nonlinear systems. In CBF-based control, the desired safety properties of the
+system are mapped to nonnegativity of a CBF, and the control input is chosen to
+ensure that the CBF remains nonnegative for all time. Recently, machine
+learning methods that represent CBFs as neural networks (neural control barrier
+functions, or NCBFs) have shown great promise due to the universal
+representability of neural networks. However, verifying that a learned CBF
+guarantees safety remains a challenging research problem. This paper presents
+novel exact conditions and algorithms for verifying safety of feedforward NCBFs
+with ReLU activation functions. The key challenge in doing so is that, due to
+the piecewise linearity of the ReLU function, the NCBF will be
+nondifferentiable at certain points, thus invalidating traditional safety
+verification methods that assume a smooth barrier function. We resolve this
+issue by leveraging a generalization of Nagumo's theorem for proving invariance
+of sets with nonsmooth boundaries to derive necessary and sufficient conditions
+for safety. Based on this condition, we propose an algorithm for safety
+verification of NCBFs that first decomposes the NCBF into piecewise linear
+segments and then solves a nonlinear program to verify safety of each segment
+as well as the intersections of the linear segments. We mitigate the complexity
+by only considering the boundary of the safe region and by pruning the segments
+with Interval Bound Propagation (IBP) and linear relaxation. We evaluate our
+approach through numerical studies with comparison to state-of-the-art
+SMT-based methods. Our code is available at
+https://github.com/HongchaoZhang-HZ/exactverif-reluncbf-nips23.},
+ arxiv_url = {https://arxiv.org/pdf/2310.09360v1.pdf},
+ author = {Hongchao Zhang and Junlin Wu and Yevgeniy Vorobeychik and Andrew Clark},
+ title = {Exact Verification of ReLU Neural Control Barrier Functions},
+ year = {2023}
+}
+
+@article{zhang-2023-improving,
+ abstract = {Diffusion models, emerging as powerful deep generative tools, excel in
+various applications. They operate through a two-steps process: introducing
+noise into training samples and then employing a model to convert random noise
+into new samples (e.g., images). However, their remarkable generative
+performance is hindered by slow training and sampling. This is due to the
+necessity of tracking extensive forward and reverse diffusion trajectories, and
+employing a large model with numerous parameters across multiple timesteps
+(i.e., noise levels). To tackle these challenges, we present a multi-stage
+framework inspired by our empirical findings. These observations indicate the
+advantages of employing distinct parameters tailored to each timestep while
+retaining universal parameters shared across all time steps. Our approach
+involves segmenting the time interval into multiple stages where we employ
+custom multi-decoder U-net architecture that blends time-dependent models with
+a universally shared encoder. Our framework enables the efficient distribution
+of computational resources and mitigates inter-stage interference, which
+substantially improves training efficiency. Extensive numerical experiments
+affirm the effectiveness of our framework, showcasing significant training and
+sampling efficiency enhancements on three state-of-the-art diffusion models,
+including large-scale latent diffusion models. Furthermore, our ablation
+studies illustrate the impact of two important components in our framework: (i)
+a novel timestep clustering algorithm for stage division, and (ii) an
+innovative multi-decoder U-net architecture, seamlessly integrating universal
+and customized hyperparameters.},
+ arxiv_url = {https://arxiv.org/pdf/2312.09181v3.pdf},
+ author = {Huijie Zhang and Yifu Lu and Ismail Alkhouri and Saiprasad Ravishankar and Dogyoon Song and Qing Qu},
+ github_url = {https://github.com/LucasYFL/Multistage_Diffusion},
+ title = {Improving Training Efficiency of Diffusion Models via Multi-Stage Framework and Tailored Multi-Decoder Architecture},
+ year = {2023}
+}
+
+@article{zhang-2024-parden,
+ abstract = {Large language models (LLMs) have shown success in many natural language
+processing tasks. Despite rigorous safety alignment processes, supposedly
+safety-aligned LLMs like Llama 2 and Claude 2 are still susceptible to
+jailbreaks, leading to security risks and abuse of the models. One option to
+mitigate such risks is to augment the LLM with a dedicated "safeguard", which
+checks the LLM's inputs or outputs for undesired behaviour. A promising
+approach is to use the LLM itself as the safeguard. Nonetheless, baseline
+methods, such as prompting the LLM to self-classify toxic content, demonstrate
+limited efficacy. We hypothesise that this is due to domain shift: the
+alignment training imparts a self-censoring behaviour to the model ("Sorry I
+can't do that"), while the self-classify approach shifts it to a classification
+format ("Is this prompt malicious"). In this work, we propose PARDEN, which
+avoids this domain shift by simply asking the model to repeat its own outputs.
+PARDEN neither requires finetuning nor white box access to the model. We
+empirically verify the effectiveness of our method and show that PARDEN
+significantly outperforms existing jailbreak detection baselines for Llama-2
+and Claude-2. Code and data are available at https://github.com/Ed-Zh/PARDEN.
+  We find that PARDEN is particularly powerful in the relevant regime of high
+True Positive Rate (TPR) and low False Positive Rate (FPR). For instance, for
+Llama2-7B, at TPR equal to 90%, PARDEN accomplishes a roughly 11x reduction in
+the FPR from 24.8% to 2.0% on the harmful behaviours dataset.},
+ arxiv_url = {https://arxiv.org/pdf/2405.07932v2.pdf},
+ author = {Ziyang Zhang and Qizhen Zhang and Jakob Foerster},
+ title = {PARDEN, Can You Repeat That? Defending against Jailbreaks via Repetition},
+ year = {2024}
+}
+
+@article{zhang-2024-position,
+ abstract = {Artificial Intelligence (AI) holds promise as a technology that can be used
+to improve government and economic policy-making. This paper proposes a new
+research agenda towards this end by introducing Social Environment Design, a
+general framework for the use of AI for automated policy-making that connects
+with the Reinforcement Learning, EconCS, and Computational Social Choice
+communities. The framework seeks to capture general economic environments,
+includes voting on policy objectives, and gives a direction for the systematic
+analysis of government and economic policy through AI simulation. We highlight
+key open problems for future research in AI-based policy-making. By solving
+these challenges, we hope to achieve various social welfare objectives, thereby
+promoting more ethical and responsible decision making.},
+ arxiv_url = {https://arxiv.org/pdf/2402.14090v3.pdf},
+ author = {Edwin Zhang and Sadie Zhao and Tonghan Wang and Safwan Hossain and Henry Gasztowtt and Stephan Zheng and David C. Parkes and Milind Tambe and Yiling Chen},
+ title = {Position: Social Environment Design Should be Further Developed for AI-based Policy-Making},
+ year = {2024}
+}
+
+@article{zhao-2023-learning,
+ abstract = {As the number of large language models (LLMs) released to the public grows,
+there is a pressing need to understand the safety implications associated with
+these models learning from third-party custom finetuning data. We explore the
+behavior of LLMs finetuned on noisy custom data containing unsafe content,
+represented by datasets that contain biases, toxicity, and harmfulness, finding
+that while aligned LLMs can readily learn this unsafe content, they also tend
+to forget it more significantly than other examples when subsequently finetuned
+on safer content. Drawing inspiration from the discrepancies in forgetting, we
+introduce the "ForgetFilter" algorithm, which filters unsafe data based on how
+strong the model's forgetting signal is for that data. We demonstrate that the
+ForgetFilter algorithm ensures safety in customized finetuning without
+compromising downstream task performance, unlike sequential safety finetuning.
+ForgetFilter outperforms alternative strategies like replay and moral
+self-correction in curbing LLMs' ability to assimilate unsafe content during
+custom finetuning, e.g. 75% lower than not applying any safety measures and 62%
+lower than using self-correction in toxicity score.},
+ arxiv_url = {https://arxiv.org/pdf/2312.12736v2.pdf},
+ author = {Jiachen Zhao and Zhun Deng and David Madras and James Zou and Mengye Ren},
+ title = {Learning and Forgetting Unsafe Examples in Large Language Models},
+ year = {2023}
+}
+
+@article{ziegler-2022-adversarial,
+ abstract = {In the future, powerful AI systems may be deployed in high-stakes settings,
+where a single failure could be catastrophic. One technique for improving AI
+safety in high-stakes settings is adversarial training, which uses an adversary
+to generate examples to train on in order to achieve better worst-case
+performance.
+  In this work, we used a safe language generation task (``avoid injuries'') as
+a testbed for achieving high reliability through adversarial training. We
+created a series of adversarial training techniques -- including a tool that
+assists human adversaries -- to find and eliminate failures in a classifier
+that filters text completions suggested by a generator. In our task, we
+determined that we can set very conservative classifier thresholds without
+significantly impacting the quality of the filtered outputs. We found that
+adversarial training increased robustness to the adversarial attacks that we
+trained on -- doubling the time for our contractors to find adversarial
+examples both with our tool (from 13 to 26 minutes) and without (from 20 to 44
+minutes) -- without affecting in-distribution performance.
+  We hope to see further work in the high-stakes reliability setting, including
+more powerful tools for enhancing human adversaries and better ways to measure
+high levels of reliability, until we can confidently rule out the possibility
+of catastrophic deployment-time failures of powerful models.},
+ arxiv_url = {https://arxiv.org/pdf/2205.01663v5.pdf},
+ author = {Daniel M. Ziegler and Seraphina Nix and Lawrence Chan and Tim Bauman and Peter Schmidt-Nielsen and Tao Lin and Adam Scherlis and Noa Nabeshima and Ben Weinstein-Raun and Daniel de Haas and Buck Shlegeris and Nate Thomas},
+ title = {Adversarial training for high-stakes reliability},
+ year = {2022}
+}
+
+@article{zou-2024-improving,
+ abstract = {AI systems can take harmful actions and are highly vulnerable to adversarial
+attacks. We present an approach, inspired by recent advances in representation
+engineering, that interrupts the models as they respond with harmful outputs
+with "circuit breakers." Existing techniques aimed at improving alignment, such
+as refusal training, are often bypassed. Techniques such as adversarial
+training try to plug these holes by countering specific attacks. As an
+alternative to refusal training and adversarial training, circuit-breaking
+directly controls the representations that are responsible for harmful outputs
+in the first place. Our technique can be applied to both text-only and
+multimodal language models to prevent the generation of harmful outputs without
+sacrificing utility -- even in the presence of powerful unseen attacks.
+Notably, while adversarial robustness in standalone image recognition remains
+an open challenge, circuit breakers allow the larger multimodal system to
+reliably withstand image "hijacks" that aim to produce harmful content.
+Finally, we extend our approach to AI agents, demonstrating considerable
+reductions in the rate of harmful actions when they are under attack. Our
+approach represents a significant step forward in the development of reliable
+safeguards to harmful behavior and adversarial attacks.},
+ arxiv_url = {https://arxiv.org/pdf/2406.04313v4.pdf},
+ author = {Andy Zou and Long Phan and Justin Wang and Derek Duenas and Maxwell Lin and Maksym Andriushchenko and Rowan Wang and Zico Kolter and Matt Fredrikson and Dan Hendrycks},
+ title = {Improving Alignment and Robustness with Circuit Breakers},
+ year = {2024}
+}
+
+% ===========================================
+% REFERENCE CANDIDATES
+% Additional reference papers for context
+% ===========================================
+
+@article{anderson-2018-strong,
+ abstract = {We present strong mixed-integer programming (MIP) formulations for
+high-dimensional piecewise linear functions that correspond to trained neural
+networks. These formulations can be used for a number of important tasks, such
+as verifying that an image classification network is robust to adversarial
+inputs, or solving decision problems where the objective function is a machine
+learning model. We present a generic framework, which may be of independent
+interest, that provides a way to construct sharp or ideal formulations for the
+maximum of d affine functions over arbitrary polyhedral input domains. We apply
+this result to derive MIP formulations for a number of the most popular
+nonlinear operations (e.g. ReLU and max pooling) that are strictly stronger
+than other approaches from the literature. We corroborate this computationally,
+showing that our formulations are able to offer substantial improvements in
+solve time on verification tasks for image classification networks.},
+ arxiv_url = {https://arxiv.org/pdf/1811.01988v4.pdf},
+ author = {Ross Anderson and Joey Huchette and Will Ma and Christian Tjandraatmadja and Juan Pablo Vielma},
+ title = {Strong mixed-integer programming formulations for trained neural networks},
+ year = {2018}
+}
+
+@article{athalye-2018-obfuscated,
+ abstract = {We identify obfuscated gradients, a kind of gradient masking, as a phenomenon
+that leads to a false sense of security in defenses against adversarial
+examples. While defenses that cause obfuscated gradients appear to defeat
+iterative optimization-based attacks, we find defenses relying on this effect
+can be circumvented. We describe characteristic behaviors of defenses
+exhibiting the effect, and for each of the three types of obfuscated gradients
+we discover, we develop attack techniques to overcome it. In a case study,
+examining non-certified white-box-secure defenses at ICLR 2018, we find
+obfuscated gradients are a common occurrence, with 7 of 9 defenses relying on
+obfuscated gradients. Our new attacks successfully circumvent 6 completely, and
+1 partially, in the original threat model each paper considers.},
+ arxiv_url = {https://arxiv.org/pdf/1802.00420v4.pdf},
+ author = {Anish Athalye and Nicholas Carlini and David Wagner},
+ title = {Obfuscated gradients give a false sense of security: Circumventing defenses to adversarial examples},
+ year = {2018}
+}
+
+@article{author-year-deep,
+ title = {Deep neural networks and mixed integer linear optimization}
+}
+
+@article{dathathri-2020-enabling,
+ abstract = {Convex relaxations have emerged as a promising approach for verifying
+desirable properties of neural networks like robustness to adversarial
+perturbations. Widely used Linear Programming (LP) relaxations only work well
+when networks are trained to facilitate verification. This precludes
+applications that involve verification-agnostic networks, i.e., networks not
+specially trained for verification. On the other hand, semidefinite programming
+(SDP) relaxations have successfully be applied to verification-agnostic
+networks, but do not currently scale beyond small networks due to poor time and
+space asymptotics. In this work, we propose a first-order dual SDP algorithm
+that (1) requires memory only linear in the total number of network
+activations, (2) only requires a fixed number of forward/backward passes
+through the network per iteration. By exploiting iterative eigenvector methods,
+we express all solver operations in terms of forward and backward passes
+through the network, enabling efficient use of hardware like GPUs/TPUs. For two
+verification-agnostic networks on MNIST and CIFAR-10, we significantly improve
+L-inf verified robust accuracy from 1% to 88% and 6% to 40% respectively. We
+also demonstrate tight verification of a quadratic stability specification for
+the decoder of a variational autoencoder.},
+ arxiv_url = {https://arxiv.org/pdf/2010.11645v2.pdf},
+ author = {Sumanth Dathathri and Krishnamurthy Dvijotham and Alexey Kurakin and Aditi Raghunathan and Jonathan Uesato and Rudy Bunel and Shreya Shankar and Jacob Steinhardt and Ian Goodfellow and Percy Liang and Pushmeet Kohli},
+ title = {Enabling certiﬁcation of veriﬁcation-agnostic networks via memory-efﬁcient semideﬁnite programming},
+ year = {2020}
+}
+
+@article{fazlyab-2019-and,
+ abstract = {Tight estimation of the Lipschitz constant for deep neural networks (DNNs) is
+useful in many applications ranging from robustness certification of
+classifiers to stability analysis of closed-loop systems with reinforcement
+learning controllers. Existing methods in the literature for estimating the
+Lipschitz constant suffer from either lack of accuracy or poor scalability. In
+this paper, we present a convex optimization framework to compute guaranteed
+upper bounds on the Lipschitz constant of DNNs both accurately and efficiently.
+Our main idea is to interpret activation functions as gradients of convex
+potential functions. Hence, they satisfy certain properties that can be
+described by quadratic constraints. This particular description allows us to
+pose the Lipschitz constant estimation problem as a semidefinite program (SDP).
+The resulting SDP can be adapted to increase either the estimation accuracy (by
+capturing the interaction between activation functions of different layers) or
+scalability (by decomposition and parallel implementation). We illustrate the
+utility of our approach with a variety of experiments on randomly generated
+networks and on classifiers trained on the MNIST and Iris datasets. In
+particular, we experimentally demonstrate that our Lipschitz bounds are the
+most accurate compared to those in the literature. We also study the impact of
+adversarial training methods on the Lipschitz bounds of the resulting
+classifiers and show that our bounds can be used to efficiently provide
+robustness guarantees.},
+ arxiv_url = {https://arxiv.org/pdf/1906.04893v2.pdf},
+ author = {Mahyar Fazlyab and Alexander Robey and Hamed Hassani and Manfred Morari and George J. Pappas},
+ title = {Efﬁcient and accurate estimation of lipschitz constants for deep neural networks},
+ year = {2019}
+}
+
+@article{jordan-2019-provable,
+ abstract = {We propose a novel method for computing exact pointwise robustness of deep
+neural networks for all convex $\ell_p$ norms. Our algorithm, GeoCert, finds
+the largest $\ell_p$ ball centered at an input point $x_0$, within which the
+output class of a given neural network with ReLU nonlinearities remains
+unchanged. We relate the problem of computing pointwise robustness of these
+networks to that of computing the maximum norm ball with a fixed center that
+can be contained in a non-convex polytope. This is a challenging problem in
+general, however we show that there exists an efficient algorithm to compute
+this for polyhedral complices. Further we show that piecewise linear neural
+networks partition the input space into a polyhedral complex. Our algorithm has
+the ability to almost immediately output a nontrivial lower bound to the
+pointwise robustness which is iteratively improved until it ultimately becomes
+tight. We empirically show that our approach generates distance lower bounds
+that are tighter compared to prior work, under moderate time constraints.},
+ arxiv_url = {https://arxiv.org/pdf/1903.08778v2.pdf},
+ author = {Matt Jordan and Justin Lewis and Alexandros G. Dimakis},
+ title = {Provable certiﬁcates for adversarial examples: Fitting a ball in the union of polytopes},
+ year = {2019}
+}
+
+@article{katz-2017-reluplex,
+ abstract = {Deep neural networks have emerged as a widely used and effective means for
+tackling complex, real-world problems. However, a major obstacle in applying
+them to safety-critical systems is the great difficulty in providing formal
+guarantees about their behavior. We present a novel, scalable, and efficient
+technique for verifying properties of deep neural networks (or providing
+counter-examples). The technique is based on the simplex method, extended to
+handle the non-convex Rectified Linear Unit (ReLU) activation function, which
+is a crucial ingredient in many modern neural networks. The verification
+procedure tackles neural networks as a whole, without making any simplifying
+assumptions. We evaluated our technique on a prototype deep neural network
+implementation of the next-generation airborne collision avoidance system for
+unmanned aircraft (ACAS Xu). Results show that our technique can successfully
+prove properties of networks that are an order of magnitude larger than the
+largest networks verified using existing methods.},
+ arxiv_url = {https://arxiv.org/pdf/1702.01135v2.pdf},
+ author = {Guy Katz and Clark Barrett and David Dill and Kyle Julian and Mykel Kochenderfer},
+ title = {Reluplex: An efﬁcient SMT solver for verifying deep neural networks},
+ year = {2017}
+}
+
+@article{lu-2019-neural,
+ abstract = {Formal verification of neural networks is essential for their deployment in
+safety-critical areas. Many available formal verification methods have been
+shown to be instances of a unified Branch and Bound (BaB) formulation. We
+propose a novel framework for designing an effective branching strategy for
+BaB. Specifically, we learn a graph neural network (GNN) to imitate the strong
+branching heuristic behaviour. Our framework differs from previous methods for
+learning to branch in two main aspects. Firstly, our framework directly treats
+the neural network we want to verify as a graph input for the GNN. Secondly, we
+develop an intuitive forward and backward embedding update schedule.
+Empirically, our framework achieves roughly $50\%$ reduction in both the number
+of branches and the time required for verification on various convolutional
+networks when compared to the best available hand-designed branching strategy.
+In addition, we show that our GNN model enjoys both horizontal and vertical
+transferability. Horizontally, the model trained on easy properties performs
+well on properties of increased difficulty levels. Vertically, the model
+trained on small neural networks achieves similar performance on large neural
+networks.},
+ arxiv_url = {https://arxiv.org/pdf/1912.01329v1.pdf},
+ author = {Jingyue Lu and M. Pawan Kumar},
+ title = {Neural network branching for neural network veriﬁcation},
+ year = {2019}
+}
+
+@article{palma-2021-improved,
+ abstract = {We improve the scalability of Branch and Bound (BaB) algorithms for formally
+proving input-output properties of neural networks. First, we propose novel
+bounding algorithms based on Lagrangian Decomposition. Previous works have used
+off-the-shelf solvers to solve relaxations at each node of the BaB tree, or
+constructed weaker relaxations that can be solved efficiently, but lead to
+unnecessarily weak bounds. Our formulation restricts the optimization to a
+subspace of the dual domain that is guaranteed to contain the optimum,
+resulting in accelerated convergence. Furthermore, it allows for a massively
+parallel implementation, which is amenable to GPU acceleration via modern deep
+learning frameworks. Second, we present a novel activation-based branching
+strategy. By coupling an inexpensive heuristic with fast dual bounding, our
+branching scheme greatly reduces the size of the BaB tree compared to previous
+heuristic methods. Moreover, it performs competitively with a recent strategy
+based on learning algorithms, without its large offline training cost. Finally,
+we design a BaB framework, named Branch and Dual Network Bound (BaDNB), based
+on our novel bounding and branching algorithms. We show that BaDNB outperforms
+previous complete verification systems by a large margin, cutting average
+verification times by factors up to 50 on adversarial robustness properties.},
+ arxiv_url = {https://arxiv.org/pdf/2104.06718v1.pdf},
+ author = {Alessandro De Palma and Rudy Bunel and Alban Desmaison and Krishnamurthy Dvijotham and Pushmeet Kohli and Philip H. S. Torr and M. Pawan Kumar},
+ title = {Improved branch and bound for neural network veriﬁcation via lagrangian decomposition},
+ year = {2021}
+}
+
+@article{palma-2021-scaling,
+ abstract = {Tight and efficient neural network bounding is crucial to the scaling of
+neural network verification systems. Many efficient bounding algorithms have
+been presented recently, but they are often too loose to verify more
+challenging properties. This is due to the weakness of the employed relaxation,
+which is usually a linear program of size linear in the number of neurons.
+While a tighter linear relaxation for piecewise-linear activations exists, it
+comes at the cost of exponentially many constraints and currently lacks an
+efficient customized solver. We alleviate this deficiency by presenting two
+novel dual algorithms: one operates a subgradient method on a small active set
+of dual variables, the other exploits the sparsity of Frank-Wolfe type
+optimizers to incur only a linear memory cost. Both methods recover the
+strengths of the new relaxation: tightness and a linear separation oracle. At
+the same time, they share the benefits of previous dual approaches for weaker
+relaxations: massive parallelism, GPU implementation, low cost per iteration
+and valid bounds at any time. As a consequence, we can obtain better bounds
+than off-the-shelf solvers in only a fraction of their running time, attaining
+significant formal verification speed-ups.},
+ arxiv_url = {https://arxiv.org/pdf/2101.05844v3.pdf},
+ author = {Alessandro De Palma and Harkirat Singh Behl and Rudy Bunel and Philip H. S. Torr and M. Pawan Kumar},
+ title = {Scaling the convex barrier with active sets},
+ year = {2021}
+}
+
+@article{raghunathan-2018-relaxations,
+ abstract = {Despite their impressive performance on diverse tasks, neural networks fail
+catastrophically in the presence of adversarial inputs---imperceptibly but
+adversarially perturbed versions of natural inputs. We have witnessed an arms
+race between defenders who attempt to train robust networks and attackers who
+try to construct adversarial examples. One promise of ending the arms race is
+developing certified defenses, ones which are provably robust against all
+attackers in some family. These certified defenses are based on convex
+relaxations which construct an upper bound on the worst case loss over all
+attackers in the family. Previous relaxations are loose on networks that are
+not trained against the respective relaxation. In this paper, we propose a new
+semidefinite relaxation for certifying robustness that applies to arbitrary
+ReLU networks. We show that our proposed relaxation is tighter than previous
+relaxations and produces meaningful robustness guarantees on three different
+"foreign networks" whose training objectives are agnostic to our proposed
+relaxation.},
+ arxiv_url = {https://arxiv.org/pdf/1811.01057v1.pdf},
+ author = {Aditi Raghunathan and Jacob Steinhardt and Percy Liang},
+ title = {Semideﬁnite relaxations for certifying robustness to adversarial examples},
+ year = {2018}
+}
+
+@article{salman-2019-convex,
+ abstract = {Verification of neural networks enables us to gauge their robustness against
+adversarial attacks. Verification algorithms fall into two categories: exact
+verifiers that run in exponential time and relaxed verifiers that are efficient
+but incomplete. In this paper, we unify all existing LP-relaxed verifiers, to
+the best of our knowledge, under a general convex relaxation framework. This
+framework works for neural networks with diverse architectures and
+nonlinearities and covers both primal and dual views of robustness
+verification. We further prove strong duality between the primal and dual
+problems under very mild conditions. Next, we perform large-scale experiments,
+amounting to more than 22 CPU-years, to obtain exact solution to the
+convex-relaxed problem that is optimal within our framework for ReLU networks.
+We find the exact solution does not significantly improve upon the gap between
+PGD and existing relaxed verifiers for various networks trained normally or
+robustly on MNIST and CIFAR datasets. Our results suggest there is an inherent
+barrier to tight verification for the large class of methods captured by our
+framework. We discuss possible causes of this barrier and potential future
+directions for bypassing it. Our code and trained models are available at
+http://github.com/Hadisalman/robust-verify-benchmark .},
+ arxiv_url = {https://arxiv.org/pdf/1902.08722v5.pdf},
+ author = {Hadi Salman and Greg Yang and Huan Zhang and Cho-Jui Hsieh and Pengchuan Zhang},
+ title = {A convex relaxation barrier to tight robustness veriﬁcation of neural networks},
+ year = {2019}
+}
+
+@article{szegedy-2013-intriguing,
+ abstract = {Deep neural networks are highly expressive models that have recently achieved
+state of the art performance on speech and visual recognition tasks. While
+their expressiveness is the reason they succeed, it also causes them to learn
+uninterpretable solutions that could have counter-intuitive properties. In this
+paper we report two such properties.
+  First, we find that there is no distinction between individual high level
+units and random linear combinations of high level units, according to various
+methods of unit analysis. It suggests that it is the space, rather than the
+individual units, that contains of the semantic information in the high layers
+of neural networks.
+  Second, we find that deep neural networks learn input-output mappings that
+are fairly discontinuous to a significant extend. We can cause the network to
+misclassify an image by applying a certain imperceptible perturbation, which is
+found by maximizing the network's prediction error. In addition, the specific
+nature of these perturbations is not a random artifact of learning: the same
+perturbation can cause a different network, that was trained on a different
+subset of the dataset, to misclassify the same input.},
+ arxiv_url = {https://arxiv.org/pdf/1312.6199v4.pdf},
+ author = {Christian Szegedy and Wojciech Zaremba and Ilya Sutskever and Joan Bruna and Dumitru Erhan and Ian Goodfellow and Rob Fergus},
+ title = {Intriguing properties of neural networks},
+ year = {2013}
+}
+
+@article{tjeng-2017-evaluating,
+ abstract = {Neural networks have demonstrated considerable success on a wide variety of
+real-world problems. However, networks trained only to optimize for training
+accuracy can often be fooled by adversarial examples - slightly perturbed
+inputs that are misclassified with high confidence. Verification of networks
+enables us to gauge their vulnerability to such adversarial examples. We
+formulate verification of piecewise-linear neural networks as a mixed integer
+program. On a representative task of finding minimum adversarial distortions,
+our verifier is two to three orders of magnitude quicker than the
+state-of-the-art. We achieve this computational speedup via tight formulations
+for non-linearities, as well as a novel presolve algorithm that makes full use
+of all information available. The computational speedup allows us to verify
+properties on convolutional networks with an order of magnitude more ReLUs than
+networks previously verified by any complete verifier. In particular, we
+determine for the first time the exact adversarial accuracy of an MNIST
+classifier to perturbations with bounded $l_\infty$ norm $\epsilon=0.1$: for
+this classifier, we find an adversarial example for 4.38% of samples, and a
+certificate of robustness (to perturbations with bounded norm) for the
+remainder. Across all robust training procedures and network architectures
+considered, we are able to certify more samples than the state-of-the-art and
+find more adversarial examples than a strong first-order attack.},
+ arxiv_url = {https://arxiv.org/pdf/1711.07356v3.pdf},
+ author = {Vincent Tjeng and Kai Xiao and Russ Tedrake},
+ title = {Evaluating robustness of neural networks with mixed integer programming},
+ year = {2017}
+}
+
+@article{xu-2020-fast,
+ abstract = {Formal verification of neural networks (NNs) is a challenging and important
+problem. Existing efficient complete solvers typically require the
+branch-and-bound (BaB) process, which splits the problem domain into
+sub-domains and solves each sub-domain using faster but weaker incomplete
+verifiers, such as Linear Programming (LP) on linearly relaxed sub-domains. In
+this paper, we propose to use the backward mode linear relaxation based
+perturbation analysis (LiRPA) to replace LP during the BaB process, which can
+be efficiently implemented on the typical machine learning accelerators such as
+GPUs and TPUs. However, unlike LP, LiRPA when applied naively can produce much
+weaker bounds and even cannot check certain conflicts of sub-domains during
+splitting, making the entire procedure incomplete after BaB. To address these
+challenges, we apply a fast gradient based bound tightening procedure combined
+with batch splits and the design of minimal usage of LP bound procedure,
+enabling us to effectively use LiRPA on the accelerator hardware for the
+challenging complete NN verification problem and significantly outperform
+LP-based approaches. On a single GPU, we demonstrate an order of magnitude
+speedup compared to existing LP-based approaches.},
+ arxiv_url = {https://arxiv.org/pdf/2011.13824v2.pdf},
+ author = {Kaidi Xu and Huan Zhang and Shiqi Wang and Yihan Wang and Suman Jana and Xue Lin and Cho-Jui Hsieh},
+ title = {Fast and complete: Enabling complete neural network veriﬁcation with rapid and massively parallel incomplete veriﬁers},
+ year = {2020}
+}
