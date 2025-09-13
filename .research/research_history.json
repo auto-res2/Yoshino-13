@@ -1124,6 +1124,53 @@
       }
     }
   ],
+  "reference_research_study_list": [
+    {
+      "title": "Enhancing the reliability and accuracy of ai-enabled diagnosis via complementarity-driven deferral to clinicians"
+    },
+    {
+      "title": "Combining the strengths of radiologists and ai for breast cancer screening: a retrospective analysis"
+    },
+    {
+      "title": "Effect of artificial intelligence-based triaging of breast cancer screening mammograms on cancer detection and radiologist workload: a retrospective simulation study"
+    },
+    {
+      "title": "A deep learning model to triage screening mammograms: a simulation study"
+    },
+    {
+      "title": "Selective classification for deep neural networks"
+    },
+    {
+      "title": "An optimum character recognition system using decision functions"
+    },
+    {
+      "title": "On the foundations of noise-free selective classification"
+    },
+    {
+      "title": "Deep gamblers: Learning to abstain with portfolio theory"
+    },
+    {
+      "title": "Selectivenet: A deep neural network with an integrated reject option"
+    },
+    {
+      "title": "Metrics reloaded: Pitfalls and recommendations for image analysis validation"
+    },
+    {
+      "title": "Bias-reduced uncertainty estimation for deep neural classi- fiers"
+    },
+    {
+      "title": "Performance measures for classification systems with rejection"
+    },
+    {
+      "title": "A call to reflect on evaluation practices for failure detection in image classification"
+    },
+    {
+      "title": "Understanding silent failures in medical image classification"
+    },
+    {
+      "title": "Unified classification and rejection: A one-versus-all frame- work"
+    }
+  ],
   "new_method": {
     "method": "Open Problems: 1. Single-order assumption still limits DP-Search; need a differentiable surrogate that can be optimised end-to-end.\n2. Seasonal drift in LiveBench is non-stationary and multi-scale; current Kalman PL forecasts lag behind sudden regime changes.\n3. Current counter-factual probes cover protected attributes but miss more subtle causal leaks (background cues, watermark traces).\n4. Audit sharing lacks an incentive mechanism; voluntary DP sketches are under-supplied.\n5. No theoretical guarantees link forecast accuracy, audit budget and final MAE over many rounds.\nMethods: We propose ORACLE (Order-Robust, Audit-Causal, Latent-Economy learner).\nA. Differentiable Sort&Search Surrogate\n   • Rewrite DP-Search as a Gumbel-Sinkhorn top-k operator; obtain smooth upper bound L_DP that converges to MAE as temperature→0.\n   • Jointly optimise L_DP with cross-entropy and AUGRC surrogate.\nB. Hierarchical Seasonality Forecaster\n   • Use Bayesian Fourier Neural Process (BFNP) on logit trajectories θ_t to capture weekly, monthly and bursty components.\n   • Change-point detector (Bayesian Online CP) triggers rapid re-calibration; gradients from one-step predictive posterior drive support sampling.\nC. Causal Generative Leak Hunter\n   • Train Diffusion-Inverter G_cf that reconstructs images/text without background & watermark latent factors inferred via SCHiNet.\n   • Instance flagged if f_θ(x)≠f_θ(G_cf(x)) while CLIP distance <δ, capturing subtle causal contamination beyond attribute flips.\nD. Constrained RL Audit Planner\n   • Formulate audit selection as CMDP with cost = GPU sec + human min; derive primal-dual policy with sub-linear regret ≤O(√T/B).\nE. Incentive-Compatible Audit Ledger (ICAL)\n   • Participants commit zk-SNARK proofs of flagged hashes into a lightweight blockchain; smart-contract pays micro-bounties from organiser escrow proportional to future replay benefit, solving free-rider problem while preserving privacy.\nF. Theoretical Guarantee\n   • Prove that with (i) BFNP forecast error ε_f, (ii) audit recall r, and (iii) CMDP constraint B, ORACLE attains expected leaderboard MAE ≤O(ε_f + (1−r)/√B) after T shards, improving the O(ε) bound of path benchmarks.\nExperimental Setup: Benchmarks: LiveBench-Image-23, LiveBench-Text-12, LiveBench-Audio-Pilot-8 plus synthetic SeasonBench with explicit Fourier drift.\nProtocol: 5-shot, 95 queries/class, 2 h GPU and 1 GiB RAM, ≤30 human-min/shard.\nBaselines: CHRONOS, ORBIT, SCARLET, Human-only audit, BFNP ablation, Gumbel surrogate ablation, ICAL off.\nMetrics: Leaderboard MAE, Surrogate → true MAE KL, Forecast RMSE, Causal-leak recall, Fairness gap, Audit cost, zk-proof latency, Micro-bounty utilisation.\nAblations: Disable BFNP, replace Gumbel-Sinkhorn with hard DP, drop leak hunter, random audit planner, no ICAL.\nExpected Result: • ORACLE cuts MAE −38 % vs CHRONOS, −15 % vs ORBIT; Surrogate KL 0.05 (↓28 %).\n• Forecast RMSE 0.03 vs 0.07 (ORBIT), preventing 90 % of post-hoc order corrections.\n• Causal-leak recall 0.92 @ 0.05 FPR (↑4 pp over ORBIT).\n• Fairness gap ≤0.8 % on reintroduced classes.\n• Meets 30-min audit budget while achieving 94 % hidden contaminant capture; CMDP regret matches theory.\n• ICAL drives 75 % of teams to share proofs; aggregated sketches add +6 pp accuracy for low-resource participants with ≤3 MB overhead.\nExpected Conclusion: By unifying a differentiable evaluation surrogate, multi-scale order forecasting, causal leak detection and an incentive-compatible audit economy, ORACLE advances few-shot learning on dynamic, contaminated benchmarks both theoretically and practically. It establishes provable resource-budget guarantees, reduces leaderboard volatility and demonstrates how cryptographic incentives can turn private audit data into a public good without sacrificing confidentiality. ORACLE therefore sets a new standard for trustworthy, socially beneficial model evaluation at scale.",
     "experimental_design": {
