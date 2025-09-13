@@ -6,5 +6,157 @@
     "indirect prompt injection",
     "unified multimodal safety",
     "cross-modal prompt defense"
+  ],
+  "research_study_list": [
+    {
+      "title": "MMCert: Provable Defense against Adversarial Attacks to Multi-modal Models"
+    },
+    {
+      "title": "Improving Alignment and Robustness with Circuit Breakers"
+    },
+    {
+      "title": "Jailbreak in pieces: Compositional Adversarial Attacks on Multi-Modal Language Models"
+    },
+    {
+      "title": "Robustness in Multimodal Learning under Train-Test Modality Mismatch"
+    },
+    {
+      "title": "A StrongREJECT for Empty Jailbreaks"
+    },
+    {
+      "title": "Refusal in Language Models Is Mediated by a Single Direction"
+    },
+    {
+      "title": "Data Poisoning Attacks Against Multimodal Encoders"
+    },
+    {
+      "title": "Calibrating Multimodal Learning"
+    },
+    {
+      "title": "Calibrating Multimodal Learning"
+    },
+    {
+      "title": "Quantifying and Enhancing Multi-modal Robustness with Modality Preference"
+    },
+    {
+      "title": "Safety Fine-Tuning at (Almost) No Cost: A Baseline for Vision Large Language Models"
+    },
+    {
+      "title": "Towards Safe Concept Transfer of Multi-Modal Diffusion via Causal Representation Editing"
+    },
+    {
+      "title": "VHELM: A Holistic Evaluation of Vision Language Models"
+    },
+    {
+      "title": "ART: Automatic Red-teaming for Text-to-Image Models to Protect Benign Users"
+    },
+    {
+      "title": "VLATTACK: Multimodal Adversarial Attacks on Vision-Language Tasks via Pre-trained Models"
+    },
+    {
+      "title": "Shadowcast: Stealthy Data Poisoning Attacks Against Vision-Language Models"
+    },
+    {
+      "title": "NaturalBench: Evaluating Vision-Language Models on Natural Adversarial Samples"
+    },
+    {
+      "title": "T2VSafetyBench: Evaluating the Safety of Text-to-Video Generative Models"
+    },
+    {
+      "title": "Diagnosing the Compositional Knowledge of Vision Language Models from a Game-Theoretic View"
+    },
+    {
+      "title": "On Evaluating Adversarial Robustness of Large Vision-Language Models"
+    },
+    {
+      "title": "BadPrompt: Backdoor Attacks on Continuous Prompts"
+    },
+    {
+      "title": "Tensor Trust: Interpretable Prompt Injection Attacks from an Online Game"
+    },
+    {
+      "title": "BadChain: Backdoor Chain-of-Thought Prompting for Large Language Models"
+    },
+    {
+      "title": "AutoDAN: Generating Stealthy Jailbreak Prompts on Aligned Large Language Models"
+    },
+    {
+      "title": "Language Model Inversion"
+    },
+    {
+      "title": "Hard Prompts Made Easy: Gradient-Based Discrete Optimization for Prompt Tuning and Discovery"
+    },
+    {
+      "title": "Improved Generation of Adversarial Examples Against Safety-aligned LLMs"
+    },
+    {
+      "title": "TrojLLM: A Black-box Trojan Prompt Attack on Large Language Models"
+    },
+    {
+      "title": "Many-shot Jailbreaking"
+    },
+    {
+      "title": "Can discrete information extraction prompts generalize across language models?"
+    },
+    {
+      "title": "MMCert: Provable Defense against Adversarial Attacks to Multi-modal Models"
+    },
+    {
+      "title": "Calibrating Multimodal Learning"
+    },
+    {
+      "title": "Calibrating Multimodal Learning"
+    },
+    {
+      "title": "Predictive Dynamic Fusion"
+    },
+    {
+      "title": "Provable Dynamic Fusion for Low-Quality Multimodal Data"
+    },
+    {
+      "title": "MultiTrust: A Comprehensive Benchmark Towards Trustworthy Multimodal Large Language Models"
+    },
+    {
+      "title": "OmniVec2 - A Novel Transformer based Network for Large Scale Multimodal and Multitask Learning"
+    },
+    {
+      "title": "Self-Supervised MultiModal Versatile Networks"
+    },
+    {
+      "title": "Unified Discrete Diffusion for Simultaneous Vision-Language Generation"
+    },
+    {
+      "title": "A Theory of Multimodal Learning"
+    },
+    {
+      "title": "An Image Is Worth 1000 Lies: Transferability of Adversarial Images across Prompts on Vision-Language Models"
+    },
+    {
+      "title": "Few-Shot Adversarial Prompt Learning on Vision-Language Models"
+    },
+    {
+      "title": "Not All Prompts Are Secure: A Switchable Backdoor Attack Against Pre-trained Vision Transfomers"
+    },
+    {
+      "title": "Data Poisoning Attacks Against Multimodal Encoders"
+    },
+    {
+      "title": "Deep Correlated Prompting for Visual Recognition with Missing Modalities"
+    },
+    {
+      "title": "Cross-Modality Perturbation Synergy Attack for Person Re-identification"
+    },
+    {
+      "title": "One Prompt Word is Enough to Boost Adversarial Robustness for Pre-trained Vision-Language Models"
+    },
+    {
+      "title": "Multimodal Prompting With Missing Modalities for Visual Recognition"
+    },
+    {
+      "title": "Boosting Adversarial Transferability using Dynamic Cues"
+    },
+    {
+      "title": "VLATTACK: Multimodal Adversarial Attacks on Vision-Language Tasks via Pre-trained Models"
+    }
   ]
 }
