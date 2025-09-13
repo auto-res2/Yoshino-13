@@ -74,7 +74,8 @@ class OracleVision(nn.Module):
 class OracleText(nn.Module):
     def __init__(self, cfg: Dict):
         super().__init__()
-        self.model = T5ForConditionalGeneration.from_pretrained("t5-base")
+        # use the smaller t5-small to keep downloads lightweight for CI
+        self.model = T5ForConditionalGeneration.from_pretrained("t5-small")
         self.head = OracleHead(self.model.config.d_model, k=cfg["k"], tau=cfg["tau"])
         self.criterion = nn.L1Loss()
 
@@ -135,16 +136,18 @@ class SimpleTrainer:
             raise RuntimeError(f"Unknown model {model_type}")
         self.model.to(self.device)
 
-        self.opt = torch.optim.AdamW(self.model.parameters(), lr=cfg["lr"])
+        # lr may be provided as string – cast to float defensively
+        self.opt = torch.optim.AdamW(self.model.parameters(), lr=float(cfg["lr"]))
 
         # data ----------------------------------------------------------
         self.dl_train = build_dataloader(cfg["dataset"], split="train")
 
         # bookkeeping & output paths -----------------------------------
         root = Path(__file__).resolve().parent.parent
-        self.img_dir = root / ".research" / "iteration1" / "images"
+        # mandatory iteration2 paths (spec requirement)
+        self.img_dir = root / ".research" / "iteration2" / "images"
         self.img_dir.mkdir(parents=True, exist_ok=True)
-        self.res_dir = root / ".research" / "iteration1"
+        self.res_dir = root / ".research" / "iteration2"
         self.res_dir.mkdir(parents=True, exist_ok=True)
         self.loss_history: List[float] = []
 

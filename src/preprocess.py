@@ -106,7 +106,7 @@ class SmokeText(Dataset):
         self.labels = ag_news["label"][:2000]
         from transformers import AutoTokenizer
 
-        self.tok = AutoTokenizer.from_pretrained("t5-base")
+        self.tok = AutoTokenizer.from_pretrained("t5-small")
 
     def __len__(self):
         return len(self.texts)
@@ -132,10 +132,8 @@ class SmokeAudio(Dataset):
             "data/speech_cmd", subset=subset, download=True
         )
         self.mel = aud_transforms.MelSpectrogram(sample_rate=16000, n_mels=80)
-        # simple label mapping (folder name → int)
-        self.label2idx = {
-            label: i for i, label in enumerate(sorted(list(set(self.ds._walker))))
-        }
+        # use official label list for mapping
+        self.label2idx = {label: i for i, label in enumerate(self.ds._labels)}
 
     def __len__(self):
         return 256  # restrict for smoke test speed
