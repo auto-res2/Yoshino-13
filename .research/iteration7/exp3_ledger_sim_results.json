@@ -1,0 +1,7 @@
+{
+  "experiment": "exp3_ledger_sim",
+  "final_train_loss": 2.0,
+  "mean_train_loss": 2.0,
+  "steps": 1,
+  "figure": "iteration7/images/exp3_ledger_sim_training_loss.pdf"
+}
