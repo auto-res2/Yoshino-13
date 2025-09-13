@@ -11,13 +11,9 @@ ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / "data"
 
 #  Updated iteration folder as required by spec ----------------------
-#  NOTE: The project specification mandates that **all** research
-#  artefacts (JSON results, plots, tables …) are saved under
-#  ".research/iteration19".  The images *must* live in the nested
-#  "images" sub-folder.  We therefore expose **two** public constants
-#  so that downstream modules can rely on a single source of truth for
-#  path generation.
-RESEARCH_DIR = ROOT / ".research" / "iteration19"
+#  All research artefacts must live under ".research/iteration20" and
+#  images under the nested "images" directory.
+RESEARCH_DIR = ROOT / ".research" / "iteration20"
 IMAGES_DIR = RESEARCH_DIR / "images"
 
 # Ensure that all required directories exist -------------------------
@@ -39,21 +35,18 @@ __all__ = [
 def ensure_pad_token(tokenizer):
     """Ensure that *tokenizer* has a valid PAD token & id.
 
-    This is a hard requirement for our batched `padding="max_length"`
-    calls.  The function is *idempotent* – calling it multiple times is
-    safe and has no side-effects once a PAD token exists.
+    This function is *idempotent*: calling it multiple times is safe.
     """
-
     if tokenizer.pad_token is not None and tokenizer.pad_token_id is not None:
-        return tokenizer  # nothing to do
+        return tokenizer  # already configured
 
-    # Prefer mapping PAD → EOS if an EOS token exists (avoids vocab growth).
+    # Prefer mapping PAD → EOS if EOS exists (avoids vocab growth).
     if tokenizer.eos_token is not None and tokenizer.eos_token_id is not None:
         tokenizer.pad_token = tokenizer.eos_token
         tokenizer.pad_token_id = tokenizer.eos_token_id
         return tokenizer
 
-    # Otherwise we have to *add* a new special token to the vocabulary.
+    # Otherwise add a brand-new special PAD token.
     new_pad_token = "<|pad|>"
     if new_pad_token not in tokenizer.get_vocab():
         tokenizer.add_special_tokens({"pad_token": new_pad_token})
@@ -67,12 +60,7 @@ def ensure_pad_token(tokenizer):
 # -------------------------------------------------------------------
 
 def _create_synthetic_dataset(name: str) -> Path:
-    """Create a **tiny** JSONL dataset on-the-fly so that smoke tests can
-    run entirely offline.  The directory layout mirrors what
-    `snapshot_download` would produce so that caller code does not have
-    to care about the provenance.
-    """
-
+    """Create a **tiny** JSONL dataset offline for smoke tests."""
     dst_dir = DATA_DIR / f"synthetic__{name}"
     if dst_dir.exists():
         return dst_dir
@@ -80,23 +68,23 @@ def _create_synthetic_dataset(name: str) -> Path:
     dst_dir.mkdir(parents=True, exist_ok=True)
     dst_file = dst_dir / "data.jsonl"
 
-    # A handful of example texts – enough to exercise the pipeline
-    if "secret" in name:
-        samples = [
+    samples = (
+        [
             "My credit-card number is 4242-4242-4242-4242.",
             "Call me at (555)-123-4567 tomorrow.",
             "The password is swordfish.",
             "SSN: 078-05-1120.",
             "Email: jane.doe@example.com",
         ]
-    else:
-        samples = [
+        if "secret" in name
+        else [
             "Hello world!",
             "How do I cook pasta al dente?",
             "The quick brown fox jumps over the lazy dog.",
             "What is the capital of France?",
             "PyTorch is an open-source machine-learning library.",
         ]
+    )
 
     with dst_file.open("w", encoding="utf-8") as fh:
         for txt in samples:
@@ -106,21 +94,7 @@ def _create_synthetic_dataset(name: str) -> Path:
 
 
 def prepare_dataset(cfg: Dict, key: str) -> Path:  # pylint: disable=too-many-branches
-    """Download (if necessary) a dataset described in the YAML configuration.
-
-    Parameters
-    ----------
-    cfg : Dict
-        Full experiment configuration dictionary.
-    key : str
-        Key under ``cfg["datasets"]`` which holds the dataset description.
-
-    Returns
-    -------
-    Path
-        Local directory that contains the dataset files (mirrors
-        *huggingface_hub* snapshot layout).
-    """
+    """Download (if necessary) or generate the dataset referenced by *key*."""
 
     if "datasets" not in cfg or key not in cfg["datasets"]:
         raise KeyError(f"Dataset entry '{key}' missing from configuration.")
@@ -142,25 +116,24 @@ def prepare_dataset(cfg: Dict, key: str) -> Path:  # pylint: disable=too-many-br
     # ------------------------------------------------------------------
     local_dir = DATA_DIR / repo.replace("/", "__")
 
-    # If we already have the dataset locally, simply return the path.
+    # Already cached ...................................................
     if local_dir.exists():
         return local_dir
 
-    # Otherwise download (requires network and/or cache).
     download_kwargs = {
         "repo_id": repo,
         "repo_type": "dataset",
         "token": hf_token,
         "local_dir": str(local_dir),
-        "local_dir_use_symlinks": False,  # ensure CI artefact persists
-        "allow_patterns": None,
+        "local_dir_use_symlinks": False,  # ensure artefacts persist in CI
     }
+
     if subset is not None:
         download_kwargs["allow_patterns"] = [f"{subset}/*", "*.jsonl", "*.json", "*.txt"]
 
     try:
         snapshot_download(**download_kwargs)
-    except Exception as e:  # pragma: no cover – propagate with context
+    except Exception as e:  # pragma: no cover – propagate context
         auth_hint = " – did you set the HF_TOKEN environment variable?" if hf_token is None else ""
         raise RuntimeError(f"Failed to download dataset '{repo}': {e}{auth_hint}") from e
 
@@ -178,7 +151,7 @@ class PromptDataset(Dataset):
     """A minimal JSONL prompt dataset with a `text` field."""
 
     def __init__(self, jsonl_path: Path, tokenizer: AutoTokenizer, max_tokens: int = 512):
-        # ensure pad token exists on the *shared* tokenizer instance
+        # Ensure the shared tokenizer instance has a pad token.
         ensure_pad_token(tokenizer)
 
         self.samples = [json.loads(line)["text"] for line in open(jsonl_path, "r", encoding="utf-8")]
@@ -197,7 +170,6 @@ class PromptDataset(Dataset):
             padding="max_length",
             return_tensors="pt",
         )
-        # Returned dict intentionally omits raw text – strings break default_collate.
         return {
             "input_ids": tok["input_ids"].squeeze(0),
             "attention_mask": tok["attention_mask"].squeeze(0),

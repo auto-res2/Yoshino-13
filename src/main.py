@@ -1,20 +1,5 @@
 # src/main.py
-"""Entry-point that orchestrates the full experimental workflow.
-
-Usage examples::
-
-    # Smoke test only
-    uv run python -m src.main --smoke-test
-
-    # Full experiment only
-    uv run python -m src.main --full-experiment
-
-If neither flag is provided **only** the smoke test is executed.  The
-full experiment is run *exclusively* when the `--full-experiment` flag
-is present.  Auto-triggering via environment variables was removed to
-avoid surprises inside automated evaluation sandboxes that do not have
-access to private resources.
-"""
+"""Entry-point orchestrating the experimental workflow."""
 
 import argparse
 import os
@@ -41,13 +26,13 @@ def _load_cfg(path: Path) -> Dict:
         raise FileNotFoundError(f"Configuration file '{path}' not found.")
     with open(path, "r", encoding="utf-8") as fh:
         cfg = yaml.safe_load(fh)
-    # Inject HF token so that downstream modules do not need to read env-vars again.
+    # Inject HF token (may be None/"") so downstream modules do not need to read env-vars.
     cfg["_hf_token"] = os.getenv(cfg.get("hf_token_env", "HF_TOKEN"))
     return cfg
 
 
 # -------------------------------------------------------------------
-#  experiment execution function
+#  experiment execution
 # -------------------------------------------------------------------
 
 def _run_experiments(cfg: Dict, smoke: bool):
@@ -56,11 +41,7 @@ def _run_experiments(cfg: Dict, smoke: bool):
         if func is None:
             print(f"[WARN] Unknown experiment '{exp_name}' – skipping.")
             continue
-        try:
-            func(cfg, smoke)
-        except RuntimeError as e:
-            print(f"[ERROR] Experiment '{exp_name}' terminated: {e}")
-            sys.exit(1)
+        func(cfg, smoke)
 
 
 # -------------------------------------------------------------------
@@ -69,46 +50,39 @@ def _run_experiments(cfg: Dict, smoke: bool):
 
 def main():
     parser = argparse.ArgumentParser(description="HYPERION-SHIELD experimental pipeline")
-    parser.add_argument(
-        "--smoke-test", action="store_true", help="Run only the smoke test configuration"
-    )
-    parser.add_argument(
-        "--full-experiment", action="store_true", help="Run the full experimental configuration"
-    )
-    parser.add_argument(
-        "--hf-token", type=str, default=None, help="HuggingFace token for private dataset/model access"
-    )
+    parser.add_argument("--smoke-test", action="store_true", help="Run the smoke-test configuration only")
+    parser.add_argument("--full-experiment", action="store_true", help="Run the full experimental configuration")
+    parser.add_argument("--hf-token", type=str, default=None, help="HuggingFace token for private access")
     args = parser.parse_args()
 
     # ------------------------------------------------------------------
-    #  Handle HF token override early so _load_cfg picks it up
+    #  HF token override (must be set *before* configurations are loaded)
     # ------------------------------------------------------------------
     if args.hf_token:
         os.environ["HF_TOKEN"] = args.hf_token
 
     # ------------------------------------------------------------------
-    #  CASE 1 – smoke-test (default)
+    #  Phase 1 – smoke test (always runs unless the user explicitly opts out)
     # ------------------------------------------------------------------
     if args.smoke_test or not args.full_experiment:
         cfg_smoke = _load_cfg(SMOKE_CFG_PATH)
         print("=== [PHASE 1/1] Smoke test start ===")
         _run_experiments(cfg_smoke, smoke=True)
-        # If only smoke test was requested we are done.
-        if not args.full_experiment:
+        if not args.full_experiment:  # User only wanted the smoke test
             return
 
     # ------------------------------------------------------------------
-    #  CASE 2 – full experiment (explicit flag)
+    #  Phase 2 – full experiment (requires explicit flag **and** HF token)
     # ------------------------------------------------------------------
     if args.full_experiment:
         cfg_full = _load_cfg(FULL_CFG_PATH)
         if cfg_full.get("_hf_token") in (None, ""):
-            # Instead of hard-failing we issue a clear warning and skip the run.
+            # Fail-fast – running the full experiment without credentials is undefined.
             print(
-                "[WARN] Full experiment requested but no HuggingFace token was provided. "
-                "Skipping full experiment phase."
+                "[ERROR] --full-experiment specified but no HuggingFace token was provided. "
+                "Set it via the --hf-token CLI argument or HF_TOKEN environment variable."
             )
-            return
+            sys.exit(1)
 
         print("=== [PHASE 2/2] Full experiment start ===")
         _run_experiments(cfg_full, smoke=False)
