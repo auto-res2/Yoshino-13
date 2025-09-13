@@ -31,7 +31,7 @@ def load_model(repo: str, hf_token: Union[str, None] = None, dtype: torch.dtype 
     """Download (if necessary) and load a causal-LM checkpoint.
 
     *   If CUDA is available we delegate device placement to *transformers* by
-        passing ``device_map=\"auto\"`` (which internally relies on *accelerate*).
+        passing ``device_map="auto"`` (which internally relies on *accelerate*).
     *   If CUDA is **not** available we load the weights on CPU **without** a
         ``device_map`` argument – this removes the hard dependency on the
         *accelerate* package for CPU-only CI environments.

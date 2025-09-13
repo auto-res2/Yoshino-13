@@ -1,3 +1,5 @@
+# src/preprocess.py
+"""Data handling & synthetic-dataset utilities."""
 from pathlib import Path
 import json
 from typing import Dict, Optional
@@ -11,9 +13,9 @@ ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / "data"
 
 #  Updated iteration folder as required by spec ----------------------
-#  All research artefacts must live under ".research/iteration21" and
+#  All research artefacts must live under ".research/iteration22" and
 #  images under the nested "images" directory.
-RESEARCH_DIR = ROOT / ".research" / "iteration21"
+RESEARCH_DIR = ROOT / ".research" / "iteration22"
 IMAGES_DIR = RESEARCH_DIR / "images"
 
 # Ensure that all required directories exist -------------------------
