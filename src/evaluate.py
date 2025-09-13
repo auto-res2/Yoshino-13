@@ -1,0 +1,158 @@
+"""src/evaluate.py
+Evaluation, metric computation and plotting utilities.  Contains the full
+implementation of *Experiment 1 – Resistance to Long-Range Jailbreaks*.
+"""
+from __future__ import annotations
+
+import json
+import logging
+import os
+import time
+from pathlib import Path
+from typing import Any, Dict, List
+
+import matplotlib
+import matplotlib.pyplot as plt
+import seaborn as sns
+import torch
+from transformers import GenerationConfig
+
+from .preprocess import ensure_dataset
+from .train import load_guard, load_model
+
+# head-less backend before importing pyplot
+matplotlib.use("Agg")
+
+logger = logging.getLogger("tracs_runner.evaluate")
+
+###############################################################################
+#   Metric helpers
+###############################################################################
+
+def compute_asr(outputs):
+    """Attack-success-rate – expects each output dict to have key *violation*."""
+    n = len(outputs)
+    return 0.0 if n == 0 else 100.0 * sum(o["violation"] for o in outputs) / n
+
+
+def median(values):
+    values = sorted(values)
+    n = len(values)
+    if n == 0:
+        return 0.0
+    mid = n // 2
+    return values[mid] if n % 2 else (values[mid - 1] + values[mid]) / 2.0
+
+###############################################################################
+#   Plot helpers
+###############################################################################
+
+def _save_bar(fig_name: str, labels: List[str], numbers: List[float], ylabel: str) -> str:
+    """Save bar-plot to .research/iteration1/images and return the file path."""
+
+    images_dir = Path(".research/iteration1/images")
+    images_dir.mkdir(parents=True, exist_ok=True)
+    pdf_path = images_dir / f"{fig_name}.pdf"
+
+    sns.set(style="whitegrid")
+    plt.figure(figsize=(6, 4))
+    ax = sns.barplot(x=labels, y=numbers, palette="Blues_d")
+    for i, v in enumerate(numbers):
+        ax.text(i, v + 0.5, f"{v:.1f}", ha="center", va="bottom")
+    plt.ylabel(ylabel)
+    plt.xlabel("Safety Stack")
+    plt.title(fig_name.replace("_", " ").title())
+    plt.tight_layout()
+    plt.savefig(pdf_path, bbox_inches="tight")
+    plt.close()
+    return str(pdf_path)
+
+###############################################################################
+#   Core experimental routine (only Experiment 1 provided)
+###############################################################################
+
+def run_experiment_1(cfg):
+    """Execute Experiment 1 and persist outputs below .research/iteration1/."""
+
+    logger.info("Running Experiment 1 – %s", cfg.description.split("\n")[0])
+
+    # ------------------------------------------------------------------
+    # 1) dataset – LongFuse
+    # ------------------------------------------------------------------
+    lf_ds = ensure_dataset("longfuse", cfg.datasets["longfuse"])["train"]
+
+    # ------------------------------------------------------------------
+    # 2) iterate over models & guard stacks
+    # ------------------------------------------------------------------
+    results_all: Dict[str, Dict[str, Any]] = {}
+    for model_key, model_id in cfg.models.items():
+        tokenizer, model = load_model(model_id)
+
+        model_res: Dict[str, Any] = {}
+        for stack in cfg.safety_stacks:
+            guard = load_guard(stack, model)
+            stack_outputs = []
+
+            for seed in cfg.seeds:
+                torch.manual_seed(seed)
+                for ex in lf_ds:
+                    prompt = ex.get("prompt", ex.get("text", ""))
+                    input_ids = tokenizer(prompt, return_tensors="pt").to(model.device)
+
+                    gen_cfg = GenerationConfig(
+                        do_sample=True,
+                        top_p=0.7,
+                        temperature=1.0,
+                        max_new_tokens=256,
+                    )
+                    t0 = time.perf_counter()
+                    if stack == "no-guard":
+                        output_ids = model.generate(**input_ids, generation_config=gen_cfg)
+                        violation = False
+                    else:
+                        output_ids, info = guard.generate(prompt, generation_config=gen_cfg)
+                        violation = info.get("violation", False)
+
+                    latency = (
+                        time.perf_counter() - t0
+                    ) / (output_ids.shape[1] - input_ids["input_ids"].shape[1])
+
+                    stack_outputs.append({"violation": bool(violation), "latency": latency * 1000.0})
+
+            asr = compute_asr(stack_outputs)
+            median_latency = median([o["latency"] for o in stack_outputs])
+            model_res[stack] = {"ASR": asr, "median_latency_ms": median_latency}
+            logger.info("%s – %s: ASR=%.2f, median latency=%.2f ms", model_key, stack, asr, median_latency)
+        results_all[model_key] = model_res
+
+    # ------------------------------------------------------------------
+    # 3) persist results JSON
+    # ------------------------------------------------------------------
+    research_dir = Path(".research/iteration1")
+    research_dir.mkdir(parents=True, exist_ok=True)
+    out_path = research_dir / "experiment_1_results.json"
+    with open(out_path, "w", encoding="utf-8") as fp:
+        json.dump(results_all, fp, indent=2)
+
+    # ------------------------------------------------------------------
+    # 4) figures
+    # ------------------------------------------------------------------
+    fig_files = []
+    for model_key, model_res in results_all.items():
+        labels, vals = zip(*[(k, v["ASR"]) for k, v in model_res.items()])
+        pdf = _save_bar(f"long_horizon_asr_{model_key}", list(labels), list(vals), "ASR % (↓)")
+        fig_files.append(pdf)
+
+    # ------------------------------------------------------------------
+    # 5) stdout trace for CI visibility
+    # ------------------------------------------------------------------
+    print("\n>>> Numerical Results (ASR & Latency)")
+    print(json.dumps(results_all, indent=2))
+
+    print("\nFigures generated:")
+    for f in fig_files:
+        print(" –", f)
+
+    print("\nFull JSON saved to:", out_path)
+    with open(out_path, "r", encoding="utf-8") as fp:
+        print(fp.read())

@@ -1,0 +1,15 @@
+# config/smoke_test.yaml
+name: experiment_1
+description: |
+  Smoke-test: Run Experiment 1 on two LongFuse prompts and a single random seed.
+  Validates data download, guard import, generation, metric & figure code.
+output_dir: .research/iteration1
+models:
+  gptj: EleutherAI/gpt-j-6B
+safety_stacks: ["no-guard", "cai"]
+seeds: [42]
+datasets:
+  longfuse:
+    type: jsonl
+    url: https://raw.githubusercontent.com/long-fuse-jailbreak/data/main/lf-500.jsonl
+hyper: {}

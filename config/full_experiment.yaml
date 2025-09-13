@@ -1,0 +1,19 @@
+# config/full_experiment.yaml
+name: experiment_1
+description: |
+  Full Experiment 1 – Resistance to Long-Range Jailbreaks.
+output_dir: .research/iteration1
+models:
+  mixtral: mistralai/Mixtral-8x7B-Instruct-v0.1
+  gptj: EleutherAI/gpt-j-6B
+safety_stacks: ["no-guard", "cai", "hilmas", "tracs"]
+seeds: [12, 21, 42, 87, 1024]
+datasets:
+  longfuse:
+    type: jsonl
+    url: https://raw.githubusercontent.com/long-fuse-jailbreak/data/main/lf-500.jsonl
+hyper:
+  tracs:
+    base_h: 16
+    growth: 2.0
+    slice_w: 8
