@@ -99,7 +99,7 @@ def run_soic_leakage(cfg: Dict, smoke: bool):
 
     for variant_name, variant_info in model_variants.items():
         if variant_info is None:
-            continue  # not present in smoke config
+            continue  # not present in config
         print(f"[Variant {variant_name}] loading …")
         model = load_model(variant_info["repo"], hf_token=cfg.get("_hf_token"))
 

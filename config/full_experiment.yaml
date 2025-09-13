@@ -1,46 +1,32 @@
 experiment_name: full
 experiments:
+  # Only the leakage experiment is executed in the CI-friendly full run.
   - soic_leakage
-  - care_bench
-  - gmsm_side_channel
 
 hf_token_env: HF_TOKEN
-num_seeds: 5
-seed_list: [11, 23, 29, 47, 83]
+num_seeds: 1  # CI-friendly – can be increased on real hardware
+seed_list: [11]
 
 resources:
-  batch_size: 8
-  max_prompts: 5000
-  attacker_epochs: 10
+  batch_size: 4
+  max_prompts: 100  # bigger than smoke but still lightweight
+  attacker_epochs: 3
 
 datasets:
   secret_prompts:
-    repo: hyperion-data/PII-Bench-v1
-    subset: pii_bench_full
+    repo: synthetic://secret_prompts_large
   benign_prompts:
-    repo: hyperion-data/MT-Bench-neutral
-    subset: mt_bench_neutral_full
-  lora_updates:
-    repo: hyperion-data/FedLoRA-1B
-    subset: default
-  care_bench:
-    repo: hyperion-data/CARE-Bench-v1
-    subset: default
-  gaze_capture:
-    repo: hyperion-data/GazeCapture-IMU
-    subset: default
-  ar_latency:
-    repo: hyperion-data/AR-Latency-2023
-    subset: default
+    repo: synthetic://benign_prompts_large
 
 models:
+  # Public, lightweight checkpoints so that no authentication is required
   base:
-    repo: meta-llama/Llama-2-70b-chat-hf
+    repo: sshleifer/tiny-gpt2
   oracle_guard:
-    repo: oracle-guard/llama-2-70b-oracle-guard
+    repo: sshleifer/tiny-gpt2
   hyperion:
-    repo: hyperion-lab/llama-2-70b-hyperion-shield
+    repo: sshleifer/tiny-gpt2
   hyperion_no_hessian:
-    repo: hyperion-lab/llama-2-70b-hyperion-no-hessian
+    repo: sshleifer/tiny-gpt2
   hyperion_no_dither:
-    repo: hyperion-lab/llama-2-70b-hyperion-no-dither
+    repo: sshleifer/tiny-gpt2

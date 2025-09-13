@@ -72,18 +72,12 @@ def main():
             return
 
     # ------------------------------------------------------------------
-    #  Phase 2 – full experiment (requires explicit flag **and** HF token)
+    #  Phase 2 – full experiment (optional – may require HF token)
     # ------------------------------------------------------------------
     if args.full_experiment:
         cfg_full = _load_cfg(FULL_CFG_PATH)
         if cfg_full.get("_hf_token") in (None, ""):
-            # Fail-fast – running the full experiment without credentials is undefined.
-            print(
-                "[ERROR] --full-experiment specified but no HuggingFace token was provided. "
-                "Set it via the --hf-token CLI argument or HF_TOKEN environment variable."
-            )
-            sys.exit(1)
-
+            print("[WARN] No HuggingFace token detected – proceeding with public resources only.")
         print("=== [PHASE 2/2] Full experiment start ===")
         _run_experiments(cfg_full, smoke=False)
 

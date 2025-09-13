@@ -11,9 +11,9 @@ ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / "data"
 
 #  Updated iteration folder as required by spec ----------------------
-#  All research artefacts must live under ".research/iteration20" and
+#  All research artefacts must live under ".research/iteration21" and
 #  images under the nested "images" directory.
-RESEARCH_DIR = ROOT / ".research" / "iteration20"
+RESEARCH_DIR = ROOT / ".research" / "iteration21"
 IMAGES_DIR = RESEARCH_DIR / "images"
 
 # Ensure that all required directories exist -------------------------
