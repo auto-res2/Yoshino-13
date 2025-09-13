@@ -20,7 +20,9 @@ def load_model(repo: str, hf_token: Union[str, None] = None, dtype: torch.dtype 
     A thin wrapper so that all model creation logic is centralised
     inside *train.py*.
     """
+    # IMPORTANT: allocate on CPU by default – many CI runners do not expose GPUs
     device_map = "auto" if torch.cuda.is_available() else {"": "cpu"}
+
     try:
         model = AutoModelForCausalLM.from_pretrained(
             repo,

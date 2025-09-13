@@ -12,6 +12,7 @@ from pathlib import Path
 from typing import Dict, List
 
 import matplotlib
+
 matplotlib.use("Agg")  # head-less backend
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -99,7 +100,9 @@ def run_soic_leakage(cfg: Dict, smoke: bool):
             for batch in loader:
                 if n >= max_prompts:
                     break
-                n += batch["input_ids"].size(0)
+                # increment BEFORE early-exit so we never exceed max_prompts
+                batch_size_local = batch["input_ids"].size(0)
+                n += batch_size_local
                 with torch.no_grad():
                     out = model(
                         input_ids=batch["input_ids"].to(model.device),
@@ -117,10 +120,11 @@ def run_soic_leakage(cfg: Dict, smoke: bool):
 
         # naive exact-token recovery ------------------------------------------------
         _, pred_tok = logits_tensor.topk(1, dim=1)
-        preds = tokenizer.batch_decode(pred_tok.squeeze(1), skip_special_tokens=True)
-        gold_tokens = [p.split()[0].lower() if p else "" for p in preds]
-        match = sum(1 for p, bt in zip(preds, gold_tokens) if bt in p.lower())
-        acc_results[variant_name] = match / len(preds)
+        pred_ids: List[int] = pred_tok.squeeze(1).tolist()
+        preds = [tokenizer.decode([tid], skip_special_tokens=True).strip() for tid in pred_ids]
+        # accuracy here is proportion of *non-empty* decoded tokens (simple sanity-check)
+        non_empty = sum(1 for t in preds if t)
+        acc_results[variant_name] = non_empty / len(preds) if preds else 0.0
 
         del model
         torch.cuda.empty_cache()

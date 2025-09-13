@@ -2,16 +2,16 @@
 """Data loading, preprocessing and Hugging-Face Hub download helpers."""
 import shutil
 from pathlib import Path
-from typing import Dict, Union
+from typing import Dict
 
-from huggingface_hub import hf_hub_download
+from huggingface_hub import hf_hub_download, snapshot_download
 
 # -------------------------------------------------------------------
 #  directory management
 # -------------------------------------------------------------------
 ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / "data"
-RESEARCH_DIR = ROOT / ".research" / "iteration1"
+RESEARCH_DIR = ROOT / ".research" / "iteration2"  # updated as per spec
 IMAGES_DIR = RESEARCH_DIR / "images"
 
 for _d in (DATA_DIR, IMAGES_DIR):
@@ -21,22 +21,29 @@ for _d in (DATA_DIR, IMAGES_DIR):
 #  download helpers
 # -------------------------------------------------------------------
 
+
 def _hf_download(repo_id: str, filename: str | None = None, subfolder: str | None = None, token: str | None = None) -> Path:
-    """A thin wrapper around `huggingface_hub.hf_hub_download` that converts
-    any exception into a `RuntimeError` so callers can fail fast.
+    """Download *either* a single file (via `hf_hub_download`) *or* an entire
+    repository snapshot (via `snapshot_download`).  Any exception is
+    converted into a `RuntimeError` so that callers fail fast and do not
+    silently proceed with partial or missing data.
     """
     try:
-        return Path(
-            hf_hub_download(
-                repo_id=repo_id,
-                filename=filename,
-                subfolder=subfolder,
-                token=token,
-                cache_dir=str(DATA_DIR),
-            )
+        if filename is None:
+            # full repo download
+            path = snapshot_download(repo_id=repo_id, token=token, cache_dir=str(DATA_DIR))
+            return Path(path)
+        # single file
+        file_path = hf_hub_download(
+            repo_id=repo_id,
+            filename=filename,
+            subfolder=subfolder,
+            token=token,
+            cache_dir=str(DATA_DIR),
         )
+        return Path(file_path)
     except Exception as e:
-        raise RuntimeError(f"Failed to download {repo_id}/{filename or ''}: {e}")
+        raise RuntimeError(f"Failed to download {repo_id}/{filename or ''}: {e}") from e
 
 
 def prepare_dataset(cfg: Dict, repo_key: str) -> Path:
@@ -47,17 +54,17 @@ def prepare_dataset(cfg: Dict, repo_key: str) -> Path:
     """
     info = cfg["datasets"][repo_key]
     repo = info["repo"]
-    subset = info.get("subset")
 
     local_dir = DATA_DIR / repo.replace("/", "__")
     if local_dir.exists():
         return local_dir
 
-    _ = _hf_download(repo_id=repo, token=cfg.get("_hf_token"))  # populates HF cache
+    # populate HF cache (either returns directory or file path depending on arguments)
+    src_path = _hf_download(repo_id=repo, token=cfg.get("_hf_token"))
 
-    # copy from cache to deterministic location; `Path(_)` points at the *file*,
-    # therefore we copy its parent (i.e. the repo snapshot folder)
-    shutil.copytree(Path(_).parent, local_dir)
+    # `src_path` may be a directory (snapshot_download) or a file path
+    src_folder = src_path if src_path.is_dir() else src_path.parent
+    shutil.copytree(src_folder, local_dir)
     return local_dir
 
 

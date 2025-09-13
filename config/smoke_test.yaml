@@ -20,7 +20,8 @@ datasets:
     subset: mt_bench_neutral
 
 models:
+  # Use very small models for CI / smoke testing to avoid OOMs
   base:
-    repo: meta-llama/Llama-2-7b-hf
+    repo: sshleifer/tiny-gpt2
   hyperion:
-    repo: hyperion-lab/llama-2-7b-hyperion-shield-snapshot
+    repo: sshleifer/tiny-gpt2
