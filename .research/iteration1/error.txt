@@ -1,0 +1,131 @@
+Using CPython 3.11.13
+Creating virtual environment at: .venv
+Resolved 82 packages in 344ms
+Downloading nvidia-cufft-cu12 (184.2MiB)
+Downloading sympy (6.0MiB)
+Downloading nvidia-cuda-nvrtc-cu12 (84.0MiB)
+Downloading torch (846.9MiB)
+Downloading setuptools (1.1MiB)
+Downloading nvidia-cusparselt-cu12 (273.9MiB)
+Downloading nvidia-curand-cu12 (60.7MiB)
+Downloading nvidia-cusolver-cu12 (255.1MiB)
+Downloading triton (148.3MiB)
+Downloading nvidia-cusparse-cu12 (274.9MiB)
+Downloading nvidia-nccl-cu12 (307.4MiB)
+Downloading nvidia-nvjitlink-cu12 (37.4MiB)
+Downloading nvidia-cudnn-cu12 (674.0MiB)
+Downloading timm (2.4MiB)
+Downloading nvidia-cuda-cupti-cu12 (9.8MiB)
+Downloading torchaudio (3.8MiB)
+Downloading nvidia-cufile-cu12 (1.1MiB)
+Downloading nvidia-cublas-cu12 (566.8MiB)
+Downloading torchvision (8.2MiB)
+ Downloading nvidia-cufile-cu12
+ Downloading timm
+ Downloading torchaudio
+ Downloading setuptools
+ Downloading torchvision
+ Downloading nvidia-cuda-cupti-cu12
+ Downloading nvidia-nvjitlink-cu12
+ Downloading sympy
+ Downloading nvidia-curand-cu12
+ Downloading nvidia-cuda-nvrtc-cu12
+ Downloading triton
+ Downloading nvidia-cufft-cu12
+ Downloading nvidia-cusolver-cu12
+ Downloading nvidia-cusparse-cu12
+ Downloading nvidia-cusparselt-cu12
+ Downloading nvidia-nccl-cu12
+ Downloading nvidia-cublas-cu12
+ Downloading nvidia-cudnn-cu12
+  × Failed to download `torch==2.8.0`
+  ├─▶ Failed to extract archive:
+  │   torch-2.8.0-cp311-cp311-manylinux_2_28_x86_64.whl
+  ├─▶ I/O operation failed during extraction
+  ╰─▶ failed to create file
+      `/home/toma/.cache/uv/.tmpWUGWM3/torch/lib/libtorch_cuda_linalg.so`: No
+      such file or directory (os error 2)
+  help: `torch` (v2.8.0) was included because `oracle-experiments` (v0.1.0)
+        depends on `torch`
+Downloading networkx (1.9MiB)
+Downloading setuptools (1.1MiB)
+Downloading pillow (6.3MiB)
+Downloading pandas (11.8MiB)
+Downloading nvidia-cuda-nvrtc-cu12 (84.0MiB)
+Downloading nvidia-cuda-cupti-cu12 (9.8MiB)
+Downloading matplotlib (8.3MiB)
+Downloading aiohttp (1.7MiB)
+Downloading nvidia-cudnn-cu12 (674.0MiB)
+Downloading fonttools (4.7MiB)
+Downloading nvidia-cufft-cu12 (184.2MiB)
+Downloading nvidia-curand-cu12 (60.7MiB)
+Downloading nvidia-cusparse-cu12 (274.9MiB)
+Downloading tokenizers (3.2MiB)
+Downloading transformers (11.1MiB)
+Downloading numpy (16.2MiB)
+Downloading hf-xet (3.0MiB)
+Downloading triton (148.3MiB)
+Downloading nvidia-cufile-cu12 (1.1MiB)
+Downloading sympy (6.0MiB)
+Downloading timm (2.4MiB)
+Downloading nvidia-nvjitlink-cu12 (37.4MiB)
+Downloading nvidia-nccl-cu12 (307.4MiB)
+Downloading nvidia-cusolver-cu12 (255.1MiB)
+Downloading torch (846.9MiB)
+Downloading pyarrow (40.8MiB)
+Downloading nvidia-cusparselt-cu12 (273.9MiB)
+Downloading kiwisolver (1.4MiB)
+Downloading torchaudio (3.8MiB)
+Downloading torchvision (8.2MiB)
+Downloading nvidia-cublas-cu12 (566.8MiB)
+ Downloading nvidia-cufile-cu12
+ Downloading kiwisolver
+ Downloading aiohttp
+ Downloading timm
+ Downloading tokenizers
+ Downloading hf-xet
+ Downloading setuptools
+ Downloading torchaudio
+ Downloading networkx
+ Downloading fonttools
+ Downloading pillow
+ Downloading torchvision
+ Downloading matplotlib
+ Downloading sympy
+ Downloading nvidia-cuda-cupti-cu12
+ Downloading transformers
+ Downloading numpy
+ Downloading nvidia-nvjitlink-cu12
+ Downloading pandas
+ Downloading nvidia-curand-cu12
+ Downloading pyarrow
+ Downloading nvidia-cuda-nvrtc-cu12
+ Downloading triton
+ Downloading nvidia-cufft-cu12
+ Downloading nvidia-cusolver-cu12
+ Downloading nvidia-cusparse-cu12
+ Downloading nvidia-cusparselt-cu12
+ Downloading nvidia-nccl-cu12
+ Downloading nvidia-cublas-cu12
+ Downloading nvidia-cudnn-cu12
+ Downloading torch
+Installed 68 packages in 4.88s
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/src/main.py", line 56, in <module>
+    main()
+  File "/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/src/main.py", line 46, in main
+    run_config(smoke_cfg)
+  File "/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/src/main.py", line 29, in run_config
+    trainer = SimpleTrainer(exp_name, exp_cfg)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/src/train.py", line 138, in __init__
+    self.opt = torch.optim.AdamW(self.model.parameters(), lr=cfg["lr"])
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/.venv/lib/python3.11/site-packages/torch/optim/adamw.py", line 37, in __init__
+    super().__init__(
+  File "/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/.venv/lib/python3.11/site-packages/torch/optim/adam.py", line 58, in __init__
+    if not 0.0 <= lr:
+           ^^^^^^^^^
+TypeError: '<=' not supported between instances of 'float' and 'str'
