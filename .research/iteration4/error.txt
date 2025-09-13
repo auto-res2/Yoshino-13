@@ -1,0 +1,38 @@
+Traceback (most recent call last):
+  File "/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/src/preprocess.py", line 67, in load_livebench
+    ds = load_dataset(repo_id, split=split, use_auth_token=os.getenv("HF_TOKEN"))
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/.venv/lib/python3.11/site-packages/datasets/load.py", line 1392, in load_dataset
+    builder_instance = load_dataset_builder(
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/.venv/lib/python3.11/site-packages/datasets/load.py", line 1132, in load_dataset_builder
+    dataset_module = dataset_module_factory(
+                     ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/.venv/lib/python3.11/site-packages/datasets/load.py", line 1025, in dataset_module_factory
+    raise e1 from None
+  File "/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/.venv/lib/python3.11/site-packages/datasets/load.py", line 980, in dataset_module_factory
+    raise DatasetNotFoundError(f"Dataset '{path}' doesn't exist on the Hub or cannot be accessed.") from e
+datasets.exceptions.DatasetNotFoundError: Dataset 'livebench/livebench-image-23' doesn't exist on the Hub or cannot be accessed.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/src/main.py", line 56, in <module>
+    main()
+  File "/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/src/main.py", line 52, in main
+    run_config(full_cfg)
+  File "/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/src/main.py", line 29, in run_config
+    trainer = SimpleTrainer(exp_name, exp_cfg)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/src/train.py", line 143, in __init__
+    self.dl_train = build_dataloader(cfg["dataset"], split="train")
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/src/preprocess.py", line 159, in build_dataloader
+    ds = load_livebench(name, split=split)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/src/preprocess.py", line 69, in load_livebench
+    raise RuntimeError(
+RuntimeError: Could not load required dataset 'livebench/livebench-image-23'. Original error: Dataset 'livebench/livebench-image-23' doesn't exist on the Hub or cannot be accessed..
+Per STRICT NO-FALLBACK rule we abort.

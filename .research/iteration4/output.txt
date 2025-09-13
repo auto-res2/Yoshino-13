@@ -1,0 +1,51 @@
+=== [PHASE 2/2] Full experiment start Sat Sep 13 04:32:46 AM UTC 2025 ===
+
+=== Running SMOKE TEST ===
+
+============================================
+Launching experiment: smoke_img
+============================================
+
+Files already downloaded and verified
+[exp:smoke_img] step 0000 loss=3.8825
+[exp:smoke_img] step 0010 loss=5.0000
+[exp:smoke_img] step 0020 loss=4.0841
+[exp:smoke_img] step 0030 loss=5.0625
+[exp:smoke_img] step 0040 loss=3.8750
+
+=== Numerical Results ===
+{
+  "experiment": "smoke_img",
+  "final_train_loss": 4.687500953674316,
+  "mean_train_loss": 4.487334184646606,
+  "steps": 50,
+  "figure": "iteration4/images/smoke_img_training_loss.pdf"
+}
+
+Figure saved → iteration4/images/smoke_img_training_loss.pdf
+
+============================================
+Launching experiment: smoke_txt
+============================================
+
+[exp:smoke_txt] step 0000 loss=1.8882
+[exp:smoke_txt] step 0010 loss=1.0076
+[exp:smoke_txt] step 0020 loss=1.6275
+
+=== Numerical Results ===
+{
+  "experiment": "smoke_txt",
+  "final_train_loss": 1.3589038848876953,
+  "mean_train_loss": 1.560953015089035,
+  "steps": 30,
+  "figure": "iteration4/images/smoke_txt_training_loss.pdf"
+}
+
+Figure saved → iteration4/images/smoke_txt_training_loss.pdf
+
+=== Running FULL EXPERIMENT ===
+
+============================================
+Launching experiment: exp1_oracle_img
+============================================
+
