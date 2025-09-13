@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / "data"
 
 #  Updated iteration folder as required by spec ----------------------
-RESEARCH_DIR = ROOT / ".research" / "iteration13"
+RESEARCH_DIR = ROOT / ".research" / "iteration14"
 IMAGES_DIR = RESEARCH_DIR / "images"
 
 # Ensure that all required directories exist -------------------------
@@ -146,8 +146,15 @@ class PromptDataset(Dataset):
     def __init__(self, jsonl_path: Path, tokenizer: AutoTokenizer, max_tokens: int = 512):
         # Ensure tokenizer has a padding token; many causal LMs (GPT-2, LLaMA) do not.
         if tokenizer.pad_token is None:
-            tokenizer.pad_token = tokenizer.eos_token
-            tokenizer.pad_token_id = tokenizer.eos_token_id
+            if tokenizer.eos_token is not None:
+                # Safest option: reuse *in-vocab* EOS token so we don't have to
+                # resize the model embedding matrix.
+                tokenizer.pad_token = tokenizer.eos_token
+                tokenizer.pad_token_id = tokenizer.eos_token_id
+            else:
+                # Absolute fallback – add a new token.  This should only happen
+                # for extremely niche tokenizers.
+                tokenizer.add_special_tokens({"pad_token": "<|pad|>"})
 
         self.samples = [json.loads(line)["text"] for line in open(jsonl_path, "r", encoding="utf-8")]
         self.tokenizer = tokenizer
