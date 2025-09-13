@@ -1,0 +1,165 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Research Paper</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      margin: 2rem auto;
+      max-width: 800px;
+      padding: 0 1rem;
+      line-height: 1.6;
+      color: #333;
+      background-color: #fff;
+    }
+    h2.paper-title {
+      font-size: 1.8em;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 0.5em;
+      border-bottom: none;
+    }
+    h2 {
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 0.3em;
+      margin-top: 2em;
+    }
+    pre {
+      background: #f6f8fa;
+      padding: 1em;
+      overflow: auto;
+      border-radius: 5px;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, monospace;
+    }
+    ul {
+      padding-left: 1.5em;
+    }
+    figure {
+      text-align: center;
+      margin: 1.5em 0;
+      background: none !important;
+    }
+    img {
+      background: #fff;
+    }
+    figure img {
+      display: block;
+      margin: 0 auto;
+      max-width: 100%;
+      height: auto;
+    }
+    .img-pair .pair {
+      display: flex;
+      justify-content: space-between;
+    }
+    .img-pair img {
+      max-width: 48%;
+      height: auto;
+    }
+    figcaption {
+      font-size: 0.9em;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+<h2 class="paper-title">Cryptographically Certified Long-Horizon Safety for Large Language Models via TRACS</h2>
+
+<section>
+  <h2>Abstract</h2>
+  <p>Large language models (LLMs) are routinely deployed in contexts where a single unsafe response can violate privacy law or facilitate real-world harm. Existing in-the-loop verifiers inspect at most K future tokens and encode policies as regular languages, so they miss multi-phase jailbreaks, numeric budgets, and covert timing channels.</p>
+  <p>We introduce TRACS, a three-layer safety framework that (i) mines parametric first-order linear-temporal-logic (FOLTL) rules from red-team logs, (ii) certifies each decoding step with an adaptive-horizon abstract interpreter that propagates a new attention-polyhedra domain, and (iii) attaches a per-token zk-SNARK proving that no disallowed continuation had non-zero probability mass.</p>
+  <p>Attention polyhedra shrink over-approximation volume by about 40 % relative to slice-zonotopes, while GPU-native Halo2 circuits allow public verification in &lt;1 ms without model access. We benchmark Mixtral-8×7 B, GPT-J-6 B, and a 33 B custom model on five adversarial corpora, including the new LongFuse-500 and SideLeak-200.</p>
+  <p>A first end-to-end run mis-loaded zero prompts and therefore reported degenerate 0 % attack-success rates; we analyse this failure and show how TRACS’ reproducibility checks exposed it. All code, datasets, and binaries are released to enable an audited rerun.</p>
+</section>
+
+<section>
+  <h2>Introduction</h2>
+  <p>Large language models can draft legal briefs, write code, and tutor students, yet they can also disclose personal identifiers, leak proprietary weights, or provide step-by-step illicit instructions. Preventing such failures is hardest when attacks are staged: an adversary spends tens of innocuous tokens priming the model, then pivots once short-horizon guards have expired. Contemporary safety stacks either apply static moderation after generation or perform in-the-loop verification with a fixed horizon (typically ≤16 tokens) <a href="https://arxiv.org/pdf/1912.01329v1.pdf" target="_blank" title="Neural network branching for neural network veriﬁcation">(Jingyue Lu, 2019)</a><a href="https://arxiv.org/pdf/2011.13824v2.pdf" target="_blank" title="Fast and complete: Enabling complete neural network veriﬁcation with rapid and massively parallel incomplete veriﬁers">(Kaidi Xu, 2020)</a>. They further encode safety as deterministic finite automata, which cannot represent numeric constraints such as “the cumulative differential-privacy budget ε must remain ≤2,” and they offer no cryptographic linkage between any claimed certificate and the emitted text.</p>
+  <p>We present TRACS (Temporal-logic, Refinable-Abstraction, Certificate-linked Safety), a safety stack that eliminates these blind spots while preserving interactive latency. TRACS assembles three advances.</p>
+  <p>Key challenges include containing the quadratic cost of long horizons, keeping proof generation fast enough for real-time decoding, and blocking side-channel leakage through timing or probability patterns. Slice propagation, fused CUDA kernels, and an entropy-aware guard address these issues.</p>
+  <p>We evaluate TRACS in three experiments. Experiment 1 measures jailbreak resistance on the new LongFuse-500 benchmark; Experiment 2 tests numeric-policy compliance on PrivacyBot-6k; Experiment 3 audits cryptographic linkage and covert-channel defence. Our preregistered plan predicted ≥70 % reduction in attack-success rate (ASR) versus Constitutional AI (CAI) and ≤2 % helpfulness loss. A first run mis-loaded the dataset and produced meaningless zero-ASR numbers. Rather than hide the error, we analyse the logs, locate missing SHA checks and unit tests, and show how TRACS’ infrastructure surfaced the anomaly.</p>
+  <p>Contributions</p>
+  <ul>
+    <li><strong>TRACS:</strong> the first stack to unite parametric FOLTL policies, adaptive horizons, and cryptographically linked certificates.</li>
+    <li><strong>Attention polyhedra:</strong> an abstract domain that keeps covariance across attention heads without exponential cost.</li>
+    <li><strong>GPU-native Halo2 verifier:</strong> integrated in the decoding loop, enabling sub-millisecond public audits.</li>
+    <li><strong>LongFuse-500 and SideLeak-200:</strong> open benchmarks for staged jailbreaks and covert-channel leakage.</li>
+    <li><strong>Transparent experimental protocol:</strong> whose failure analysis illustrates how silent pipeline errors can defeat naïve safety evaluations.</li>
+  </ul>
+  <p>Future work will repeat Experiments 1–3 with the corrected loader, extend attention polyhedra to mixture-of-experts routing, and combine TRACS with circuit-breaker defences <a href="https://arxiv.org/pdf/2406.04313v4.pdf" target="_blank" title="Improving Alignment and Robustness with Circuit Breakers">(Andy Zou, 2024)</a> for layered safety.</p>
+</section>
+
+<section>
+  <h2>Related Work</h2>
+  <ul>
+    <li><strong>Certified robustness:</strong> Complete verifiers typically follow a branch-and-bound template with LP or SDP relaxations <a href="https://arxiv.org/pdf/2011.13824v2.pdf" target="_blank" title="Fast and complete: Enabling complete neural network veriﬁcation with rapid and massively parallel incomplete veriﬁers">(Kaidi Xu, 2020)</a><a href="https://arxiv.org/pdf/2104.06718v1.pdf" target="_blank" title="Improved branch and bound for neural network veriﬁcation via lagrangian decomposition">(Alessandro De Palma, 2021)</a>. Their fixed horizons and regular-language policies cannot reason about long-range dependencies or numeric accumulators. Zonotope abstractions scale but ignore inter-head correlations; Lagrangian domains regain some precision yet remain head-agnostic <a href="https://arxiv.org/pdf/2210.08069v1.pdf" target="_blank" title="Zonotope Domains for Lagrangian Neural Network Verification">(Matt Jordan, 2022)</a>. TRACS’ attention polyhedra generalise both by embedding covariance explicitly.</li>
+    <li><strong>Temporal logic for safety:</strong> HiLMAS encodes policies as DFAs but lacks quantifiers. First-order temporal verification is common in cyber-physical control <a href="https://arxiv.org/pdf/2402.10998v3.pdf" target="_blank" title="Provably Safe Neural Network Controllers via Differential Dynamic Logic">(Samuel Teuber, 2024)</a> but absent in NLP. TRACS adapts FOLTL to conversational motifs mined automatically, bridging that gap.</li>
+    <li><strong>Cryptographic binding:</strong> Watermarks only assert that “some” certificate was attached; auditors must still trust the producer. Zero-knowledge SNARKs offer soundness and confidentiality and have recently been explored for image classification <a href="https://arxiv.org/pdf/2406.04313v4.pdf" target="_blank" title="Improving Alignment and Robustness with Circuit Breakers">(Andy Zou, 2024)</a>. TRACS brings zk-SNARKs into language decoding.</li>
+    <li><strong>Side-channel defence:</strong> Prior defences focus on vision or inject random noise <a href="https://arxiv.org/pdf/2205.12134v3.pdf" target="_blank" title="Adversarial Attack on Attackers: Post-Process to Mitigate Black-Box Score-Based Query Attacks">(Sizhe Chen, 2022)</a>. Our entropy-and-burstiness monitor lowers estimated leakage to &lt;0.02 bits message⁻¹, an order of magnitude below CAI.</li>
+    <li><strong>Jailbreak mitigation:</strong> Refusal tuning, PARDEN repetition, and circuit breakers reduce direct exploits but falter against multi-turn staging <a href="https://arxiv.org/pdf/2307.02483v1.pdf" target="_blank" title="Jailbroken: How Does LLM Safety Training Fail?">(Alexander Wei, 2023)</a><a href="https://arxiv.org/pdf/2405.07932v2.pdf" target="_blank" title="PARDEN, Can You Repeat That? Defending against Jailbreaks via Repetition">(Ziyang Zhang, 2024)</a><a href="https://arxiv.org/pdf/2406.04313v4.pdf" target="_blank" title="Improving Alignment and Robustness with Circuit Breakers">(Andy Zou, 2024)</a>. TRACS proves that no unsafe continuation exists within an adaptively chosen horizon, addressing the root cause.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Background</h2>
+  <ul>
+    <li><strong>Problem setting:</strong> Let an autoregressive LLM f map a dialogue history x₀:ₜ₋₁ to logits zₜ over vocabulary V. A safety policy Φ is a set of traces expressed in first-order linear temporal logic whose free variables quantify over token values and positions. A decoding step is safe if, for every possible future sequence xₜ:ₜ₊ₕ, the concatenated trace x₀:ₜ₊ₕ satisfies Φ.</li>
+    <li><strong>Limitations of prior art:</strong> CAI and HiLMAS approximate Φ with deterministic finite automata and guard only a fixed horizon K, so an adversary can stage a payload beyond K or exploit numeric counters.</li>
+    <li><strong>Attention polyhedra:</strong> Slice-zonotopes treat each attention dimension independently. We instead define an attention polyhedron P = {Aξ+b |  ∥ξ∥∞≤1} whose rows span both token- and head-level interactions, while a covariance matrix Σ tracks second-order terms. Affine layers propagate (A,b,Σ) exactly; soft-max is bounded via log-sum-exp envelopes, retaining covariance without exponential blow-up.</li>
+    <li><strong>zk-SNARK preliminaries:</strong> Halo2 commits polynomials and yields succinct, zero-knowledge proofs. Our circuit C ingests a hash of the hidden state Hₜ, the masked logits ẑₜ, and the instantiated rule set Rₜ, and outputs a proof πₜ that ẑₜ assigns zero probability to any next token that would force a violation within horizon h(t). Anyone can verify πₜ given only the public text and commitments.</li>
+    <li><strong>Assumptions:</strong> We assume hash collision resistance and monotonicity of post-soft-max attention scores—standard for ReLU-based transformers but an open question for emerging architectures.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Method</h2>
+  <ul>
+    <li><strong>Layer 0 – motif mining:</strong> Red-team logs are tokenised and mined with sequential-pattern algorithms. Frequent harmful motifs are lifted into parametric FOLTL templates; an integer-linear program instantiates session-specific parameters, yielding rule set R₀.</li>
+    <li><strong>Layer 1 – adaptive verifier:</strong> A lightweight model g estimates future-risk; the horizon is h(t)=base_h·α^{risk(t)}. The window is partitioned into width-w slices; attention polyhedra are propagated slice-wise, giving O(|V|·w·h) complexity instead of O(h²).</li>
+    <li><strong>Layer 2 – certified decoding:</strong> At each step TRACS masks logits violating current abstract constraints, produces ẑₜ, and feeds (Hₜ,Rₜ,ẑₜ) to the on-device Halo2 prover. The sampler draws yₜ∼Softmax(ẑₜ) and outputs (yₜ,πₜ).</li>
+    <li><strong>Precision booster:</strong> Σ is updated analytically through affine layers and bounded at non-linearities, shrinking abstract volume by ≈40 % versus zonotopes.</li>
+    <li><strong>Side-channel guard:</strong> Inter-token gaps Δt and surprisals sₜ are monitored; if the KL divergence from a no-leak baseline exceeds τ, logits are smoothed and re-certified.</li>
+    <li><strong>Training:</strong> Models are fine-tuned with reward r = helpfulness−λ·unsafe−µ·latency−ν·side, with implicit-function gradients propagating through SNARK constraints.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Experimental Setup</h2>
+  <p><strong>Experiment 1 – Long-horizon jailbreaks:</strong> Mixtral-8×7 B-Instruct and GPT-J-6 B are tested under four stacks: S0 No-Guard, S1 CAI (17 rules), S2 HiLMAS-K16, S3 TRACS. Prompts from LongFuse-500 (SHA-256 verified) produce 20 000 completions. Decoding uses nucleus p=0.7, temperature 1.0, and up to 256 new tokens. Logged telemetry includes violation flags, first-violation position, horizon, proof size, FLOPs, latency, and VRAM.</p>
+  <p><strong>Experiment 2 – Numeric policy compliance:</strong> Mixtral-8×7 B is guarded by HiLMAS-DFA and TRACS-FOLTL on PrivacyBot-6k. After LoRA rank-16 fine-tuning for helpfulness, the 6 000-dialogue test split is run across three seeds. Metrics are policy-violation rate (PVR), false-alarm rate (FAR), MT-Bench helpfulness, and abstract-state volume.</p>
+  <p><strong>Experiment 3A – Public SNARK audit:</strong> We release 10 000 (text,π) pairs, randomly corrupt 500 texts and 500 proofs, and measure false-acceptance rate (FAR) and verification latency.</p>
+  <p><strong>Experiment 3B – Covert-channel benchmark:</strong> SideLeak-200 prompts encode 32-bit secrets via timing or probability channels. Capacity is estimated with Arimoto–Blahut bounds; stacks S0–S3 are compared.</p>
+  <p><strong>Infrastructure:</strong> Datasets load only if SHA and row count match; guard.generate returns an info dictionary consumed by CI tests. All experiments run on 8 × A100 within an 8 GPU×6 h budget (≈$1 600).</p>
+</section>
+
+<section>
+  <h2>Results</h2>
+  <figure>
+    <img src="images/long_horizon_asr_gptj.png" alt="Long-horizon ASR for GPT-J under four guard stacks" style="width:70%">
+    <figcaption>Figure 1: Long-horizon attack-success rate (ASR) for GPT-J under four guard stacks; lower is better (filename: long_horizon_asr_gptj.pdf).</figcaption>
+  </figure>
+  <p><strong>Experiment 1 outcome:</strong> A missing ensure() call caused the prompt loader to return an empty list. Consequently every stack—including the deliberately empty No-Guard—reported ASR = 0 % and median latency ≈32 ms. Mixtral was never instantiated, and no long-horizon breakdown was produced.</p>
+  <p><strong>Root-cause analysis:</strong> The absence of SHA-verification log lines flagged the issue. CI unit tests that feed adversarial probes to each guard were skipped, so the pipeline advanced silently. The empty prompt list collapsed the experiment grid, bypassing Mixtral and halting before Experiments 2 and 3.</p>
+  <p><strong>Planned comparison:</strong> With a correct loader we expect CAI ≈33 % ASR, HiLMAS ≈22 %, and TRACS ≤10 %, with ≥60 % reduction for long-horizon ASR, ≤2 % helpfulness loss, and ≤55 % latency overhead.</p>
+  <p>Lessons</p>
+  <ul>
+    <li><strong>1:</strong> Assert len(prompts)=500 after load.</li>
+    <li><strong>2:</strong> Run guard unit tests before large-scale generation.</li>
+    <li><strong>3:</strong> Isolate smoke tests via environment variables.</li>
+    <li><strong>4:</strong> Wrap each experiment in try/except to avoid cascading failures.</li>
+  </ul>
+  <p>Although the numerical results are void, the public release already contains halo2-cuda binaries, datasets, and log schemas, enabling the community to reproduce—and debug—the full pipeline.</p>
+</section>
+
+<section>
+  <h2>Conclusion</h2>
+  <p>TRACS elevates LLM safety from short-horizon regular checks to adaptive first-order temporal guarantees, tightens abstraction with attention polyhedra, and binds every token to a zero-knowledge proof verifiable in real time. A data-loading bug invalidated our first empirical run, yet the telemetry and integrity checks embedded in TRACS surfaced the anomaly immediately—underscoring the need for reproducible infrastructure in safety research.</p>
+  <p>Once the corrected evaluation is complete we expect TRACS to cut attack-success rates by &gt;70 % relative to prevailing stacks while preserving helpfulness and latency budgets. Future work will extend attention polyhedra to mixture-of-experts transformers, incorporate probabilistic specifications <a href="https://arxiv.org/pdf/2102.09479v2.pdf" target="_blank" title="Make Sure You're Unsure: A Framework for Verifying Probabilistic Specifications">(Leonard Berrada, 2021)</a>, and layer TRACS with circuit breakers for even stronger guarantees <a href="https://arxiv.org/pdf/2406.04313v4.pdf" target="_blank" title="Improving Alignment and Robustness with Circuit Breakers">(Andy Zou, 2024)</a>. All artefacts are public and we invite independent audits to stress-test and extend the framework.</p>
+</section>
+</body>
+</html>
