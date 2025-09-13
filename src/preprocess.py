@@ -1,7 +1,5 @@
-# src/preprocess.py
-"""Data loading, preprocessing and Hugging-Face Hub download helpers."""
-import json
 from pathlib import Path
+import json
 from typing import Dict, Optional
 
 from huggingface_hub import snapshot_download
@@ -13,7 +11,7 @@ ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / "data"
 
 #  Updated iteration folder as required by spec ----------------------
-RESEARCH_DIR = ROOT / ".research" / "iteration14"
+RESEARCH_DIR = ROOT / ".research" / "iteration15"  # <<<< updated >>>>
 IMAGES_DIR = RESEARCH_DIR / "images"
 
 # Ensure that all required directories exist -------------------------
@@ -144,17 +142,26 @@ class PromptDataset(Dataset):
     """A minimal JSONL prompt dataset with a `text` field."""
 
     def __init__(self, jsonl_path: Path, tokenizer: AutoTokenizer, max_tokens: int = 512):
-        # Ensure tokenizer has a padding token; many causal LMs (GPT-2, LLaMA) do not.
-        if tokenizer.pad_token is None:
+        # ------------------------------------------------------------------
+        # Ensure the tokenizer has a valid PAD token.  Some causal LMs (GPT-2,
+        # LLaMA) are trained without one which breaks `padding=...` in the
+        # encoding call unless we fix it here.
+        # ------------------------------------------------------------------
+        if tokenizer.pad_token_id is None:
             if tokenizer.eos_token is not None:
-                # Safest option: reuse *in-vocab* EOS token so we don't have to
-                # resize the model embedding matrix.
+                # Re-use an existing special token so we don't have to resize
+                # the embedding matrix (safe for inference-only scenarios).
                 tokenizer.pad_token = tokenizer.eos_token
-                tokenizer.pad_token_id = tokenizer.eos_token_id
             else:
-                # Absolute fallback – add a new token.  This should only happen
-                # for extremely niche tokenizers.
+                # Absolute fallback – add a new PAD token that *is* in the
+                # vocabulary afterwards.
                 tokenizer.add_special_tokens({"pad_token": "<|pad|>"})
+
+            # `tokenizer.add_special_tokens` does *not* automatically update
+            # `pad_token_id` when the token already exists, so we set it again
+            # defensively to guarantee it is non-None.
+            if tokenizer.pad_token_id is None:
+                tokenizer.pad_token_id = tokenizer.convert_tokens_to_ids(tokenizer.pad_token)
 
         self.samples = [json.loads(line)["text"] for line in open(jsonl_path, "r", encoding="utf-8")]
         self.tokenizer = tokenizer
