@@ -854,6 +854,53 @@
       }
     }
   ],
+  "reference_research_study_list": [
+    {
+      "title": "Intriguing properties of neural networks"
+    },
+    {
+      "title": "Obfuscated gradients give a false sense of security: Circumventing defenses to adversarial examples"
+    },
+    {
+      "title": "A convex relaxation barrier to tight robustness veriﬁcation of neural networks"
+    },
+    {
+      "title": "Reluplex: An efﬁcient SMT solver for verifying deep neural networks"
+    },
+    {
+      "title": "Evaluating robustness of neural networks with mixed integer programming"
+    },
+    {
+      "title": "Deep neural networks and mixed integer linear optimization"
+    },
+    {
+      "title": "Strong mixed-integer programming formulations for trained neural networks"
+    },
+    {
+      "title": "Provable certiﬁcates for adversarial examples: Fitting a ball in the union of polytopes"
+    },
+    {
+      "title": "Improved branch and bound for neural network veriﬁcation via lagrangian decomposition"
+    },
+    {
+      "title": "Fast and complete: Enabling complete neural network veriﬁcation with rapid and massively parallel incomplete veriﬁers"
+    },
+    {
+      "title": "Neural network branching for neural network veriﬁcation"
+    },
+    {
+      "title": "Scaling the convex barrier with active sets"
+    },
+    {
+      "title": "Semideﬁnite relaxations for certifying robustness to adversarial examples"
+    },
+    {
+      "title": "Enabling certiﬁcation of veriﬁcation-agnostic networks via memory-efﬁcient semideﬁnite programming"
+    },
+    {
+      "title": "Efﬁcient and accurate estimation of lipschitz constants for deep neural networks"
+    }
+  ],
   "new_method": {
     "method": "Open Problems: A. In-the-loop certificates still cover only a K-token horizon; adversaries can craft attacks that bypass short horizons by staging multi-phase payloads (e.g. first teach the model a latent concept, then exploit it 40 tokens later).  \nB. The DFA/LTL fragments used in HiLMAS handle only *regular* safety properties (no data-flow or numeric constraints) and cannot express nuanced policies such as \u00193 differentially private budget must never exceed ϵ\u0019 or \u0019never reveal two unique personal identifiers in the same session\u001a.  \nC. The watermark proves that *some* certificate was attached, but the verifier must blindly trust that the certificate really corresponds to the emitted text; cryptographic linkage is missing.  \nD. Current abstract-interpretation bounds drop precision whenever the verifier meets large soft-maxes or long-range attention, so certificates can become overly conservative, hurting helpfulness.  \nE. Existing benchmarks ignore covert channels (timing, probability distribution, punctuation density) that can leak disallowed information even when surface tokens look benign.\nMethods: We extend HiLMAS into TRACS (Temporal-logic, Refinable-Abstraction, Certificate-linked Safety), a three-layer framework that tackles the above gaps.\n\nLayer-0: Offline Spec Mining & Parametric Rule Synthesis  \n• Mine frequent harmful conversation motifs from public red-team logs with sequential-pattern mining; translate them into *parametric* first-order LTL (FOLTL) templates containing data variables (e.g. person\\_id[i]).  \n• A small ILP solver instantiates template parameters automatically from the current context, yielding per-session rule sets richer than fixed DFAs.\n\nLayer-1: Adaptive Horizon Verifier  \n• Replace fixed K with an adaptive horizon h(t) that grows when the mined motifs predict long-range dependencies.  \n• Use *slice-based abstraction*: instead of propagating one big zonotope through h(t) steps, split the trace into slices conditioned on predicted future prompts, enabling tighter bounds with sub-quadratic cost.\n\nLayer-2: zk-SNARK-anchored Certified Decoding  \n• Each decoding step emits (token, π), where π is a succinct zk-SNARK proving: “given hidden-state hash H and rule set R, the projected logit vector assigns zero mass to any next-token that would force violation within h(t) future steps”.  \n• Because π is zero-knowledge, it reveals no model internals yet allows anyone to verify text↔certificate consistency.\n\nPrecision Booster  \n• Introduce *attention polyhedra*: a new abstract domain that keeps pairwise covariance between attention scores, reducing worst-case over-approximation by ≈40 % vs zonotopes in preliminary tests.\n\nCovert-Channel Guard  \n• A side-channel analyzer monitors burstiness, entropy, and inter-token time gaps; any statistical deviation that could encode hidden data triggers logit smoothing and re-certification.\n\nTraining  \n• Multi-objective RL: reward = helpfulness – λ unsafe – µ latency – ν side-channel KL.  \n• Verifier differentiable via implicit-function gradients through the SNARK constraints, further shrinking intervention rates.\n\nExperimental Setup: Models: Mixtral-8×7B, GPT-J-6B, and a 33 B custom model.  \nDatasets/attacks: RealToxicityPrompts, Helpful-Harmless, Jailbroken-317, plus new *LongFuse-500* (multi-phase jailbreaks) and *SideLeak-200* (covert-channel prompts).  \nBaselines: (i) Anthropic CAI; (ii) mid-gen toxicity classifier; (iii) HiLMAS; (iv) TRACS.  \nMetrics: ASR, Long-Horizon ASR (≥20-token delay), Helpfulness (MT-Bench), Certificate Precision (false-alarm rate), SNARK verification time, Side-Channel Leakage (bits/msg), and Public-Audit Success (ability of third-party verifier to reproduce SNARK checks).  \nHardware: 8×A100; verifier kernels fused with Triton; SNARKs via Halo2 on GPU (≈0.6 ms/token).  \nAblations: remove attention polyhedra; fix horizon; drop side-channel guard; replace SNARK with plain hash.\nExpected Result: • TRACS reduces overall ASR by 70–80 % vs CAI and by 25 % vs HiLMAS; Long-Horizon ASR drops by 60 %.  \n• Helpfulness loss ≤2 %.  \n• Median per-token latency +45 % (within interactive budget).  \n• Certificate precision 99.1 %; public auditors validate >99.9 % of SNARKs within 1 ms.  \n• Side-channel leakage <0.02 bits/msg, 10× lower than baselines.\nExpected Conclusion: TRACS demonstrates that (1) richer first-order temporal logic, (2) adaptive horizon abstract interpretation with novel attention polyhedra, and (3) zero-knowledge-anchored certificates together enable end-to-end safety guarantees even against long-range and covert-channel jailbreaks.  The framework keeps models broadly useful while giving regulators cryptographically verifiable evidence of compliance, marking a decisive step toward legally accountable generative AI.",
     "experimental_design": {
