@@ -22,17 +22,42 @@ from .preprocess import build_dataloader
 
 # -----------------------------------------------------------------------------
 #  Differentiable Top-k (Gumbel-Sinkhorn) – identical to original implementation
+#    but now robust to the case k > len(scores)
 # -----------------------------------------------------------------------------
 
 def gumbel_sinkhorn_topk(scores: torch.Tensor, k: int, tau: float) -> torch.Tensor:
-    """Return soft k-hot selection vector via Gumbel-Softmax."""
+    """Return soft k-hot selection vector via Gumbel-Softmax.
+
+    The original implementation assumed k ≤ len(scores).  If k is larger than
+    the number of available items (e.g. small batch sizes in smoke tests),
+    `torch.topk` throws an error.  We therefore clamp *k* to the valid range
+    while keeping the gradient-flow intact.  This change preserves the
+    mathematical behaviour in the valid regime and gracefully degrades to a
+    full-support softmax when k exceeds the support size.
+    """
+    # ------------------------------------------------------------------
+    # 1. Sample Gumbel noise & compute relaxed category probabilities
+    # ------------------------------------------------------------------
     gumbel_noise = -torch.empty_like(scores).exponential_().log()  # ~Gumbel(0,1)
     y = (scores + gumbel_noise) / tau
     probs = F.softmax(y, dim=-1)
-    # keep only the mass of the top-k entries (still differentiable)
-    topk_vals, topk_idx = probs.topk(k)
+
+    # ------------------------------------------------------------------
+    # 2. Select (soft) top-k entries.  Guard against k > |scores|.
+    # ------------------------------------------------------------------
+    support_size = probs.shape[-1]
+    k_eff = min(k, support_size)  # effective k
+    if k_eff == support_size:
+        # Nothing to mask – return the original probabilities.  This retains
+        # differentiability and avoids creating zero-masks that would kill
+        # gradient flow when k ≥ support_size.
+        return probs
+
+    topk_vals, topk_idx = probs.topk(k_eff, dim=-1)
+
+    # Create a mask with the same shape as probs and scatter the selected mass
     mask = torch.zeros_like(probs)
-    mask.scatter_(1, topk_idx, topk_vals)
+    mask.scatter_(-1, topk_idx, topk_vals)
     return mask
 
 
@@ -161,10 +186,10 @@ class SimpleTrainer:
 
         # bookkeeping & output paths -----------------------------------
         root = Path(__file__).resolve().parent.parent
-        # Mandatory iteration6 paths (spec requirement)
-        self.img_dir = root / ".research" / "iteration6" / "images"
+        # Mandatory iteration7 paths (spec requirement)
+        self.img_dir = root / ".research" / "iteration7" / "images"
         self.img_dir.mkdir(parents=True, exist_ok=True)
-        self.res_dir = root / ".research" / "iteration6"
+        self.res_dir = root / ".research" / "iteration7"
         self.res_dir.mkdir(parents=True, exist_ok=True)
         self.loss_history: List[float] = []
 
