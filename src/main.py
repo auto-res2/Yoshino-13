@@ -101,6 +101,13 @@ def main():
     # Phase 2 – full experiment (optional) --------------------------------------
     if run_full and not args.smoke_test:
         cfg_full = _load_cfg(FULL_CFG_PATH)
+        # Fail fast if private resources are requested but no token is present.
+        if cfg_full.get("_hf_token") in (None, ""):
+            print(
+                "[ERROR] Full experiment requires access to private models/datasets. "
+                "Please provide a valid HuggingFace token via --hf-token or the HF_TOKEN environment variable."
+            )
+            sys.exit(1)
         _run_experiments(cfg_full, smoke=False)
 
 
