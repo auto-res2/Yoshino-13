@@ -1,0 +1,6 @@
+=== uv sync start Sat Sep 13 07:23:42 AM UTC 2025 ===
+=== uv install end Sat Sep 13 07:24:50 AM UTC 2025 ===
+=== [PHASE 1/2] Smoke test start Sat Sep 13 07:24:50 AM UTC 2025 ===
+
+==== EXPERIMENT 1 – SOIC Leakage-Stress Test ====
+[Variant base] loading …
