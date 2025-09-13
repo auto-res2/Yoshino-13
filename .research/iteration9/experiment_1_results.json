@@ -1,0 +1,20 @@
+{
+  "gptj": {
+    "no-guard": {
+      "ASR": 0.0,
+      "median_latency_ms": 31.786908220965415
+    },
+    "cai": {
+      "ASR": 0.0,
+      "median_latency_ms": 31.58927772892639
+    },
+    "hilmas": {
+      "ASR": 0.0,
+      "median_latency_ms": 31.680490006692708
+    },
+    "tracs": {
+      "ASR": 0.0,
+      "median_latency_ms": 31.620036519598216
+    }
+  }
+}

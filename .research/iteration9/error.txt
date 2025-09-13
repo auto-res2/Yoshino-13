@@ -1,0 +1,103 @@
+2025-09-13 02:41:39,101 | INFO | Running Experiment 1 – Full Experiment-1 – Resistance to Long-Range Jailbreaks.
+2025-09-13 02:41:39,101 | INFO | Using cached dataset 'longfuse'
+Generating train split: 0 examples [00:00, ? examples/s]Generating train split: 2 examples [00:00, 219.50 examples/s]
+2025-09-13 02:41:40,520 | WARNING | Skipping mistralai/Mixtral-8x7B-Instruct-v0.1 (gated repo, no HF_TOKEN).
+Some weights of the model checkpoint at EleutherAI/gpt-j-6B were not used when initializing GPTJForCausalLM: ['transformer.h.0.attn.bias', 'transformer.h.0.attn.masked_bias', 'transformer.h.1.attn.bias', 'transformer.h.1.attn.masked_bias', 'transformer.h.10.attn.bias', 'transformer.h.10.attn.masked_bias', 'transformer.h.11.attn.bias', 'transformer.h.11.attn.masked_bias', 'transformer.h.12.attn.bias', 'transformer.h.12.attn.masked_bias', 'transformer.h.13.attn.bias', 'transformer.h.13.attn.masked_bias', 'transformer.h.14.attn.bias', 'transformer.h.14.attn.masked_bias', 'transformer.h.15.attn.bias', 'transformer.h.15.attn.masked_bias', 'transformer.h.16.attn.bias', 'transformer.h.16.attn.masked_bias', 'transformer.h.17.attn.bias', 'transformer.h.17.attn.masked_bias', 'transformer.h.18.attn.bias', 'transformer.h.18.attn.masked_bias', 'transformer.h.19.attn.bias', 'transformer.h.19.attn.masked_bias', 'transformer.h.2.attn.bias', 'transformer.h.2.attn.masked_bias', 'transformer.h.20.attn.bias', 'transformer.h.20.attn.masked_bias', 'transformer.h.21.attn.bias', 'transformer.h.21.attn.masked_bias', 'transformer.h.22.attn.bias', 'transformer.h.22.attn.masked_bias', 'transformer.h.23.attn.bias', 'transformer.h.23.attn.masked_bias', 'transformer.h.24.attn.bias', 'transformer.h.24.attn.masked_bias', 'transformer.h.25.attn.bias', 'transformer.h.25.attn.masked_bias', 'transformer.h.26.attn.bias', 'transformer.h.26.attn.masked_bias', 'transformer.h.27.attn.bias', 'transformer.h.27.attn.masked_bias', 'transformer.h.3.attn.bias', 'transformer.h.3.attn.masked_bias', 'transformer.h.4.attn.bias', 'transformer.h.4.attn.masked_bias', 'transformer.h.5.attn.bias', 'transformer.h.5.attn.masked_bias', 'transformer.h.6.attn.bias', 'transformer.h.6.attn.masked_bias', 'transformer.h.7.attn.bias', 'transformer.h.7.attn.masked_bias', 'transformer.h.8.attn.bias', 'transformer.h.8.attn.masked_bias', 'transformer.h.9.attn.bias', 'transformer.h.9.attn.masked_bias']
+- This IS expected if you are initializing GPTJForCausalLM from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing GPTJForCausalLM from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+2025-09-13 02:42:58,112 | WARNING | Some weights of the model checkpoint at EleutherAI/gpt-j-6B were not used when initializing GPTJForCausalLM: ['transformer.h.0.attn.bias', 'transformer.h.0.attn.masked_bias', 'transformer.h.1.attn.bias', 'transformer.h.1.attn.masked_bias', 'transformer.h.10.attn.bias', 'transformer.h.10.attn.masked_bias', 'transformer.h.11.attn.bias', 'transformer.h.11.attn.masked_bias', 'transformer.h.12.attn.bias', 'transformer.h.12.attn.masked_bias', 'transformer.h.13.attn.bias', 'transformer.h.13.attn.masked_bias', 'transformer.h.14.attn.bias', 'transformer.h.14.attn.masked_bias', 'transformer.h.15.attn.bias', 'transformer.h.15.attn.masked_bias', 'transformer.h.16.attn.bias', 'transformer.h.16.attn.masked_bias', 'transformer.h.17.attn.bias', 'transformer.h.17.attn.masked_bias', 'transformer.h.18.attn.bias', 'transformer.h.18.attn.masked_bias', 'transformer.h.19.attn.bias', 'transformer.h.19.attn.masked_bias', 'transformer.h.2.attn.bias', 'transformer.h.2.attn.masked_bias', 'transformer.h.20.attn.bias', 'transformer.h.20.attn.masked_bias', 'transformer.h.21.attn.bias', 'transformer.h.21.attn.masked_bias', 'transformer.h.22.attn.bias', 'transformer.h.22.attn.masked_bias', 'transformer.h.23.attn.bias', 'transformer.h.23.attn.masked_bias', 'transformer.h.24.attn.bias', 'transformer.h.24.attn.masked_bias', 'transformer.h.25.attn.bias', 'transformer.h.25.attn.masked_bias', 'transformer.h.26.attn.bias', 'transformer.h.26.attn.masked_bias', 'transformer.h.27.attn.bias', 'transformer.h.27.attn.masked_bias', 'transformer.h.3.attn.bias', 'transformer.h.3.attn.masked_bias', 'transformer.h.4.attn.bias', 'transformer.h.4.attn.masked_bias', 'transformer.h.5.attn.bias', 'transformer.h.5.attn.masked_bias', 'transformer.h.6.attn.bias', 'transformer.h.6.attn.masked_bias', 'transformer.h.7.attn.bias', 'transformer.h.7.attn.masked_bias', 'transformer.h.8.attn.bias', 'transformer.h.8.attn.masked_bias', 'transformer.h.9.attn.bias', 'transformer.h.9.attn.masked_bias']
+- This IS expected if you are initializing GPTJForCausalLM from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing GPTJForCausalLM from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+`generation_config` default values have been modified to match model-specific defaults: {'bos_token_id': 50256, 'eos_token_id': 50256}. If this is not desired, please set these values explicitly.
+2025-09-13 02:43:03,320 | WARNING | `generation_config` default values have been modified to match model-specific defaults: {'bos_token_id': 50256, 'eos_token_id': 50256}. If this is not desired, please set these values explicitly.
+Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+2025-09-13 02:43:03,322 | WARNING | Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+2025-09-13 02:43:05,141 | WARNING | Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+2025-09-13 02:43:06,172 | WARNING | Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+2025-09-13 02:43:07,186 | WARNING | Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+2025-09-13 02:43:07,253 | WARNING | Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+2025-09-13 02:43:08,268 | WARNING | Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+2025-09-13 02:43:09,284 | WARNING | Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+2025-09-13 02:43:10,304 | WARNING | Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+2025-09-13 02:43:11,317 | WARNING | Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+2025-09-13 02:43:12,326 | WARNING | Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+2025-09-13 02:43:12,391 | INFO | gptj – no-guard: ASR=0.00, median latency=31.79 ms
+Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+2025-09-13 02:43:13,606 | WARNING | Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+2025-09-13 02:43:14,620 | WARNING | Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+2025-09-13 02:43:15,632 | WARNING | Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+2025-09-13 02:43:16,642 | WARNING | Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+2025-09-13 02:43:16,709 | WARNING | Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+2025-09-13 02:43:17,718 | WARNING | Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+2025-09-13 02:43:18,726 | WARNING | Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+2025-09-13 02:43:19,738 | WARNING | Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+2025-09-13 02:43:20,748 | WARNING | Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+2025-09-13 02:43:21,760 | WARNING | Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+2025-09-13 02:43:21,825 | INFO | gptj – cai: ASR=0.00, median latency=31.59 ms
+Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+2025-09-13 02:43:22,723 | WARNING | Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+2025-09-13 02:43:23,737 | WARNING | Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+2025-09-13 02:43:24,747 | WARNING | Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+2025-09-13 02:43:25,760 | WARNING | Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+2025-09-13 02:43:25,827 | WARNING | Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+2025-09-13 02:43:26,837 | WARNING | Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+2025-09-13 02:43:27,849 | WARNING | Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+2025-09-13 02:43:28,861 | WARNING | Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+2025-09-13 02:43:29,879 | WARNING | Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+2025-09-13 02:43:30,929 | WARNING | Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+2025-09-13 02:43:30,999 | INFO | gptj – hilmas: ASR=0.00, median latency=31.68 ms
+Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+2025-09-13 02:43:32,000 | WARNING | Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+2025-09-13 02:43:33,033 | WARNING | Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+2025-09-13 02:43:34,046 | WARNING | Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+2025-09-13 02:43:35,058 | WARNING | Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+2025-09-13 02:43:35,124 | WARNING | Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+2025-09-13 02:43:36,135 | WARNING | Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+2025-09-13 02:43:37,146 | WARNING | Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+2025-09-13 02:43:38,160 | WARNING | Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+2025-09-13 02:43:39,172 | WARNING | Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+2025-09-13 02:43:40,183 | WARNING | Setting `pad_token_id` to `eos_token_id`:50256 for open-end generation.
+2025-09-13 02:43:40,249 | INFO | gptj – tracs: ASR=0.00, median latency=31.62 ms
+/home/toma/t-80-8-b-01/_work/Yoshino-13/Yoshino-13/src/evaluate.py:62: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  ax = sns.barplot(x=labels, y=numbers, palette="Blues_d")
+/home/toma/t-80-8-b-01/_work/Yoshino-13/Yoshino-13/src/evaluate.py:68: UserWarning: Tight layout not applied. The bottom and top margins cannot be made large enough to accommodate all Axes decorations.
+  plt.tight_layout()

@@ -1,0 +1,49 @@
+=== [PHASE 2/2] Full experiment start Sat Sep 13 02:41:33 AM UTC 2025 ===
+
+>>> Numerical Results (ASR & Latency)
+{
+  "gptj": {
+    "no-guard": {
+      "ASR": 0.0,
+      "median_latency_ms": 31.786908220965415
+    },
+    "cai": {
+      "ASR": 0.0,
+      "median_latency_ms": 31.58927772892639
+    },
+    "hilmas": {
+      "ASR": 0.0,
+      "median_latency_ms": 31.680490006692708
+    },
+    "tracs": {
+      "ASR": 0.0,
+      "median_latency_ms": 31.620036519598216
+    }
+  }
+}
+
+Figures generated:
+ – .research/iteration9/images/long_horizon_asr_gptj.pdf
+
+Full JSON saved to: .research/iteration9/experiment_1_results.json
+{
+  "gptj": {
+    "no-guard": {
+      "ASR": 0.0,
+      "median_latency_ms": 31.786908220965415
+    },
+    "cai": {
+      "ASR": 0.0,
+      "median_latency_ms": 31.58927772892639
+    },
+    "hilmas": {
+      "ASR": 0.0,
+      "median_latency_ms": 31.680490006692708
+    },
+    "tracs": {
+      "ASR": 0.0,
+      "median_latency_ms": 31.620036519598216
+    }
+  }
+}
+=== [PHASE 2/2] Full experiment end Sat Sep 13 02:43:41 AM UTC 2025 ===
