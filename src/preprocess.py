@@ -11,7 +11,13 @@ ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / "data"
 
 #  Updated iteration folder as required by spec ----------------------
-RESEARCH_DIR = ROOT / ".research" / "iteration18"  # upgraded from iteration17 → iteration18
+#  NOTE: The project specification mandates that **all** research
+#  artefacts (JSON results, plots, tables …) are saved under
+#  ".research/iteration19".  The images *must* live in the nested
+#  "images" sub-folder.  We therefore expose **two** public constants
+#  so that downstream modules can rely on a single source of truth for
+#  path generation.
+RESEARCH_DIR = ROOT / ".research" / "iteration19"
 IMAGES_DIR = RESEARCH_DIR / "images"
 
 # Ensure that all required directories exist -------------------------
@@ -41,7 +47,7 @@ def ensure_pad_token(tokenizer):
     if tokenizer.pad_token is not None and tokenizer.pad_token_id is not None:
         return tokenizer  # nothing to do
 
-    # Prefer mapping PAD → EOS if an EOS token exists (no vocab growth).
+    # Prefer mapping PAD → EOS if an EOS token exists (avoids vocab growth).
     if tokenizer.eos_token is not None and tokenizer.eos_token_id is not None:
         tokenizer.pad_token = tokenizer.eos_token
         tokenizer.pad_token_id = tokenizer.eos_token_id
@@ -59,7 +65,6 @@ def ensure_pad_token(tokenizer):
 # -------------------------------------------------------------------
 #  download helpers & synthetic dataset generation
 # -------------------------------------------------------------------
-
 
 def _create_synthetic_dataset(name: str) -> Path:
     """Create a **tiny** JSONL dataset on-the-fly so that smoke tests can
@@ -147,7 +152,7 @@ def prepare_dataset(cfg: Dict, key: str) -> Path:  # pylint: disable=too-many-br
         "repo_type": "dataset",
         "token": hf_token,
         "local_dir": str(local_dir),
-        "local_dir_use_symlinks": False,  # ensure CI artifact persists
+        "local_dir_use_symlinks": False,  # ensure CI artefact persists
         "allow_patterns": None,
     }
     if subset is not None:
@@ -160,7 +165,6 @@ def prepare_dataset(cfg: Dict, key: str) -> Path:  # pylint: disable=too-many-br
         raise RuntimeError(f"Failed to download dataset '{repo}': {e}{auth_hint}") from e
 
     return local_dir
-
 
 # -------------------------------------------------------------------
 #  Dataset wrapper
