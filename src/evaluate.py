@@ -47,10 +47,10 @@ def median(values):
 #   Plot helpers
 ###############################################################################
 
-def _save_bar(fig_name: str, labels: List[str], numbers: List[float], ylabel: str) -> str:
-    """Save bar-plot to .research/iteration1/images and return the file path."""
+def _save_bar(fig_name: str, labels: List[str], numbers: List[float], ylabel: str, base_dir: Path) -> str:
+    """Save bar-plot to .research/iteration2/images and return the file path."""
 
-    images_dir = Path(".research/iteration1/images")
+    images_dir = base_dir / "images"
     images_dir.mkdir(parents=True, exist_ok=True)
     pdf_path = images_dir / f"{fig_name}.pdf"
 
@@ -72,7 +72,7 @@ def _save_bar(fig_name: str, labels: List[str], numbers: List[float], ylabel: st
 ###############################################################################
 
 def run_experiment_1(cfg):
-    """Execute Experiment 1 and persist outputs below .research/iteration1/."""
+    """Execute Experiment 1 and persist outputs below .research/iteration2/."""
 
     logger.info("Running Experiment 1 – %s", cfg.description.split("\n")[0])
 
@@ -87,6 +87,7 @@ def run_experiment_1(cfg):
     results_all: Dict[str, Dict[str, Any]] = {}
     for model_key, model_id in cfg.models.items():
         tokenizer, model = load_model(model_id)
+        device = next(model.parameters()).device  # universal device getter
 
         model_res: Dict[str, Any] = {}
         for stack in cfg.safety_stacks:
@@ -97,7 +98,7 @@ def run_experiment_1(cfg):
                 torch.manual_seed(seed)
                 for ex in lf_ds:
                     prompt = ex.get("prompt", ex.get("text", ""))
-                    input_ids = tokenizer(prompt, return_tensors="pt").to(model.device)
+                    input_ids = tokenizer(prompt, return_tensors="pt").to(device)
 
                     gen_cfg = GenerationConfig(
                         do_sample=True,
@@ -128,9 +129,9 @@ def run_experiment_1(cfg):
     # ------------------------------------------------------------------
     # 3) persist results JSON
     # ------------------------------------------------------------------
-    research_dir = Path(".research/iteration1")
-    research_dir.mkdir(parents=True, exist_ok=True)
-    out_path = research_dir / "experiment_1_results.json"
+    base_dir = Path(cfg.output_dir)
+    base_dir.mkdir(parents=True, exist_ok=True)
+    out_path = base_dir / "experiment_1_results.json"
     with open(out_path, "w", encoding="utf-8") as fp:
         json.dump(results_all, fp, indent=2)
 
@@ -140,7 +141,7 @@ def run_experiment_1(cfg):
     fig_files = []
     for model_key, model_res in results_all.items():
         labels, vals = zip(*[(k, v["ASR"]) for k, v in model_res.items()])
-        pdf = _save_bar(f"long_horizon_asr_{model_key}", list(labels), list(vals), "ASR % (↓)")
+        pdf = _save_bar(f"long_horizon_asr_{model_key}", list(labels), list(vals), "ASR % (↓)", base_dir)
         fig_files.append(pdf)
 
     # ------------------------------------------------------------------

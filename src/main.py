@@ -28,10 +28,20 @@ _CONFIG_DIR = Path(__file__).resolve().parent.parent / "config"
 _SMOKE_CFG = _CONFIG_DIR / "smoke_test.yaml"
 _FULL_CFG = _CONFIG_DIR / "full_experiment.yaml"
 
+
 class ExperimentConfig:
     """Lightweight immutable wrapper around the YAML config dict."""
 
-    __slots__ = ("name", "description", "datasets", "models", "safety_stacks", "seeds", "hyper")
+    __slots__ = (
+        "name",
+        "description",
+        "datasets",
+        "models",
+        "safety_stacks",
+        "seeds",
+        "hyper",
+        "output_dir",  # newly added – required by YAML specs
+    )
 
     def __init__(self, raw):
         for k, v in raw.items():
