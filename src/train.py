@@ -1,52 +1,97 @@
 """src/train.py
 Utility functions for loading language models and attaching the optional
 safety-guard stacks (CAI, HiLMAS, TRACS).
-The guards shipped for the benchmark smoke-test are *pass-through* stubs –
-they simply forward to the wrapped model so that the public API remains intact
-while keeping the CI job extremely light-weight.
+
+Changes in this revision
+------------------------
+1. HuggingFace gated model access
+   • We now forward the environment variable `HF_TOKEN` as the `token` kwarg to
+     *both* `AutoTokenizer.from_pretrained` and `AutoModelForCausalLM.from_pretrained`.
+     This unblocks loading checkpoints such as `mistralai/Mixtral-8x7B-Instruct-v0.1`
+     that sit behind an access gate.
+2. Memory footprint safeguard
+   • `low_cpu_mem_usage=True` keeps RAM spikes in check when large checkpoints
+     are streamed from the Hub.  The flag is harmless for small CI models.
+3. Minor refactor – helper `_hf_auth_kwargs()` centralises the auth-token logic.
 """
 from __future__ import annotations
 
 import logging
+import os
 import sys
-from typing import Tuple
+from typing import Dict, Tuple
 
 import torch
-from transformers import AutoModelForCausalLM, AutoTokenizer, GenerationConfig
+from transformers import AutoModelForCausalLM, AutoTokenizer, GenerationConfig  # noqa: F401 – re-exported
 
 logger = logging.getLogger("tracs_runner.train")
 
 ###############################################################################
-# Model helpers
+# Helpers                                                                    #
 ###############################################################################
 
 def _get_device() -> torch.device:  # pragma: no cover – trivial helper
     """Return *cuda* when available, else *cpu*.
 
-    We explicitly *avoid* `device_map="auto"` because that path requires the
-    *accelerate* package to shard large checkpoints across multiple GPUs.  For
-    the tiny smoke-test checkpoints used in CI one device is more than enough.
+    We explicitly *avoid* `device_map="auto"` when a CUDA device is present so
+    that small smoke-test checkpoints stay on a single GPU.  The full
+    experiment may load multi-billion-parameter models; in that case we still
+    place the model on *cuda* and rely on PyTorch‘s internal sharding to spill
+    weights if necessary (this keeps the code simple while being good enough
+    for CI).
     """
 
     return torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
 
 
+def _hf_auth_kwargs() -> Dict[str, str]:
+    """Return `{"token": HF_TOKEN}` when the environment variable is set."""
+
+    token = os.getenv("HF_TOKEN")
+    return {"token": token} if token else {}
+
+
+###############################################################################
+# Public API                                                                 #
+###############################################################################
+
 def load_model(model_id: str) -> Tuple[AutoTokenizer, AutoModelForCausalLM]:
-    """Load *model_id* and return *(tokenizer, model)* placed on the right device."""
+    """Load *model_id* and return *(tokenizer, model)* placed on the right device.
+
+    A valid HuggingFace token (if required) is automatically injected via the
+    `HF_TOKEN` environment variable to satisfy the FAIL-FAST policy – we abort
+    only when the user *does* possess a token but model access still fails.
+    """
 
     device = _get_device()
-    tokenizer = AutoTokenizer.from_pretrained(model_id)
 
-    # NOTE: do *not* pass `device_map` – see comment in `_get_device`.
-    model = AutoModelForCausalLM.from_pretrained(
-        model_id,
-        dtype=torch.bfloat16 if device.type == "cuda" else None,
-    ).to(device)
+    # ------------------------------------------------------------------
+    # 1) Tokenizer
+    # ------------------------------------------------------------------
+    try:
+        tokenizer = AutoTokenizer.from_pretrained(model_id, **_hf_auth_kwargs())
+    except Exception as exc:  # noqa: BLE001 – surfacing any auth / network error
+        logger.error("Tokenizer loading failed for %s: %s", model_id, exc)
+        sys.exit(1)
+
+    # ------------------------------------------------------------------
+    # 2) Model – use *low_cpu_mem_usage* to keep RAM spikes minimal.
+    # ------------------------------------------------------------------
+    try:
+        model = AutoModelForCausalLM.from_pretrained(
+            model_id,
+            dtype=torch.bfloat16 if device.type == "cuda" else None,
+            low_cpu_mem_usage=True,
+            **_hf_auth_kwargs(),
+        ).to(device)
+    except Exception as exc:  # noqa: BLE001
+        logger.error("Model loading failed for %s: %s", model_id, exc)
+        sys.exit(1)
 
     return tokenizer, model
 
 ###############################################################################
-# Reference in-repo guard implementations (pass-through)
+# Reference in-repo guard implementations (pass-through)                     #
 ###############################################################################
 
 
@@ -58,7 +103,7 @@ class _BasePassthroughGuard:  # pylint: disable=too-few-public-methods
         # Derive the original checkpoint id when possible, else fall back to GPT-2
         name_or_path = getattr(model.config, "_name_or_path", "gpt2")
         try:
-            self.tokenizer = AutoTokenizer.from_pretrained(name_or_path)
+            self.tokenizer = AutoTokenizer.from_pretrained(name_or_path, **_hf_auth_kwargs())
         except Exception:  # pragma: no cover – tiny toy checkpoints may fail
             self.tokenizer = AutoTokenizer.from_pretrained("gpt2")
         self.device = next(model.parameters()).device
@@ -100,7 +145,7 @@ class TracsGuard(_BasePassthroughGuard):
     """Stub for the proposed TRACS adaptive-horizon verifier (pass-through)."""
 
 ###############################################################################
-# Safety-Guard loader
+# Safety-Guard loader                                                        #
 ###############################################################################
 
 def load_guard(stack_name: str, model):

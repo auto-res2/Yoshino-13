@@ -1,6 +1,12 @@
 """src/evaluate.py
-Evaluation, metric computation and plotting utilities.  Contains the full
-implementation of *Experiment 1 – Resistance to Long-Range Jailbreaks*.
+Evaluation, metric computation and plotting utilities – *Experiment 1*.
+
+Changes in this revision
+------------------------
+1. Path compliance
+   • All figures are now saved under `.research/iteration6/images/…` to satisfy
+     the mandatory path policy.
+2. Updated doc-strings & comments to reflect the new iteration directory.
 """
 from __future__ import annotations
 
@@ -25,7 +31,7 @@ matplotlib.use("Agg")
 logger = logging.getLogger("tracs_runner.evaluate")
 
 ###############################################################################
-#   Metric helpers
+#   Metric helpers                                                           #
 ###############################################################################
 
 def compute_asr(outputs):
@@ -43,13 +49,13 @@ def median(values):
     return values[mid] if n % 2 else (values[mid - 1] + values[mid]) / 2.0
 
 ###############################################################################
-#   Plot helpers – All images must reside in .research/iteration5/images
+#   Plot helpers – images must reside in .research/iteration6/images          #
 ###############################################################################
 
 def _save_bar(fig_name: str, labels: List[str], numbers: List[float], ylabel: str) -> str:
     """Save bar-plot under the mandated research directory and return its path."""
 
-    images_dir = Path(".research/iteration5/images")
+    images_dir = Path(".research/iteration6/images")
     images_dir.mkdir(parents=True, exist_ok=True)
     pdf_path = images_dir / f"{fig_name}.pdf"
 
@@ -67,7 +73,7 @@ def _save_bar(fig_name: str, labels: List[str], numbers: List[float], ylabel: st
     return str(pdf_path)
 
 ###############################################################################
-#   Core experimental routine (only Experiment 1 provided)
+#   Core experimental routine (only Experiment 1 provided)                   #
 ###############################################################################
 
 def run_experiment_1(cfg):

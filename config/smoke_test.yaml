@@ -3,7 +3,7 @@ name: experiment_1
 description: |
   Smoke-test: Run Experiment 1 on two LongFuse prompts and a single random seed.
   Validates data download, guard import, generation, metric & figure code.
-output_dir: .research/iteration5
+output_dir: .research/iteration6
 models:
   tiny: sshleifer/tiny-gpt2        # light-weight model suitable for CI
 safety_stacks: ["no-guard", "cai"]
