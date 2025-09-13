@@ -1,0 +1,12 @@
+=== uv sync start Sat Sep 13 04:26:09 AM UTC 2025 ===
+=== uv install end Sat Sep 13 04:27:07 AM UTC 2025 ===
+=== [PHASE 1/2] Smoke test start Sat Sep 13 04:27:07 AM UTC 2025 ===
+
+=== Running SMOKE TEST ===
+
+============================================
+Launching experiment: smoke_img
+============================================
+
+Downloading https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz to data/cifar10/cifar-10-python.tar.gz
+Extracting data/cifar10/cifar-10-python.tar.gz to data/cifar10
