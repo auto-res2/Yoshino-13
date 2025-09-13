@@ -1,0 +1,7 @@
+{
+  "experiment": "smoke_txt",
+  "final_train_loss": 1.7416043281555176,
+  "mean_train_loss": 1.8051385203997294,
+  "steps": 30,
+  "figure": "iteration6/images/smoke_txt_training_loss.pdf"
+}

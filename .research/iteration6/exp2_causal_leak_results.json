@@ -1,0 +1,7 @@
+{
+  "experiment": "exp2_causal_leak",
+  "final_train_loss": 3.71875,
+  "mean_train_loss": 4.491098142623901,
+  "steps": 500,
+  "figure": "iteration6/images/exp2_causal_leak_training_loss.pdf"
+}
