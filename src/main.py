@@ -7,7 +7,7 @@ Usage examples:
     uv run python -m src.main --smoke-test
 
     # Full experiment only
-    uv run python -m src.main --full-experiment
+    uv run python -m src.main --full-experiment --hf-token YOUR_HF_TOKEN
 
 If neither flag is provided, the smoke test is executed.  The *full*
 experiment is run **only** when the `--full-experiment` flag is
@@ -76,7 +76,16 @@ def main():
     parser.add_argument(
         "--full-experiment", action="store_true", help="Run the full experimental configuration"
     )
+    parser.add_argument(
+        "--hf-token", type=str, default=None, help="HuggingFace token for private dataset/model access"
+    )
     args = parser.parse_args()
+
+    # ------------------------------------------------------------------
+    #  Handle HF token override early so _load_cfg picks it up
+    # ------------------------------------------------------------------
+    if args.hf_token:
+        os.environ["HF_TOKEN"] = args.hf_token
 
     # ------------------------------------------------------------------
     #  Decide execution plan

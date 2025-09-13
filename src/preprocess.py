@@ -13,7 +13,7 @@ from huggingface_hub import snapshot_download
 ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / "data"
 # *** Updated iteration folder as required by spec ***
-RESEARCH_DIR = ROOT / ".research" / "iteration7"
+RESEARCH_DIR = ROOT / ".research" / "iteration8"
 IMAGES_DIR = RESEARCH_DIR / "images"
 
 for _d in (DATA_DIR, IMAGES_DIR):
