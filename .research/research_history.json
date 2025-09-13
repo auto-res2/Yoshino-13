@@ -6,5 +6,157 @@
     "dynamic benchmark few-shot learning",
     "contamination-resistant few-shot algorithms",
     "adaptive few-shot LiveBench"
+  ],
+  "research_study_list": [
+    {
+      "title": "To the Cutoff... and Beyond? A Longitudinal Perspective on LLM Data Contamination"
+    },
+    {
+      "title": "Time Travel in LLMs: Tracing Data Contamination in Large Language Models"
+    },
+    {
+      "title": "What Would Gauss Say About Representations? Probing Pretrained Image Models using Synthetic Gaussian Benchmarks"
+    },
+    {
+      "title": "Overcoming Common Flaws in the Evaluation of Selective Classification Systems"
+    },
+    {
+      "title": "Prometheus: Inducing Fine-Grained Evaluation Capability in Language Models"
+    },
+    {
+      "title": "Defense against backdoor attacks via robust covariance estimation"
+    },
+    {
+      "title": "What Does Rotation Prediction Tell Us about Classifier Accuracy under Varying Testing Environments?"
+    },
+    {
+      "title": "SEAL: A Framework for Systematic Evaluation of Real-World Super-Resolution"
+    },
+    {
+      "title": "Proving Test Set Contamination in Black-Box Language Models"
+    },
+    {
+      "title": "Proving Test Set Contamination in Black-Box Language Models"
+    },
+    {
+      "title": "LP++: A Surprisingly Strong Linear Probe for Few-Shot CLIP"
+    },
+    {
+      "title": "Pretrained Optimization Model for Zero-Shot Black Box Optimization"
+    },
+    {
+      "title": "Offline Multi-Objective Optimization"
+    },
+    {
+      "title": "ExPT: Synthetic Pretraining for Few-Shot Experimental Design"
+    },
+    {
+      "title": "Towards Practical Few-shot Query Sets: Transductive Minimum Description Length Inference"
+    },
+    {
+      "title": "A Closer Look at the Few-Shot Adaptation of Large Vision-Language Models"
+    },
+    {
+      "title": "Efficient Lifelong Model Evaluation in an Era of Rapid Progress"
+    },
+    {
+      "title": "FLEX: Unifying Evaluation for Few-Shot NLP"
+    },
+    {
+      "title": "A large-scale benchmark for few-shot program induction and synthesis"
+    },
+    {
+      "title": "UniBench: Visual Reasoning Requires Rethinking Vision-Language Beyond Scaling"
+    },
+    {
+      "title": "A Theory of Dynamic Benchmarks"
+    },
+    {
+      "title": "Meta-Dataset: A Dataset of Datasets for Learning to Learn from Few Examples"
+    },
+    {
+      "title": "Efficient Continual Learning with Modular Networks and Task-Driven Priors"
+    },
+    {
+      "title": "Hard-Meta-Dataset++: Towards Understanding Few-Shot Performance on Difficult Tasks"
+    },
+    {
+      "title": "Efficient Lifelong Model Evaluation in an Era of Rapid Progress"
+    },
+    {
+      "title": "A large-scale benchmark for few-shot program induction and synthesis"
+    },
+    {
+      "title": "Wandering within a world: Online contextualized few-shot learning"
+    },
+    {
+      "title": "NAS-Bench-1Shot1: Benchmarking and Dissecting One-shot Neural Architecture Search"
+    },
+    {
+      "title": "How Well Do Unsupervised Learning Algorithms Model Human Real-time and Life-long Learning?"
+    },
+    {
+      "title": "Towards Practical Few-shot Query Sets: Transductive Minimum Description Length Inference"
+    },
+    {
+      "title": "Hard-Meta-Dataset++: Towards Understanding Few-Shot Performance on Difficult Tasks"
+    },
+    {
+      "title": "A Closer Look at Few-shot Classification Again"
+    },
+    {
+      "title": "Dealing with Synthetic Data Contamination in Online Continual Learning"
+    },
+    {
+      "title": "Open-Set Likelihood Maximization for Few-Shot Learning"
+    },
+    {
+      "title": "Feature Contamination: Neural Networks Learn Uncorrelated Features and Fail to Generalize"
+    },
+    {
+      "title": "SoTTA: Robust Test-Time Adaptation on Noisy Data Streams"
+    },
+    {
+      "title": "Wandering within a world: Online contextualized few-shot learning"
+    },
+    {
+      "title": "A Theoretical Analysis of the Number of Shots in Few-Shot Learning"
+    },
+    {
+      "title": "Realistic evaluation of transductive few-shot learning"
+    },
+    {
+      "title": "On sensitivity of meta-learning to support data"
+    },
+    {
+      "title": "StreamBench: Towards Benchmarking Continuous Improvement of Language Agents"
+    },
+    {
+      "title": "Efficient Lifelong Model Evaluation in an Era of Rapid Progress"
+    },
+    {
+      "title": "Meta-Adapter: An Online Few-shot Learner for Vision-Language Model"
+    },
+    {
+      "title": "Towards Practical Few-shot Query Sets: Transductive Minimum Description Length Inference"
+    },
+    {
+      "title": "Evaluation of Test-Time Adaptation Under Computational Time Constraints"
+    },
+    {
+      "title": "Meta-Dataset: A Dataset of Datasets for Learning to Learn from Few Examples"
+    },
+    {
+      "title": "UniBench: Visual Reasoning Requires Rethinking Vision-Language Beyond Scaling"
+    },
+    {
+      "title": "Adaptive Distribution Calibration for Few-Shot Learning with Hierarchical Optimal Transport"
+    },
+    {
+      "title": "A Closer Look at the Few-Shot Adaptation of Large Vision-Language Models"
+    },
+    {
+      "title": "Bayesian Few-Shot Classification with One-vs-Each Pólya-Gamma Augmented Gaussian Processes"
+    }
   ]
 }
