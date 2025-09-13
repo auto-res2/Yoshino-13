@@ -40,7 +40,7 @@ class ExperimentConfig:
         "safety_stacks",
         "seeds",
         "hyper",
-        "output_dir",  # newly added – required by YAML specs
+        "output_dir",  # required by YAML specs
     )
 
     def __init__(self, raw):

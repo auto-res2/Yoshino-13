@@ -43,13 +43,13 @@ def median(values):
     return values[mid] if n % 2 else (values[mid - 1] + values[mid]) / 2.0
 
 ###############################################################################
-#   Plot helpers – All images must reside in .research/iteration4/images
+#   Plot helpers – All images must reside in .research/iteration5/images
 ###############################################################################
 
 def _save_bar(fig_name: str, labels: List[str], numbers: List[float], ylabel: str) -> str:
     """Save bar-plot under the mandated research directory and return its path."""
 
-    images_dir = Path(".research/iteration4/images")
+    images_dir = Path(".research/iteration5/images")
     images_dir.mkdir(parents=True, exist_ok=True)
     pdf_path = images_dir / f"{fig_name}.pdf"
 

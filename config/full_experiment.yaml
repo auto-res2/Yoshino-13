@@ -2,7 +2,7 @@
 name: experiment_1
 description: |
   Full Experiment 1 – Resistance to Long-Range Jailbreaks.
-output_dir: .research/iteration4
+output_dir: .research/iteration5
 models:
   mixtral: mistralai/Mixtral-8x7B-Instruct-v0.1
   gptj: EleutherAI/gpt-j-6B
@@ -11,8 +11,6 @@ seeds: [12, 21, 42, 87, 1024]
 datasets:
   longfuse:
     type: jsonl
-    # Corrected URL – previous path 404ed.  The new link points to the public
-    # GitHub mirror that hosts the dataset under the expected filename.
     url: https://raw.githubusercontent.com/long-fuse-jailbreak/LongFuse-500/main/lf-500.jsonl
 hyper:
   tracs:
