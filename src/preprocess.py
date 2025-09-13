@@ -21,6 +21,14 @@ DATA_DIR.mkdir(parents=True, exist_ok=True)
 # Dataset helper
 ###############################################################################
 
+def _load_local_jsonl(path: Path) -> DatasetDict:
+    """Helper – load a local JSONL file via 🤗 Datasets."""
+    if not path.exists():
+        logger.error("Local dataset %s not found", path)
+        sys.exit(1)
+    return load_dataset("json", data_files=str(path))
+
+
 def ensure_dataset(name: str, spec: Dict[str, Any]) -> DatasetDict:
     """Download (if required) and return a 🤗 *DatasetDict* for *name*.
 
@@ -29,29 +37,47 @@ def ensure_dataset(name: str, spec: Dict[str, Any]) -> DatasetDict:
 
     ds_path = DATA_DIR / name
     if ds_path.exists():
+        # Cached – prefer local copy irrespective of *spec* to guarantee
+        # reproducibility and avoid flaky network.
         logger.info("Using cached dataset '%s'", name)
+        local_file = ds_path / "data.jsonl"
+        return _load_local_jsonl(local_file)
 
     try:
+        ds_path.mkdir(parents=True, exist_ok=True)
+
+        # ------------------------------------------------------------------
+        # 1) HuggingFace Hub repository
+        # ------------------------------------------------------------------
         if spec.get("type") == "hf":
             repo_id = spec["repo"]
             token = os.getenv("HF_TOKEN")
             return load_dataset(repo_id, token=token)
 
+        # ------------------------------------------------------------------
+        # 2) Remote JSONL file (HTTP/HTTPS)
+        # ------------------------------------------------------------------
         if spec.get("type") == "jsonl":
             url = spec["url"]
-            local_file = ds_path / "data.jsonl"
-            if not local_file.exists():
-                import requests
+            import requests
 
-                logger.info("Downloading %s → %s", url, local_file)
-                resp = requests.get(url, timeout=120)
-                if resp.status_code != 200:
-                    logger.error("Failed to download %s (status %s)", url, resp.status_code)
-                    sys.exit(1)
-                ds_path.mkdir(parents=True, exist_ok=True)
-                with open(local_file, "wb") as f:
-                    f.write(resp.content)
-            return load_dataset("json", data_files=str(local_file))
+            local_file = ds_path / "data.jsonl"
+            logger.info("Downloading %s → %s", url, local_file)
+            resp = requests.get(url, timeout=120)
+            if resp.status_code != 200:
+                logger.error("Failed to download %s (status %s)", url, resp.status_code)
+                sys.exit(1)
+            with open(local_file, "wb") as f:
+                f.write(resp.content)
+            return _load_local_jsonl(local_file)
+
+        # ------------------------------------------------------------------
+        # 3) Local path already supplied – zero network I/O
+        # ------------------------------------------------------------------
+        if spec.get("type") == "local":
+            local_file = Path(spec["path"])
+            return _load_local_jsonl(local_file)
+
     except Exception as e:
         logger.error("Dataset acquisition failed for %s: %s", name, e)
         sys.exit(1)

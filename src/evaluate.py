@@ -44,13 +44,13 @@ def median(values):
     return values[mid] if n % 2 else (values[mid - 1] + values[mid]) / 2.0
 
 ###############################################################################
-#   Plot helpers
+#   Plot helpers – All images must reside in .research/iteration3/images
 ###############################################################################
 
-def _save_bar(fig_name: str, labels: List[str], numbers: List[float], ylabel: str, base_dir: Path) -> str:
-    """Save bar-plot to .research/iteration2/images and return the file path."""
+def _save_bar(fig_name: str, labels: List[str], numbers: List[float], ylabel: str) -> str:
+    """Save bar-plot under the mandated research directory and return its path."""
 
-    images_dir = base_dir / "images"
+    images_dir = Path(".research/iteration3/images")
     images_dir.mkdir(parents=True, exist_ok=True)
     pdf_path = images_dir / f"{fig_name}.pdf"
 
@@ -72,7 +72,7 @@ def _save_bar(fig_name: str, labels: List[str], numbers: List[float], ylabel: st
 ###############################################################################
 
 def run_experiment_1(cfg):
-    """Execute Experiment 1 and persist outputs below .research/iteration2/."""
+    """Execute Experiment 1 and persist outputs below .research/iteration3/."""
 
     logger.info("Running Experiment 1 – %s", cfg.description.split("\n")[0])
 
@@ -98,38 +98,40 @@ def run_experiment_1(cfg):
                 torch.manual_seed(seed)
                 for ex in lf_ds:
                     prompt = ex.get("prompt", ex.get("text", ""))
-                    input_ids = tokenizer(prompt, return_tensors="pt").to(device)
+                    inp = tokenizer(prompt, return_tensors="pt").to(device)
 
                     gen_cfg = GenerationConfig(
                         do_sample=True,
                         top_p=0.7,
                         temperature=1.0,
-                        max_new_tokens=256,
+                        max_new_tokens=32,  # keep smoke-test light-weight
                     )
                     t0 = time.perf_counter()
                     if stack == "no-guard":
-                        output_ids = model.generate(**input_ids, generation_config=gen_cfg)
+                        output_ids = model.generate(**inp, generation_config=gen_cfg)
                         violation = False
                     else:
                         output_ids, info = guard.generate(prompt, generation_config=gen_cfg)
                         violation = info.get("violation", False)
 
-                    latency = (
-                        time.perf_counter() - t0
-                    ) / (output_ids.shape[1] - input_ids["input_ids"].shape[1])
+                    latency = (time.perf_counter() - t0) / max(
+                        1, output_ids.shape[1] - inp["input_ids"].shape[1]
+                    )
 
                     stack_outputs.append({"violation": bool(violation), "latency": latency * 1000.0})
 
             asr = compute_asr(stack_outputs)
             median_latency = median([o["latency"] for o in stack_outputs])
             model_res[stack] = {"ASR": asr, "median_latency_ms": median_latency}
-            logger.info("%s – %s: ASR=%.2f, median latency=%.2f ms", model_key, stack, asr, median_latency)
+            logger.info(
+                "%s – %s: ASR=%.2f, median latency=%.2f ms", model_key, stack, asr, median_latency
+            )
         results_all[model_key] = model_res
 
     # ------------------------------------------------------------------
-    # 3) persist results JSON
+    # 3) persist results JSON – one file per experiment in .research/iteration3
     # ------------------------------------------------------------------
-    base_dir = Path(cfg.output_dir)
+    base_dir = Path(".research/iteration3")
     base_dir.mkdir(parents=True, exist_ok=True)
     out_path = base_dir / "experiment_1_results.json"
     with open(out_path, "w", encoding="utf-8") as fp:
@@ -141,7 +143,7 @@ def run_experiment_1(cfg):
     fig_files = []
     for model_key, model_res in results_all.items():
         labels, vals = zip(*[(k, v["ASR"]) for k, v in model_res.items()])
-        pdf = _save_bar(f"long_horizon_asr_{model_key}", list(labels), list(vals), "ASR % (↓)", base_dir)
+        pdf = _save_bar(f"long_horizon_asr_{model_key}", list(labels), list(vals), "ASR % (↓)")
         fig_files.append(pdf)
 
     # ------------------------------------------------------------------

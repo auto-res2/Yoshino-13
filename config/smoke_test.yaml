@@ -3,13 +3,13 @@ name: experiment_1
 description: |
   Smoke-test: Run Experiment 1 on two LongFuse prompts and a single random seed.
   Validates data download, guard import, generation, metric & figure code.
-output_dir: .research/iteration2
+output_dir: .research/iteration3
 models:
   tiny: sshleifer/tiny-gpt2  # light-weight model suitable for CI
 safety_stacks: ["no-guard", "cai"]
 seeds: [42]
 datasets:
   longfuse:
-    type: jsonl
-    url: https://raw.githubusercontent.com/long-fuse-jailbreak/data/main/lf-500.jsonl
+    type: local
+    path: data/longfuse/data.jsonl
 hyper: {}
