@@ -18,7 +18,7 @@ def load_model(repo: str, hf_token: Union[str, None] = None, dtype: torch.dtype 
     """Download (if necessary) and load a causal-LM checkpoint.
 
     *   If CUDA is available we delegate device placement to *transformers* by
-        passing ``device_map="auto"`` (this uses *accelerate* under the hood).
+        passing ``device_map="auto"`` (*accelerate* under the hood).
     *   If CUDA is **not** available we load the weights on CPU **without** a
         ``device_map`` argument – this removes the hard dependency on the
         *accelerate* package for CPU-only CI environments.
@@ -28,15 +28,15 @@ def load_model(repo: str, hf_token: Union[str, None] = None, dtype: torch.dtype 
 
     has_cuda = torch.cuda.is_available()
 
-    # ---------------------------------------------------------------------
+    # ------------------------------------------------------------------
     # ensure dtype is supported on the target device
-    # ---------------------------------------------------------------------
+    # ------------------------------------------------------------------
     if not has_cuda and dtype == torch.float16:
         dtype = torch.float32
 
-    # ---------------------------------------------------------------------
+    # ------------------------------------------------------------------
     # resolve synthetic:// URIs – used by smoke tests to load tiny local ckpts
-    # ---------------------------------------------------------------------
+    # ------------------------------------------------------------------
     if repo.startswith("synthetic://"):
         local_dir = Path("data") / repo[len("synthetic://") :].replace("/", "__")
         if not local_dir.exists():
@@ -45,9 +45,9 @@ def load_model(repo: str, hf_token: Union[str, None] = None, dtype: torch.dtype 
             )
         repo = str(local_dir)
 
-    # ---------------------------------------------------------------------
+    # ------------------------------------------------------------------
     # build kwargs for `from_pretrained`
-    # ---------------------------------------------------------------------
+    # ------------------------------------------------------------------
     kwargs = {
         "torch_dtype": dtype,  # `torch_dtype` is still accepted by >=4.56
         "token": hf_token,
@@ -57,7 +57,7 @@ def load_model(repo: str, hf_token: Union[str, None] = None, dtype: torch.dtype 
 
     try:
         model = AutoModelForCausalLM.from_pretrained(repo, **kwargs)
-        # When running on CPU, explicitly move the model even if the checkpoint
+        # When running on CPU explicitly move the model even if the checkpoint
         # carries CUDA tensors (edge-case for tiny synthetic models saved on GPU)
         if not has_cuda:
             model.to(torch.device("cpu"))

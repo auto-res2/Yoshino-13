@@ -7,7 +7,7 @@ Usage examples::
     uv run python -m src.main --smoke-test
 
     # Full experiment only
-    uv run python -m src.main --full-experiment --hf-token YOUR_HF_TOKEN
+    uv run python -m src.main --full-experiment
 
 If neither flag is provided **only** the smoke test is executed.  The
 full experiment is run *exclusively* when the `--full-experiment` flag

@@ -17,5 +17,5 @@ dependencies = [
   "seaborn>=0.12.0",
   "scikit-learn>=1.3.0",
   "PyYAML>=6.0",
-  "accelerate>=0.27.0",  # required for device_map="auto"
+  "accelerate>=0.27.0"
 ]

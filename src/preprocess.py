@@ -12,11 +12,11 @@ from huggingface_hub import snapshot_download
 ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / "data"
 
-# *** Updated iteration folder as required by spec ***
-RESEARCH_DIR = ROOT / ".research" / "iteration11"
+#  Updated iteration folder as required by spec ----------------------
+RESEARCH_DIR = ROOT / ".research" / "iteration12"
 IMAGES_DIR = RESEARCH_DIR / "images"
 
-# Ensure that all required directories exist -----------------------
+# Ensure that all required directories exist -------------------------
 for _d in (DATA_DIR, RESEARCH_DIR, IMAGES_DIR):
     _d.mkdir(parents=True, exist_ok=True)
 
@@ -164,8 +164,8 @@ class PromptDataset(Dataset):
             padding="max_length",
             return_tensors="pt",
         )
+        # Returned dict intentionally omits raw text – strings break default_collate.
         return {
             "input_ids": tok["input_ids"].squeeze(0),
             "attention_mask": tok["attention_mask"].squeeze(0),
-            "raw_text": txt,
         }

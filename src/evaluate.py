@@ -21,7 +21,7 @@ import torch
 from sklearn.metrics import mutual_info_score
 from transformers import AutoTokenizer
 
-from .preprocess import prepare_dataset, PromptDataset, RESEARCH_DIR, IMAGES_DIR
+from .preprocess import IMAGES_DIR, RESEARCH_DIR, PromptDataset, prepare_dataset
 from .train import load_model
 
 # ---------------------------------------------------------------
@@ -52,7 +52,7 @@ def run_soic_leakage(cfg: Dict, smoke: bool):
     result_path = RESEARCH_DIR / f"{exp_name}.json"
     figures: List[str] = []
 
-    # 1) datasets -------------------------------------------------------------
+    # 1) datasets -----------------------------------------------------------
     secret_dir = prepare_dataset(cfg, "secret_prompts")
     benign_dir = prepare_dataset(cfg, "benign_prompts")
 
@@ -76,7 +76,7 @@ def run_soic_leakage(cfg: Dict, smoke: bool):
     secret_loader = torch.utils.data.DataLoader(secret_ds, batch_size=batch_size, shuffle=True)
     benign_loader = torch.utils.data.DataLoader(benign_ds, batch_size=batch_size, shuffle=True)
 
-    # 2) models ---------------------------------------------------------------
+    # 2) models -------------------------------------------------------------
     model_variants: Dict[str, Dict] = {
         "base": cfg["models"]["base"],
         "hyperion": cfg["models"].get("hyperion"),
@@ -125,7 +125,7 @@ def run_soic_leakage(cfg: Dict, smoke: bool):
         logits_tensor = torch.cat(collected_logits, dim=0)
         mi_results[variant_name] = compute_mi(collected_labels, logits_tensor)
 
-        # naive exact-token recovery -----------------------------------------
+        # naive exact-token recovery ---------------------------------------
         _, pred_tok = logits_tensor.topk(1, dim=1)
         pred_ids: List[int] = pred_tok.squeeze(1).tolist()
         preds = [tokenizer.decode([tid], skip_special_tokens=True).strip() for tid in pred_ids]
@@ -135,7 +135,7 @@ def run_soic_leakage(cfg: Dict, smoke: bool):
         del model
         torch.cuda.empty_cache()
 
-    # 3) persist JSON ---------------------------------------------------------
+    # 3) persist JSON -------------------------------------------------------
     res_dict = {
         "mutual_information_bits": mi_results,
         "token_recovery_accuracy": acc_results,
@@ -143,7 +143,7 @@ def run_soic_leakage(cfg: Dict, smoke: bool):
     }
     result_path.write_text(json.dumps(res_dict, indent=2))
 
-    # 4) figures --------------------------------------------------------------
+    # 4) figures ------------------------------------------------------------
     sns.set_theme(style="whitegrid")
 
     plt.figure(figsize=(6, 4))
@@ -170,7 +170,7 @@ def run_soic_leakage(cfg: Dict, smoke: bool):
     plt.close()
     figures.append(fig2.name)
 
-    # 5) STDOUT --------------------------------------------------------------
+    # 5) STDOUT -------------------------------------------------------------
     print(json.dumps(res_dict, indent=2))
     print("Figures generated:")
     for f in figures:
