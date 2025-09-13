@@ -13,7 +13,7 @@ from huggingface_hub import snapshot_download
 ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / "data"
 # *** Updated iteration folder as required by spec ***
-RESEARCH_DIR = ROOT / ".research" / "iteration6"
+RESEARCH_DIR = ROOT / ".research" / "iteration7"
 IMAGES_DIR = RESEARCH_DIR / "images"
 
 for _d in (DATA_DIR, IMAGES_DIR):
@@ -125,7 +125,9 @@ def prepare_dataset(cfg: Dict, key: str) -> Path:  # pylint: disable=too-many-br
     try:
         snapshot_download(**download_kwargs)
     except Exception as e:  # pragma: no cover – propagate with context
-        raise RuntimeError(f"Failed to download dataset '{repo}': {e}") from e
+        # Provide a clearer error when authentication is required but missing.
+        auth_hint = " – did you set the HF_TOKEN environment variable?" if hf_token is None else ""
+        raise RuntimeError(f"Failed to download dataset '{repo}': {e}{auth_hint}") from e
 
     return local_dir
 
