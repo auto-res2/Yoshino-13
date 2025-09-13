@@ -1,0 +1,31 @@
+=== [PHASE 2/2] Full experiment start Sat Sep 13 09:09:22 AM UTC 2025 ===
+[WARN] No HuggingFace token detected – proceeding with public resources only.
+=== [PHASE 2/2] Full experiment start ===
+
+==== EXPERIMENT 1 – SOIC Leakage-Stress Test ====
+[Variant base] loading …
+[Variant hyperion] loading …
+[Variant oracle_guard] loading …
+[Variant hyperion_no_hessian] loading …
+[Variant hyperion_no_dither] loading …
+{
+  "mutual_information_bits": {
+    "base": 0.0,
+    "hyperion": 0.0,
+    "oracle_guard": 0.0,
+    "hyperion_no_hessian": 0.0,
+    "hyperion_no_dither": 0.0
+  },
+  "token_recovery_accuracy": {
+    "base": 1.0,
+    "hyperion": 1.0,
+    "oracle_guard": 1.0,
+    "hyperion_no_hessian": 1.0,
+    "hyperion_no_dither": 1.0
+  },
+  "num_samples": 10
+}
+Figures generated:
+  - mi_bits_models.pdf
+  - token_recovery_accuracy.pdf
+=== [PHASE 2/2] Full experiment end Sat Sep 13 09:09:42 AM UTC 2025 ===
