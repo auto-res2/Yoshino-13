@@ -1,0 +1,7 @@
+=== uv sync start Sat Sep 13 07:15:46 AM UTC 2025 ===
+=== uv install end Sat Sep 13 07:15:50 AM UTC 2025 ===
+=== [PHASE 1/2] Smoke test start Sat Sep 13 07:15:51 AM UTC 2025 ===
+
+==== EXPERIMENT 1 – SOIC Leakage-Stress Test ====
+[Variant base] loading …
+[ERROR] Experiment 'soic_leakage' terminated: Cannot load model 'sshleifer/tiny-gpt2': Using a `device_map`, `tp_plan`, `torch.device` context manager or setting `torch.set_default_device(device)` requires `accelerate`. You can install it with `pip install accelerate`
