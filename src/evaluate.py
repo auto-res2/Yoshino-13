@@ -6,7 +6,6 @@ from __future__ import annotations
 
 import json
 import logging
-import os
 import time
 from pathlib import Path
 from typing import Any, Dict, List
@@ -20,7 +19,7 @@ from transformers import GenerationConfig
 from .preprocess import ensure_dataset
 from .train import load_guard, load_model
 
-# head-less backend before importing pyplot
+# Use a head-less backend **before** importing pyplot
 matplotlib.use("Agg")
 
 logger = logging.getLogger("tracs_runner.evaluate")
@@ -44,13 +43,13 @@ def median(values):
     return values[mid] if n % 2 else (values[mid - 1] + values[mid]) / 2.0
 
 ###############################################################################
-#   Plot helpers – All images must reside in .research/iteration3/images
+#   Plot helpers – All images must reside in .research/iteration4/images
 ###############################################################################
 
 def _save_bar(fig_name: str, labels: List[str], numbers: List[float], ylabel: str) -> str:
     """Save bar-plot under the mandated research directory and return its path."""
 
-    images_dir = Path(".research/iteration3/images")
+    images_dir = Path(".research/iteration4/images")
     images_dir.mkdir(parents=True, exist_ok=True)
     pdf_path = images_dir / f"{fig_name}.pdf"
 
@@ -72,7 +71,7 @@ def _save_bar(fig_name: str, labels: List[str], numbers: List[float], ylabel: st
 ###############################################################################
 
 def run_experiment_1(cfg):
-    """Execute Experiment 1 and persist outputs below .research/iteration3/."""
+    """Execute Experiment 1 and persist outputs below *cfg.output_dir*."""
 
     logger.info("Running Experiment 1 – %s", cfg.description.split("\n")[0])
 
@@ -129,9 +128,9 @@ def run_experiment_1(cfg):
         results_all[model_key] = model_res
 
     # ------------------------------------------------------------------
-    # 3) persist results JSON – one file per experiment in .research/iteration3
+    # 3) persist results JSON – one file per experiment under cfg.output_dir
     # ------------------------------------------------------------------
-    base_dir = Path(".research/iteration3")
+    base_dir = Path(cfg.output_dir)
     base_dir.mkdir(parents=True, exist_ok=True)
     out_path = base_dir / "experiment_1_results.json"
     with open(out_path, "w", encoding="utf-8") as fp:
