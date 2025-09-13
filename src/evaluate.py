@@ -4,10 +4,12 @@ originally embedded inside SimpleTrainer.  Splitting it out keeps
 train.py focused on optimisation logic.
 """
 from __future__ import annotations
-from typing import List
+
 from pathlib import Path
+from typing import List
 
 import matplotlib
+
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 

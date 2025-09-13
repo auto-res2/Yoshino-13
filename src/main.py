@@ -6,18 +6,20 @@ If --full-experiment is given without --smoke-test, a smoke test is still
 executed first in compliance with the spec.
 """
 from __future__ import annotations
+
 import argparse
 from pathlib import Path
+
 import yaml
 
 from .train import SimpleTrainer
 
-
+# directory containing YAML experiment definitions
 CONFIG_DIR = Path(__file__).resolve().parent.parent / "config"
 
 
 def run_config(cfg_path: Path) -> None:
-    """Run every experiment block inside a YAML config file."""
+    """Execute every experiment block inside a YAML config file."""
     with open(cfg_path, "r") as f:
         cfg = yaml.safe_load(f)
 
@@ -31,8 +33,14 @@ def run_config(cfg_path: Path) -> None:
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description="ORACLE research experiments")
-    parser.add_argument("--smoke-test", action="store_true", help="run smoke test only")
-    parser.add_argument("--full-experiment", action="store_true", help="run full experiment (executes smoke test first)")
+    parser.add_argument(
+        "--smoke-test", action="store_true", help="run smoke test only"
+    )
+    parser.add_argument(
+        "--full-experiment",
+        action="store_true",
+        help="run full experiment (executes smoke test first)",
+    )
     args = parser.parse_args(argv)
 
     if not args.smoke_test and not args.full_experiment:
@@ -44,7 +52,7 @@ def main(argv=None):
         print("\n=== Running SMOKE TEST ===")
         run_config(smoke_cfg)
 
-    # Run full only if specifically requested *and* smoke succeeded
+    # Run full only if explicitly requested *and* smoke succeeded
     if args.full_experiment:
         full_cfg = CONFIG_DIR / "full_experiment.yaml"
         print("\n=== Running FULL EXPERIMENT ===")

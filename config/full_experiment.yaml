@@ -9,7 +9,7 @@ experiments:
     k: 5
     tau: 0.05
     lr: 1e-4
-    max_steps: 200     # shortened for CI stability
+    max_steps: 200
     dataset:
       name: cifar10
       batch_size: 64
