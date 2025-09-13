@@ -15,36 +15,46 @@ __all__ = ["load_model"]
 
 
 def load_model(repo: str, hf_token: Union[str, None] = None, dtype: torch.dtype = torch.float16):
-    """Download (if necessary) and load a causal-LM checkpoint onto the
-    first available CUDA device (or CPU if CUDA is not available).
-    A thin wrapper so that all model creation logic is centralised
-    inside *train.py*.
+    """Download (if necessary) and load a causal-LM checkpoint.
+
+    *   If CUDA is available we delegate device placement to *transformers* by
+        passing ``device_map="auto"`` (this uses *accelerate* under the hood).
+    *   If CUDA is **not** available we load the weights on CPU **without** a
+        ``device_map`` argument – this removes the hard dependency on the
+        *accelerate* package for CPU-only CI environments.
+    *   FP16 tensors are only supported on GPU.  When running on CPU we
+        automatically promote the dtype to ``torch.float32``.
     """
-    # IMPORTANT: allocate on CPU by default – many CI runners do not expose GPUs
-    device_map = "auto" if torch.cuda.is_available() else {"": "cpu"}
+    has_cuda = torch.cuda.is_available()
+
+    # ensure dtype is supported on the target device ---------------------------
+    if not has_cuda and dtype == torch.float16:
+        dtype = torch.float32
+
+    # resolve synthetic:// URIs -------------------------------------------------
+    if repo.startswith("synthetic://"):
+        local_dir = Path("data") / repo[len("synthetic://") :].replace("/", "__")
+        if not local_dir.exists():
+            raise RuntimeError(
+                f"Synthetic model directory '{local_dir}' not found. Did the smoke-test assets get generated?"
+            )
+        repo = str(local_dir)
+
+    # build kwargs for `from_pretrained` ---------------------------------------
+    kwargs = {
+        "torch_dtype": dtype,
+        "token": hf_token,
+    }
+    if has_cuda:
+        kwargs["device_map"] = "auto"  # requires *accelerate*
 
     try:
-        # In smoke-test mode we often pass a *synthetic* identifier that
-        # refers to a **local** tiny model stored inside the repository
-        # (e.g. ``synthetic://tiny-gpt2``).  Such identifiers are NOT
-        # hosted on the HF Hub and therefore have to be resolved via the
-        # filesystem.  We canonicalise those URIs here so that down-stream
-        # code never has to special-case them.
-        if repo.startswith("synthetic://"):
-            local_dir = Path("data") / repo[len("synthetic://") :].replace("/", "__")
-            if not local_dir.exists():
-                raise RuntimeError(
-                    f"Synthetic model directory '{local_dir}' not found. Did the smoke-test assets get generated?"
-                )
-            repo = str(local_dir)
-
-        model = AutoModelForCausalLM.from_pretrained(
-            repo,
-            torch_dtype=dtype,
-            device_map=device_map,
-            token=hf_token,
-        )
+        model = AutoModelForCausalLM.from_pretrained(repo, **kwargs)
+        # When running on CPU, make extra sure we land there even if the weight
+        # file is saved in FP16 (rare but possible for tiny test models).
+        if not has_cuda:
+            model.to(torch.device("cpu"))
         model.eval()
         return model
-    except Exception as e:
-        raise RuntimeError(f"Cannot load model '{repo}': {e}")
+    except Exception as e:  # pragma: no cover – fail fast, propagate reason
+        raise RuntimeError(f"Cannot load model '{repo}': {e}") from e
