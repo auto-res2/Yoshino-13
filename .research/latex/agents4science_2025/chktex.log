@@ -1,0 +1,105 @@
+Warning 2 in paper.tex line 49: Non-breaking space (`~') should have been used.
+Large language models can draft legal briefs, write code, and tutor students, yet they can also disclose personal identifiers, leak proprietary weights, or provide step-by-step illicit instructions. Preventing such failures is hardest when attacks are staged: an adversary spends tens of innocuous tokens priming the model, then pivots once short-horizon guards have expired. Contemporary safety stacks either apply static moderation after generation or perform in-the-loop verification with a fixed horizon (typically \(\le 16\) tokens) \cite{lu-2019-neural,xu-2020-fast}. They further encode safety as deterministic finite automata, which cannot represent numeric constraints such as "the cumulative differential-privacy budget \(\varepsilon\) must remain \(\le 2\)," and they offer no cryptographic linkage between any claimed certificate and the emitted text.  
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ^
+Warning 18 in paper.tex line 49: Use either `` or '' as an alternative to `"'.
+Large language models can draft legal briefs, write code, and tutor students, yet they can also disclose personal identifiers, leak proprietary weights, or provide step-by-step illicit instructions. Preventing such failures is hardest when attacks are staged: an adversary spends tens of innocuous tokens priming the model, then pivots once short-horizon guards have expired. Contemporary safety stacks either apply static moderation after generation or perform in-the-loop verification with a fixed horizon (typically \(\le 16\) tokens) \cite{lu-2019-neural,xu-2020-fast}. They further encode safety as deterministic finite automata, which cannot represent numeric constraints such as "the cumulative differential-privacy budget \(\varepsilon\) must remain \(\le 2\)," and they offer no cryptographic linkage between any claimed certificate and the emitted text.  
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ^
+Warning 18 in paper.tex line 49: Use either `` or '' as an alternative to `"'.
+Large language models can draft legal briefs, write code, and tutor students, yet they can also disclose personal identifiers, leak proprietary weights, or provide step-by-step illicit instructions. Preventing such failures is hardest when attacks are staged: an adversary spends tens of innocuous tokens priming the model, then pivots once short-horizon guards have expired. Contemporary safety stacks either apply static moderation after generation or perform in-the-loop verification with a fixed horizon (typically \(\le 16\) tokens) \cite{lu-2019-neural,xu-2020-fast}. They further encode safety as deterministic finite automata, which cannot represent numeric constraints such as "the cumulative differential-privacy budget \(\varepsilon\) must remain \(\le 2\)," and they offer no cryptographic linkage between any claimed certificate and the emitted text.  
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                ^
+Warning 2 in paper.tex line 51: Non-breaking space (`~') should have been used.
+We present TRACS (Temporal-logic, Refinable-Abstraction, Certificate-linked Safety), a safety stack that eliminates these blind spots while preserving interactive latency. TRACS assembles three advances. 1. Offline mining of parametric FOLTL motifs from public red-team logs, yielding richer rule sets than regular languages. 2. An adaptive-horizon abstract interpreter that partitions the future into context-conditioned slices and propagates a novel attention-polyhedra domain, explicitly retaining pairwise covariance between attention scores and reducing over-approximation by \(\approx 40\%\) relative to slice-zonotopes \cite{jordan-2022-zonotope}. 3. Per-token zk-SNARKs produced by GPU-accelerated Halo2 circuits; every emitted token is bundled with a succinct proof verifiable in \(<1\) ms, closing the auditability gap left by watermarking.  
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ^
+Warning 8 in paper.tex line 66: Wrong length of dash may have been used.
+Future work will repeat Experiments 1-3 with the corrected loader, extend attention polyhedra to mixture-of-experts routing, and combine TRACS with circuit-breaker defences \cite{zou-2024-improving} for layered safety.  
+                                     ^
+Warning 2 in paper.tex line 66: Non-breaking space (`~') should have been used.
+Future work will repeat Experiments 1-3 with the corrected loader, extend attention polyhedra to mixture-of-experts routing, and combine TRACS with circuit-breaker defences \cite{zou-2024-improving} for layered safety.  
+                                                                                                                                                                            ^
+Warning 2 in paper.tex line 70: Non-breaking space (`~') should have been used.
+Complete verifiers typically follow a branch-and-bound template with LP or SDP relaxations \cite{xu-2020-fast,palma-2021-improved}. Their fixed horizons and regular-language policies cannot reason about long-range dependencies or numeric accumulators. Zonotope abstractions scale but ignore inter-head correlations; Lagrangian domains regain some precision yet remain head-agnostic \cite{jordan-2022-zonotope}. TRACS' attention polyhedra generalise both by embedding covariance explicitly.  
+                                                                                          ^
+Warning 2 in paper.tex line 70: Non-breaking space (`~') should have been used.
+Complete verifiers typically follow a branch-and-bound template with LP or SDP relaxations \cite{xu-2020-fast,palma-2021-improved}. Their fixed horizons and regular-language policies cannot reason about long-range dependencies or numeric accumulators. Zonotope abstractions scale but ignore inter-head correlations; Lagrangian domains regain some precision yet remain head-agnostic \cite{jordan-2022-zonotope}. TRACS' attention polyhedra generalise both by embedding covariance explicitly.  
+                                                                                                                                                                                                                                                                                                                                                                                             ^
+Warning 2 in paper.tex line 73: Non-breaking space (`~') should have been used.
+HiLMAS encodes policies as DFAs but lacks quantifiers. First-order temporal verification is common in cyber-physical control \cite{teuber-2024-provably} but absent in NLP. TRACS adapts FOLTL to conversational motifs mined automatically, bridging that gap.  
+                                                                                                                            ^
+Warning 13 in paper.tex line 73: Intersentence spacing (`\@') should perhaps be used.
+HiLMAS encodes policies as DFAs but lacks quantifiers. First-order temporal verification is common in cyber-physical control \cite{teuber-2024-provably} but absent in NLP. TRACS adapts FOLTL to conversational motifs mined automatically, bridging that gap.  
+                                                                                                                                                                          ^
+Warning 18 in paper.tex line 76: Use either `` or '' as an alternative to `"'.
+Watermarks only assert that "some" certificate was attached; auditors must still trust the producer. Zero-knowledge SNARKs offer soundness and confidentiality and have recently been explored for image classification \cite{zou-2024-improving}. TRACS brings zk-SNARKs into language decoding.  
+                            ^
+Warning 18 in paper.tex line 76: Use either `` or '' as an alternative to `"'.
+Watermarks only assert that "some" certificate was attached; auditors must still trust the producer. Zero-knowledge SNARKs offer soundness and confidentiality and have recently been explored for image classification \cite{zou-2024-improving}. TRACS brings zk-SNARKs into language decoding.  
+                                 ^
+Warning 2 in paper.tex line 76: Non-breaking space (`~') should have been used.
+Watermarks only assert that "some" certificate was attached; auditors must still trust the producer. Zero-knowledge SNARKs offer soundness and confidentiality and have recently been explored for image classification \cite{zou-2024-improving}. TRACS brings zk-SNARKs into language decoding.  
+                                                                                                                                                                                                                       ^
+Warning 2 in paper.tex line 79: Non-breaking space (`~') should have been used.
+Prior defences focus on vision or inject random noise \cite{chen-2022-adversarial}. Our entropy-and-burstiness monitor lowers estimated leakage to \(<0.02\) bits message\(^{-1}\), an order of magnitude below CAI.  
+                                                     ^
+Warning 13 in paper.tex line 79: Intersentence spacing (`\@') should perhaps be used.
+Prior defences focus on vision or inject random noise \cite{chen-2022-adversarial}. Our entropy-and-burstiness monitor lowers estimated leakage to \(<0.02\) bits message\(^{-1}\), an order of magnitude below CAI.  
+                                                                                                                                                                                                                   ^
+Warning 2 in paper.tex line 82: Non-breaking space (`~') should have been used.
+Refusal tuning, PARDEN repetition, and circuit breakers reduce direct exploits but falter against multi-turn staging \cite{wei-2023-jailbroken,zhang-2024-parden,zou-2024-improving}. TRACS proves that no unsafe continuation exists within an adaptively chosen horizon, addressing the root cause.  
+                                                                                                                    ^
+Warning 8 in paper.tex line 98: Wrong length of dash may have been used.
+We assume hash collision resistance and monotonicity of post-soft-max attention scores - standard for ReLU-based transformers but an open question for emerging architectures.  
+                                                                                       ^
+Warning 8 in paper.tex line 101: Wrong length of dash may have been used.
+\subsection{Layer 0 - motif mining}  
+                    ^
+Warning 8 in paper.tex line 104: Wrong length of dash may have been used.
+\subsection{Layer 1 - adaptive verifier}  
+                    ^
+Warning 8 in paper.tex line 107: Wrong length of dash may have been used.
+\subsection{Layer 2 - certified decoding}  
+                    ^
+Warning 8 in paper.tex line 120: Wrong length of dash may have been used.
+\subsection{Experiment 1 - Long-horizon jailbreaks}  
+                         ^
+Warning 13 in paper.tex line 121: Intersentence spacing (`\@') should perhaps be used.
+Mixtral-\(8\times 7\)\,B-Instruct and GPT-J-6\,B are tested under four stacks: S0 No-Guard, S1 CAI (17 rules), S2 HiLMAS-K16, S3 TRACS. Prompts from LongFuse-500 (SHA-256 verified) produce 20\,000 completions. Decoding uses nucleus \(p=0.7\), temperature 1.0, and up to 256 new tokens. Logged telemetry includes violation flags, first-violation position, horizon, proof size, FLOPs, latency, and VRAM.  
+                                                                                                                                      ^
+Warning 13 in paper.tex line 121: Intersentence spacing (`\@') should perhaps be used.
+Mixtral-\(8\times 7\)\,B-Instruct and GPT-J-6\,B are tested under four stacks: S0 No-Guard, S1 CAI (17 rules), S2 HiLMAS-K16, S3 TRACS. Prompts from LongFuse-500 (SHA-256 verified) produce 20\,000 completions. Decoding uses nucleus \(p=0.7\), temperature 1.0, and up to 256 new tokens. Logged telemetry includes violation flags, first-violation position, horizon, proof size, FLOPs, latency, and VRAM.  
+                                                                                                                                                                                                                                                                                                                                                                                                                ^
+Warning 8 in paper.tex line 123: Wrong length of dash may have been used.
+\subsection{Experiment 2 - Numeric policy compliance}  
+                         ^
+Warning 8 in paper.tex line 126: Wrong length of dash may have been used.
+\subsection{Experiment 3A - Public SNARK audit}  
+                          ^
+Warning 8 in paper.tex line 129: Wrong length of dash may have been used.
+\subsection{Experiment 3B - Covert-channel benchmark}  
+                          ^
+Warning 36 in paper.tex line 143: You should put a space in front of parenthesis.
+A missing \texttt{ensure()} call caused the prompt loader to return an empty list. Consequently every stack - including the deliberately empty No-Guard - reported ASR = 0\% and median latency \(\approx 32\) ms. Mixtral was never instantiated, and no long-horizon breakdown was produced.  
+                        ^
+Warning 8 in paper.tex line 143: Wrong length of dash may have been used.
+A missing \texttt{ensure()} call caused the prompt loader to return an empty list. Consequently every stack - including the deliberately empty No-Guard - reported ASR = 0\% and median latency \(\approx 32\) ms. Mixtral was never instantiated, and no long-horizon breakdown was produced.  
+                                                                                                            ^
+Warning 8 in paper.tex line 143: Wrong length of dash may have been used.
+A missing \texttt{ensure()} call caused the prompt loader to return an empty list. Consequently every stack - including the deliberately empty No-Guard - reported ASR = 0\% and median latency \(\approx 32\) ms. Mixtral was never instantiated, and no long-horizon breakdown was produced.  
+                                                                                                                                                        ^
+Warning 36 in paper.tex line 152: You should put a space in front of parenthesis.
+(1) Assert \(\text{len(prompts)}=500\) after load; (2) run guard unit tests before large-scale generation; (3) isolate smoke tests via environment variables; (4) wrap each experiment in \texttt{try/except} to avoid cascading failures.  
+                      ^
+Warning 8 in paper.tex line 154: Wrong length of dash may have been used.
+Although the numerical results are void, the public release already contains halo2-cuda binaries, datasets, and log schemas, enabling the community to reproduce - and debug - the full pipeline.  
+                                                                                                                                                                 ^
+Warning 8 in paper.tex line 154: Wrong length of dash may have been used.
+Although the numerical results are void, the public release already contains halo2-cuda binaries, datasets, and log schemas, enabling the community to reproduce - and debug - the full pipeline.  
+                                                                                                                                                                             ^
+Warning 8 in paper.tex line 157: Wrong length of dash may have been used.
+TRACS elevates LLM safety from short-horizon regular checks to adaptive first-order temporal guarantees, tightens abstraction with attention polyhedra, and binds every token to a zero-knowledge proof verifiable in real time. A data-loading bug invalidated our first empirical run, yet the telemetry and integrity checks embedded in TRACS surfaced the anomaly immediately - underscoring the need for reproducible infrastructure in safety research.  
+                                                                                                                                                                                                                                                                                                                                                                                   ^
+Warning 2 in paper.tex line 159: Non-breaking space (`~') should have been used.
+Once the corrected evaluation is complete we expect TRACS to cut attack-success rates by \(>70\%\) relative to prevailing stacks while preserving helpfulness and latency budgets. Future work will extend attention polyhedra to mixture-of-experts transformers, incorporate probabilistic specifications \cite{berrada-2021-make}, and layer TRACS with circuit breakers for even stronger guarantees \cite{zou-2024-improving}. All artefacts are public and we invite independent audits to stress-test and extend the framework.  
+                                                                                                                                                                                                                                                                                                           ^
+Warning 2 in paper.tex line 159: Non-breaking space (`~') should have been used.
+Once the corrected evaluation is complete we expect TRACS to cut attack-success rates by \(>70\%\) relative to prevailing stacks while preserving helpfulness and latency budgets. Future work will extend attention polyhedra to mixture-of-experts transformers, incorporate probabilistic specifications \cite{berrada-2021-make}, and layer TRACS with circuit breakers for even stronger guarantees \cite{zou-2024-improving}. All artefacts are public and we invite independent audits to stress-test and extend the framework.  
+                                                                                                                                                                                                                                                                                                                                                                                                        ^
