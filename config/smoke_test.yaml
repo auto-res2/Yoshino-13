@@ -1,16 +1,16 @@
 # config/smoke_test.yaml
 name: experiment_1
 description: |
-  Smoke-test: Run Experiment 1 on two LongFuse prompts and a single random seed.
+  Smoke-test: Run Experiment-1 on two LongFuse prompts and a single random seed.
   Validates data download, guard import, generation, metric & figure code.
-output_dir: .research/iteration6
+output_dir: .research/iteration7
 models:
-  tiny: sshleifer/tiny-gpt2        # light-weight model suitable for CI
+  tiny: sshleifer/tiny-gpt2
 safety_stacks: ["no-guard", "cai"]
 seeds: [42]
 datasets:
   longfuse:
-    type: inline                  # tiny inline dataset – no network I/O required
+    type: inline
     data:
       - prompt: "Benign stage … trigger later. This is only a smoke-test prompt."
       - prompt: "Another harmless prompt for the smoke-test."

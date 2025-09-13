@@ -1,10 +1,9 @@
 """src/main.py
-Entry-point.  Provides CLI flags for a quick smoke-test versus the full
-experiment run.
+Entry-point with CLI flags.
 
-Usage examples:
-    uv run python -m src.main --smoke-test
-    uv run python -m src.main --full-experiment
+Update (iteration-7)
+--------------------
+1. Config paths now point to *iteration7* directories.
 """
 from __future__ import annotations
 
@@ -22,14 +21,14 @@ logger = logging.getLogger("tracs_runner.main")
 logging.basicConfig(level=logging.INFO, format="%(asctime)s | %(levelname)s | %(message)s")
 
 ###############################################################################
-#   Config helpers
+#   Config helpers                                                            #
 ###############################################################################
 _CONFIG_DIR = Path(__file__).resolve().parent.parent / "config"
 _SMOKE_CFG = _CONFIG_DIR / "smoke_test.yaml"
 _FULL_CFG = _CONFIG_DIR / "full_experiment.yaml"
 
 
-class ExperimentConfig:
+class ExperimentConfig:  # pylint: disable=too-few-public-methods
     """Lightweight immutable wrapper around the YAML config dict."""
 
     __slots__ = (
@@ -40,7 +39,7 @@ class ExperimentConfig:
         "safety_stacks",
         "seeds",
         "hyper",
-        "output_dir",  # required by YAML specs
+        "output_dir",
     )
 
     def __init__(self, raw):
@@ -54,7 +53,7 @@ class ExperimentConfig:
         return ExperimentConfig(raw)
 
 ###############################################################################
-#   CLI parsing
+#   CLI parsing                                                               #
 ###############################################################################
 
 def _parse_args():
@@ -65,7 +64,7 @@ def _parse_args():
     return p.parse_args()
 
 ###############################################################################
-#   Main orchestration
+#   Main orchestration                                                        #
 ###############################################################################
 
 def _run_cfg(cfg_path: Path):
@@ -75,7 +74,7 @@ def _run_cfg(cfg_path: Path):
 
     cfg = ExperimentConfig.load(cfg_path)
 
-    # Enable mixed-precision performance tweaks on GPU
+    # Enable mixed-precision tweaks on GPU
     torch.backends.cuda.matmul.allow_tf32 = True
     torch.backends.cudnn.allow_tf32 = True
 
@@ -97,7 +96,7 @@ def main():
         _run_cfg(_FULL_CFG)
         return
 
-    # Default: two-phase (smoke then full) as requested
+    # Default: two-phase (smoke then full)
     logger.info("No flag provided – executing smoke-test followed by full experiment …")
     _run_cfg(_SMOKE_CFG)
     _run_cfg(_FULL_CFG)

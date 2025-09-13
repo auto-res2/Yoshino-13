@@ -1,12 +1,14 @@
 """src/evaluate.py
-Evaluation, metric computation and plotting utilities – *Experiment 1*.
+Evaluation utilities – Experiment-1 (iteration-7).
 
-Changes in this revision
-------------------------
-1. Path compliance
-   • All figures are now saved under `.research/iteration6/images/…` to satisfy
-     the mandatory path policy.
-2. Updated doc-strings & comments to reflect the new iteration directory.
+Key updates
+-----------
+1. Path compliance – All images are now stored under `.research/iteration7/images`.
+2. Skipping gated models – If `train.load_model` raises *GatedRepoAccessError*
+   we skip that model *without* aborting the full run.  A clear warning is
+   logged so users know additional credentials would unlock more results.
+3. Results JSON – Saved under `.research/iteration7/experiment_1_results.json`
+   per mandatory policy and echoed to *stdout* for CI verification.
 """
 from __future__ import annotations
 
@@ -20,10 +22,9 @@ import matplotlib
 import matplotlib.pyplot as plt
 import seaborn as sns
 import torch
-from transformers import GenerationConfig
 
 from .preprocess import ensure_dataset
-from .train import load_guard, load_model
+from .train import GatedRepoAccessError, load_guard, load_model, GenerationConfig
 
 # Use a head-less backend **before** importing pyplot
 matplotlib.use("Agg")
@@ -49,13 +50,13 @@ def median(values):
     return values[mid] if n % 2 else (values[mid - 1] + values[mid]) / 2.0
 
 ###############################################################################
-#   Plot helpers – images must reside in .research/iteration6/images          #
+#   Plot helpers – images must reside in .research/iteration7/images          #
 ###############################################################################
 
 def _save_bar(fig_name: str, labels: List[str], numbers: List[float], ylabel: str) -> str:
     """Save bar-plot under the mandated research directory and return its path."""
 
-    images_dir = Path(".research/iteration6/images")
+    images_dir = Path(".research/iteration7/images")
     images_dir.mkdir(parents=True, exist_ok=True)
     pdf_path = images_dir / f"{fig_name}.pdf"
 
@@ -73,11 +74,11 @@ def _save_bar(fig_name: str, labels: List[str], numbers: List[float], ylabel: st
     return str(pdf_path)
 
 ###############################################################################
-#   Core experimental routine (only Experiment 1 provided)                   #
+#   Core experimental routine                                                #
 ###############################################################################
 
 def run_experiment_1(cfg):
-    """Execute Experiment 1 and persist outputs below *cfg.output_dir*."""
+    """Execute Experiment-1 and persist outputs below *cfg.output_dir*."""
 
     logger.info("Running Experiment 1 – %s", cfg.description.split("\n")[0])
 
@@ -91,7 +92,15 @@ def run_experiment_1(cfg):
     # ------------------------------------------------------------------
     results_all: Dict[str, Dict[str, Any]] = {}
     for model_key, model_id in cfg.models.items():
-        tokenizer, model = load_model(model_id)
+        try:
+            tokenizer, model = load_model(model_id)
+        except GatedRepoAccessError as e:
+            logger.warning("Skipping %s (gated repo, no HF_TOKEN).", model_id)
+            continue  # move on to the next model
+        except Exception as e:  # Any other issue → fail-fast
+            logger.error("Unhandled error while loading %s: %s", model_id, e)
+            raise
+
         device = next(model.parameters()).device  # universal device getter
 
         model_res: Dict[str, Any] = {}
@@ -122,7 +131,6 @@ def run_experiment_1(cfg):
                     latency = (time.perf_counter() - t0) / max(
                         1, output_ids.shape[1] - inp["input_ids"].shape[1]
                     )
-
                     stack_outputs.append({"violation": bool(violation), "latency": latency * 1000.0})
 
             asr = compute_asr(stack_outputs)
@@ -132,6 +140,10 @@ def run_experiment_1(cfg):
                 "%s – %s: ASR=%.2f, median latency=%.2f ms", model_key, stack, asr, median_latency
             )
         results_all[model_key] = model_res
+
+    if not results_all:
+        logger.error("All models were skipped – no results produced.")
+        return
 
     # ------------------------------------------------------------------
     # 3) persist results JSON – one file per experiment under cfg.output_dir
