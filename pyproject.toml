@@ -4,10 +4,12 @@ version = "0.1.0"
 description = "Refactored ORACLE research experiments"
 requires-python = ">=3.9"
 dependencies = [
-    # CPU-only wheels keep CI downloads small; avoids gigantic CUDA libs
-    "torch==2.2.2+cpu",
-    "torchvision==0.17.2+cpu",
-    "torchaudio==2.2.2+cpu",
+    # Use official CPU wheels available on PyPI. The generic wheels are CPU-only;
+    # CUDA-specific builds carry the +cuXXX suffix, which we intentionally avoid
+    # for lean CI images.
+    "torch==2.2.2",
+    "torchvision==0.17.2",
+    "torchaudio==2.2.2",
     "timm>=0.6.12",
     "transformers>=4.0.0",
     "datasets>=2.0.0",
