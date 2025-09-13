@@ -1,3 +1,4 @@
+# src/preprocess.py
 from pathlib import Path
 import json
 from typing import Dict, Optional
@@ -11,7 +12,7 @@ ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / "data"
 
 #  Updated iteration folder as required by spec ----------------------
-RESEARCH_DIR = ROOT / ".research" / "iteration15"  # <<<< updated >>>>
+RESEARCH_DIR = ROOT / ".research" / "iteration16"  # <<<< updated to iteration16 >>>>
 IMAGES_DIR = RESEARCH_DIR / "images"
 
 # Ensure that all required directories exist -------------------------
@@ -149,19 +150,11 @@ class PromptDataset(Dataset):
         # ------------------------------------------------------------------
         if tokenizer.pad_token_id is None:
             if tokenizer.eos_token is not None:
-                # Re-use an existing special token so we don't have to resize
-                # the embedding matrix (safe for inference-only scenarios).
                 tokenizer.pad_token = tokenizer.eos_token
             else:
-                # Absolute fallback – add a new PAD token that *is* in the
-                # vocabulary afterwards.
                 tokenizer.add_special_tokens({"pad_token": "<|pad|>"})
-
-            # `tokenizer.add_special_tokens` does *not* automatically update
-            # `pad_token_id` when the token already exists, so we set it again
-            # defensively to guarantee it is non-None.
-            if tokenizer.pad_token_id is None:
-                tokenizer.pad_token_id = tokenizer.convert_tokens_to_ids(tokenizer.pad_token)
+                if tokenizer.pad_token_id is None:
+                    tokenizer.pad_token_id = tokenizer.convert_tokens_to_ids(tokenizer.pad_token)
 
         self.samples = [json.loads(line)["text"] for line in open(jsonl_path, "r", encoding="utf-8")]
         self.tokenizer = tokenizer

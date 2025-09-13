@@ -69,8 +69,9 @@ def run_soic_leakage(cfg: Dict, smoke: bool):
             tokenizer.pad_token = tokenizer.eos_token
             tokenizer.pad_token_id = tokenizer.eos_token_id
         else:
-            # Fall back to adding a dedicated PAD token that is already in-vocab
             tokenizer.add_special_tokens({"pad_token": "<|pad|>"})
+            if tokenizer.pad_token_id is None:
+                tokenizer.pad_token_id = tokenizer.convert_tokens_to_ids(tokenizer.pad_token)
 
     secret_ds = PromptDataset(secret_file, tokenizer)
     benign_ds = PromptDataset(benign_file, tokenizer)
@@ -103,6 +104,16 @@ def run_soic_leakage(cfg: Dict, smoke: bool):
             continue  # not present in smoke config
         print(f"[Variant {variant_name}] loading …")
         model = load_model(variant_info["repo"], hf_token=cfg.get("_hf_token"))
+
+        # ------------------------------------------------------------------
+        # Resize token embeddings if we had to add a PAD token that expands
+        # the vocabulary.  This prevents index-out-of-range errors when the
+        # newly introduced PAD id is greater than the original vocab size.
+        # ------------------------------------------------------------------
+        vocab_size_model = model.get_input_embeddings().weight.size(0)
+        vocab_size_tok = len(tokenizer)
+        if vocab_size_tok > vocab_size_model:
+            model.resize_token_embeddings(vocab_size_tok)
 
         collected_logits = []
         collected_labels: List[int] = []
@@ -141,10 +152,11 @@ def run_soic_leakage(cfg: Dict, smoke: bool):
         torch.cuda.empty_cache()
 
     # 3) persist JSON -------------------------------------------------------
+    total_samples = min(max_prompts, len(secret_ds)) + min(max_prompts, len(benign_ds))
     res_dict = {
         "mutual_information_bits": mi_results,
         "token_recovery_accuracy": acc_results,
-        "num_samples": len(collected_labels),
+        "num_samples": total_samples,
     }
     result_path.write_text(json.dumps(res_dict, indent=2))
 
