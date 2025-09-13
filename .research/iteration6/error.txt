@@ -1,0 +1,9 @@
+2025-09-13 02:13:27,792 | INFO | Running Experiment 1 – Full Experiment 1 – Resistance to Long-Range Jailbreaks.
+2025-09-13 02:13:27,793 | INFO | Using cached dataset 'longfuse'
+Generating train split: 0 examples [00:00, ? examples/s]Generating train split: 2 examples [00:00, 227.00 examples/s]
+2025-09-13 02:13:29,161 | ERROR | Tokenizer loading failed for mistralai/Mixtral-8x7B-Instruct-v0.1: You are trying to access a gated repo.
+Make sure to have access to it at https://huggingface.co/mistralai/Mixtral-8x7B-Instruct-v0.1.
+401 Client Error. (Request ID: Root=1-68c4d349-303fbb5571b50fa1440cef2f;fbc2e463-393a-405f-8832-657e92c95f77)
+
+Cannot access gated repo for url https://huggingface.co/mistralai/Mixtral-8x7B-Instruct-v0.1/resolve/main/config.json.
+Access to model mistralai/Mixtral-8x7B-Instruct-v0.1 is restricted. You must have access to it and be authenticated to access it. Please log in.
