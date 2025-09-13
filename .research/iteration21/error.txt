@@ -1,0 +1,11 @@
+`torch_dtype` is deprecated! Use `dtype` instead!
+/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/src/evaluate.py:165: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  ax = sns.barplot(x=list(mi_results.keys()), y=list(mi_results.values()), palette="viridis")
+/home/toma/t-80-8-b-03/_work/Yoshino-13/Yoshino-13/src/evaluate.py:177: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  ax = sns.barplot(x=list(acc_results.keys()), y=list(acc_results.values()), palette="magma")
