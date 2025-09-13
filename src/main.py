@@ -7,7 +7,6 @@ executed first in compliance with the spec.
 """
 from __future__ import annotations
 import argparse
-import sys
 from pathlib import Path
 import yaml
 
