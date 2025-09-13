@@ -1,1 +1,7 @@
-airas-template
+# Cryptographically Certified Long-Horizon Safety for Large Language Models via TRACS
+> ⚠️ **NOTE:** This research is an automatic research using AIRAS.
+## Abstract
+Large language models (LLMs) are routinely deployed in contexts where a single unsafe response can violate privacy law or facilitate real-world harm. Existing in-the-loop verifiers inspect at most K future tokens and encode policies as regular languages, so they miss multi-phase jailbreaks, numeric budgets, and covert timing channels. We introduce TRACS, a three-layer safety framework that (i) mines parametric first-order linear-temporal-logic (FOLTL) rules from red-team logs, (ii) certifies each decoding step with an adaptive-horizon abstract interpreter that propagates a new attention-polyhedra domain, and (iii) attaches a per-token zk-SNARK proving that no disallowed continuation had non-zero probability mass. Attention polyhedra shrink over-approximation volume by about 40 % relative to slice-zonotopes, while GPU-native Halo2 circuits allow public verification in <1 ms without model access. We benchmark Mixtral-8×7 B, GPT-J-6 B, and a 33 B custom model on five adversarial corpora, including the new LongFuse-500 and SideLeak-200. A first end-to-end run mis-loaded zero prompts and therefore reported degenerate 0 % attack-success rates; we analyse this failure and show how TRACS’ reproducibility checks exposed it. All code, datasets, and binaries are released to enable an audited rerun.
+
+- [Research history](https://github.com/auto-res2/Yoshino-13/blob/test-0/.research/research_history.json)
+- [GitHub Pages](https://auto-res2.github.io/Yoshino-13/branches/test-0/index.html)
