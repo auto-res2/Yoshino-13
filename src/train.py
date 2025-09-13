@@ -24,6 +24,20 @@ def load_model(repo: str, hf_token: Union[str, None] = None, dtype: torch.dtype 
     device_map = "auto" if torch.cuda.is_available() else {"": "cpu"}
 
     try:
+        # In smoke-test mode we often pass a *synthetic* identifier that
+        # refers to a **local** tiny model stored inside the repository
+        # (e.g. ``synthetic://tiny-gpt2``).  Such identifiers are NOT
+        # hosted on the HF Hub and therefore have to be resolved via the
+        # filesystem.  We canonicalise those URIs here so that down-stream
+        # code never has to special-case them.
+        if repo.startswith("synthetic://"):
+            local_dir = Path("data") / repo[len("synthetic://") :].replace("/", "__")
+            if not local_dir.exists():
+                raise RuntimeError(
+                    f"Synthetic model directory '{local_dir}' not found. Did the smoke-test assets get generated?"
+                )
+            repo = str(local_dir)
+
         model = AutoModelForCausalLM.from_pretrained(
             repo,
             torch_dtype=dtype,

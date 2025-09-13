@@ -13,11 +13,9 @@ resources:
 
 datasets:
   secret_prompts:
-    repo: hyperion-data/PII-Bench-v1
-    subset: pii_bench
+    repo: synthetic://secret_prompts
   benign_prompts:
-    repo: hyperion-data/MT-Bench-neutral
-    subset: mt_bench_neutral
+    repo: synthetic://benign_prompts
 
 models:
   # Use very small models for CI / smoke testing to avoid OOMs

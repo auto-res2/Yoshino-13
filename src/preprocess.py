@@ -1,5 +1,6 @@
 # src/preprocess.py
 """Data loading, preprocessing and Hugging-Face Hub download helpers."""
+import json
 import shutil
 from pathlib import Path
 from typing import Dict
@@ -11,15 +12,53 @@ from huggingface_hub import hf_hub_download, snapshot_download
 # -------------------------------------------------------------------
 ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / "data"
-RESEARCH_DIR = ROOT / ".research" / "iteration2"  # updated as per spec
+RESEARCH_DIR = ROOT / ".research" / "iteration3"  # updated as per spec
 IMAGES_DIR = RESEARCH_DIR / "images"
 
 for _d in (DATA_DIR, IMAGES_DIR):
     _d.mkdir(parents=True, exist_ok=True)
 
 # -------------------------------------------------------------------
-#  download helpers
+#  download helpers & synthetic dataset generation
 # -------------------------------------------------------------------
+
+
+def _create_synthetic_dataset(name: str) -> Path:
+    """Create a **tiny** JSONL dataset on-the-fly so that smoke tests can
+    run entirely offline.  The directory layout mirrors what
+    `snapshot_download` would produce so that caller code does not have
+    to care about the provenance.
+    """
+    dst_dir = DATA_DIR / f"synthetic__{name}"
+    if dst_dir.exists():
+        return dst_dir
+
+    dst_dir.mkdir(parents=True, exist_ok=True)
+    dst_file = dst_dir / "data.jsonl"
+
+    # A handful of example texts – enough to exercise the pipeline
+    if "secret" in name:
+        samples = [
+            "My credit-card number is 4242-4242-4242-4242.",
+            "Call me at (555)-123-4567 tomorrow.",
+            "The password is swordfish.",
+            "SSN: 078-05-1120.",
+            "Email: jane.doe@example.com",
+        ]
+    else:
+        samples = [
+            "Hello world!",
+            "How do I cook pasta al dente?",
+            "The quick brown fox jumps over the lazy dog.",
+            "What is the capital of France?",
+            "PyTorch is an open-source machine-learning library.",
+        ]
+
+    with dst_file.open("w", encoding="utf-8") as fh:
+        for txt in samples:
+            fh.write(json.dumps({"text": txt}) + "\n")
+
+    return dst_dir
 
 
 def _hf_download(repo_id: str, filename: str | None = None, subfolder: str | None = None, token: str | None = None) -> Path:
@@ -48,13 +87,34 @@ def _hf_download(repo_id: str, filename: str | None = None, subfolder: str | Non
 
 def prepare_dataset(cfg: Dict, repo_key: str) -> Path:
     """Ensure that the dataset referenced by *repo_key* in the YAML config is
-    present locally.  The complete repository snapshot is copied into an
-    organised folder below *data/* so that downstream code never needs to
-    re-query the Hub.
+    present locally.  The function now supports three URI schemes:
+
+    1. ``synthetic://<name>`` – a tiny dataset generated on-the-fly for CI.
+    2. ``file://<absolute-or-relative-path>`` – an already present folder.
+    3. Any other string → treated as HuggingFace Hub repo ID.
     """
     info = cfg["datasets"][repo_key]
     repo = info["repo"]
 
+    # -------------------------------------------------------------
+    # 1) synthetic datasets (used for smoke tests)
+    # -------------------------------------------------------------
+    if repo.startswith("synthetic://"):
+        name = repo[len("synthetic://") :]
+        return _create_synthetic_dataset(name)
+
+    # -------------------------------------------------------------
+    # 2) explicit file path
+    # -------------------------------------------------------------
+    if repo.startswith("file://"):
+        path = Path(repo[len("file://") :]).expanduser().resolve()
+        if not path.exists():
+            raise RuntimeError(f"Local dataset path '{path}' not found.")
+        return path
+
+    # -------------------------------------------------------------
+    # 3) regular HF download (default case)
+    # -------------------------------------------------------------
     local_dir = DATA_DIR / repo.replace("/", "__")
     if local_dir.exists():
         return local_dir
@@ -80,9 +140,9 @@ class PromptDataset(Dataset):
     """A minimal JSONL prompt dataset with a `text` field."""
 
     def __init__(self, jsonl_path: Path, tokenizer: AutoTokenizer, max_tokens: int = 512):
-        import json
+        import json as _json
 
-        self.samples = [json.loads(line)["text"] for line in open(jsonl_path, "r", encoding="utf-8")]
+        self.samples = [_json.loads(line)["text"] for line in open(jsonl_path, "r", encoding="utf-8")]
         self.tokenizer = tokenizer
         self.max_tokens = max_tokens
 
