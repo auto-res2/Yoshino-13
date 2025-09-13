@@ -66,6 +66,7 @@ def run_soic_leakage(cfg: Dict, smoke: bool):
     # Ensure padding token exists – many GPT family tokenizers lack one
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
+        tokenizer.pad_token_id = tokenizer.eos_token_id
 
     secret_ds = PromptDataset(secret_file, tokenizer)
     benign_ds = PromptDataset(benign_file, tokenizer)
